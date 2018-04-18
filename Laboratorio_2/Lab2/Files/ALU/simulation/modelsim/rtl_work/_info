@@ -1,0 +1,140 @@
+m255
+K4
+z2
+13
+!s112 1.1
+!i10d 8192
+!i10e 25
+!i10f 100
+cModel Technology
+Z0 dC:/Users/lamar/Dropbox/kiko/Disciplinas/UnB/OAC/2018-1/Lab2/Files/ALU/simulation/modelsim
+vALU
+Z1 DXx6 sv_std 3 std 0 22 AD7iAPLo6nTIKk<N0eo=D3
+DXx4 work 10 ALU_v_unit 0 22 8OCed:m_R0LXY3[zA]65P1
+Z2 VDg1SIo80bB@j0V0VzS_@n1
+r1
+!s85 0
+31
+!i10b 1
+!s100 ]e8ObcYn4F<B;AlG`A3C81
+IK<]=^2faCW=Y<fIoQdb7k2
+!s105 ALU_v_unit
+S1
+R0
+w1523205219
+Z3 8C:/Users/lamar/Dropbox/kiko/Disciplinas/UnB/OAC/2018-1/Lab2/Files/ALU/ALU.v
+Z4 FC:/Users/lamar/Dropbox/kiko/Disciplinas/UnB/OAC/2018-1/Lab2/Files/ALU/ALU.v
+L0 13
+Z5 OV;L;10.5b;63
+Z6 !s108 1523234640.000000
+Z7 !s107 C:/Users/lamar/Dropbox/kiko/Disciplinas/UnB/OAC/2018-1/Lab2/Files/ALU/Parametros.v|C:/Users/lamar/Dropbox/kiko/Disciplinas/UnB/OAC/2018-1/Lab2/Files/ALU/ALU.v|
+Z8 !s90 -reportprogress|300|-sv|-work|work|+incdir+C:/Users/lamar/Dropbox/kiko/Disciplinas/UnB/OAC/2018-1/Lab2/Files/ALU|C:/Users/lamar/Dropbox/kiko/Disciplinas/UnB/OAC/2018-1/Lab2/Files/ALU/ALU.v|
+!i113 1
+Z9 o-sv -work work
+Z10 !s92 -sv -work work +incdir+C:/Users/lamar/Dropbox/kiko/Disciplinas/UnB/OAC/2018-1/Lab2/Files/ALU
+Z11 tCvgOpt 0
+n@a@l@u
+vALU_tb
+R1
+DXx4 work 13 ALU_tb_v_unit 0 22 ;2ebBAlLETobUI2ihkc[90
+R2
+r1
+!s85 0
+31
+!i10b 1
+!s100 _BQ2e94KHGcVcG0e2OEH;3
+IhS6A3MH?k=NUgV3AFo5^R1
+!s105 ALU_tb_v_unit
+S1
+R0
+Z12 w1523234579
+Z13 8C:/Users/lamar/Dropbox/kiko/Disciplinas/UnB/OAC/2018-1/Lab2/Files/ALU/ALU_tb.v
+Z14 FC:/Users/lamar/Dropbox/kiko/Disciplinas/UnB/OAC/2018-1/Lab2/Files/ALU/ALU_tb.v
+L0 8
+R5
+Z15 !s108 1523234642.000000
+Z16 !s107 C:/Users/lamar/Dropbox/kiko/Disciplinas/UnB/OAC/2018-1/Lab2/Files/ALU/Parametros.v|C:/Users/lamar/Dropbox/kiko/Disciplinas/UnB/OAC/2018-1/Lab2/Files/ALU/ALU_tb.v|
+Z17 !s90 -reportprogress|300|-sv|-work|work|+incdir+C:/Users/lamar/Dropbox/kiko/Disciplinas/UnB/OAC/2018-1/Lab2/Files/ALU|C:/Users/lamar/Dropbox/kiko/Disciplinas/UnB/OAC/2018-1/Lab2/Files/ALU/ALU_tb.v|
+!i113 1
+R9
+R10
+R11
+n@a@l@u_tb
+XALU_tb_v_unit
+R1
+V;2ebBAlLETobUI2ihkc[90
+r1
+!s85 0
+31
+!i10b 1
+!s100 <Ao9O1OKAZ3:cBg1j[2>>0
+I;2ebBAlLETobUI2ihkc[90
+!i103 1
+S1
+R0
+R12
+R13
+R14
+Z18 FC:/Users/lamar/Dropbox/kiko/Disciplinas/UnB/OAC/2018-1/Lab2/Files/ALU/Parametros.v
+L0 4
+R5
+R15
+R16
+R17
+!i113 1
+R9
+R10
+R11
+n@a@l@u_tb_v_unit
+XALU_v_unit
+R1
+V8OCed:m_R0LXY3[zA]65P1
+r1
+!s85 0
+31
+!i10b 1
+!s100 Ya`_@H2fUi@5BN`Jne>0R2
+I8OCed:m_R0LXY3[zA]65P1
+!i103 1
+S1
+R0
+Z19 w1523211277
+R3
+R4
+R18
+L0 4
+R5
+R6
+R7
+R8
+!i113 1
+R9
+R10
+R11
+n@a@l@u_v_unit
+XParametros_v_unit
+R1
+!s110 1523234639
+!i10b 1
+!s100 T4R8C4eF4<YkkW;9BZj:F1
+IRl6E5Q7MGPZ6SL7Y[UN]10
+VRl6E5Q7MGPZ6SL7Y[UN]10
+!i103 1
+S1
+R0
+R19
+8C:/Users/lamar/Dropbox/kiko/Disciplinas/UnB/OAC/2018-1/Lab2/Files/ALU/Parametros.v
+R18
+L0 4
+R5
+r1
+!s85 0
+31
+!s108 1523234639.000000
+!s107 C:/Users/lamar/Dropbox/kiko/Disciplinas/UnB/OAC/2018-1/Lab2/Files/ALU/Parametros.v|
+!s90 -reportprogress|300|-sv|-work|work|+incdir+C:/Users/lamar/Dropbox/kiko/Disciplinas/UnB/OAC/2018-1/Lab2/Files/ALU|C:/Users/lamar/Dropbox/kiko/Disciplinas/UnB/OAC/2018-1/Lab2/Files/ALU/Parametros.v|
+!i113 1
+R9
+R10
+R11
+n@parametros_v_unit

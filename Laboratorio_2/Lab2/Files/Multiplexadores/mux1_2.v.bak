@@ -1,0 +1,12 @@
+module mux1_2(
+	input sel,
+	input dado0,
+	input dado1,
+	output saida
+	);
+	
+	
+	assign saida=(sel?dado0,dado1);
+	
+endmodule
+	

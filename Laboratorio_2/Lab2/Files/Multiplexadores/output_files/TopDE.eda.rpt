@@ -1,0 +1,351 @@
+EDA Netlist Writer report for TopDE
+Sat Apr 14 21:10:58 2018
+Quartus Prime Version 17.1.0 Build 590 10/25/2017 SJ Lite Edition
+
+
+---------------------
+; Table of Contents ;
+---------------------
+  1. Legal Notice
+  2. EDA Netlist Writer Summary
+  3. Simulation Settings
+  4. Simulation Generated Files
+  5. EDA Netlist Writer Messages
+
+
+
+----------------
+; Legal Notice ;
+----------------
+Copyright (C) 2017  Intel Corporation. All rights reserved.
+Your use of Intel Corporation's design tools, logic functions 
+and other software and tools, and its AMPP partner logic 
+functions, and any output files from any of the foregoing 
+(including device programming or simulation files), and any 
+associated documentation or information are expressly subject 
+to the terms and conditions of the Intel Program License 
+Subscription Agreement, the Intel Quartus Prime License Agreement,
+the Intel FPGA IP License Agreement, or other applicable license
+agreement, including, without limitation, that your use is for
+the sole purpose of programming logic devices manufactured by
+Intel and sold by Intel or its authorized distributors.  Please
+refer to the applicable agreement for further details.
+
+
+
++-------------------------------------------------------------------+
+; EDA Netlist Writer Summary                                        ;
++---------------------------+---------------------------------------+
+; EDA Netlist Writer Status ; Successful - Sat Apr 14 21:10:58 2018 ;
+; Revision Name             ; TopDE                                 ;
+; Top-level Entity Name     ; mux32_8                               ;
+; Family                    ; Cyclone V                             ;
+; Simulation Files Creation ; Successful                            ;
++---------------------------+---------------------------------------+
+
+
++-------------------------------------------------------------------------------------------------------------------------------+
+; Simulation Settings                                                                                                           ;
++---------------------------------------------------------------------------------------------------+---------------------------+
+; Option                                                                                            ; Setting                   ;
++---------------------------------------------------------------------------------------------------+---------------------------+
+; Tool Name                                                                                         ; ModelSim-Altera (Verilog) ;
+; Generate functional simulation netlist                                                            ; Off                       ;
+; Time scale                                                                                        ; 1 ps                      ;
+; Truncate long hierarchy paths                                                                     ; Off                       ;
+; Map illegal HDL characters                                                                        ; Off                       ;
+; Flatten buses into individual nodes                                                               ; Off                       ;
+; Maintain hierarchy                                                                                ; Off                       ;
+; Bring out device-wide set/reset signals as ports                                                  ; Off                       ;
+; Enable glitch filtering                                                                           ; Off                       ;
+; Do not write top level VHDL entity                                                                ; Off                       ;
+; Disable detection of setup and hold time violations in the input registers of bi-directional pins ; Off                       ;
+; Architecture name in VHDL output netlist                                                          ; structure                 ;
+; Generate third-party EDA tool command script for RTL functional simulation                        ; Off                       ;
+; Generate third-party EDA tool command script for gate-level simulation                            ; Off                       ;
++---------------------------------------------------------------------------------------------------+---------------------------+
+
+
++----------------------------------------------------------------------------------------------------------------+
+; Simulation Generated Files                                                                                     ;
++----------------------------------------------------------------------------------------------------------------+
+; Generated Files                                                                                                ;
++----------------------------------------------------------------------------------------------------------------+
+; C:/Users/lamar/Dropbox/kiko/Disciplinas/UnB/OAC/2018-1/Lab2/Files/Multiplexadores/simulation/modelsim/TopDE.vo ;
++----------------------------------------------------------------------------------------------------------------+
+
+
++-----------------------------+
+; EDA Netlist Writer Messages ;
++-----------------------------+
+Info: *******************************************************************
+Info: Running Quartus Prime EDA Netlist Writer
+    Info: Version 17.1.0 Build 590 10/25/2017 SJ Lite Edition
+    Info: Processing started: Sat Apr 14 21:10:49 2018
+Info: Command: quartus_eda --read_settings_files=off --write_settings_files=off Multiplexadores -c TopDE
+Warning (18236): Number of processors has not been specified which may cause overloading on shared machines.  Set the global assignment NUM_PARALLEL_PROCESSORS in your QSF to an appropriate value for best performance.
+Warning (10905): Generated the EDA functional simulation netlist because it is the only supported netlist type for this device.
+Info (204001): Port "dado[4][0]" is changed into "dado_4_0" because it's a member of 2-D array port "dado" File: C:/Users/lamar/Dropbox/kiko/Disciplinas/UnB/OAC/2018-1/Lab2/Files/Multiplexadores/mux32_8.v Line: 3
+Info (204001): Port "dado[5][0]" is changed into "dado_5_0" because it's a member of 2-D array port "dado" File: C:/Users/lamar/Dropbox/kiko/Disciplinas/UnB/OAC/2018-1/Lab2/Files/Multiplexadores/mux32_8.v Line: 3
+Info (204001): Port "dado[6][0]" is changed into "dado_6_0" because it's a member of 2-D array port "dado" File: C:/Users/lamar/Dropbox/kiko/Disciplinas/UnB/OAC/2018-1/Lab2/Files/Multiplexadores/mux32_8.v Line: 3
+Info (204001): Port "dado[7][0]" is changed into "dado_7_0" because it's a member of 2-D array port "dado" File: C:/Users/lamar/Dropbox/kiko/Disciplinas/UnB/OAC/2018-1/Lab2/Files/Multiplexadores/mux32_8.v Line: 3
+Info (204001): Port "dado[2][0]" is changed into "dado_2_0" because it's a member of 2-D array port "dado" File: C:/Users/lamar/Dropbox/kiko/Disciplinas/UnB/OAC/2018-1/Lab2/Files/Multiplexadores/mux32_8.v Line: 3
+Info (204001): Port "dado[3][0]" is changed into "dado_3_0" because it's a member of 2-D array port "dado" File: C:/Users/lamar/Dropbox/kiko/Disciplinas/UnB/OAC/2018-1/Lab2/Files/Multiplexadores/mux32_8.v Line: 3
+Info (204001): Port "dado[1][0]" is changed into "dado_1_0" because it's a member of 2-D array port "dado" File: C:/Users/lamar/Dropbox/kiko/Disciplinas/UnB/OAC/2018-1/Lab2/Files/Multiplexadores/mux32_8.v Line: 3
+Info (204001): Port "dado[0][0]" is changed into "dado_0_0" because it's a member of 2-D array port "dado" File: C:/Users/lamar/Dropbox/kiko/Disciplinas/UnB/OAC/2018-1/Lab2/Files/Multiplexadores/mux32_8.v Line: 3
+Info (204001): Port "dado[4][1]" is changed into "dado_4_1" because it's a member of 2-D array port "dado" File: C:/Users/lamar/Dropbox/kiko/Disciplinas/UnB/OAC/2018-1/Lab2/Files/Multiplexadores/mux32_8.v Line: 3
+Info (204001): Port "dado[5][1]" is changed into "dado_5_1" because it's a member of 2-D array port "dado" File: C:/Users/lamar/Dropbox/kiko/Disciplinas/UnB/OAC/2018-1/Lab2/Files/Multiplexadores/mux32_8.v Line: 3
+Info (204001): Port "dado[6][1]" is changed into "dado_6_1" because it's a member of 2-D array port "dado" File: C:/Users/lamar/Dropbox/kiko/Disciplinas/UnB/OAC/2018-1/Lab2/Files/Multiplexadores/mux32_8.v Line: 3
+Info (204001): Port "dado[7][1]" is changed into "dado_7_1" because it's a member of 2-D array port "dado" File: C:/Users/lamar/Dropbox/kiko/Disciplinas/UnB/OAC/2018-1/Lab2/Files/Multiplexadores/mux32_8.v Line: 3
+Info (204001): Port "dado[2][1]" is changed into "dado_2_1" because it's a member of 2-D array port "dado" File: C:/Users/lamar/Dropbox/kiko/Disciplinas/UnB/OAC/2018-1/Lab2/Files/Multiplexadores/mux32_8.v Line: 3
+Info (204001): Port "dado[3][1]" is changed into "dado_3_1" because it's a member of 2-D array port "dado" File: C:/Users/lamar/Dropbox/kiko/Disciplinas/UnB/OAC/2018-1/Lab2/Files/Multiplexadores/mux32_8.v Line: 3
+Info (204001): Port "dado[1][1]" is changed into "dado_1_1" because it's a member of 2-D array port "dado" File: C:/Users/lamar/Dropbox/kiko/Disciplinas/UnB/OAC/2018-1/Lab2/Files/Multiplexadores/mux32_8.v Line: 3
+Info (204001): Port "dado[0][1]" is changed into "dado_0_1" because it's a member of 2-D array port "dado" File: C:/Users/lamar/Dropbox/kiko/Disciplinas/UnB/OAC/2018-1/Lab2/Files/Multiplexadores/mux32_8.v Line: 3
+Info (204001): Port "dado[4][2]" is changed into "dado_4_2" because it's a member of 2-D array port "dado" File: C:/Users/lamar/Dropbox/kiko/Disciplinas/UnB/OAC/2018-1/Lab2/Files/Multiplexadores/mux32_8.v Line: 3
+Info (204001): Port "dado[5][2]" is changed into "dado_5_2" because it's a member of 2-D array port "dado" File: C:/Users/lamar/Dropbox/kiko/Disciplinas/UnB/OAC/2018-1/Lab2/Files/Multiplexadores/mux32_8.v Line: 3
+Info (204001): Port "dado[6][2]" is changed into "dado_6_2" because it's a member of 2-D array port "dado" File: C:/Users/lamar/Dropbox/kiko/Disciplinas/UnB/OAC/2018-1/Lab2/Files/Multiplexadores/mux32_8.v Line: 3
+Info (204001): Port "dado[7][2]" is changed into "dado_7_2" because it's a member of 2-D array port "dado" File: C:/Users/lamar/Dropbox/kiko/Disciplinas/UnB/OAC/2018-1/Lab2/Files/Multiplexadores/mux32_8.v Line: 3
+Info (204001): Port "dado[2][2]" is changed into "dado_2_2" because it's a member of 2-D array port "dado" File: C:/Users/lamar/Dropbox/kiko/Disciplinas/UnB/OAC/2018-1/Lab2/Files/Multiplexadores/mux32_8.v Line: 3
+Info (204001): Port "dado[3][2]" is changed into "dado_3_2" because it's a member of 2-D array port "dado" File: C:/Users/lamar/Dropbox/kiko/Disciplinas/UnB/OAC/2018-1/Lab2/Files/Multiplexadores/mux32_8.v Line: 3
+Info (204001): Port "dado[1][2]" is changed into "dado_1_2" because it's a member of 2-D array port "dado" File: C:/Users/lamar/Dropbox/kiko/Disciplinas/UnB/OAC/2018-1/Lab2/Files/Multiplexadores/mux32_8.v Line: 3
+Info (204001): Port "dado[0][2]" is changed into "dado_0_2" because it's a member of 2-D array port "dado" File: C:/Users/lamar/Dropbox/kiko/Disciplinas/UnB/OAC/2018-1/Lab2/Files/Multiplexadores/mux32_8.v Line: 3
+Info (204001): Port "dado[4][3]" is changed into "dado_4_3" because it's a member of 2-D array port "dado" File: C:/Users/lamar/Dropbox/kiko/Disciplinas/UnB/OAC/2018-1/Lab2/Files/Multiplexadores/mux32_8.v Line: 3
+Info (204001): Port "dado[5][3]" is changed into "dado_5_3" because it's a member of 2-D array port "dado" File: C:/Users/lamar/Dropbox/kiko/Disciplinas/UnB/OAC/2018-1/Lab2/Files/Multiplexadores/mux32_8.v Line: 3
+Info (204001): Port "dado[6][3]" is changed into "dado_6_3" because it's a member of 2-D array port "dado" File: C:/Users/lamar/Dropbox/kiko/Disciplinas/UnB/OAC/2018-1/Lab2/Files/Multiplexadores/mux32_8.v Line: 3
+Info (204001): Port "dado[7][3]" is changed into "dado_7_3" because it's a member of 2-D array port "dado" File: C:/Users/lamar/Dropbox/kiko/Disciplinas/UnB/OAC/2018-1/Lab2/Files/Multiplexadores/mux32_8.v Line: 3
+Info (204001): Port "dado[2][3]" is changed into "dado_2_3" because it's a member of 2-D array port "dado" File: C:/Users/lamar/Dropbox/kiko/Disciplinas/UnB/OAC/2018-1/Lab2/Files/Multiplexadores/mux32_8.v Line: 3
+Info (204001): Port "dado[3][3]" is changed into "dado_3_3" because it's a member of 2-D array port "dado" File: C:/Users/lamar/Dropbox/kiko/Disciplinas/UnB/OAC/2018-1/Lab2/Files/Multiplexadores/mux32_8.v Line: 3
+Info (204001): Port "dado[1][3]" is changed into "dado_1_3" because it's a member of 2-D array port "dado" File: C:/Users/lamar/Dropbox/kiko/Disciplinas/UnB/OAC/2018-1/Lab2/Files/Multiplexadores/mux32_8.v Line: 3
+Info (204001): Port "dado[0][3]" is changed into "dado_0_3" because it's a member of 2-D array port "dado" File: C:/Users/lamar/Dropbox/kiko/Disciplinas/UnB/OAC/2018-1/Lab2/Files/Multiplexadores/mux32_8.v Line: 3
+Info (204001): Port "dado[4][4]" is changed into "dado_4_4" because it's a member of 2-D array port "dado" File: C:/Users/lamar/Dropbox/kiko/Disciplinas/UnB/OAC/2018-1/Lab2/Files/Multiplexadores/mux32_8.v Line: 3
+Info (204001): Port "dado[5][4]" is changed into "dado_5_4" because it's a member of 2-D array port "dado" File: C:/Users/lamar/Dropbox/kiko/Disciplinas/UnB/OAC/2018-1/Lab2/Files/Multiplexadores/mux32_8.v Line: 3
+Info (204001): Port "dado[6][4]" is changed into "dado_6_4" because it's a member of 2-D array port "dado" File: C:/Users/lamar/Dropbox/kiko/Disciplinas/UnB/OAC/2018-1/Lab2/Files/Multiplexadores/mux32_8.v Line: 3
+Info (204001): Port "dado[7][4]" is changed into "dado_7_4" because it's a member of 2-D array port "dado" File: C:/Users/lamar/Dropbox/kiko/Disciplinas/UnB/OAC/2018-1/Lab2/Files/Multiplexadores/mux32_8.v Line: 3
+Info (204001): Port "dado[2][4]" is changed into "dado_2_4" because it's a member of 2-D array port "dado" File: C:/Users/lamar/Dropbox/kiko/Disciplinas/UnB/OAC/2018-1/Lab2/Files/Multiplexadores/mux32_8.v Line: 3
+Info (204001): Port "dado[3][4]" is changed into "dado_3_4" because it's a member of 2-D array port "dado" File: C:/Users/lamar/Dropbox/kiko/Disciplinas/UnB/OAC/2018-1/Lab2/Files/Multiplexadores/mux32_8.v Line: 3
+Info (204001): Port "dado[1][4]" is changed into "dado_1_4" because it's a member of 2-D array port "dado" File: C:/Users/lamar/Dropbox/kiko/Disciplinas/UnB/OAC/2018-1/Lab2/Files/Multiplexadores/mux32_8.v Line: 3
+Info (204001): Port "dado[0][4]" is changed into "dado_0_4" because it's a member of 2-D array port "dado" File: C:/Users/lamar/Dropbox/kiko/Disciplinas/UnB/OAC/2018-1/Lab2/Files/Multiplexadores/mux32_8.v Line: 3
+Info (204001): Port "dado[4][5]" is changed into "dado_4_5" because it's a member of 2-D array port "dado" File: C:/Users/lamar/Dropbox/kiko/Disciplinas/UnB/OAC/2018-1/Lab2/Files/Multiplexadores/mux32_8.v Line: 3
+Info (204001): Port "dado[5][5]" is changed into "dado_5_5" because it's a member of 2-D array port "dado" File: C:/Users/lamar/Dropbox/kiko/Disciplinas/UnB/OAC/2018-1/Lab2/Files/Multiplexadores/mux32_8.v Line: 3
+Info (204001): Port "dado[6][5]" is changed into "dado_6_5" because it's a member of 2-D array port "dado" File: C:/Users/lamar/Dropbox/kiko/Disciplinas/UnB/OAC/2018-1/Lab2/Files/Multiplexadores/mux32_8.v Line: 3
+Info (204001): Port "dado[7][5]" is changed into "dado_7_5" because it's a member of 2-D array port "dado" File: C:/Users/lamar/Dropbox/kiko/Disciplinas/UnB/OAC/2018-1/Lab2/Files/Multiplexadores/mux32_8.v Line: 3
+Info (204001): Port "dado[2][5]" is changed into "dado_2_5" because it's a member of 2-D array port "dado" File: C:/Users/lamar/Dropbox/kiko/Disciplinas/UnB/OAC/2018-1/Lab2/Files/Multiplexadores/mux32_8.v Line: 3
+Info (204001): Port "dado[3][5]" is changed into "dado_3_5" because it's a member of 2-D array port "dado" File: C:/Users/lamar/Dropbox/kiko/Disciplinas/UnB/OAC/2018-1/Lab2/Files/Multiplexadores/mux32_8.v Line: 3
+Info (204001): Port "dado[1][5]" is changed into "dado_1_5" because it's a member of 2-D array port "dado" File: C:/Users/lamar/Dropbox/kiko/Disciplinas/UnB/OAC/2018-1/Lab2/Files/Multiplexadores/mux32_8.v Line: 3
+Info (204001): Port "dado[0][5]" is changed into "dado_0_5" because it's a member of 2-D array port "dado" File: C:/Users/lamar/Dropbox/kiko/Disciplinas/UnB/OAC/2018-1/Lab2/Files/Multiplexadores/mux32_8.v Line: 3
+Info (204001): Port "dado[4][6]" is changed into "dado_4_6" because it's a member of 2-D array port "dado" File: C:/Users/lamar/Dropbox/kiko/Disciplinas/UnB/OAC/2018-1/Lab2/Files/Multiplexadores/mux32_8.v Line: 3
+Info (204001): Port "dado[5][6]" is changed into "dado_5_6" because it's a member of 2-D array port "dado" File: C:/Users/lamar/Dropbox/kiko/Disciplinas/UnB/OAC/2018-1/Lab2/Files/Multiplexadores/mux32_8.v Line: 3
+Info (204001): Port "dado[6][6]" is changed into "dado_6_6" because it's a member of 2-D array port "dado" File: C:/Users/lamar/Dropbox/kiko/Disciplinas/UnB/OAC/2018-1/Lab2/Files/Multiplexadores/mux32_8.v Line: 3
+Info (204001): Port "dado[7][6]" is changed into "dado_7_6" because it's a member of 2-D array port "dado" File: C:/Users/lamar/Dropbox/kiko/Disciplinas/UnB/OAC/2018-1/Lab2/Files/Multiplexadores/mux32_8.v Line: 3
+Info (204001): Port "dado[2][6]" is changed into "dado_2_6" because it's a member of 2-D array port "dado" File: C:/Users/lamar/Dropbox/kiko/Disciplinas/UnB/OAC/2018-1/Lab2/Files/Multiplexadores/mux32_8.v Line: 3
+Info (204001): Port "dado[3][6]" is changed into "dado_3_6" because it's a member of 2-D array port "dado" File: C:/Users/lamar/Dropbox/kiko/Disciplinas/UnB/OAC/2018-1/Lab2/Files/Multiplexadores/mux32_8.v Line: 3
+Info (204001): Port "dado[1][6]" is changed into "dado_1_6" because it's a member of 2-D array port "dado" File: C:/Users/lamar/Dropbox/kiko/Disciplinas/UnB/OAC/2018-1/Lab2/Files/Multiplexadores/mux32_8.v Line: 3
+Info (204001): Port "dado[0][6]" is changed into "dado_0_6" because it's a member of 2-D array port "dado" File: C:/Users/lamar/Dropbox/kiko/Disciplinas/UnB/OAC/2018-1/Lab2/Files/Multiplexadores/mux32_8.v Line: 3
+Info (204001): Port "dado[4][7]" is changed into "dado_4_7" because it's a member of 2-D array port "dado" File: C:/Users/lamar/Dropbox/kiko/Disciplinas/UnB/OAC/2018-1/Lab2/Files/Multiplexadores/mux32_8.v Line: 3
+Info (204001): Port "dado[5][7]" is changed into "dado_5_7" because it's a member of 2-D array port "dado" File: C:/Users/lamar/Dropbox/kiko/Disciplinas/UnB/OAC/2018-1/Lab2/Files/Multiplexadores/mux32_8.v Line: 3
+Info (204001): Port "dado[6][7]" is changed into "dado_6_7" because it's a member of 2-D array port "dado" File: C:/Users/lamar/Dropbox/kiko/Disciplinas/UnB/OAC/2018-1/Lab2/Files/Multiplexadores/mux32_8.v Line: 3
+Info (204001): Port "dado[7][7]" is changed into "dado_7_7" because it's a member of 2-D array port "dado" File: C:/Users/lamar/Dropbox/kiko/Disciplinas/UnB/OAC/2018-1/Lab2/Files/Multiplexadores/mux32_8.v Line: 3
+Info (204001): Port "dado[2][7]" is changed into "dado_2_7" because it's a member of 2-D array port "dado" File: C:/Users/lamar/Dropbox/kiko/Disciplinas/UnB/OAC/2018-1/Lab2/Files/Multiplexadores/mux32_8.v Line: 3
+Info (204001): Port "dado[3][7]" is changed into "dado_3_7" because it's a member of 2-D array port "dado" File: C:/Users/lamar/Dropbox/kiko/Disciplinas/UnB/OAC/2018-1/Lab2/Files/Multiplexadores/mux32_8.v Line: 3
+Info (204001): Port "dado[1][7]" is changed into "dado_1_7" because it's a member of 2-D array port "dado" File: C:/Users/lamar/Dropbox/kiko/Disciplinas/UnB/OAC/2018-1/Lab2/Files/Multiplexadores/mux32_8.v Line: 3
+Info (204001): Port "dado[0][7]" is changed into "dado_0_7" because it's a member of 2-D array port "dado" File: C:/Users/lamar/Dropbox/kiko/Disciplinas/UnB/OAC/2018-1/Lab2/Files/Multiplexadores/mux32_8.v Line: 3
+Info (204001): Port "dado[4][8]" is changed into "dado_4_8" because it's a member of 2-D array port "dado" File: C:/Users/lamar/Dropbox/kiko/Disciplinas/UnB/OAC/2018-1/Lab2/Files/Multiplexadores/mux32_8.v Line: 3
+Info (204001): Port "dado[5][8]" is changed into "dado_5_8" because it's a member of 2-D array port "dado" File: C:/Users/lamar/Dropbox/kiko/Disciplinas/UnB/OAC/2018-1/Lab2/Files/Multiplexadores/mux32_8.v Line: 3
+Info (204001): Port "dado[6][8]" is changed into "dado_6_8" because it's a member of 2-D array port "dado" File: C:/Users/lamar/Dropbox/kiko/Disciplinas/UnB/OAC/2018-1/Lab2/Files/Multiplexadores/mux32_8.v Line: 3
+Info (204001): Port "dado[7][8]" is changed into "dado_7_8" because it's a member of 2-D array port "dado" File: C:/Users/lamar/Dropbox/kiko/Disciplinas/UnB/OAC/2018-1/Lab2/Files/Multiplexadores/mux32_8.v Line: 3
+Info (204001): Port "dado[2][8]" is changed into "dado_2_8" because it's a member of 2-D array port "dado" File: C:/Users/lamar/Dropbox/kiko/Disciplinas/UnB/OAC/2018-1/Lab2/Files/Multiplexadores/mux32_8.v Line: 3
+Info (204001): Port "dado[3][8]" is changed into "dado_3_8" because it's a member of 2-D array port "dado" File: C:/Users/lamar/Dropbox/kiko/Disciplinas/UnB/OAC/2018-1/Lab2/Files/Multiplexadores/mux32_8.v Line: 3
+Info (204001): Port "dado[1][8]" is changed into "dado_1_8" because it's a member of 2-D array port "dado" File: C:/Users/lamar/Dropbox/kiko/Disciplinas/UnB/OAC/2018-1/Lab2/Files/Multiplexadores/mux32_8.v Line: 3
+Info (204001): Port "dado[0][8]" is changed into "dado_0_8" because it's a member of 2-D array port "dado" File: C:/Users/lamar/Dropbox/kiko/Disciplinas/UnB/OAC/2018-1/Lab2/Files/Multiplexadores/mux32_8.v Line: 3
+Info (204001): Port "dado[4][9]" is changed into "dado_4_9" because it's a member of 2-D array port "dado" File: C:/Users/lamar/Dropbox/kiko/Disciplinas/UnB/OAC/2018-1/Lab2/Files/Multiplexadores/mux32_8.v Line: 3
+Info (204001): Port "dado[5][9]" is changed into "dado_5_9" because it's a member of 2-D array port "dado" File: C:/Users/lamar/Dropbox/kiko/Disciplinas/UnB/OAC/2018-1/Lab2/Files/Multiplexadores/mux32_8.v Line: 3
+Info (204001): Port "dado[6][9]" is changed into "dado_6_9" because it's a member of 2-D array port "dado" File: C:/Users/lamar/Dropbox/kiko/Disciplinas/UnB/OAC/2018-1/Lab2/Files/Multiplexadores/mux32_8.v Line: 3
+Info (204001): Port "dado[7][9]" is changed into "dado_7_9" because it's a member of 2-D array port "dado" File: C:/Users/lamar/Dropbox/kiko/Disciplinas/UnB/OAC/2018-1/Lab2/Files/Multiplexadores/mux32_8.v Line: 3
+Info (204001): Port "dado[2][9]" is changed into "dado_2_9" because it's a member of 2-D array port "dado" File: C:/Users/lamar/Dropbox/kiko/Disciplinas/UnB/OAC/2018-1/Lab2/Files/Multiplexadores/mux32_8.v Line: 3
+Info (204001): Port "dado[3][9]" is changed into "dado_3_9" because it's a member of 2-D array port "dado" File: C:/Users/lamar/Dropbox/kiko/Disciplinas/UnB/OAC/2018-1/Lab2/Files/Multiplexadores/mux32_8.v Line: 3
+Info (204001): Port "dado[1][9]" is changed into "dado_1_9" because it's a member of 2-D array port "dado" File: C:/Users/lamar/Dropbox/kiko/Disciplinas/UnB/OAC/2018-1/Lab2/Files/Multiplexadores/mux32_8.v Line: 3
+Info (204001): Port "dado[0][9]" is changed into "dado_0_9" because it's a member of 2-D array port "dado" File: C:/Users/lamar/Dropbox/kiko/Disciplinas/UnB/OAC/2018-1/Lab2/Files/Multiplexadores/mux32_8.v Line: 3
+Info (204001): Port "dado[4][10]" is changed into "dado_4_10" because it's a member of 2-D array port "dado" File: C:/Users/lamar/Dropbox/kiko/Disciplinas/UnB/OAC/2018-1/Lab2/Files/Multiplexadores/mux32_8.v Line: 3
+Info (204001): Port "dado[5][10]" is changed into "dado_5_10" because it's a member of 2-D array port "dado" File: C:/Users/lamar/Dropbox/kiko/Disciplinas/UnB/OAC/2018-1/Lab2/Files/Multiplexadores/mux32_8.v Line: 3
+Info (204001): Port "dado[6][10]" is changed into "dado_6_10" because it's a member of 2-D array port "dado" File: C:/Users/lamar/Dropbox/kiko/Disciplinas/UnB/OAC/2018-1/Lab2/Files/Multiplexadores/mux32_8.v Line: 3
+Info (204001): Port "dado[7][10]" is changed into "dado_7_10" because it's a member of 2-D array port "dado" File: C:/Users/lamar/Dropbox/kiko/Disciplinas/UnB/OAC/2018-1/Lab2/Files/Multiplexadores/mux32_8.v Line: 3
+Info (204001): Port "dado[2][10]" is changed into "dado_2_10" because it's a member of 2-D array port "dado" File: C:/Users/lamar/Dropbox/kiko/Disciplinas/UnB/OAC/2018-1/Lab2/Files/Multiplexadores/mux32_8.v Line: 3
+Info (204001): Port "dado[3][10]" is changed into "dado_3_10" because it's a member of 2-D array port "dado" File: C:/Users/lamar/Dropbox/kiko/Disciplinas/UnB/OAC/2018-1/Lab2/Files/Multiplexadores/mux32_8.v Line: 3
+Info (204001): Port "dado[1][10]" is changed into "dado_1_10" because it's a member of 2-D array port "dado" File: C:/Users/lamar/Dropbox/kiko/Disciplinas/UnB/OAC/2018-1/Lab2/Files/Multiplexadores/mux32_8.v Line: 3
+Info (204001): Port "dado[0][10]" is changed into "dado_0_10" because it's a member of 2-D array port "dado" File: C:/Users/lamar/Dropbox/kiko/Disciplinas/UnB/OAC/2018-1/Lab2/Files/Multiplexadores/mux32_8.v Line: 3
+Info (204001): Port "dado[4][11]" is changed into "dado_4_11" because it's a member of 2-D array port "dado" File: C:/Users/lamar/Dropbox/kiko/Disciplinas/UnB/OAC/2018-1/Lab2/Files/Multiplexadores/mux32_8.v Line: 3
+Info (204001): Port "dado[5][11]" is changed into "dado_5_11" because it's a member of 2-D array port "dado" File: C:/Users/lamar/Dropbox/kiko/Disciplinas/UnB/OAC/2018-1/Lab2/Files/Multiplexadores/mux32_8.v Line: 3
+Info (204001): Port "dado[6][11]" is changed into "dado_6_11" because it's a member of 2-D array port "dado" File: C:/Users/lamar/Dropbox/kiko/Disciplinas/UnB/OAC/2018-1/Lab2/Files/Multiplexadores/mux32_8.v Line: 3
+Info (204001): Port "dado[7][11]" is changed into "dado_7_11" because it's a member of 2-D array port "dado" File: C:/Users/lamar/Dropbox/kiko/Disciplinas/UnB/OAC/2018-1/Lab2/Files/Multiplexadores/mux32_8.v Line: 3
+Info (204001): Port "dado[2][11]" is changed into "dado_2_11" because it's a member of 2-D array port "dado" File: C:/Users/lamar/Dropbox/kiko/Disciplinas/UnB/OAC/2018-1/Lab2/Files/Multiplexadores/mux32_8.v Line: 3
+Info (204001): Port "dado[3][11]" is changed into "dado_3_11" because it's a member of 2-D array port "dado" File: C:/Users/lamar/Dropbox/kiko/Disciplinas/UnB/OAC/2018-1/Lab2/Files/Multiplexadores/mux32_8.v Line: 3
+Info (204001): Port "dado[1][11]" is changed into "dado_1_11" because it's a member of 2-D array port "dado" File: C:/Users/lamar/Dropbox/kiko/Disciplinas/UnB/OAC/2018-1/Lab2/Files/Multiplexadores/mux32_8.v Line: 3
+Info (204001): Port "dado[0][11]" is changed into "dado_0_11" because it's a member of 2-D array port "dado" File: C:/Users/lamar/Dropbox/kiko/Disciplinas/UnB/OAC/2018-1/Lab2/Files/Multiplexadores/mux32_8.v Line: 3
+Info (204001): Port "dado[4][12]" is changed into "dado_4_12" because it's a member of 2-D array port "dado" File: C:/Users/lamar/Dropbox/kiko/Disciplinas/UnB/OAC/2018-1/Lab2/Files/Multiplexadores/mux32_8.v Line: 3
+Info (204001): Port "dado[5][12]" is changed into "dado_5_12" because it's a member of 2-D array port "dado" File: C:/Users/lamar/Dropbox/kiko/Disciplinas/UnB/OAC/2018-1/Lab2/Files/Multiplexadores/mux32_8.v Line: 3
+Info (204001): Port "dado[6][12]" is changed into "dado_6_12" because it's a member of 2-D array port "dado" File: C:/Users/lamar/Dropbox/kiko/Disciplinas/UnB/OAC/2018-1/Lab2/Files/Multiplexadores/mux32_8.v Line: 3
+Info (204001): Port "dado[7][12]" is changed into "dado_7_12" because it's a member of 2-D array port "dado" File: C:/Users/lamar/Dropbox/kiko/Disciplinas/UnB/OAC/2018-1/Lab2/Files/Multiplexadores/mux32_8.v Line: 3
+Info (204001): Port "dado[2][12]" is changed into "dado_2_12" because it's a member of 2-D array port "dado" File: C:/Users/lamar/Dropbox/kiko/Disciplinas/UnB/OAC/2018-1/Lab2/Files/Multiplexadores/mux32_8.v Line: 3
+Info (204001): Port "dado[3][12]" is changed into "dado_3_12" because it's a member of 2-D array port "dado" File: C:/Users/lamar/Dropbox/kiko/Disciplinas/UnB/OAC/2018-1/Lab2/Files/Multiplexadores/mux32_8.v Line: 3
+Info (204001): Port "dado[1][12]" is changed into "dado_1_12" because it's a member of 2-D array port "dado" File: C:/Users/lamar/Dropbox/kiko/Disciplinas/UnB/OAC/2018-1/Lab2/Files/Multiplexadores/mux32_8.v Line: 3
+Info (204001): Port "dado[0][12]" is changed into "dado_0_12" because it's a member of 2-D array port "dado" File: C:/Users/lamar/Dropbox/kiko/Disciplinas/UnB/OAC/2018-1/Lab2/Files/Multiplexadores/mux32_8.v Line: 3
+Info (204001): Port "dado[4][13]" is changed into "dado_4_13" because it's a member of 2-D array port "dado" File: C:/Users/lamar/Dropbox/kiko/Disciplinas/UnB/OAC/2018-1/Lab2/Files/Multiplexadores/mux32_8.v Line: 3
+Info (204001): Port "dado[5][13]" is changed into "dado_5_13" because it's a member of 2-D array port "dado" File: C:/Users/lamar/Dropbox/kiko/Disciplinas/UnB/OAC/2018-1/Lab2/Files/Multiplexadores/mux32_8.v Line: 3
+Info (204001): Port "dado[6][13]" is changed into "dado_6_13" because it's a member of 2-D array port "dado" File: C:/Users/lamar/Dropbox/kiko/Disciplinas/UnB/OAC/2018-1/Lab2/Files/Multiplexadores/mux32_8.v Line: 3
+Info (204001): Port "dado[7][13]" is changed into "dado_7_13" because it's a member of 2-D array port "dado" File: C:/Users/lamar/Dropbox/kiko/Disciplinas/UnB/OAC/2018-1/Lab2/Files/Multiplexadores/mux32_8.v Line: 3
+Info (204001): Port "dado[2][13]" is changed into "dado_2_13" because it's a member of 2-D array port "dado" File: C:/Users/lamar/Dropbox/kiko/Disciplinas/UnB/OAC/2018-1/Lab2/Files/Multiplexadores/mux32_8.v Line: 3
+Info (204001): Port "dado[3][13]" is changed into "dado_3_13" because it's a member of 2-D array port "dado" File: C:/Users/lamar/Dropbox/kiko/Disciplinas/UnB/OAC/2018-1/Lab2/Files/Multiplexadores/mux32_8.v Line: 3
+Info (204001): Port "dado[1][13]" is changed into "dado_1_13" because it's a member of 2-D array port "dado" File: C:/Users/lamar/Dropbox/kiko/Disciplinas/UnB/OAC/2018-1/Lab2/Files/Multiplexadores/mux32_8.v Line: 3
+Info (204001): Port "dado[0][13]" is changed into "dado_0_13" because it's a member of 2-D array port "dado" File: C:/Users/lamar/Dropbox/kiko/Disciplinas/UnB/OAC/2018-1/Lab2/Files/Multiplexadores/mux32_8.v Line: 3
+Info (204001): Port "dado[4][14]" is changed into "dado_4_14" because it's a member of 2-D array port "dado" File: C:/Users/lamar/Dropbox/kiko/Disciplinas/UnB/OAC/2018-1/Lab2/Files/Multiplexadores/mux32_8.v Line: 3
+Info (204001): Port "dado[5][14]" is changed into "dado_5_14" because it's a member of 2-D array port "dado" File: C:/Users/lamar/Dropbox/kiko/Disciplinas/UnB/OAC/2018-1/Lab2/Files/Multiplexadores/mux32_8.v Line: 3
+Info (204001): Port "dado[6][14]" is changed into "dado_6_14" because it's a member of 2-D array port "dado" File: C:/Users/lamar/Dropbox/kiko/Disciplinas/UnB/OAC/2018-1/Lab2/Files/Multiplexadores/mux32_8.v Line: 3
+Info (204001): Port "dado[7][14]" is changed into "dado_7_14" because it's a member of 2-D array port "dado" File: C:/Users/lamar/Dropbox/kiko/Disciplinas/UnB/OAC/2018-1/Lab2/Files/Multiplexadores/mux32_8.v Line: 3
+Info (204001): Port "dado[2][14]" is changed into "dado_2_14" because it's a member of 2-D array port "dado" File: C:/Users/lamar/Dropbox/kiko/Disciplinas/UnB/OAC/2018-1/Lab2/Files/Multiplexadores/mux32_8.v Line: 3
+Info (204001): Port "dado[3][14]" is changed into "dado_3_14" because it's a member of 2-D array port "dado" File: C:/Users/lamar/Dropbox/kiko/Disciplinas/UnB/OAC/2018-1/Lab2/Files/Multiplexadores/mux32_8.v Line: 3
+Info (204001): Port "dado[1][14]" is changed into "dado_1_14" because it's a member of 2-D array port "dado" File: C:/Users/lamar/Dropbox/kiko/Disciplinas/UnB/OAC/2018-1/Lab2/Files/Multiplexadores/mux32_8.v Line: 3
+Info (204001): Port "dado[0][14]" is changed into "dado_0_14" because it's a member of 2-D array port "dado" File: C:/Users/lamar/Dropbox/kiko/Disciplinas/UnB/OAC/2018-1/Lab2/Files/Multiplexadores/mux32_8.v Line: 3
+Info (204001): Port "dado[4][15]" is changed into "dado_4_15" because it's a member of 2-D array port "dado" File: C:/Users/lamar/Dropbox/kiko/Disciplinas/UnB/OAC/2018-1/Lab2/Files/Multiplexadores/mux32_8.v Line: 3
+Info (204001): Port "dado[5][15]" is changed into "dado_5_15" because it's a member of 2-D array port "dado" File: C:/Users/lamar/Dropbox/kiko/Disciplinas/UnB/OAC/2018-1/Lab2/Files/Multiplexadores/mux32_8.v Line: 3
+Info (204001): Port "dado[6][15]" is changed into "dado_6_15" because it's a member of 2-D array port "dado" File: C:/Users/lamar/Dropbox/kiko/Disciplinas/UnB/OAC/2018-1/Lab2/Files/Multiplexadores/mux32_8.v Line: 3
+Info (204001): Port "dado[7][15]" is changed into "dado_7_15" because it's a member of 2-D array port "dado" File: C:/Users/lamar/Dropbox/kiko/Disciplinas/UnB/OAC/2018-1/Lab2/Files/Multiplexadores/mux32_8.v Line: 3
+Info (204001): Port "dado[2][15]" is changed into "dado_2_15" because it's a member of 2-D array port "dado" File: C:/Users/lamar/Dropbox/kiko/Disciplinas/UnB/OAC/2018-1/Lab2/Files/Multiplexadores/mux32_8.v Line: 3
+Info (204001): Port "dado[3][15]" is changed into "dado_3_15" because it's a member of 2-D array port "dado" File: C:/Users/lamar/Dropbox/kiko/Disciplinas/UnB/OAC/2018-1/Lab2/Files/Multiplexadores/mux32_8.v Line: 3
+Info (204001): Port "dado[1][15]" is changed into "dado_1_15" because it's a member of 2-D array port "dado" File: C:/Users/lamar/Dropbox/kiko/Disciplinas/UnB/OAC/2018-1/Lab2/Files/Multiplexadores/mux32_8.v Line: 3
+Info (204001): Port "dado[0][15]" is changed into "dado_0_15" because it's a member of 2-D array port "dado" File: C:/Users/lamar/Dropbox/kiko/Disciplinas/UnB/OAC/2018-1/Lab2/Files/Multiplexadores/mux32_8.v Line: 3
+Info (204001): Port "dado[4][16]" is changed into "dado_4_16" because it's a member of 2-D array port "dado" File: C:/Users/lamar/Dropbox/kiko/Disciplinas/UnB/OAC/2018-1/Lab2/Files/Multiplexadores/mux32_8.v Line: 3
+Info (204001): Port "dado[5][16]" is changed into "dado_5_16" because it's a member of 2-D array port "dado" File: C:/Users/lamar/Dropbox/kiko/Disciplinas/UnB/OAC/2018-1/Lab2/Files/Multiplexadores/mux32_8.v Line: 3
+Info (204001): Port "dado[6][16]" is changed into "dado_6_16" because it's a member of 2-D array port "dado" File: C:/Users/lamar/Dropbox/kiko/Disciplinas/UnB/OAC/2018-1/Lab2/Files/Multiplexadores/mux32_8.v Line: 3
+Info (204001): Port "dado[7][16]" is changed into "dado_7_16" because it's a member of 2-D array port "dado" File: C:/Users/lamar/Dropbox/kiko/Disciplinas/UnB/OAC/2018-1/Lab2/Files/Multiplexadores/mux32_8.v Line: 3
+Info (204001): Port "dado[2][16]" is changed into "dado_2_16" because it's a member of 2-D array port "dado" File: C:/Users/lamar/Dropbox/kiko/Disciplinas/UnB/OAC/2018-1/Lab2/Files/Multiplexadores/mux32_8.v Line: 3
+Info (204001): Port "dado[3][16]" is changed into "dado_3_16" because it's a member of 2-D array port "dado" File: C:/Users/lamar/Dropbox/kiko/Disciplinas/UnB/OAC/2018-1/Lab2/Files/Multiplexadores/mux32_8.v Line: 3
+Info (204001): Port "dado[1][16]" is changed into "dado_1_16" because it's a member of 2-D array port "dado" File: C:/Users/lamar/Dropbox/kiko/Disciplinas/UnB/OAC/2018-1/Lab2/Files/Multiplexadores/mux32_8.v Line: 3
+Info (204001): Port "dado[0][16]" is changed into "dado_0_16" because it's a member of 2-D array port "dado" File: C:/Users/lamar/Dropbox/kiko/Disciplinas/UnB/OAC/2018-1/Lab2/Files/Multiplexadores/mux32_8.v Line: 3
+Info (204001): Port "dado[4][17]" is changed into "dado_4_17" because it's a member of 2-D array port "dado" File: C:/Users/lamar/Dropbox/kiko/Disciplinas/UnB/OAC/2018-1/Lab2/Files/Multiplexadores/mux32_8.v Line: 3
+Info (204001): Port "dado[5][17]" is changed into "dado_5_17" because it's a member of 2-D array port "dado" File: C:/Users/lamar/Dropbox/kiko/Disciplinas/UnB/OAC/2018-1/Lab2/Files/Multiplexadores/mux32_8.v Line: 3
+Info (204001): Port "dado[6][17]" is changed into "dado_6_17" because it's a member of 2-D array port "dado" File: C:/Users/lamar/Dropbox/kiko/Disciplinas/UnB/OAC/2018-1/Lab2/Files/Multiplexadores/mux32_8.v Line: 3
+Info (204001): Port "dado[7][17]" is changed into "dado_7_17" because it's a member of 2-D array port "dado" File: C:/Users/lamar/Dropbox/kiko/Disciplinas/UnB/OAC/2018-1/Lab2/Files/Multiplexadores/mux32_8.v Line: 3
+Info (204001): Port "dado[2][17]" is changed into "dado_2_17" because it's a member of 2-D array port "dado" File: C:/Users/lamar/Dropbox/kiko/Disciplinas/UnB/OAC/2018-1/Lab2/Files/Multiplexadores/mux32_8.v Line: 3
+Info (204001): Port "dado[3][17]" is changed into "dado_3_17" because it's a member of 2-D array port "dado" File: C:/Users/lamar/Dropbox/kiko/Disciplinas/UnB/OAC/2018-1/Lab2/Files/Multiplexadores/mux32_8.v Line: 3
+Info (204001): Port "dado[1][17]" is changed into "dado_1_17" because it's a member of 2-D array port "dado" File: C:/Users/lamar/Dropbox/kiko/Disciplinas/UnB/OAC/2018-1/Lab2/Files/Multiplexadores/mux32_8.v Line: 3
+Info (204001): Port "dado[0][17]" is changed into "dado_0_17" because it's a member of 2-D array port "dado" File: C:/Users/lamar/Dropbox/kiko/Disciplinas/UnB/OAC/2018-1/Lab2/Files/Multiplexadores/mux32_8.v Line: 3
+Info (204001): Port "dado[4][18]" is changed into "dado_4_18" because it's a member of 2-D array port "dado" File: C:/Users/lamar/Dropbox/kiko/Disciplinas/UnB/OAC/2018-1/Lab2/Files/Multiplexadores/mux32_8.v Line: 3
+Info (204001): Port "dado[5][18]" is changed into "dado_5_18" because it's a member of 2-D array port "dado" File: C:/Users/lamar/Dropbox/kiko/Disciplinas/UnB/OAC/2018-1/Lab2/Files/Multiplexadores/mux32_8.v Line: 3
+Info (204001): Port "dado[6][18]" is changed into "dado_6_18" because it's a member of 2-D array port "dado" File: C:/Users/lamar/Dropbox/kiko/Disciplinas/UnB/OAC/2018-1/Lab2/Files/Multiplexadores/mux32_8.v Line: 3
+Info (204001): Port "dado[7][18]" is changed into "dado_7_18" because it's a member of 2-D array port "dado" File: C:/Users/lamar/Dropbox/kiko/Disciplinas/UnB/OAC/2018-1/Lab2/Files/Multiplexadores/mux32_8.v Line: 3
+Info (204001): Port "dado[2][18]" is changed into "dado_2_18" because it's a member of 2-D array port "dado" File: C:/Users/lamar/Dropbox/kiko/Disciplinas/UnB/OAC/2018-1/Lab2/Files/Multiplexadores/mux32_8.v Line: 3
+Info (204001): Port "dado[3][18]" is changed into "dado_3_18" because it's a member of 2-D array port "dado" File: C:/Users/lamar/Dropbox/kiko/Disciplinas/UnB/OAC/2018-1/Lab2/Files/Multiplexadores/mux32_8.v Line: 3
+Info (204001): Port "dado[1][18]" is changed into "dado_1_18" because it's a member of 2-D array port "dado" File: C:/Users/lamar/Dropbox/kiko/Disciplinas/UnB/OAC/2018-1/Lab2/Files/Multiplexadores/mux32_8.v Line: 3
+Info (204001): Port "dado[0][18]" is changed into "dado_0_18" because it's a member of 2-D array port "dado" File: C:/Users/lamar/Dropbox/kiko/Disciplinas/UnB/OAC/2018-1/Lab2/Files/Multiplexadores/mux32_8.v Line: 3
+Info (204001): Port "dado[4][19]" is changed into "dado_4_19" because it's a member of 2-D array port "dado" File: C:/Users/lamar/Dropbox/kiko/Disciplinas/UnB/OAC/2018-1/Lab2/Files/Multiplexadores/mux32_8.v Line: 3
+Info (204001): Port "dado[5][19]" is changed into "dado_5_19" because it's a member of 2-D array port "dado" File: C:/Users/lamar/Dropbox/kiko/Disciplinas/UnB/OAC/2018-1/Lab2/Files/Multiplexadores/mux32_8.v Line: 3
+Info (204001): Port "dado[6][19]" is changed into "dado_6_19" because it's a member of 2-D array port "dado" File: C:/Users/lamar/Dropbox/kiko/Disciplinas/UnB/OAC/2018-1/Lab2/Files/Multiplexadores/mux32_8.v Line: 3
+Info (204001): Port "dado[7][19]" is changed into "dado_7_19" because it's a member of 2-D array port "dado" File: C:/Users/lamar/Dropbox/kiko/Disciplinas/UnB/OAC/2018-1/Lab2/Files/Multiplexadores/mux32_8.v Line: 3
+Info (204001): Port "dado[2][19]" is changed into "dado_2_19" because it's a member of 2-D array port "dado" File: C:/Users/lamar/Dropbox/kiko/Disciplinas/UnB/OAC/2018-1/Lab2/Files/Multiplexadores/mux32_8.v Line: 3
+Info (204001): Port "dado[3][19]" is changed into "dado_3_19" because it's a member of 2-D array port "dado" File: C:/Users/lamar/Dropbox/kiko/Disciplinas/UnB/OAC/2018-1/Lab2/Files/Multiplexadores/mux32_8.v Line: 3
+Info (204001): Port "dado[1][19]" is changed into "dado_1_19" because it's a member of 2-D array port "dado" File: C:/Users/lamar/Dropbox/kiko/Disciplinas/UnB/OAC/2018-1/Lab2/Files/Multiplexadores/mux32_8.v Line: 3
+Info (204001): Port "dado[0][19]" is changed into "dado_0_19" because it's a member of 2-D array port "dado" File: C:/Users/lamar/Dropbox/kiko/Disciplinas/UnB/OAC/2018-1/Lab2/Files/Multiplexadores/mux32_8.v Line: 3
+Info (204001): Port "dado[4][20]" is changed into "dado_4_20" because it's a member of 2-D array port "dado" File: C:/Users/lamar/Dropbox/kiko/Disciplinas/UnB/OAC/2018-1/Lab2/Files/Multiplexadores/mux32_8.v Line: 3
+Info (204001): Port "dado[5][20]" is changed into "dado_5_20" because it's a member of 2-D array port "dado" File: C:/Users/lamar/Dropbox/kiko/Disciplinas/UnB/OAC/2018-1/Lab2/Files/Multiplexadores/mux32_8.v Line: 3
+Info (204001): Port "dado[6][20]" is changed into "dado_6_20" because it's a member of 2-D array port "dado" File: C:/Users/lamar/Dropbox/kiko/Disciplinas/UnB/OAC/2018-1/Lab2/Files/Multiplexadores/mux32_8.v Line: 3
+Info (204001): Port "dado[7][20]" is changed into "dado_7_20" because it's a member of 2-D array port "dado" File: C:/Users/lamar/Dropbox/kiko/Disciplinas/UnB/OAC/2018-1/Lab2/Files/Multiplexadores/mux32_8.v Line: 3
+Info (204001): Port "dado[2][20]" is changed into "dado_2_20" because it's a member of 2-D array port "dado" File: C:/Users/lamar/Dropbox/kiko/Disciplinas/UnB/OAC/2018-1/Lab2/Files/Multiplexadores/mux32_8.v Line: 3
+Info (204001): Port "dado[3][20]" is changed into "dado_3_20" because it's a member of 2-D array port "dado" File: C:/Users/lamar/Dropbox/kiko/Disciplinas/UnB/OAC/2018-1/Lab2/Files/Multiplexadores/mux32_8.v Line: 3
+Info (204001): Port "dado[1][20]" is changed into "dado_1_20" because it's a member of 2-D array port "dado" File: C:/Users/lamar/Dropbox/kiko/Disciplinas/UnB/OAC/2018-1/Lab2/Files/Multiplexadores/mux32_8.v Line: 3
+Info (204001): Port "dado[0][20]" is changed into "dado_0_20" because it's a member of 2-D array port "dado" File: C:/Users/lamar/Dropbox/kiko/Disciplinas/UnB/OAC/2018-1/Lab2/Files/Multiplexadores/mux32_8.v Line: 3
+Info (204001): Port "dado[4][21]" is changed into "dado_4_21" because it's a member of 2-D array port "dado" File: C:/Users/lamar/Dropbox/kiko/Disciplinas/UnB/OAC/2018-1/Lab2/Files/Multiplexadores/mux32_8.v Line: 3
+Info (204001): Port "dado[5][21]" is changed into "dado_5_21" because it's a member of 2-D array port "dado" File: C:/Users/lamar/Dropbox/kiko/Disciplinas/UnB/OAC/2018-1/Lab2/Files/Multiplexadores/mux32_8.v Line: 3
+Info (204001): Port "dado[6][21]" is changed into "dado_6_21" because it's a member of 2-D array port "dado" File: C:/Users/lamar/Dropbox/kiko/Disciplinas/UnB/OAC/2018-1/Lab2/Files/Multiplexadores/mux32_8.v Line: 3
+Info (204001): Port "dado[7][21]" is changed into "dado_7_21" because it's a member of 2-D array port "dado" File: C:/Users/lamar/Dropbox/kiko/Disciplinas/UnB/OAC/2018-1/Lab2/Files/Multiplexadores/mux32_8.v Line: 3
+Info (204001): Port "dado[2][21]" is changed into "dado_2_21" because it's a member of 2-D array port "dado" File: C:/Users/lamar/Dropbox/kiko/Disciplinas/UnB/OAC/2018-1/Lab2/Files/Multiplexadores/mux32_8.v Line: 3
+Info (204001): Port "dado[3][21]" is changed into "dado_3_21" because it's a member of 2-D array port "dado" File: C:/Users/lamar/Dropbox/kiko/Disciplinas/UnB/OAC/2018-1/Lab2/Files/Multiplexadores/mux32_8.v Line: 3
+Info (204001): Port "dado[1][21]" is changed into "dado_1_21" because it's a member of 2-D array port "dado" File: C:/Users/lamar/Dropbox/kiko/Disciplinas/UnB/OAC/2018-1/Lab2/Files/Multiplexadores/mux32_8.v Line: 3
+Info (204001): Port "dado[0][21]" is changed into "dado_0_21" because it's a member of 2-D array port "dado" File: C:/Users/lamar/Dropbox/kiko/Disciplinas/UnB/OAC/2018-1/Lab2/Files/Multiplexadores/mux32_8.v Line: 3
+Info (204001): Port "dado[4][22]" is changed into "dado_4_22" because it's a member of 2-D array port "dado" File: C:/Users/lamar/Dropbox/kiko/Disciplinas/UnB/OAC/2018-1/Lab2/Files/Multiplexadores/mux32_8.v Line: 3
+Info (204001): Port "dado[5][22]" is changed into "dado_5_22" because it's a member of 2-D array port "dado" File: C:/Users/lamar/Dropbox/kiko/Disciplinas/UnB/OAC/2018-1/Lab2/Files/Multiplexadores/mux32_8.v Line: 3
+Info (204001): Port "dado[6][22]" is changed into "dado_6_22" because it's a member of 2-D array port "dado" File: C:/Users/lamar/Dropbox/kiko/Disciplinas/UnB/OAC/2018-1/Lab2/Files/Multiplexadores/mux32_8.v Line: 3
+Info (204001): Port "dado[7][22]" is changed into "dado_7_22" because it's a member of 2-D array port "dado" File: C:/Users/lamar/Dropbox/kiko/Disciplinas/UnB/OAC/2018-1/Lab2/Files/Multiplexadores/mux32_8.v Line: 3
+Info (204001): Port "dado[2][22]" is changed into "dado_2_22" because it's a member of 2-D array port "dado" File: C:/Users/lamar/Dropbox/kiko/Disciplinas/UnB/OAC/2018-1/Lab2/Files/Multiplexadores/mux32_8.v Line: 3
+Info (204001): Port "dado[3][22]" is changed into "dado_3_22" because it's a member of 2-D array port "dado" File: C:/Users/lamar/Dropbox/kiko/Disciplinas/UnB/OAC/2018-1/Lab2/Files/Multiplexadores/mux32_8.v Line: 3
+Info (204001): Port "dado[1][22]" is changed into "dado_1_22" because it's a member of 2-D array port "dado" File: C:/Users/lamar/Dropbox/kiko/Disciplinas/UnB/OAC/2018-1/Lab2/Files/Multiplexadores/mux32_8.v Line: 3
+Info (204001): Port "dado[0][22]" is changed into "dado_0_22" because it's a member of 2-D array port "dado" File: C:/Users/lamar/Dropbox/kiko/Disciplinas/UnB/OAC/2018-1/Lab2/Files/Multiplexadores/mux32_8.v Line: 3
+Info (204001): Port "dado[4][23]" is changed into "dado_4_23" because it's a member of 2-D array port "dado" File: C:/Users/lamar/Dropbox/kiko/Disciplinas/UnB/OAC/2018-1/Lab2/Files/Multiplexadores/mux32_8.v Line: 3
+Info (204001): Port "dado[5][23]" is changed into "dado_5_23" because it's a member of 2-D array port "dado" File: C:/Users/lamar/Dropbox/kiko/Disciplinas/UnB/OAC/2018-1/Lab2/Files/Multiplexadores/mux32_8.v Line: 3
+Info (204001): Port "dado[6][23]" is changed into "dado_6_23" because it's a member of 2-D array port "dado" File: C:/Users/lamar/Dropbox/kiko/Disciplinas/UnB/OAC/2018-1/Lab2/Files/Multiplexadores/mux32_8.v Line: 3
+Info (204001): Port "dado[7][23]" is changed into "dado_7_23" because it's a member of 2-D array port "dado" File: C:/Users/lamar/Dropbox/kiko/Disciplinas/UnB/OAC/2018-1/Lab2/Files/Multiplexadores/mux32_8.v Line: 3
+Info (204001): Port "dado[2][23]" is changed into "dado_2_23" because it's a member of 2-D array port "dado" File: C:/Users/lamar/Dropbox/kiko/Disciplinas/UnB/OAC/2018-1/Lab2/Files/Multiplexadores/mux32_8.v Line: 3
+Info (204001): Port "dado[3][23]" is changed into "dado_3_23" because it's a member of 2-D array port "dado" File: C:/Users/lamar/Dropbox/kiko/Disciplinas/UnB/OAC/2018-1/Lab2/Files/Multiplexadores/mux32_8.v Line: 3
+Info (204001): Port "dado[1][23]" is changed into "dado_1_23" because it's a member of 2-D array port "dado" File: C:/Users/lamar/Dropbox/kiko/Disciplinas/UnB/OAC/2018-1/Lab2/Files/Multiplexadores/mux32_8.v Line: 3
+Info (204001): Port "dado[0][23]" is changed into "dado_0_23" because it's a member of 2-D array port "dado" File: C:/Users/lamar/Dropbox/kiko/Disciplinas/UnB/OAC/2018-1/Lab2/Files/Multiplexadores/mux32_8.v Line: 3
+Info (204001): Port "dado[4][24]" is changed into "dado_4_24" because it's a member of 2-D array port "dado" File: C:/Users/lamar/Dropbox/kiko/Disciplinas/UnB/OAC/2018-1/Lab2/Files/Multiplexadores/mux32_8.v Line: 3
+Info (204001): Port "dado[5][24]" is changed into "dado_5_24" because it's a member of 2-D array port "dado" File: C:/Users/lamar/Dropbox/kiko/Disciplinas/UnB/OAC/2018-1/Lab2/Files/Multiplexadores/mux32_8.v Line: 3
+Info (204001): Port "dado[6][24]" is changed into "dado_6_24" because it's a member of 2-D array port "dado" File: C:/Users/lamar/Dropbox/kiko/Disciplinas/UnB/OAC/2018-1/Lab2/Files/Multiplexadores/mux32_8.v Line: 3
+Info (204001): Port "dado[7][24]" is changed into "dado_7_24" because it's a member of 2-D array port "dado" File: C:/Users/lamar/Dropbox/kiko/Disciplinas/UnB/OAC/2018-1/Lab2/Files/Multiplexadores/mux32_8.v Line: 3
+Info (204001): Port "dado[2][24]" is changed into "dado_2_24" because it's a member of 2-D array port "dado" File: C:/Users/lamar/Dropbox/kiko/Disciplinas/UnB/OAC/2018-1/Lab2/Files/Multiplexadores/mux32_8.v Line: 3
+Info (204001): Port "dado[3][24]" is changed into "dado_3_24" because it's a member of 2-D array port "dado" File: C:/Users/lamar/Dropbox/kiko/Disciplinas/UnB/OAC/2018-1/Lab2/Files/Multiplexadores/mux32_8.v Line: 3
+Info (204001): Port "dado[1][24]" is changed into "dado_1_24" because it's a member of 2-D array port "dado" File: C:/Users/lamar/Dropbox/kiko/Disciplinas/UnB/OAC/2018-1/Lab2/Files/Multiplexadores/mux32_8.v Line: 3
+Info (204001): Port "dado[0][24]" is changed into "dado_0_24" because it's a member of 2-D array port "dado" File: C:/Users/lamar/Dropbox/kiko/Disciplinas/UnB/OAC/2018-1/Lab2/Files/Multiplexadores/mux32_8.v Line: 3
+Info (204001): Port "dado[4][25]" is changed into "dado_4_25" because it's a member of 2-D array port "dado" File: C:/Users/lamar/Dropbox/kiko/Disciplinas/UnB/OAC/2018-1/Lab2/Files/Multiplexadores/mux32_8.v Line: 3
+Info (204001): Port "dado[5][25]" is changed into "dado_5_25" because it's a member of 2-D array port "dado" File: C:/Users/lamar/Dropbox/kiko/Disciplinas/UnB/OAC/2018-1/Lab2/Files/Multiplexadores/mux32_8.v Line: 3
+Info (204001): Port "dado[6][25]" is changed into "dado_6_25" because it's a member of 2-D array port "dado" File: C:/Users/lamar/Dropbox/kiko/Disciplinas/UnB/OAC/2018-1/Lab2/Files/Multiplexadores/mux32_8.v Line: 3
+Info (204001): Port "dado[7][25]" is changed into "dado_7_25" because it's a member of 2-D array port "dado" File: C:/Users/lamar/Dropbox/kiko/Disciplinas/UnB/OAC/2018-1/Lab2/Files/Multiplexadores/mux32_8.v Line: 3
+Info (204001): Port "dado[2][25]" is changed into "dado_2_25" because it's a member of 2-D array port "dado" File: C:/Users/lamar/Dropbox/kiko/Disciplinas/UnB/OAC/2018-1/Lab2/Files/Multiplexadores/mux32_8.v Line: 3
+Info (204001): Port "dado[3][25]" is changed into "dado_3_25" because it's a member of 2-D array port "dado" File: C:/Users/lamar/Dropbox/kiko/Disciplinas/UnB/OAC/2018-1/Lab2/Files/Multiplexadores/mux32_8.v Line: 3
+Info (204001): Port "dado[1][25]" is changed into "dado_1_25" because it's a member of 2-D array port "dado" File: C:/Users/lamar/Dropbox/kiko/Disciplinas/UnB/OAC/2018-1/Lab2/Files/Multiplexadores/mux32_8.v Line: 3
+Info (204001): Port "dado[0][25]" is changed into "dado_0_25" because it's a member of 2-D array port "dado" File: C:/Users/lamar/Dropbox/kiko/Disciplinas/UnB/OAC/2018-1/Lab2/Files/Multiplexadores/mux32_8.v Line: 3
+Info (204001): Port "dado[4][26]" is changed into "dado_4_26" because it's a member of 2-D array port "dado" File: C:/Users/lamar/Dropbox/kiko/Disciplinas/UnB/OAC/2018-1/Lab2/Files/Multiplexadores/mux32_8.v Line: 3
+Info (204001): Port "dado[5][26]" is changed into "dado_5_26" because it's a member of 2-D array port "dado" File: C:/Users/lamar/Dropbox/kiko/Disciplinas/UnB/OAC/2018-1/Lab2/Files/Multiplexadores/mux32_8.v Line: 3
+Info (204001): Port "dado[6][26]" is changed into "dado_6_26" because it's a member of 2-D array port "dado" File: C:/Users/lamar/Dropbox/kiko/Disciplinas/UnB/OAC/2018-1/Lab2/Files/Multiplexadores/mux32_8.v Line: 3
+Info (204001): Port "dado[7][26]" is changed into "dado_7_26" because it's a member of 2-D array port "dado" File: C:/Users/lamar/Dropbox/kiko/Disciplinas/UnB/OAC/2018-1/Lab2/Files/Multiplexadores/mux32_8.v Line: 3
+Info (204001): Port "dado[2][26]" is changed into "dado_2_26" because it's a member of 2-D array port "dado" File: C:/Users/lamar/Dropbox/kiko/Disciplinas/UnB/OAC/2018-1/Lab2/Files/Multiplexadores/mux32_8.v Line: 3
+Info (204001): Port "dado[3][26]" is changed into "dado_3_26" because it's a member of 2-D array port "dado" File: C:/Users/lamar/Dropbox/kiko/Disciplinas/UnB/OAC/2018-1/Lab2/Files/Multiplexadores/mux32_8.v Line: 3
+Info (204001): Port "dado[1][26]" is changed into "dado_1_26" because it's a member of 2-D array port "dado" File: C:/Users/lamar/Dropbox/kiko/Disciplinas/UnB/OAC/2018-1/Lab2/Files/Multiplexadores/mux32_8.v Line: 3
+Info (204001): Port "dado[0][26]" is changed into "dado_0_26" because it's a member of 2-D array port "dado" File: C:/Users/lamar/Dropbox/kiko/Disciplinas/UnB/OAC/2018-1/Lab2/Files/Multiplexadores/mux32_8.v Line: 3
+Info (204001): Port "dado[4][27]" is changed into "dado_4_27" because it's a member of 2-D array port "dado" File: C:/Users/lamar/Dropbox/kiko/Disciplinas/UnB/OAC/2018-1/Lab2/Files/Multiplexadores/mux32_8.v Line: 3
+Info (204001): Port "dado[5][27]" is changed into "dado_5_27" because it's a member of 2-D array port "dado" File: C:/Users/lamar/Dropbox/kiko/Disciplinas/UnB/OAC/2018-1/Lab2/Files/Multiplexadores/mux32_8.v Line: 3
+Info (204001): Port "dado[6][27]" is changed into "dado_6_27" because it's a member of 2-D array port "dado" File: C:/Users/lamar/Dropbox/kiko/Disciplinas/UnB/OAC/2018-1/Lab2/Files/Multiplexadores/mux32_8.v Line: 3
+Info (204001): Port "dado[7][27]" is changed into "dado_7_27" because it's a member of 2-D array port "dado" File: C:/Users/lamar/Dropbox/kiko/Disciplinas/UnB/OAC/2018-1/Lab2/Files/Multiplexadores/mux32_8.v Line: 3
+Info (204001): Port "dado[2][27]" is changed into "dado_2_27" because it's a member of 2-D array port "dado" File: C:/Users/lamar/Dropbox/kiko/Disciplinas/UnB/OAC/2018-1/Lab2/Files/Multiplexadores/mux32_8.v Line: 3
+Info (204001): Port "dado[3][27]" is changed into "dado_3_27" because it's a member of 2-D array port "dado" File: C:/Users/lamar/Dropbox/kiko/Disciplinas/UnB/OAC/2018-1/Lab2/Files/Multiplexadores/mux32_8.v Line: 3
+Info (204001): Port "dado[1][27]" is changed into "dado_1_27" because it's a member of 2-D array port "dado" File: C:/Users/lamar/Dropbox/kiko/Disciplinas/UnB/OAC/2018-1/Lab2/Files/Multiplexadores/mux32_8.v Line: 3
+Info (204001): Port "dado[0][27]" is changed into "dado_0_27" because it's a member of 2-D array port "dado" File: C:/Users/lamar/Dropbox/kiko/Disciplinas/UnB/OAC/2018-1/Lab2/Files/Multiplexadores/mux32_8.v Line: 3
+Info (204001): Port "dado[4][28]" is changed into "dado_4_28" because it's a member of 2-D array port "dado" File: C:/Users/lamar/Dropbox/kiko/Disciplinas/UnB/OAC/2018-1/Lab2/Files/Multiplexadores/mux32_8.v Line: 3
+Info (204001): Port "dado[5][28]" is changed into "dado_5_28" because it's a member of 2-D array port "dado" File: C:/Users/lamar/Dropbox/kiko/Disciplinas/UnB/OAC/2018-1/Lab2/Files/Multiplexadores/mux32_8.v Line: 3
+Info (204001): Port "dado[6][28]" is changed into "dado_6_28" because it's a member of 2-D array port "dado" File: C:/Users/lamar/Dropbox/kiko/Disciplinas/UnB/OAC/2018-1/Lab2/Files/Multiplexadores/mux32_8.v Line: 3
+Info (204001): Port "dado[7][28]" is changed into "dado_7_28" because it's a member of 2-D array port "dado" File: C:/Users/lamar/Dropbox/kiko/Disciplinas/UnB/OAC/2018-1/Lab2/Files/Multiplexadores/mux32_8.v Line: 3
+Info (204001): Port "dado[2][28]" is changed into "dado_2_28" because it's a member of 2-D array port "dado" File: C:/Users/lamar/Dropbox/kiko/Disciplinas/UnB/OAC/2018-1/Lab2/Files/Multiplexadores/mux32_8.v Line: 3
+Info (204001): Port "dado[3][28]" is changed into "dado_3_28" because it's a member of 2-D array port "dado" File: C:/Users/lamar/Dropbox/kiko/Disciplinas/UnB/OAC/2018-1/Lab2/Files/Multiplexadores/mux32_8.v Line: 3
+Info (204001): Port "dado[1][28]" is changed into "dado_1_28" because it's a member of 2-D array port "dado" File: C:/Users/lamar/Dropbox/kiko/Disciplinas/UnB/OAC/2018-1/Lab2/Files/Multiplexadores/mux32_8.v Line: 3
+Info (204001): Port "dado[0][28]" is changed into "dado_0_28" because it's a member of 2-D array port "dado" File: C:/Users/lamar/Dropbox/kiko/Disciplinas/UnB/OAC/2018-1/Lab2/Files/Multiplexadores/mux32_8.v Line: 3
+Info (204001): Port "dado[4][29]" is changed into "dado_4_29" because it's a member of 2-D array port "dado" File: C:/Users/lamar/Dropbox/kiko/Disciplinas/UnB/OAC/2018-1/Lab2/Files/Multiplexadores/mux32_8.v Line: 3
+Info (204001): Port "dado[5][29]" is changed into "dado_5_29" because it's a member of 2-D array port "dado" File: C:/Users/lamar/Dropbox/kiko/Disciplinas/UnB/OAC/2018-1/Lab2/Files/Multiplexadores/mux32_8.v Line: 3
+Info (204001): Port "dado[6][29]" is changed into "dado_6_29" because it's a member of 2-D array port "dado" File: C:/Users/lamar/Dropbox/kiko/Disciplinas/UnB/OAC/2018-1/Lab2/Files/Multiplexadores/mux32_8.v Line: 3
+Info (204001): Port "dado[7][29]" is changed into "dado_7_29" because it's a member of 2-D array port "dado" File: C:/Users/lamar/Dropbox/kiko/Disciplinas/UnB/OAC/2018-1/Lab2/Files/Multiplexadores/mux32_8.v Line: 3
+Info (204001): Port "dado[2][29]" is changed into "dado_2_29" because it's a member of 2-D array port "dado" File: C:/Users/lamar/Dropbox/kiko/Disciplinas/UnB/OAC/2018-1/Lab2/Files/Multiplexadores/mux32_8.v Line: 3
+Info (204001): Port "dado[3][29]" is changed into "dado_3_29" because it's a member of 2-D array port "dado" File: C:/Users/lamar/Dropbox/kiko/Disciplinas/UnB/OAC/2018-1/Lab2/Files/Multiplexadores/mux32_8.v Line: 3
+Info (204001): Port "dado[1][29]" is changed into "dado_1_29" because it's a member of 2-D array port "dado" File: C:/Users/lamar/Dropbox/kiko/Disciplinas/UnB/OAC/2018-1/Lab2/Files/Multiplexadores/mux32_8.v Line: 3
+Info (204001): Port "dado[0][29]" is changed into "dado_0_29" because it's a member of 2-D array port "dado" File: C:/Users/lamar/Dropbox/kiko/Disciplinas/UnB/OAC/2018-1/Lab2/Files/Multiplexadores/mux32_8.v Line: 3
+Info (204001): Port "dado[4][30]" is changed into "dado_4_30" because it's a member of 2-D array port "dado" File: C:/Users/lamar/Dropbox/kiko/Disciplinas/UnB/OAC/2018-1/Lab2/Files/Multiplexadores/mux32_8.v Line: 3
+Info (204001): Port "dado[5][30]" is changed into "dado_5_30" because it's a member of 2-D array port "dado" File: C:/Users/lamar/Dropbox/kiko/Disciplinas/UnB/OAC/2018-1/Lab2/Files/Multiplexadores/mux32_8.v Line: 3
+Info (204001): Port "dado[6][30]" is changed into "dado_6_30" because it's a member of 2-D array port "dado" File: C:/Users/lamar/Dropbox/kiko/Disciplinas/UnB/OAC/2018-1/Lab2/Files/Multiplexadores/mux32_8.v Line: 3
+Info (204001): Port "dado[7][30]" is changed into "dado_7_30" because it's a member of 2-D array port "dado" File: C:/Users/lamar/Dropbox/kiko/Disciplinas/UnB/OAC/2018-1/Lab2/Files/Multiplexadores/mux32_8.v Line: 3
+Info (204001): Port "dado[2][30]" is changed into "dado_2_30" because it's a member of 2-D array port "dado" File: C:/Users/lamar/Dropbox/kiko/Disciplinas/UnB/OAC/2018-1/Lab2/Files/Multiplexadores/mux32_8.v Line: 3
+Info (204001): Port "dado[3][30]" is changed into "dado_3_30" because it's a member of 2-D array port "dado" File: C:/Users/lamar/Dropbox/kiko/Disciplinas/UnB/OAC/2018-1/Lab2/Files/Multiplexadores/mux32_8.v Line: 3
+Info (204001): Port "dado[1][30]" is changed into "dado_1_30" because it's a member of 2-D array port "dado" File: C:/Users/lamar/Dropbox/kiko/Disciplinas/UnB/OAC/2018-1/Lab2/Files/Multiplexadores/mux32_8.v Line: 3
+Info (204001): Port "dado[0][30]" is changed into "dado_0_30" because it's a member of 2-D array port "dado" File: C:/Users/lamar/Dropbox/kiko/Disciplinas/UnB/OAC/2018-1/Lab2/Files/Multiplexadores/mux32_8.v Line: 3
+Info (204001): Port "dado[4][31]" is changed into "dado_4_31" because it's a member of 2-D array port "dado" File: C:/Users/lamar/Dropbox/kiko/Disciplinas/UnB/OAC/2018-1/Lab2/Files/Multiplexadores/mux32_8.v Line: 3
+Info (204001): Port "dado[5][31]" is changed into "dado_5_31" because it's a member of 2-D array port "dado" File: C:/Users/lamar/Dropbox/kiko/Disciplinas/UnB/OAC/2018-1/Lab2/Files/Multiplexadores/mux32_8.v Line: 3
+Info (204001): Port "dado[6][31]" is changed into "dado_6_31" because it's a member of 2-D array port "dado" File: C:/Users/lamar/Dropbox/kiko/Disciplinas/UnB/OAC/2018-1/Lab2/Files/Multiplexadores/mux32_8.v Line: 3
+Info (204001): Port "dado[7][31]" is changed into "dado_7_31" because it's a member of 2-D array port "dado" File: C:/Users/lamar/Dropbox/kiko/Disciplinas/UnB/OAC/2018-1/Lab2/Files/Multiplexadores/mux32_8.v Line: 3
+Info (204001): Port "dado[2][31]" is changed into "dado_2_31" because it's a member of 2-D array port "dado" File: C:/Users/lamar/Dropbox/kiko/Disciplinas/UnB/OAC/2018-1/Lab2/Files/Multiplexadores/mux32_8.v Line: 3
+Info (204001): Port "dado[3][31]" is changed into "dado_3_31" because it's a member of 2-D array port "dado" File: C:/Users/lamar/Dropbox/kiko/Disciplinas/UnB/OAC/2018-1/Lab2/Files/Multiplexadores/mux32_8.v Line: 3
+Info (204001): Port "dado[1][31]" is changed into "dado_1_31" because it's a member of 2-D array port "dado" File: C:/Users/lamar/Dropbox/kiko/Disciplinas/UnB/OAC/2018-1/Lab2/Files/Multiplexadores/mux32_8.v Line: 3
+Info (204001): Port "dado[0][31]" is changed into "dado_0_31" because it's a member of 2-D array port "dado" File: C:/Users/lamar/Dropbox/kiko/Disciplinas/UnB/OAC/2018-1/Lab2/Files/Multiplexadores/mux32_8.v Line: 3
+Info (204019): Generated file TopDE.vo in folder "C:/Users/lamar/Dropbox/kiko/Disciplinas/UnB/OAC/2018-1/Lab2/Files/Multiplexadores/simulation/modelsim/" for EDA simulation tool
+Info: Quartus Prime EDA Netlist Writer was successful. 0 errors, 2 warnings
+    Info: Peak virtual memory: 696 megabytes
+    Info: Processing ended: Sat Apr 14 21:10:59 2018
+    Info: Elapsed time: 00:00:10
+    Info: Total CPU time (on all processors): 00:00:08
+
+

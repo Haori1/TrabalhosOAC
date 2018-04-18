@@ -1,0 +1,54 @@
+m255
+K4
+z2
+13
+!s112 1.1
+!i10d 8192
+!i10e 25
+!i10f 100
+cModel Technology
+Z0 dC:/Users/lamar/Dropbox/kiko/Disciplinas/UnB/OAC/2018-1/Lab2/Files/Decoder/simulation/modelsim
+vdecoder7
+!s110 1523134731
+!i10b 1
+!s100 AhlBAWS^NooF;E>zj3X1j0
+IG=EQH:B<VOTV@6JO[eU2X0
+Z1 VDg1SIo80bB@j0V0VzS_@n1
+R0
+w1523124100
+8C:/Users/lamar/Dropbox/kiko/Disciplinas/UnB/OAC/2018-1/Lab2/Files/Decoder/decoder7.v
+FC:/Users/lamar/Dropbox/kiko/Disciplinas/UnB/OAC/2018-1/Lab2/Files/Decoder/decoder7.v
+L0 3
+Z2 OV;L;10.5b;63
+r1
+!s85 0
+31
+!s108 1523134731.000000
+!s107 C:/Users/lamar/Dropbox/kiko/Disciplinas/UnB/OAC/2018-1/Lab2/Files/Decoder/decoder7.v|
+!s90 -reportprogress|300|-vlog01compat|-work|work|+incdir+C:/Users/lamar/Dropbox/kiko/Disciplinas/UnB/OAC/2018-1/Lab2/Files/Decoder|C:/Users/lamar/Dropbox/kiko/Disciplinas/UnB/OAC/2018-1/Lab2/Files/Decoder/decoder7.v|
+!i113 1
+Z3 o-vlog01compat -work work
+Z4 !s92 -vlog01compat -work work +incdir+C:/Users/lamar/Dropbox/kiko/Disciplinas/UnB/OAC/2018-1/Lab2/Files/Decoder
+Z5 tCvgOpt 0
+vdecoder7_tb
+!s110 1523134732
+!i10b 1
+!s100 <J^ZfPIFTZY<PS1Mb6SV@1
+I^;iIACigZ8CF^hzNia1e72
+R1
+R0
+w1523120549
+8C:/Users/lamar/Dropbox/kiko/Disciplinas/UnB/OAC/2018-1/Lab2/Files/Decoder/decoder7_tb.v
+FC:/Users/lamar/Dropbox/kiko/Disciplinas/UnB/OAC/2018-1/Lab2/Files/Decoder/decoder7_tb.v
+L0 4
+R2
+r1
+!s85 0
+31
+!s108 1523134732.000000
+!s107 C:/Users/lamar/Dropbox/kiko/Disciplinas/UnB/OAC/2018-1/Lab2/Files/Decoder/decoder7_tb.v|
+!s90 -reportprogress|300|-vlog01compat|-work|work|+incdir+C:/Users/lamar/Dropbox/kiko/Disciplinas/UnB/OAC/2018-1/Lab2/Files/Decoder|C:/Users/lamar/Dropbox/kiko/Disciplinas/UnB/OAC/2018-1/Lab2/Files/Decoder/decoder7_tb.v|
+!i113 1
+R3
+R4
+R5
