@@ -1,0 +1,80 @@
+module TopDE ( /* I/O type definition */
+	input CLOCK50,
+	input [3:0] KEY,
+	input [9:0] SW,
+	output [9:0] LEDR,
+	output [6:0] HEX0, HEX1, HEX2, HEX3, HEX4, HEX5
+	);
+
+
+reg [31:0] idataa,idatab;
+
+reg [31:0] oresult;
+wire [31:0] oresult1;
+
+reg onan, ozero, ooverflow, ounderflow;
+reg oCompResult;
+
+initial
+	begin
+		idataa	<= 32'b0;
+		idatab	<= 32'b0;
+		oresult	<= 32'b0;
+		onan		<= 1'b0;
+		ozero		<= 1'b0;
+		ooverflow  <= 1'b0;
+		ounderflow <= 1'b0;
+		oCompResult<= 1'b0;
+	end
+	
+
+always @(posedge CLOCK50)
+	begin
+		if (SW[0] == 1'b0)
+			idataa <= {SW[9:1],23'b0};
+		else
+			idatab <= {SW[9:1],23'b0};
+		end
+		
+		if(KEY == ~4'd15)
+			oresult <= idataa;
+		else
+			if (KEY == ~4'd14)
+				oresult <= idatab;
+			else
+				oresult <= oresut1;
+			end
+		end
+				
+	end
+	
+	
+assign LEDR[0]=ozero;
+assign LEDR[1]=ooverflow;
+assign LEDR[2]=ounderflow;
+assign LEDR[3]=oCompResult;
+assign LEDR[4]=onan;
+
+
+FPALU fpalu1 (
+	.iclock(CLOCK_50), 
+	.idataa(idataa),
+	.idatab(idatab),
+	.icontrol(~KEY),
+	.oresult(oresult1),
+	.onan(onan),
+	.ozero(ozero),
+	.ooverflow(ooverflow),
+	.ounderflow(ounderflow),
+	.oCompResult(oCompResult)
+	);
+
+Decoder7 d0 (oresult[ 3: 0],HEX0);
+Decoder7 d1 (oresult[ 7: 4],HEX1);
+Decoder7 d2 (oresult[11: 8],HEX2);
+Decoder7 d3 (oresult[15:12],HEX3);
+Decoder7 d4 (oresult[19:16],HEX4);
+Decoder7 d5 (oresult[23:20],HEX5);
+
+
+endmodule

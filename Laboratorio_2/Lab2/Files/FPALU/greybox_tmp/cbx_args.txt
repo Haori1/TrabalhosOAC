@@ -1,0 +1,11 @@
+INTENDED_DEVICE_FAMILY="Cyclone V"
+PIPELINE=1
+WIDTH_EXP=8
+WIDTH_MAN=23
+DEVICE_FAMILY="Cyclone V"
+clock
+dataa
+datab
+aeb
+alb
+aleb

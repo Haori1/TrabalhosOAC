@@ -1,0 +1,102 @@
+Usando o Quartus Prime
+
+O Quartus Prime é a ferramenta de desenvolvimento desenvolvido pela empresa Altera/Intel para seus produtos FPGA. Esta ferramenta permite a síntese e análise de circuitos descritos em esquemático ou nas Linguagem de Descrição de Hardware Verilog ou VHDL, para fins de implementação no dispositivo FPGA ou para simulação.
+
+Use a versão 17.1 do Quartus Prime nos micros do LINF. (Está instalada também a versão 13.0!)
+Instale o Quartus Prime v17.1 na sua máquina, faça o download da versão Lite Edition a partir do site da Altera.
+>>>>>>Não instale a versão de avaliação/subscription que funciona só por 30 dias!<<<<<<<<<
+		
+1) Iniciando um novo projeto
+- Iniciar o programa Quartus Prime através do Menu Iniciar do Windows, submenu Intel FPGA.
+- Escolha criar um novo projeto (Create a New Project > New Project Wizard)
+- Introduction: Next>
+- Diretory, Name and Top-Level Entity: Crie um novo diretório onde estará o projeto
+  Defina o nome do Projeto e, automaticamente, o nome do arquivo Top-Level. Next>
+  Use nomes que não contenham caracteres especiais (!@#$%¨&()-[]{}.:;<>/?| etc.
+- Project Type: Empty project. Next>
+- Add Files: Insira os arquivos .v, se existirem. Next>
+- Family & Device & Boarding Settings: Selecione a aba Board e selecione DE1-SoC Board
+  O dispositivo 5CSEMA5F31C6 será selecionado.
+  Selecione a caixa Create top-level design file para criar o arquivo de top-level padrão e fazer a associação dos pinos.
+- EDA Tool Settings: selecione como ferramenta de simulação o ModelSim-Altera e Verilog HDL. Next>
+  no diretório  C:\intelFPGA_lite\17.1\modelsim_ase
+- Summary: Confira se está tudo Ok.  Finish>
+
+2) Compilando o projeto
+- A janela Project Navigator selecione a visão de Files (default é Hierarchy)
+   Lembre-se que o arquivo principal do projeto, que será compilado e simulado inicialmente, é definido pelo top-level! Logo, defina qual o arquivo que vc deseja compilar clicando com o botão direito do mouse sobre o nome do arquivo.v e selecionando Set as Top-Level Entity.
+- No menu Assigments/Import Assignments e selecione o arquivo DE1_SOC.qsf    OK
+- Inicie a compilação ícone Start Compilation (CTRL-L)
+- Corrija os erros encontrados e verifique os Warnings (são de grande ajuda no debug do projeto).
+- Os requerimentos físicos do projeto podem ser visualizados no Flow Summary e detalhadamente no relatório: Analysis & Synthesis/ Resource Utilization by Entity
+
+3) Análise dos requerimentos temporais
+- clique no botão TimeQuest timing Analyzer
+- na janela Tasks defina o Clock desejado no seu projeto
+  Clique em Create Timing Netlist para criar o modelo o seu projeto
+  No menu Constrains selecione Create clock
+  Preencha o Clock name com clk
+  Defina o Period: 20.00 ns  para definir a frequência de 50MHz
+  Em Targets, clique no '...' 
+  Em Collection selecione get_ports
+  Clique em List
+  Selecione o sinal de Clock de 50MHz do seu projeto
+  Clique em > para selecioná-lo. Clique em OK
+  Clique em Run
+- na janela Tasks clique em Update Timing NetList
+- em Set Operationg Conditions selecione 6_slow_1100mv_0C 
+- na janela Tasks em Reports/ Datasheet 
+  execute Report Fmax Summary
+  execute Report Datasheet
+- na janela Report selecione o relatório que vc deseja ver
+  RR = Rise to Rise  RF = Rise to Fall  FR=Fall to Rise   FF=Fall to Fall
+  ordene de forma a visualizar sempre o pior caso dos tempos de atraso.
+- Saia do TimeQuest salvando o arquivo .sdc que contém essas definições
+
+4) Simulando o projeto por forma de onda: Permite uma simulação simples definindo os sinais de entrada
+- Crie o arquivo com a forma de onda dos sinais de entrada:
+	File > New > University Program (VWF)
+- Defina os pinos a serem considerados na simulação.  
+	Click com botão direito > Insert Node or Bus >  Node Finder > Selecione Filter: Pins All > List
+	Click em >> para adicionar todos os nós encontrados.
+- OK
+- OK
+- Crie os sinais que verificam seu projeto. Selecione e agrupe os sinais de entrada e click em Count Value (icone com C)
+- Defina o período (em ns) de cada contagem (ex.: 40 ns).  Ps.: Edit/Set End Time/ define o tempo total da simulação
+- Salve como arquivo .vwf
+- Execute as simulações
+	-ícone Run Functional Simulation (simulação funcional, portas lógicas ideais)
+	-ícone Run Timing Simulation (simulação temporal)  NÃO FUNCIONA NA CYCLONE V 
+- Tire um print screen das formas de onda e do circuito para colocar no relatório.
+
+5) Simulando o projeto com o ModelSim:  Permite a definição de situações muito mais complexas que por forma de onda
+- Crie um arquivo de testbench contendo a simulação a ser realizada:
+- No menu Tools/Options/ selecione General/EDA Tool Options
+- Na caixa ModelSim-Altera indique o diretório: C:\intelFPGA_lite\17.1\modelsim_ase\win32aloem
+- No menu Assignments/Settings selecione EDA Tool Settings/Simulation
+  Selecione Tool name: ModelSim-Altera
+  NativeLink settings selecione Compile test bench e Selecione em Test Benches 
+  selecione New, escolha um nome e Add o arquivo do testbench do seu projeto  OK
+  OK
+- No menu Tools/Run simulation tool/ execute RTL Simulation
+- O ModelSim será aberto e executado com o seu test bench
+- Verifique e corrija os erros, se houver.
+- Na janela Transcript deve ser apresentado a saída do seu testbench
+- Na janela Wave deve ser apresentado as formas de onda do seu testbench
+
+Observe que o Quartus NÃO simula os atrasos para o FPGA Cyclone V!!!
+Para isso deve ser utilizado o TimeQuest.
+
+
+5) Implementando o projeto no chip FPGA do kit DE1-SoC
+- Selecione o arquivo TopDE.v como top Level
+- Compile novamente o projeto  - Deve ser gerado cerca de 200 warnings
+- cline no Icone Programmer
+- Verifique se o cabo USB está corretamente conectado na placa DE1-SoC na entrada Blaster
+- Verifique se o driver USB Blaster está corretamente instalado: Hardware Setup > Currently selected hardware > USB Blaster
+- Clique em Auto Detect e selecione o device 5CSEMA5
+- Clique no Device 5CSEMA5 e com o botão direito Change File.  Selecione o arquivo .sof no diretório output_files
+- Selecione a caixa Program/Configure deste device
+- Start
+- Teste o circuito implementado
+- Faça um vídeo do circuito em funcionamento, coloque no YouTube e o link no relatório

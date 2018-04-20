@@ -1,0 +1,33 @@
+module TopDE (
+	input [3:0] KEY,
+	input [9:0] SW,
+	output [9:0] LEDR,
+	output [6:0] HEX0, HEX1, HEX2, HEX3, HEX4, HEX5,
+	);
+
+wire [31:0] idataa,idatab;
+assign idataa = {{27{SW[4]}},SW[4:0]};
+assign idatab = {{27{SW[9]}},SW[9:5]};
+
+
+wire ozero;
+assign LEDR[0] = ozero;
+
+wire [31:0] oresult;
+
+ALU  ula1 (	.iA(idataa), 
+				.iB(idatab), 
+				.iControl(~KEY), 
+				.oZero(ozero), 
+				.oResult(oresult)
+				);
+
+Decoder7 d0 (oresult[ 3: 0],HEX0);
+Decoder7 d1 (oresult[ 7: 4],HEX1);
+Decoder7 d2 (oresult[11: 8],HEX2);
+Decoder7 d3 (oresult[15:12],HEX3);
+Decoder7 d4 (oresult[19:16],HEX4);
+Decoder7 d5 (oresult[23:20],HEX5);
+
+
+endmodule

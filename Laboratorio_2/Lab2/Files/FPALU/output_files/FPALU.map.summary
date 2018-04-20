@@ -1,0 +1,17 @@
+Analysis & Synthesis Status : Successful - Sun Apr 15 20:32:04 2018
+Quartus Prime Version : 17.1.0 Build 590 10/25/2017 SJ Lite Edition
+Revision Name : FPALU
+Top-level Entity Name : FPALU
+Family : Cyclone V
+Logic utilization (in ALMs) : N/A
+Total registers : 1771
+Total pins : 106
+Total virtual pins : 0
+Total block memory bits : 4,938
+Total DSP Blocks : 7
+Total HSSI RX PCSs : 0
+Total HSSI PMA RX Deserializers : 0
+Total HSSI TX PCSs : 0
+Total HSSI PMA TX Serializers : 0
+Total PLLs : 0
+Total DLLs : 0

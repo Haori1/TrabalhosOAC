@@ -1,0 +1,20 @@
+Fitter Status : Successful - Sun Apr 15 20:36:22 2018
+Quartus Prime Version : 17.1.0 Build 590 10/25/2017 SJ Lite Edition
+Revision Name : FPALU
+Top-level Entity Name : FPALU
+Family : Cyclone V
+Device : 5CSEMA5F31C6
+Timing Models : Final
+Logic utilization (in ALMs) : 1,124 / 32,070 ( 4 % )
+Total registers : 1607
+Total pins : 106 / 457 ( 23 % )
+Total virtual pins : 0
+Total block memory bits : 4,938 / 4,065,280 ( < 1 % )
+Total RAM Blocks : 5 / 397 ( 1 % )
+Total DSP Blocks : 7 / 87 ( 8 % )
+Total HSSI RX PCSs : 0
+Total HSSI PMA RX Deserializers : 0
+Total HSSI TX PCSs : 0
+Total HSSI PMA TX Serializers : 0
+Total PLLs : 0 / 6 ( 0 % )
+Total DLLs : 0 / 4 ( 0 % )
