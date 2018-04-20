@@ -1,13 +1,16 @@
 .data
-quebraLinha: .ascii "\n"
-imaginario: .ascii "i"
-entreImaginario: .ascii " + "
+quebraLinha: .string "\n"
+imaginario: .string "i"
+entreImaginario: .string " + "
 
 .text
 
+
+# Falta fazer com que o programa pergunte novamente...
+
 main:
 #polinomio: ax² + bx + c
-# equacao do delta: b² - 2(a)(c)
+# equacao do delta: b² - 4(a)(c)
 #O delta fornece a informacao de se a equacao possui raizes reais ou complexas
 # calculo das raizes: (-b +- sqrt(delta))/2
 #caso delta seja negativo, calcula-se a raiz do módulo do delta e desenha-se o i de acordo com esse valor.
@@ -38,6 +41,7 @@ fadd.s fa0, fa4, ft0 #fa0 = a
 
 
 jal calculaDelta
+jal imprimeRaizes
 
 
 #valores simulados de A
@@ -59,28 +63,27 @@ calculaDelta:
 
  addi sp, sp, -16 #Cria uma pilha com 4 palavras
  
- li t0, 2 
+ li t0, 4 
  
- fcvt.s.w ft3, t0 #loga o 2 que vai multiplicar ac
+ fcvt.s.w ft3, t0 #loga o 4 que vai multiplicar ac
 
- fmul.s ft0, fs1, fs1 #t0 = b²
- fmul.s ft1, fs0, fs2 #t1 = ac
- fmul.s ft1, ft1 , ft3 #t1 = 2ac
- fsub.s ft2, ft0, ft1 #t2 = b² - 2ac
+ fmul.s ft0, fa1, fa1 #ft0 = b²
+ fmul.s ft1, fa0, fa2 #ft1 = ac
+ fmul.s ft1, ft1 , ft3 #ft1 = 2ac
+ fsub.s ft2, ft0, ft1 #ft2 = b² - 2ac
  
  li t0, 0 
- fcvt.s.w ft0, t0 
+ fcvt.s.w ft0, t0 #loga o valor zero em ft0 para comparacao float
  
- li t0, 1
- fcvt.s.w ft3, t0
+ li t0, 1 #loga o valor de t0 para comparacao
  
- flt.s t1, ft2, ft0 #se t2 <0 ft1 = 1, caso contrario ft1 = 0
+ flt.s t1, ft2, ft0 #se ft2 < 0 t1 = 1, caso contrario t1 = 0
  
- feq.s ft1, ft3, negativo #se for negativo, retorna 2
+ beq t1, t0, negativo #se for negativo, retorna 2
  
  li a0, 1
  
- feq.s ft1, ft0, raizes #se for positivo, retorna 1
+ bne t1, t0, raizes #se for positivo, retorna 1
  
  negativo:
  
@@ -90,16 +93,15 @@ calculaDelta:
  
  li t0, 2
  beq a0, t0, raizes_negativas
-  
  
  positivas:
  
  li t0, -1
- fcvt.s.w ft0, t0
+ fcvt.s.w ft0, t0 #loga o valor -1 para inverter valores negativos
  
  fmul.s ft5, fa1, ft0 #-b
  
- fsqrt.s ft4, ft4 #raiz do modulo do delta
+ fsqrt.s ft4, ft2 #raiz do modulo do delta
  
  fadd.s ft6, ft4, ft5 #soma de -b com raiz de delta
  
@@ -110,11 +112,12 @@ calculaDelta:
  
  fsw ft6, 12(sp) #salva x1 na pilha
  
- fsub.s ft6, ft4, ft5 #soma de -b com raiz de delta
+ fsub.s ft6, ft5, ft4 #subtracao de -b pela raiz de delta
  fdiv.s ft6, ft6, ft0 #divisão da soma por dois 
  
  fsw ft6, 8(sp) #salva x2 na pilha
  
+ li t0, 2 #loga o valor padrao de raizes complexas
  bne a0, t0, retornoCalcula
  
  raizes_negativas:
@@ -123,20 +126,26 @@ calculaDelta:
  li t0, -1
  fcvt.s.w ft0, t0 #salva -1 para inverter valores negativos
  
+ li t0, 2 #loga o 2 que dividira os valores
+ fcvt.s.w ft1, t0
+ 
  fmul.s ft4, ft2, ft0 #-delta
  fsqrt.s ft4, ft4 #raiz do modulo do delta
+ fdiv.s ft4, ft4, ft1 #divide parte imaginaria por 2
  
  fmul.s ft5, fa1, ft0 #-b
+ fdiv.s ft5, ft5, ft1 #divide parte real por 2
  
  fsw ft4, 12(sp) #salva parte imaginária de x1 na pilha
  
  fsw ft5, 8(sp) #salva parte real de x1 na pilha
 
- fmul.s ft4, ft2, ft0 #-delta, da equação para achar x''
+ fmul.s ft4, ft4, ft0 #-delta, da equação para achar x''
  
  fsw ft4, 4(sp) #salva parte imaginária de x2 na pilha
-   
+  
  fsw ft5, 0(sp) #salva parte real de x2 na pilha
+ 
  
  
  retornoCalcula:
@@ -148,6 +157,7 @@ calculaDelta:
 imprimeRaizes:
 
  li t0, 2
+ add t1, a0, zero
  
  imprimeReais:
  beq a0, t0, imprimeComplexas
@@ -170,9 +180,9 @@ imprimeRaizes:
  
  addi sp, sp, 16 #desaloca pilha 
     
- bne a0, t0, retornoImprime
+ bne t1, t0, retornoImprime
 
- imprimeComplexas:
+imprimeComplexas:
  
  flw fa0, 0(sp) #loga parte real de x2
  
