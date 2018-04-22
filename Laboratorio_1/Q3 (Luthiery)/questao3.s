@@ -15,7 +15,7 @@
 	print_read_a:	.string "Digite o coeficiente a: "
 	print_read_b:	.string "Digite o coeficiente b: "
 	print_read_c:	.string "Digite o coeficiente c: "
-	print_roots:	.string "Raizes:"
+	print_roots:	.string "Raízes:"
 	print_x1:	.string "R(1): "
 	print_x2:	.string "R(2): "
 	print_i:	.string "i"
@@ -37,14 +37,14 @@ main:
 	ecall
 	li a7, 6
 	ecall
-	fmv.s fa2, fa0		# lendo o coeficiente a e colocando-o em fa2
+	fmv.s fa2, fa0		# lendo o coeficiente b e colocando-o em fa2
 	
 	la a0, print_read_c
 	li a7, 4
 	ecall
 	li a7, 6
 	ecall
-	fmv.s fa3, fa0		# lendo o coeficiente a e colocando-o em fa3
+	fmv.s fa3, fa0		# lendo o coeficiente c e colocando-o em fa3
 	
 	jal bhaskara
 	jal show
