@@ -8,6 +8,9 @@
 # 2017/2								#
 #########################################################################
 
+#obs: Vamos tentar deixar as instrucoes antigas comentadas, para facilitar o debug
+#Quando for uma instrucao relevante e de dificl entendimento
+
 #definicao do mapa de enderecamento de MMIO
 .eqv VGAADDRESSINI      0xFF000000
 .eqv VGAADDRESSFIM      0xFF012C00
@@ -170,6 +173,8 @@ eventQueueEndPtr:       .word 0x90000E00
 #	mtc0 $t0,$14
 #	eret
 	
+	
+#*****************************************************************************************************************************#
 # inicio do exception handler
 exceptionHandling:  addi    $sp, $sp, -8 # aloca espaco 
     sw      $at, 0($sp)			# salva $at
@@ -650,10 +655,13 @@ endSyscall:	lw	$1, 0($sp)  # recupera QUASE todos os registradores na pilha
     addi    $sp, $sp, 264
     j endException
 
+#Toda essa parte de excecao parce que nao sera tratada
+#*****************************************************************************************************************************#
+
 
 goToExit:   	DE2(goToExitDE2)	# se for a DE2
-  		li 	$v0, 10		# chama o syscal normal do Mars
-  		syscall			# exit syscall
+  		li 	a7, 10		# chama o syscal normal do Mars
+  		ecall			# exit syscall
   		
 goToExitDE2:	j       goToExitDE2     ########### syscall 10 ou 110
 
@@ -718,43 +726,43 @@ goToCLS:	jal     clsCLS                 	# chama CLS
 #  $a3    =    cor                          #
 #############################################
 
-printInt:	addi 	$sp, $sp, -4			# Aloca espaco
-		sw 	$ra, 0($sp)			# salva $ra
-		la 	$t0, TempBuffer			# carrega o Endereco do Buffer da String
+printInt:	addi 	sp, sp, -4			# Aloca espaco
+		sw 	ra, 0(sp)			# salva $ra
+		la 	t0, TempBuffer			# carrega o Endereco do Buffer da String
 		
-		bge 	$a0, $zero, ehposprintInt	# Se eh positvo
-		li 	$t1, '-'			# carrega o sinal -
-		sb 	$t1, 0($t0)			# coloca no buffer
-		addi 	$t0, $t0, 1			# incrementa endereco do buffer
-		sub 	$a0, $zero, $a0			# torna o numero positivo
+		bge 	a0, zero, ehposprintInt	# Se eh positvo
+		li 	t1, '-'			# carrega o sinal -
+		sb 	t1, 0(t0)			# coloca no buffer
+		addi 	t0, t0, 1			# incrementa endereco do buffer
+		sub 	a0, zero, a0			# torna o numero positivo
 		
-ehposprintInt:  li 	$t2, 10				# carrega numero 10
-		li 	$t1, 0				# carrega numero de digitos com 0
+ehposprintInt:  li 	t2, 10				# carrega numero 10
+		li 	t1, 0				# carrega numero de digitos com 0
 		
-loop1printInt:	div 	$a0, $t2			# divide por 10
-		mfhi 	$t3				# resto
-		mflo 	$t4				# quociente
-		addi 	$sp, $sp, -4			# aloca espaco na pilha
-		sw 	$t3, 0($sp)			# coloca resto na pilha
-		move 	$a0, $t4			# atualiza o numero com o quociente
-		addi 	$t1, $t1, 1			# incrementa o contador de digitos
-		bne 	$a0, $zero, loop1printInt	# verifica se o numero eh zero
+loop1printInt:	div 	a0, t2			# divide por 10
+		mfhi 	t3				# resto
+		mflo 	t4				# quocient
+		addi 	sp, sp, -4			# aloca espaco na pilha
+		sw 	t3, 0(sp)			# coloca resto na pilha
+		mv 	a0, t4			# atualiza o numero com o quociente
+		addi 	t1, t1, 1			# incrementa o contador de digitos
+		bne 	a0, zero, loop1printInt	# verifica se o numero eh zero
 				
-loop2printInt:	lw 	$t2, 0($sp)			# le digito da pilha
-		addi 	$sp, $sp, 4			# libera espaco
-		addi 	$t2, $t2, 48			# converte o digito para ascii
-		sb 	$t2, 0($t0)			# coloca caractere no buffer
-		addi 	$t0, $t0, 1			# incrementa endereco do buffer
-		addi 	$t1, $t1, -1			# decrementa contador de digitos
-		bne 	$t1, $zero, loop2printInt	# eh o ultimo?
-		sb 	$zero, 0($t0)			# insere \NULL na string
+loop2printInt:	lw 	t2, 0($sp)			# le digito da pilha
+		addi 	sp, sp, 4			# libera espaco
+		addi 	t2, t2, 48			# converte o digito para ascii
+		sb 	t2, 0(t0)			# coloca caractere no buffer
+		addi 	t0, t0, 1			# incrementa endereco do buffer
+		addi 	t1, t1, -1			# decrementa contador de digitos
+		bne 	t1, zero, loop2printInt	# eh o ultimo?
+		sb 	zero, 0(t0)			# insere \NULL na string
 		
-		la 	$a0, TempBuffer			# Endereco do buffer da srting
+		la 	a0, TempBuffer			# Endereco do buffer da srting
 		jal 	printString			# chama o print string
 				
-		lw 	$ra, 0($sp)			# recupera $a
-		addi 	$sp, $sp, 4			# libera espaco
-fimprintInt:	jr 	$ra				# retorna
+		lw 	ra, 0(sp)			# recupera $a
+		addi 	sp, sp, 4			# libera espaco
+fimprintInt:	ret				# retorna
 		
 
 
@@ -766,36 +774,36 @@ fimprintInt:	jr 	$ra				# retorna
 #  $a3    =    cor			    #
 #############################################
 
-printHex:	addi    $sp, $sp, -4    		# aloca espaco
-    		sw      $ra, 0($sp)			# salva $ra
-		move 	$t0, $a0			# Inteiro de 32 bits a ser impresso em Hexa
-		la 	$t1, TabelaHexASCII		# endereco da tabela HEX->ASCII
-		la 	$t2, TempBuffer			# onde a string sera montada
+printHex:	addi    sp, sp, -4    		# aloca espaco
+    		sw      ra, 0(sp)			# salva $ra
+		mv 	t0, a0			# Inteiro de 32 bits a ser impresso em Hexa
+		la 	t1, TabelaHexASCII		# endereco da tabela HEX->ASCII
+		la 	t2, TempBuffer			# onde a string sera montada
 
-		li 	$t3,'0'			# Caractere '0'
-		sb 	$t3,0($t2)		# Escreve '0' no Buffer da String
-		li 	$t3,'x'			# Caractere 'x'
-		sb 	$t3,1($t2)		# Escreve 'x' no Buffer da String
-		addi 	$t2,$t2,2		# novo endereco inicial da string
+		li 	t3,'0'			# Caractere '0'
+		sb 	t3,0(t2)		# Escreve '0' no Buffer da String
+		li 	t3,'x'			# Caractere 'x'
+		sb 	t3,1(t2)		# Escreve 'x' no Buffer da String
+		addi 	t2,t2,2		# novo endereco inicial da string
 
-		li 	$t3, 28			# contador de nibble   inicio = 28
-loopprintHex:	blt 	$t3, $zero, fimloopprintHex	# terminou? $t3<0?
-		srlv 	$t4, $t0, $t3		# desloca o nibble para direita
-		andi 	$t4, $t4, 0x000F	# mascara o nibble	
-		add 	$t4, $t1, $t4		# endereco do ascii do nibble
-		lb 	$t4, 0($t4)		# le ascii do nibble
-		sb 	$t4, 0($t2)		# armazena o ascii do nibble no buffer da string
-		addi 	$t2, $t2, 1		# incrementa o endereco do buffer
-		addi 	$t3, $t3, -4		# decrementa o numero do nibble
+		li 	t3, 28			# contador de nibble   inicio = 28
+loopprintHex:	blt 	t3, zero, fimloopprintHex	# terminou? $t3<0?
+		srl 	t4, t0, t3		# desloca o nibble para direita
+		andi 	t4, t4, 0x000F	# mascara o nibble	
+		add 	t4, t1, t4		# endereco do ascii do nibble
+		lb 	t4, 0(t4)		# le ascii do nibble
+		sb 	t4, 0(t2)		# armazena o ascii do nibble no buffer da string
+		addi 	t2, t2, 1		# incrementa o endereco do buffer
+		addi 	t3, t3, -4		# decrementa o numero do nibble
 		j 	loopprintHex
 		
-fimloopprintHex: sb 	$zero,0($t2)		# grava \null na string
-		la 	$a0, TempBuffer		# Argumento do print String
+fimloopprintHex: sb 	zero,0(t2)		# grava \null na string
+		la 	a0, TempBuffer		# Argumento do print String
     		jal	printString		# Chama o print string
     			
-		lw 	$ra, 0($sp)		# recupera $ra
-		addi 	$sp, $sp, 4		# libera espaco
-fimprintHex:	jr 	$ra			# retorna
+		lw 	ra, 0(sp)		# recupera $ra
+		addi 	sp, sp, 4		# libera espaco
+fimprintHex:	ret			# retorna
 
 
 #####################################
@@ -806,28 +814,28 @@ fimprintHex:	jr 	$ra			# retorna
 #  $a3    =  cor		    #
 #####################################
 
-printString:	addi	$sp, $sp, -8			# aloca espaco
-    		sw	$ra, 0($sp)			# salva $ra
-    		sw	$s0, 4($sp)			# salva $s0
-    		move	$s0, $a0              		# $s0 = endereco do caractere na string
+printString:	addi	sp, sp, -8			# aloca espaco
+    		sw	ra, 0(sp)			# salva $ra
+    		sw	s0, 4(sp)			# salva $s0
+    		mv	s0, a0              		# $s0 = endereco do caractere na string
 
-loopprintString: lb	$a0, 0($s0)                 	# le em $a0 o caracter a ser impresso
-    		beq     $a0, $zero, fimloopprintString   # string ASCIIZ termina com NULL
+loopprintString: lb	a0, 0(s0)                 	# le em $a0 o caracter a ser impresso
+    		beq     a0, $zero, fimloopprintString   # string ASCIIZ termina com NULL
 
     		jal     printChar       		# imprime char
     		
-		addi    $a1, $a1, 8                 	# incrementa a coluna		
-		blt	$a1, 313, NaoPulaLinha	    	# se ainda tiver lugar na linha
-    		addi    $a2, $a2, 8                 	# incrementa a linha
-    		move    $a1, $zero			# volta a coluna zero
+		addi    a1, a1, 8                 	# incrementa a coluna		
+		blt	a1, 313, NaoPulaLinha	    	# se ainda tiver lugar na linha
+    		addi    a2, a2, 8                 	# incrementa a linha
+    		mv    a1, $zero			# volta a coluna zero
 
-NaoPulaLinha:	addi    $s0, $s0, 1			# proximo caractere
+NaoPulaLinha:	addi    s0, s0, 1			# proximo caractere
     		j       loopprintString       		# volta ao loop
 
-fimloopprintString:	lw      $ra, 0($sp)    		# recupera $ra
-			lw 	$s0, 0($sp)		# recupera $s0
-    			addi    $sp, $sp, 8		# libera espaco
-fimprintString:		jr      $ra             	# retorna
+fimloopprintString:	lw      ra, 0(sp)    		# recupera $ra
+			lw 	s0, 0(sp)		# recupera $s0
+    			addi    sp, sp, 8		# libera espaco
+fimprintString:		ret             	# retorna
 
 
 #########################################################
@@ -847,71 +855,76 @@ fimprintString:		jr      $ra             	# retorna
 #########################################################
 
 
-printChar:     andi    $t5, $a3, 0xFF00         # cor fundo
-    	andi    $t6, $a3, 0x00FF             	# cor frente
-    	srl     $t5, $t5, 8			# numero da cor de fundo
+printChar:     andi    t5, a3, 0xFF00         # cor fundo
+    	andi    t6, a3, 0x00FF             	# cor frente
+    	srl     t5, t5, 8			# numero da cor de fundo
 
-	blt 	$a0, ' ', NAOIMPRIMIVEL		# ascii menor que 32 nao eh imprimivel
-	bgt	$a0, '~', NAOIMPRIMIVEL		# ascii Maior que 126  nao eh imprimivel
+	blt 	a0, ' ', NAOIMPRIMIVEL		# ascii menor que 32 nao eh imprimivel
+	bgt	a0, '~', NAOIMPRIMIVEL		# ascii Maior que 126  nao eh imprimivel
     	j       IMPRIMIVEL
     
-NAOIMPRIMIVEL:     li      $a0, 32		# Imprime espaco
+NAOIMPRIMIVEL:     li      a0, 32		# Imprime espaco
 
-IMPRIMIVEL:	li	$at, NUMCOLUNAS		# Num colunas 320
-    	mult    $at, $a2			# multiplica $a2x320
+IMPRIMIVEL:	li	at, NUMCOLUNAS		# Num colunas 320
+    	mul    $at, $a2			# multiplica $a2x320
+    	#O que eh at?
     	mflo    $t4				# $t4 = coordenada y
-    	add     $t4, $t4, $a1               	# $t4 = 320*y + x
-    	addi    $t4, $t4, 7                 	# t4 = 320*y + (x+7)
-    	la      $t8, VGAADDRESSINI          	# Endereco de inicio da memoria VGA
-    	add     $t4, $t4, $t8               	# t4 = endereco de impressao do ultimo pixel da primeira linha do char
-    	addi    $t2, $a0, -32               	# indice do char na memoria
-    	sll     $t2, $t2, 3                 	# offset em bytes em relacao ao endereco inicial
-	la      $t3, LabelTabChar		# endereco dos caracteres na memoria
-    	add     $t2, $t2, $t3               	# endereco do caractere na memoria
-	lw      $t3, 0($t2)                 	# carrega a primeira word do char
-	li 	$t0, 4				# i=4
+    	add     t4, t4, a1               	# $t4 = 320*y + x
+    	addi    t4, t4, 7                 	# t4 = 320*y + (x+7)
+    	la      t8, VGAADDRESSINI          	# Endereco de inicio da memoria VGA
+    	add     t4, t4, t8               	# t4 = endereco de impressao do ultimo pixel da primeira linha do char
+    	addi    t2, a0, -32               	# indice do char na memoria
+    	sll     t2, t2, 3                 	# offset em bytes em relacao ao endereco inicial
+	la      t3, LabelTabChar		# endereco dos caracteres na memoria
+    	add     t2, t2, t3               	# endereco do caractere na memoria
+	lw      t3, 0(t2)                 	# carrega a primeira word do char
+	li 	t0, 4				# i=4
 
-forChar1I:	beq     $t0, $zero, endForChar1I	# if(i == 0) end for i
-    		addi    $t1, $zero, 8               	# j = 8
+forChar1I:	beq     t0, zero, endForChar1I	# if(i == 0) end for i
+    		addi    t1, zero, 8               	# j = 8
 
-	forChar1J:      beq     $t1, $zero, endForChar1J    	# if(j == 0) end for j
-        		andi    $t9, $t3, 0x0001		# primeiro bit do caracter
-        		srl     $t3, $t3, 1             	# retira o primeiro bit
-        		beq     $t9, $zero, printCharPixelbg1	# pixel eh fundo?
-        		sb      $t6, 0($t4)             	# imprime pixel com cor de frente
+	forChar1J:      beq     t1, zero, endForChar1J    	# if(j == 0) end for j
+        		#andi    t9, t3, 0x0001		# primeiro bit do caracter
+        		andi    s9, t3, 0x0001	#trocado t9 por s9
+        		#nao existe t9 em risc 5
+        		srl     t3, t3, 1             	# retira o primeiro bit
+        		#beq     $t9, $zero, printCharPixelbg1	# pixel eh fundo?
+        		beq     s0, zero, printCharPixelbg1
+        		sb      s9, 0(t4)             	# imprime pixel com cor de frente
         		j       endCharPixel1
-printCharPixelbg1:     	sb      $t5, 0($t4)                 	# imprime pixel com cor de fundo
-endCharPixel1:     	addi    $t1, $t1, -1                	# j--
-    			addi    $t4, $t4, -1                	# t4 aponta um pixel para a esquerda
+printCharPixelbg1:     	sb      t5, 0(t4)                 	# imprime pixel com cor de fundo
+endCharPixel1:     	addi    t1, t1, -1                	# j--
+    			addi    t4, t4, -1                	# t4 aponta um pixel para a esquerda
     			j       forChar1J			# vollta novo pixel
 
-endForChar1J: 	addi    $t0, $t0, -1 		# i--
-    		addi    $t4, $t4, 328           # 2**12 + 8
+endForChar1J: 	addi    t0, t0, -1 		# i--
+    		addi    t4, t4, 328           # 2**12 + 8
     		j       forChar1I		# volta ao loop
 
-endForChar1I:	lw      $t3, 4($t2)           	# carrega a segunda word do char
-		li 	$t0, 4			# i = 4
-forChar2I:     	beq     $t0, $zero, endForChar2I    	# if(i == 0) end for i
-    		addi    $t1, $zero, 8               # j = 8
+endForChar1I:	lw      t3, 4(t2)           	# carrega a segunda word do char
+		li 	t0, 4			# i = 4
+forChar2I:     	beq     t0, zero, endForChar2I    	# if(i == 0) end for i
+    		addi    t1, zero, 8               # j = 8
 
-	forChar2J:	beq	$t1, $zero, endForChar2J    	# if(j == 0) end for j
-        		andi    $t9, $t3, 0x0001	    	# pixel a ser impresso
-        		srl     $t3, $t3, 1                 	# desloca para o proximo
-        		beq     $t9, $zero, printCharPixelbg2	# pixel eh fundo?
-        		sb      $t6, 0($t4)			# imprime cor frente
+	forChar2J:	beq	t1, zero, endForChar2J    	# if(j == 0) end for j
+        		#andi    $t9, $t3, 0x0001	    	# pixel a ser impresso
+        		andi    s9, t3, 0x0001 #trocado t9 por s9
+        		srl     t3, t3, 1                 	# desloca para o proximo
+        		beq     s9, zero, printCharPixelbg2	# pixel eh fundo?
+        		sb      s9, 0(t4)			# imprime cor frente
         		j       endCharPixel2			# volta ao loop
 
-printCharPixelbg2:     	sb      $t5, 0($t4)			# imprime cor de fundo
+printCharPixelbg2:     	sb      t5, 0(t4)			# imprime cor de fundo
 
-endCharPixel2:     	addi    $t1, $t1, -1			# j--
-    			addi    $t4, $t4, -1                	# t4 aponta um pixel para a esquerda
+endCharPixel2:     	addi    t1, t1, -1			# j--
+    			addi    t4, t4, -1                	# t4 aponta um pixel para a esquerda
     			j       forChar2J
 
-endForChar2J:	addi	$t0, $t0, -1 		# i--
-    		addi    $t4, $t4, 328		#
+endForChar2J:	addi	t0, t0, -1 		# i--
+    		addi    t4, t4, 328		#
     		j       forChar2I		# volta ao loop
 
-endForChar2I:	jr $ra				# retorna
+endForChar2I:	ret			# retorna
 
 
 #########################################
@@ -923,7 +936,7 @@ endForChar2I:	jr $ra				# retorna
 readChar:	DE2(readCharKDMMIODE2)
 
 ##### Tratamento para uso com o Keyboard Display MMIO Tool do Mars
-readCharKDMMIO:		la 	$t0, KDMMIO_Ctrl			# Execucao com Polling do KD MMIO
+readCharKDMMIO:		la 	t0, KDMMIO_Ctrl			# Execucao com Polling do KD MMIO
 
 loopReadCharKDMMIO:  	lw     	$v0, 0($t0)   			# le o bit de flag do teclado
 			andi 	$v0, $v0, 0x0001		# masacara bit 0
@@ -933,7 +946,7 @@ loopReadCharKDMMIO:  	lw     	$v0, 0($t0)   			# le o bit de flag do teclado
 
 
 ##### Tratamento para uso com o Keyboard Display MMIO Tool na DE2 usando o KDMMIO
-readCharKDMMIODE2:	la 	$t0, KDMMIO_Ctrl			# Execucao com Polling do KD MMIO
+readCharKDMMIODE2:	la 	t0, KDMMIO_Ctrl			# Execucao com Polling do KD MMIO
 
 loopReadCharKDMMIODE2: 	lw     	$v0, 0($t0)   			# le o bit de flag do teclado
 			andi 	$v0, $v0, 0x0001		# masacara bit 0
@@ -946,33 +959,35 @@ loopReadCharKDMMIODE2: 	lw     	$v0, 0($t0)   			# le o bit de flag do teclado
 ##### Tratamento para uso com o teclado PS2 da DE2 usando Buffer0 teclado
 #### muda $v0, $t0,$t1,$t2,$t3 e $fp
 #### Cuidar: ao entrar $fp ja deve conter o endereco la $fp,LabelScanCode  #####
-readCharDE2:  	la      $t0, Buffer0Teclado 			# Endereco buffer0
-    		lw     	$t1, 0($t0)				# conteudo inicial do buffer
+readCharDE2:  	la      t0, Buffer0Teclado 			# Endereco buffer0
+    		lw     	t1, 0(t0)				# conteudo inicial do buffer
 	
-loopReadChar:  	lw     	$t2, 0($t0)   				# le buffer teclado
-		bne     $t2, $t1, buffermodificadoChar    	# testa se o buffer foi modificado
+loopReadChar:  	lw     	t2, 0(t0)   				# le buffer teclado
+		bne     t2, t1, buffermodificadoChar    	# testa se o buffer foi modificado
 
-atualizaBufferChar:  move $t1, $t2			# atualiza o buffer com o novo valor
+atualizaBufferChar:  mv t1, t2			# atualiza o buffer com o novo valor
     	j       loopReadChar				# loop de printicpal de leitura 
 
-buffermodificadoChar:    andi    $t3, $t2, 0xFF00 	# mascara o 2o scancode
-	beq     $t3, 0XF000, teclasoltaChar		# eh 0xF0 no 2o scancode? tecla foi solta
-	andi	$t3, $t2, 0xFF				# mascara 1o scancode
-    	bne 	$t3, 0x12, atualizaBufferChar		# nao eh o SHIFT que esta pressionado ? volta a ler 
-	la      $fp, LabelScanCodeShift			# se for SHIFT que esta pressionado atualiza o endereco da tabel
+buffermodificadoChar:    andi    t3, t2, 0xFF00 	# mascara o 2o scancode
+	beq     t3, 0XF000, teclasoltaChar		# eh 0xF0 no 2o scancode? tecla foi solta
+	andi	t3, t2, 0xFF				# mascara 1o scancode
+    	bne 	t3, 0x12, atualizaBufferChar		# nao eh o SHIFT que esta pressionado ? volta a ler 
+	la      fp, LabelScanCodeShift			# se for SHIFT que esta pressionado atualiza o endereco da tabel
     	j       atualizaBufferChar			# volta a ler
 
-teclasoltaChar:		andi $t3, $t2, 0x00FF		# mascara o 1o scancode
-  	bgt	$t3, 0x80, atualizaBufferChar		# se o scancode for > 0x80 entao nao eh imprimivel!
-	bne 	$t3, 0x12, naoehshiftChar		# nao foi o shift que foi solto? entao processa
+teclasoltaChar:		andi t3, t2, 0x00FF		# mascara o 1o scancode
+  	bgt	t3, 0x80, atualizaBufferChar		# se o scancode for > 0x80 entao nao eh imprimivel!
+	bne 	t3, 0x12, naoehshiftChar		# nao foi o shift que foi solto? entao processa
+	
+	#O que eh o fp em risc 5?
 	la 	$fp, LabelScanCode			# shift foi solto atualiza o endereco da tabela
 	j 	atualizaBufferChar			# volta a ler
 	
-naoehshiftChar:	   	add     $t3, $fp, $t3                   	# endereco na tabela de scancode da tecla com ou sem shift
+naoehshiftChar:	   	add     t3, $fp, t3                   	# endereco na tabela de scancode da tecla com ou sem shift
     	lb      $v0, 0($t3)				# le o ascii do caracter para $v0
     	beq     $v0, $zero, atualizaBufferChar		# se for caractere nao imprimivel volta a ler
     	
-fimreadChar: 	jr   $ra				# retorna
+fimreadChar: 	ret				# retorna
 	
 #########################################
 #    ReadString         	 	#
@@ -984,26 +999,26 @@ fimreadChar: 	jr   $ra				# retorna
 #########################################
 # muda $v0, $v1, $a0 e $fp  
 
-readString: 	addi 	$sp, $sp, -4			# reserva espaco na pilha
-		sw 	$ra, 0($sp)			# salva $ra
+readString: 	addi 	sp, sp, -4			# reserva espaco na pilha
+		sw 	ra, 0(sp)			# salva $ra
 		li 	$v1, 0				# zera o contador de caracteres digitados
     		la      $fp, LabelScanCode      	# Endereco da tabela de scancode inicial para readChar
     		
-loopreadString: beq 	$a1, $v1, fimreadString   	# buffer cheio fim
-		move 	$t9, $ra			# salva $ra
+loopreadString: beq 	a1, $v1, fimreadString   	# buffer cheio fim
+		mv 	s9, ra			# salva $ra
 		jal 	readChar			# le um caracter do teclado (retorno em $v0)
-		move 	$ra, $t9			# recupera $ra
+		mv 	ra, s9			# recupera $ra
 		beq 	$v0, 0x0A, fimreadString	# se for tecla ENTER fim
-		sb 	$v0, 0($a0)			# grava no buffer
+		sb 	$v0, 0(a0)			# grava no buffer
 		addi 	$v1, $v1, 1			# incrementa contador
 		addi 	$a0, $a0, 1			# incrementa endereco no buffer
 		j loopreadString			# volta a ler outro caractere
 	
-fimreadString: 	sb 	$zero, 0($a0)			# grava NULL no buffer
+fimreadString: 	sb 	zero, 0(a0)			# grava NULL no buffer
 		addi 	$v0, $a0, -1			# Para que $v0 tenha o endereco do ultimo caractere digitado
 		lw 	$ra, 0($sp)			# recupera $ra
 		addi 	$sp, $sp, 4			# libera espaco
-		jr 	$ra				# retorna
+		ret				# retorna
 	
 	
 ###########################
@@ -1012,29 +1027,29 @@ fimreadString: 	sb 	$zero, 0($a0)			# grava NULL no buffer
 #                         #
 ###########################
 
-readInt: 	addi 	$sp,$sp,-4		# reserva espaco na pilha
-	sw 	$ra, 0($sp)			# salva $ra
-	la 	$a0, TempBuffer			# Endereco do buffer de string
-	li 	$a1, 10				# numero maximo de digitos
+readInt: 	addi 	sp,sp,-4		# reserva espaco na pilha
+	sw 	ra, 0(sp)			# salva $ra
+	la 	a0, TempBuffer			# Endereco do buffer de string
+	li 	a1, 10				# numero maximo de digitos
 	jal 	readString			# le uma string de ate 10 digitos, $v1 numero de digitos
-	move 	$t0, $v0			# copia endereco do ultimo digito
-	li 	$t2, 10				# dez
-	li 	$t3, 1				# dezenas, centenas, etc
-	move 	$v0, $zero			# zera o numero
+	mv 	t0, $v0			# copia endereco do ultimo digito
+	li 	t2, 10				# dez
+	li 	t3, 1				# dezenas, centenas, etc
+	mv 	$v0, zero			# zera o numero
 	
-loopReadInt: 	beq	$v1,$zero, fimReadInt	# Leu todos os digitos
-	lbu 	$t1, ($t0)			# le um digito
-	beq 	$t1, 0x2d, ehnegReadInt		# = '-'
-	beq 	$t1, 0x2b, ehposReadInt		# = '+'
-	blt 	$t1, 0x30, naoehReadInt		# <'0'
-	bgt 	$t1, 0x39, naoehReadInt		# >'9'
-	addi 	$t1, $t1, -48			# transforma ascii em numero
-	mult 	$t1, $t3			# multiplica por dezenas/centenas
-	mflo 	$t1				# resultado LO da mult
+loopReadInt: 	beq	$v1,zero, fimReadInt	# Leu todos os digitos
+	lbu 	t1, (t0)			# le um digito
+	beq 	t1, 0x2d, ehnegReadInt		# = '-'
+	beq 	t1, 0x2b, ehposReadInt		# = '+'
+	blt 	t1, 0x30, naoehReadInt		# <'0'
+	bgt 	t1, 0x39, naoehReadInt		# >'9'
+	addi 	t1, t1, -48			# transforma ascii em numero
+	mult 	t1, t3			# multiplica por dezenas/centenas
+	mflo 	t1				# resultado LO da mult
 	add 	$v0, $v0, $t1			# soma no numero
-	mult 	$t3, $t2			# proxima dezena/centena
-	mflo 	$t3				# resultado LO da mult
-	addi 	$t0, $t0, -1			# busca o digito anterior
+	mul 	t3, t2			# proxima dezena/centena
+	mflo 	t3				# resultado LO da mult
+	addi 	t0, t0, -1			# busca o digito anterior
 	addi	$v1, $v1, -1			# reduz o contador de digitos 
 	j loopReadInt				# volta para buscar proximo digito
 
@@ -1044,9 +1059,9 @@ ehnegReadInt:	sub $v0,$zero,$v0		# se for negativo
 
 ehposReadInt:					# se for positivo só retorna
 
-fimReadInt:	lw 	$ra, 0($sp)		# recupera $ra
-	addi 	$sp, $sp, 4			# libera espaco
-	jr 	$ra				# fim ReadInt
+fimReadInt:	lw 	ra, 0(sp)		# recupera $ra
+	addi 	sp, sp, 4			# libera espaco
+	ret				# fim ReadInt
 
 
 ###########################################
@@ -1067,44 +1082,44 @@ fimReadInt:	lw 	$ra, 0($sp)		# recupera $ra
 #################################################################################################
 midiOut: DE2(midiOutDE2)
 	li $v0,31		# Chama o syscall normal
-	syscall
+	ecall
 	j fimmidiOut
 
-midiOutDE2:	la      $t0, NoteData
-    		add     $t1, $zero, $zero
+midiOutDE2:	la      t0, NoteData
+    		add     t1, zero, zero
 
     		# Melody = 0
 
     		# Definicao do Instrumento
-   	 	andi    $t2, $a2, 0x0000000F
-    		sll     $t2, $t2, 27
-    		or      $t1, $t1, $t2
+   	 	andi    t2, a2, 0x0000000F
+    		sll     t2, t2, 27
+    		or      t1, t1, t2
 
     		# Definicao do Volume
-    		andi    $t2, $a3, 0x0000007F
-    		sll     $t2, $t2, 20
-    		or      $t1, $t1, $t2
+    		andi    t2, a3, 0x0000007F
+    		sll     t2, t2, 20
+    		or      t1, t1, t2
 
     		# Definicao do Pitch
-    		andi    $t2, $a0, 0x0000007F
-    		sll     $t2, $t2, 13
-    		or      $t1, $t1, $t2
+    		andi    t2, a0, 0x0000007F
+    		sll     t2, t2, 13
+    		or      t1, t1, t2
 
     		# Definicao da Duracao
-    		andi    $t2, $a1, 0x00001FFF
-    		or      $t1, $t1, $t2
+    		andi    t2, a1, 0x00001FFF
+    		or      t1, t1, t2
 
     		# Guarda a definicao da duracao da nota na Word 1
     		j       SintMidOut
 
-SintMidOut:	sw	$t1, 0($t0)
+SintMidOut:	sw	t1, 0(t0)
 
 	    		# Verifica a subida do clock AUD_DACLRCK para o sintetizador receber as definicoes
-	    		la      $t2, NoteClock
-Check_AUD_DACLRCK:     	lw      $t3, 0($t2)
-    			beq     $t3, $zero, Check_AUD_DACLRCK
+	    		la      t2, NoteClock
+Check_AUD_DACLRCK:     	lw      t3, 0(t2)
+    			beq     t3, zero, Check_AUD_DACLRCK
 
-fimmidiOut:    		jr      $ra
+fimmidiOut:    		ret
 
 ###########################################
 #        MidiOut 33 (2015/1)              #
@@ -1123,50 +1138,50 @@ fimmidiOut:    		jr      $ra
 #################################################################################################
 midiOutSync: DE2(midiOutSyncDE2)
 	li $v0,33		# Chama o syscall normal
-	syscall
+	ecall
 	j fimmidiOutSync
 	
-midiOutSyncDE2:	la      $t0, NoteData
-    		add     $t1, $zero, $zero
+midiOutSyncDE2:	la      t0, NoteData
+    		add     t1, zero, zero
 
     		# Melody = 1
-    		ori     $t1, $t1, 0x80000000
+    		ori     t1, t1, 0x80000000
 
     		# Definicao do Instrumento
-    		andi    $t2, $a2, 0x0000000F
-    		sll     $t2, $t2, 27
-    		or      $t1, $t1, $t2
+    		andi    t2, a2, 0x0000000F
+    		sll     t2, t2, 27
+    		or      t1, t1, t2
 
     		# Definicao do Volume
-    		andi    $t2, $a3, 0x0000007F
-    		sll     $t2, $t2, 20
-    		or      $t1, $t1, $t2
+    		andi    t2, a3, 0x0000007F
+    		sll     t2, t2, 20
+    		or      t1, t1, t2
 
     		# Definicao do Pitch
-    		andi    $t2, $a0, 0x0000007F
-    		sll     $t2, $t2, 13
-    		or      $t1, $t1, $t2
+    		andi    t2, a0, 0x0000007F
+    		sll     t2, t2, 13
+    		or      t1, t1, t2
 
     		# Definicao da Duracao
-    		andi    $t2, $a1, 0x00001FFF
-    		or      $t1, $t1, $t2
+    		andi    t2, a1, 0x00001FFF
+    		or      t1, t1, t2
 
     		# Guarda a definicao da duracao da nota na Word 1
     		j       SintMidOutSync
 
-SintMidOutSync:	sw	$t1, 0($t0)
+SintMidOutSync:	sw	t1, 0(t0)
 
     		# Verifica a subida do clock AUD_DACLRCK para o sintetizador receber as definicoes
-    		la      $t2, NoteClock
-    		la      $t4, NoteMelody
+    		la      t2, NoteClock
+    		la      t4, NoteMelody
 
-Check_AUD_DACLRCKSync:	lw      $t3, 0($t2)
-    			beq     $t3, $zero, Check_AUD_DACLRCKSync
+Check_AUD_DACLRCKSync:	lw      t3, 0(t2)
+    			beq     t3, zero, Check_AUD_DACLRCKSync
 
-Melody:     	lw      $t5, 0($t4)
-    		bne     $t5, $zero, Melody
+Melody:     	lw      t5, 0(t4)
+    		bne     t5, zero, Melody
 
-fimmidiOutSync:	jr      $ra
+fimmidiOutSync:	ret
 
 
 #################################
@@ -1175,31 +1190,31 @@ fimmidiOutSync:	jr      $ra
 #  $v1 = evento                 #
 #################################
 
-popEvent:     addi    $sp, $sp, -12
-    sw      $a0, 0($sp)
-    sw      $s0, 4($sp)
-    sw      $ra, 8($sp)
+popEvent:     addi    sp, sp, -12
+    sw      a0, 0(sp)
+    sw      s0, 4(sp)
+    sw      ra, 8(sp)
 
     # verifica se ha eventos na fila comparando os ponteiros de inicio e fim
-    la      $s0, eventQueueBeginPtr
-    lw      $k0, 0($s0)
+    la      s0, eventQueueBeginPtr
+    lw      k0, 0($s0)
     la      $k1, eventQueueEndPtr
     lw      $k1, 0($k1)
     li      $v0, 0
     beq     $k0, $k1, popEventEnd
 
     # tira o evento da fila e coloca em $v1
-    move    $a0, $k0
+    mv    a0, k0
     jal     eventQueueIncrementPointer
     sw      $v0, 0($s0)
     li      $v0, 1
     lw      $v1, 0($k0)
 
-popEventEnd:     lw      $ra, 8($sp)
-    lw      $s0, 4($sp)
-    lw      $a0, 0($sp)
-    addi    $sp, $sp, 12
-    jr      $ra
+popEventEnd:     lw      ra, 8(sp)
+    lw      s0, 4(sp)
+    lw      a0, 0(sp)
+    addi    sp, sp, 12
+    ret
 
 
 
@@ -1211,150 +1226,150 @@ popEventEnd:     lw      $ra, 8($sp)
 #################################
 
 
-printFloat:	addi 	$sp, $sp, -4
-		sw 	$ra, 0($sp)
-		la 	$s0, TempBuffer
+printFloat:	addi 	sp, sp, -4
+		sw 	ra, 0(sp)
+		la 	s0, TempBuffer
 
 		# Encontra o sinal do número e coloca no Buffer
-		li 	$t0, '+'			# define sinal '+'
-		mfc1 	$s1, $f12			# recupera o numero float
-		andi 	$s1, $s1, 0x80000000		# mascara com 1000
-		beq 	$s1, $zero, ehposprintFloat	# eh positivo $s0=0
-		li 	$s1, 1				# numero eh negativo $s0=1
-		li 	$t0, '-'			# define sinal '-'
-ehposprintFloat: sb 	$t0, 0($s0)			# coloca sinal no buffer
-		addi 	$s0, $s0,1			# incrementa o endereco do buffer
+		li 	t0, '+'			# define sinal '+'
+		mfc1 	s1, f12			# recupera o numero float
+		andi 	s1, s1, 0x80000000		# mascara com 1000
+		beq 	s1, zero, ehposprintFloat	# eh positivo $s0=0
+		li 	s1, 1				# numero eh negativo $s0=1
+		li 	t0, '-'			# define sinal '-'
+ehposprintFloat: sb 	t0, 0(s0)			# coloca sinal no buffer
+		addi 	s0, s0,1			# incrementa o endereco do buffer
 
 		# Encontra o expoente em $t0
-		 mfc1 	$t0, $f12			# recupera o numero float
-		 andi 	$t0, $t0, 0x7F800000   		# mascara com 0111 1111 1000 0000 0000 0000...
-		 sll 	$t0, $t0, 1			# tira o sinal do numero
-		 srl 	$t0, $t0, 24			# recupera o expoente
+		 mfc1 	t0, f12			# recupera o numero float
+		 andi 	t0, t0, 0x7F800000   		# mascara com 0111 1111 1000 0000 0000 0000...
+		 sll    t0, t0, 1			# tira o sinal do numero
+		 srl 	t0, t0, 24			# recupera o expoente
 
 		# Encontra a fracao em $t1
-		mfc1 	$t1, $f12			# recupera o numero float 
-		andi 	$t1, $t1, 0x007FFFFF		# mascara com 0000 0000 0111 1111 1111... 		 
+		mfc1    t1, f12			# recupera o numero float 
+		andi 	t1, t1, 0x007FFFFF		# mascara com 0000 0000 0111 1111 1111... 		 
 			 
-		beq 	$t0, $zero, ehExp0printFloat	# Expoente = 0
-		beq 	$t0, 255, ehExp255printFloat	# Expoente = 255
+		beq 	t0, zero, ehExp0printFloat	# Expoente = 0
+		beq 	t0, 255, ehExp255printFloat	# Expoente = 255
 		
 		# Eh um numero float normal  $t0 eh o expoente e $t1 eh a mantissa
 		# Encontra o E tal que 10^E <= x <10^(E+1)
-		abs.s 	$f0, $f12		# $f0 recebe o módulo  de x
-		lui 	$t0, 0x3F80
-		mtc1 	$t0, $f1		# $f1 recebe o numero 1.0
-		lui 	$t0, 0x4120
-		mtc1 	$t0, $f10		# $f10 recebe o numero 10.0
+		abs.s 	f0, f12		# $f0 recebe o módulo  de x
+		lui     t0, 0x3F80
+		mtc1 	t0, f1		# $f1 recebe o numero 1.0
+		lui 	t0, 0x4120
+		mtc1 	t0, $f10		# $f10 recebe o numero 10.0
 		
-		c.lt.s 	1, $f0, $f1		# $f0 < 1.0 ? Flag 1 indica se $f0<1 ou seja E deve ser negativo
+		c.lt.s 	1, f0, f1		# $f0 < 1.0 ? Flag 1 indica se $f0<1 ou seja E deve ser negativo
 		bc1t 	1, menor1printFloat
-		mov.s 	$f2, $f10		# $f2  fator de multiplicaçao = 10
+		mov.s 	f2, f10		# $f2  fator de multiplicaçao = 10
 		j 	cont2printFloat		# vai para expoente positivo
-menor1printFloat: div.s $f2,$f1,$f10		# $f2 fator multiplicativo = 0.1
+menor1printFloat: fdiv.s f2,f1,f10		# $f2 fator multiplicativo = 0.1
 
 			# calcula o expoente negativo de 10
-cont1printFloat: 	mov.s 	$f4, $f0			# inicia com o numero x 
-		 	mov.s 	$f3, $f1			# contador começa em 1
-loop1printFloat: 	div.s 	$f4, $f4, $f2			# divide o numero pelo fator multiplicativo
-		 	c.le.s 	0, $f4, $f1			# o numero eh > que 1? entao fim
+cont1printFloat: 	mov.s 	f4, f0			# inicia com o numero x 
+		 	mov.s 	f3, f1			# contador começa em 1
+loop1printFloat: 	fdiv.s 	f4, f4, f2			# divide o numero pelo fator multiplicativo
+		 	c.le.s 	0, f4, f1			# o numero eh > que 1? entao fim
 		 	bc1f 	0, fimloop1printFloat
-		 	add.s 	$f3, $f3, $f1			# incrementa o contador
+		 	fadd.s 	f3, f3, f1			# incrementa o contador
 		 	j 	loop1printFloat			# volta ao loop
-fimloop1printFloat: 	div.s 	$f4, $f4, $f2			# ajusta o numero
+fimloop1printFloat: 	fdiv.s 	f4, f4, f2			# ajusta o numero
 		 	j 	intprintFloat			# vai para imprimir a parte inteira
 
 			# calcula o expoente positivo de 10
-cont2printFloat:	mov.s 	$f4, $f0			# inicia com o numero x 
-		 	mtc1 	$zero, $f3			# contador começa em 0
-loop2printFloat:  	c.lt.s 	0, $f4, $f10			# resultado eh < que 10? entao fim
-		 	div.s 	$f4, $f4, $f2			# divide o numero pelo fator multiplicativo
+cont2printFloat:	fmov.s 	f4, f0			# inicia com o numero x 
+		 	mtc1 	zero, f3			# contador começa em 0
+loop2printFloat:  	c.lt.s 	0, f4, f10			# resultado eh < que 10? entao fim
+		 	fdiv.s 	f4, f4, f2			# divide o numero pelo fator multiplicativo
 		 	bc1t 	0 ,intprintFloat
-		 	add.s 	$f3, $f3, $f1			# incrementa o contador
+		 	fadd.s 	f3, f3, f1			# incrementa o contador
 		 	j 	loop2printFloat
 
 		# Neste ponto tem-se no flag 1 se $f0<1, em $f3 o expoente de 10 e $f0 0 módulo do numero e $s1 o sinal
 		# e em $f4 um número entre 1 e 10 que multiplicado por E$f3 deve voltar ao numero		
 		
 	  		# imprime parte inteira (o sinal já está no buffer)
-intprintFloat:		mul.s 		$f4, $f4, $f2		# ajusta o numero
-		  	floor.w.s 	$f5, $f4		# menor inteiro
-		  	mfc1 		$t0, $f5		# passa para $t5
-		  	addi 		$t0, $t0, 48		# converte para ascii
-		  	sb 		$t0, 0($s0)		# coloca no buffer
-		  	addi 		$s0, $s0, 1		# incrementta o buffer
+intprintFloat:		fmul.s 		f4, f4, f2		# ajusta o numero
+		  	floor.w.s 	f5, f4		# menor inteiro
+		  	mfc1 		t0, f5		# passa para $t5
+		  	addi 		t0, t0, 48		# converte para ascii
+		  	sb 		t0, 0(s0)		# coloca no buffer
+		  	addi 		s0, s0, 1		# incrementta o buffer
 		  
 		  	# imprime parte fracionaria
-		  	li 	$t0, '.'			# carrega o '.'
-		  	sb 	$t0, 0($s0)			# coloca no buffer
-		  	addi 	$s0, $s0, 1			# incrementa o buffer
+		  	li 	t0, '.'			# carrega o '.'
+		  	sb 	t0, 0(s0)			# coloca no buffer
+		  	addi 	s0, s0, 1			# incrementa o buffer
 		  
 		  	# $f4 contem a mantissa com 1 casa não decimal
-		  	li 		$t1, 8				# contador de digitos  -  8 casas decimais
-loopfracprintFloat:  	beq 		$t1, $zero, fimfracprintFloat	# fim dos digitos?
-		  	floor.w.s 	$f5, $f4			# menor inteiro
-		  	cvt.s.w 	$f5, $f5			# parte inteira		
-		  	sub.s 		$f5, $f4, $f5			# parte fracionaria
-		  	mul.s 		$f5, $f5, $f10			# mult x 10
-		  	floor.w.s 	$f6, $f5			# converte para inteiro
-		  	mfc1 		$t0, $f6			# passa para $t0
-		  	addi 		$t0, $t0, 48			# converte para ascii
-		  	sb 		$t0, 0($s0)			# coloca no buffer
-		  	addi 		$s0, $s0, 1			# incrementa endereco
-		  	addi 		$t1, $t1, -1			# decrementa contador
-		  	mov.s 		$f4, $f5			# coloca o numero em $f4
+		  	li 		t1, 8				# contador de digitos  -  8 casas decimais
+loopfracprintFloat:  	beq 		t1, zero, fimfracprintFloat	# fim dos digitos?
+		  	floor.w.s 	f5, f4			# menor inteiro
+		  	cvt.s.w 	f5, f5			# parte inteira		
+		  	fsub.s 		f5, f4, f5			# parte fracionaria
+		  	fmul.s 		f5, f5, f10			# mult x 10
+		  	floor.w.s 	f6, f5			# converte para inteiro
+		  	mfc1 		t0, f6			# passa para $t0
+		  	addi 		t0, t0, 48			# converte para ascii
+		  	sb 		t0, 0($s0)			# coloca no buffer
+		  	addi 		$s0, s0, 1			# incrementa endereco
+		  	addi 		t1, t1, -1			# decrementa contador
+		  	mov.s 		f4, f5			# coloca o numero em $f4
 		  	j 		loopfracprintFloat		# volta ao loop
 		  
 		  	# imprime 'E'		  
-fimfracprintFloat: 	li 	$t0,'E'			# carrega 'E'
-			sb 	$t0, 0($s0)		# coloca no buffer
-			addi 	$s0, $s0, 1		# incrementa endereco
+fimfracprintFloat: 	li 	t0,'E'			# carrega 'E'
+			sb 	t0, 0(s0)		# coloca no buffer
+			addi 	s0, s0, 1		# incrementa endereco
 			
 		  	# imprime sinal do expoente
-		  	li 	$t0, '+'				# carrega '+'
+		  	li 	t0, '+'				# carrega '+'
 		  	bc1f 	1, expposprintFloat			# nao eh negativo?
-		  	li 	$t0, '-'				# carrega '-'
-expposprintFloat: 	sb 	$t0, 0($s0)				# coloca no buffer
-		  	addi 	$s0, $s0, 1				#incrementa endereco
+		  	li 	t0, '-'				# carrega '-'
+expposprintFloat: 	sb 	t0, 0(s0)				# coloca no buffer
+		  	addi 	s0, s0, 1				#incrementa endereco
 				    
 		  	# imprimeo expoente com 2 digitos (maximo E+38)
-			li 	$t1, 10				# carrega 10
-			cvt.w.s $f3, $f3			# converte $f3 em inteiro	
-			mfc1 	$t0, $f3			# passa $f3 para $t0
-			div 	$t0, $t1			# divide por 10
-			mflo 	$t0				# quociente (dezena)
-			addi 	$t0, $t0, 48			# converte para ascii
-			sb 	$t0, 0($s0)			# coloca no buffer
-			mfhi 	$t0				# resto (unidade)
-			addi 	$t0, $t0, 48			# converte para ascii
-			sb 	$t0, 1($s0)			# coloca no buffer
-			sb 	$zero, 2($s0)			# insere \NULL da string
-			la 	$a0, TempBuffer			# endereco do Buffer										
+			li 	t1, 10				# carrega 10
+			cvt.w.s f3, f3			# converte $f3 em inteiro	
+			mfc1 	t0, f3			# passa $f3 para $t0
+			div 	t0, t1			# divide por 10
+			mflo 	t0				# quociente (dezena)
+			addi 	t0, t0, 48			# converte para ascii
+			sb 	t0, 0(s0)			# coloca no buffer
+			mfhi 	t0				# resto (unidade)
+			addi 	t0, t0, 48			# converte para ascii
+			sb 	t0, 1(s0)			# coloca no buffer
+			sb 	zero, 2(s0)			# insere \NULL da string
+			la 	a0, TempBuffer			# endereco do Buffer										
 	  		j 	fimprintFloat			# imprime a string
 								
-ehExp0printFloat: 	beq 	$t1, $zero, eh0printFloat	# Verifica se eh zero
+ehExp0printFloat: 	beq 	t1, zero, eh0printFloat	# Verifica se eh zero
 		
-ehDesnormprintFloat: 	la 	$a0, NumDesnormP		# string numero desnormalizado positivo
-			beq 	$s1, $zero, fimprintFloat	# o sinal eh 1? entao é negativo
-		 	la 	$a0, NumDesnormN		# string numero desnormalizado negativo
+ehDesnormprintFloat: 	la 	a0, NumDesnormP		# string numero desnormalizado positivo
+			beq 	s1, zero, fimprintFloat	# o sinal eh 1? entao é negativo
+		 	la 	a0, NumDesnormN		# string numero desnormalizado negativo
 			j 	fimprintFloat			# imprime a string
 
-eh0printFloat:		la 	$a0, NumZero			# string do zero
+eh0printFloat:		la 	a0, NumZero			# string do zero
 			j 	fimprintFloat 	 		# imprime a string
 		 		 		 		 
-ehExp255printFloat: 	beq 	$t1, $zero, ehInfprintFloat	# se mantissa eh zero entao eh Infinito
+ehExp255printFloat: 	beq 	t1, zero, ehInfprintFloat	# se mantissa eh zero entao eh Infinito
 
-ehNaNprintfFloat:	la 	$a0, NumNaN			# string do NaN
+ehNaNprintfFloat:	la 	a0, NumNaN			# string do NaN
 			j 	fimprintFloat			# imprime string
 
-ehInfprintFloat:	la 	$a0, NumInfP			# string do infinito positivo
-			beq 	$s1, $zero, fimprintFloat	# o sinal eh 1? entao eh negativo
-			la 	$a0, NumInfN			# string do infinito negativo
+ehInfprintFloat:	la 	a0, NumInfP			# string do infinito positivo
+			beq 	s1, zero, fimprintFloat	# o sinal eh 1? entao eh negativo
+			la 	a0, NumInfN			# string do infinito negativo
 								# imprime string
 		
 fimprintFloat:		jal 	printString			# imprime a string em $a0
-			lw 	$ra, 0($sp)			# recupera $ra
-			addi 	$sp, $sp, 4			# libera sepaco
-			jr 	$ra				# retorna
+			lw 	ra, 0(sp)			# recupera $ra
+			addi 	sp, sp, 4			# libera sepaco
+			ret				# retorna
 
 
 #################################
@@ -1363,180 +1378,180 @@ fimprintFloat:		jal 	printString			# imprime a string em $a0
 # 2017/2			#
 #################################
 
-readFloat: addi $sp, $sp, -4			# aloca espaco
-	sw 	$ra, 0($sp)			# salva $ra
-	la 	$a0, TempBuffer			# endereco do FloatBuffer
-	li 	$a1, 32				# numero maximo de caracteres
+readFloat: addi sp, sp, -4			# aloca espaco
+	sw 	ra, 0(sp)			# salva $ra
+	la 	a0, TempBuffer			# endereco do FloatBuffer
+	li 	a1, 32				# numero maximo de caracteres
 	jal	readString			# le string, retorna $v0 ultimo endereco e $v1 numero de caracteres
-	move 	$s0, $v0			# ultimo endereco da string (antes do \0)
-	move 	$s1, $v1			# numero de caracteres digitados
-	la	$s7, TempBuffer			# Endereco do primeiro caractere
+	mv 	s0, v0			# ultimo endereco da string (antes do \0)
+	mv 	s1, v1			# numero de caracteres digitados
+	la	s7, TempBuffer			# Endereco do primeiro caractere
 	
-lePrimeiroreadFloat:	move 	$t0, $s7		# Endereco de Inicio
-	lb 	$t1, 0($t0)				# le primeiro caractere
-	beq 	$t1, 'e', insere0AreadFloat		# insere '0' antes
-	beq 	$t1, 'E', insere0AreadFloat		# insere '0' antes
-	beq 	$t1, '.', insere0AreadFloat		#  insere '0' antes
-	beq 	$t1, '+', pulaPrimreadChar		# pula o primeiro caractere
-	beq 	$t1, '-', pulaPrimreadChar
+lePrimeiroreadFloat:	move 	t0, s7		# Endereco de Inicio
+	lb 	t1, 0(t0)				# le primeiro caractere
+	beq 	t1, 'e', insere0AreadFloat		# insere '0' antes
+	beq 	t1, 'E', insere0AreadFloat		# insere '0' antes
+	beq 	t1, '.', insere0AreadFloat		#  insere '0' antes
+	beq 	t1, '+', pulaPrimreadChar		# pula o primeiro caractere
+	beq 	t1, '-', pulaPrimreadChar
 	j leUltimoreadFloat
 
-pulaPrimreadChar: addi $s7,$s7,1		# incrementa o endereco inicial
+pulaPrimreadChar: addi s7,s7,1		# incrementa o endereco inicial
 		  j lePrimeiroreadFloat		# volta a testar o novo primeiro caractere
 		  
-insere0AreadFloat: move $t0, $s0		# endereco do ultimo caractere
-		   addi $s0, $s0, 1		# desloca o ultimo endereco para o proximo
-	   	   addi $s1, $s1, 1		# incrementa o num. caracteres
-	   	   sb 	$zero, 1($s0)		# \NULL do final de string
-	   	   move $t8, $s7		# primeiro caractere
-insere0Aloop:	   beq 	$t0, $t8, saiinsere0AreadFloat	# chegou no inicio entao fim
-		   lb 	$t1, 0($t0)		# le caractere
-		   sb 	$t1, 1($t0)		# escreve no proximo
-		   addi $t0, $t0, -1		# decrementa endereco
+insere0AreadFloat: mv t0, s0		# endereco do ultimo caractere
+		   addi s0, s0, 1		# desloca o ultimo endereco para o proximo
+	   	   addi s1, s1, 1		# incrementa o num. caracteres
+	   	   sb 	zero, 1(s0)		# \NULL do final de string
+	   	   mv  s8, s7		# primeiro caractere
+insere0Aloop:	   beq 	t0, s8, saiinsere0AreadFloat	# chegou no inicio entao fim
+		   lb 	t1, 0(t0)		# le caractere
+		   sb 	t1, 1(t0)		# escreve no proximo
+		   addi t0, t0, -1		# decrementa endereco
 		   j insere0Aloop		# volta ao loop
-saiinsere0AreadFloat: li $t1, '0'		# ascii '0'
-		   sb $t1, 0($t0)		# escreve '0' no primeiro caractere
+saiinsere0AreadFloat: li t1, '0'		# ascii '0'
+		   sb t1, 0(t0)		# escreve '0' no primeiro caractere
 
-leUltimoreadFloat: lb  	$t1,0($s0)			# le ultimo caractere
-		beq 	$t1,'e', insere0PreadFloat	# insere '0' depois
-		beq 	$t1,'E', insere0PreadFloat	# insere '0' depois
-		beq 	$t1,'.', insere0PreadFloat	# insere '0' depois
+leUltimoreadFloat: lb  	t1,0(s0)			# le ultimo caractere
+		beq 	t1,'e', insere0PreadFloat	# insere '0' depois
+		beq 	t1,'E', insere0PreadFloat	# insere '0' depois
+		beq 	t1,'.', insere0PreadFloat	# insere '0' depois
 		j 	inicioreadFloat
 	
-insere0PreadFloat: addi	$s0, $s0, 1		# desloca o ultimo endereco para o proximo
-	   	   addi	$s1, $s1, 1		# incrementa o num. caracteres
-		   li 	$t1,'0'			# ascii '0'
-		   sb 	$t1,0($s0)		# escreve '0' no ultimo
-		   sb 	$zero,1($s0)		# \null do final de string
+insere0PreadFloat: addi	s0, s0, 1		# desloca o ultimo endereco para o proximo
+	   	   addi	s1, s1, 1		# incrementa o num. caracteres
+		   li 	t1,'0'			# ascii '0'
+		   sb 	t1,0(s0)		# escreve '0' no ultimo
+		   sb 	zero,1(s0)		# \null do final de string
 
-inicioreadFloat:  mtc1 	$zero,$f0		# $f0 Resultado inicialmente zero
-		li 	$t0, 10			# inteiro 10	
-		mtc1 	$t0, $f10		# passa para o C1
-		cvt.s.w $f10, $f10		# $f10 contem sempre o numero cte 10.0000
-		li 	$t0, 1			# inteiro 1
-		mtc1 	$t0, $f1		# passa para o C1
-		cvt.s.w $f1, $f1		# $f1 contem sempre o numero cte 1.0000
+inicioreadFloat:  mtc1 	zero,f0		# $f0 Resultado inicialmente zero
+		li 	t0, 10			# inteiro 10	
+		mtc1 	t0, f10		# passa para o C1
+		cvt.s.w f10, f10		# $f10 contem sempre o numero cte 10.0000
+		li 	t0, 1			# inteiro 1
+		mtc1 	t0, f1		# passa para o C1
+		cvt.s.w f1, f1		# $f1 contem sempre o numero cte 1.0000
 	
 ##### Verifica se tem 'e' ou 'E' na string  resultado em $s3			
-procuraEreadFloat:	add 	$s3, $s0, 1			# inicialmente nao tem 'e' ou 'E' na string (fora da string)
-			move 	$t0, $s7			# endereco inicial
-loopEreadFloat: 	beq 	$t0, $s0, naotemEreadFloat	# sai se nao encontrou 'e'
-			lb 	$t1, 0($t0)			# le o caractere
-			beq 	$t1, 'e', ehEreadFloat		# tem 'e'
-			beq	$t1, 'E', ehEreadFloat		# tem 'E'
-			addi 	$t0, $t0, 1			# incrementa endereco
+procuraEreadFloat:	add 	s3, s0, 1			# inicialmente nao tem 'e' ou 'E' na string (fora da string)
+			mv 	t0, s7			# endereco inicial
+loopEreadFloat: 	beq 	t0, s0, naotemEreadFloat	# sai se nao encontrou 'e'
+			lb 	t1, 0(t0)			# le o caractere
+			beq 	t1, 'e', ehEreadFloat		# tem 'e'
+			beq	t1, 'E', ehEreadFloat		# tem 'E'
+			addi 	t0, t0, 1			# incrementa endereco
 			j 	loopEreadFloat			# volta ao loop
-ehEreadFloat: 		move 	$s3, $t0			# endereco do 'e' ou 'E' na string
+ehEreadFloat: 		mv 	s3, t0			# endereco do 'e' ou 'E' na string
 naotemEreadFloat:						# nao tem 'e' ou 'E' $s3 eh o endereco do \0 da string
 
 ##### Verifica se tem '.' na string resultado em $s2 espera-se que nao exista ponto no expoente
-procuraPontoreadFloat:	move 	$s2, $s3			# local inicial do ponto na string (='e' se existir) ou fora da string	
-			move 	$t0, $s7			# endereco inicial
-loopPontoreadFloat: 	beq 	$t0, $s0, naotemPontoreadFloat	# sai se nao encontrou '.'
-			lb 	$t1, 0($t0)			# le o caractere
-			beq 	$t1, '.', ehPontoreadFloat	# tem '.'
-			addi 	$t0, $t0, 1			# incrementa endereco
+procuraPontoreadFloat:	mv 	s2, s3			# local inicial do ponto na string (='e' se existir) ou fora da string	
+			mv 	t0, s7			# endereco inicial
+loopPontoreadFloat: 	beq 	t0, s0, naotemPontoreadFloat	# sai se nao encontrou '.'
+			lb 	t1, 0(t0)			# le o caractere
+			beq 	t1, '.', ehPontoreadFloat	# tem '.'
+			addi 	t0, t0, 1			# incrementa endereco
 			j 	loopPontoreadFloat		# volta ao loop
-ehPontoreadFloat: 	move 	$s2, $t0			# endereco do '.' na string
+ehPontoreadFloat: 	move 	s2, t0			# endereco do '.' na string
 naotemPontoreadFloat:						# nao tem '.' $s2 = local do 'e' ou \0 da string
 
 ### Encontra a parte inteira em $f0
-intreadFloat:		mtc1 	$zero, $f2			# zera parte inteira
-			addi 	$t0, $s2, -1			# endereco do caractere antes do ponto
-			mov.s 	$f3, $f1			# $f3 contem unidade/dezenas/centenas		
-			move 	$t8, $s7			# Primeiro Endereco
-loopintreadFloat: 	blt 	$t0, $t8, fimintreadFloat	# sai se o enderefo for < inicio da string
-			lb 	$t1, 0($t0)			# le o caracter
-			blt 	$t1, '0', erroreadFloat		# nao eh caractere valido para numero
-			bgt 	$t1, '9', erroreadFloat		# nao eh caractere valido para numero
-			addi 	$t1, $t1, -48			# converte ascii para decimal
-			mtc1 	$t1, $f2			# passa para 0 C1
-			cvt.s.w $f2, $f2			# digito lido em float
+intreadFloat:		mtc1 	zero, f2			# zera parte inteira
+			addi 	t0, s2, -1			# endereco do caractere antes do ponto
+			mov.s 	f3, f1			# $f3 contem unidade/dezenas/centenas		
+			mv 	s8, s7			# Primeiro Endereco
+loopintreadFloat: 	blt 	t0, s8, fimintreadFloat	# sai se o enderefo for < inicio da string
+			lb 	t1, 0(t0)			# le o caracter
+			blt 	t1, '0', erroreadFloat		# nao eh caractere valido para numero
+			bgt 	t1, '9', erroreadFloat		# nao eh caractere valido para numero
+			addi 	t1, t1, -48			# converte ascii para decimal
+			mtc1 	t1, f2			# passa para 0 C1
+			cvt.s.w f2, f2			# digito lido em float
 
-			mul.s 	$f2,$f2,$f3			# multiplcica por un/dezena/centena
-			add.s 	$f0,$f0,$f2			# soma no resultado
-			mul.s 	$f3,$f3,$f10			# proxima dezena/centena
+			fmul.s 	f2,f2,f3			# multiplcica por un/dezena/centena
+			fadd.s 	f0,f0,f2			# soma no resultado
+			fmul.s 	f3,f3,f10			# proxima dezena/centena
 
-			add $t0,$t0,-1				# endereco anterior
+			add t0,t0,-1				# endereco anterior
 			j loopintreadFloat			# volta ao loop
 fimintreadFloat:
 
 ### Encontra a parte fracionaria  ja em $f0							
-fracreadFloat:		mtc1 	$zero, $f2			# zera parte fracionaria
-			addi 	$t0, $s2, 1			# endereco depois do ponto
-			div.s 	$f3, $f1, $f10			# $f3 inicial 0.1
+fracreadFloat:		mtc1 	zero, f2			# zera parte fracionaria
+			addi 	t0, s2, 1			# endereco depois do ponto
+			fdiv.s 	f3, f1, f10			# $f3 inicial 0.1
 	
-loopfracreadFloat: 	bge 	$t0, $s3, fimfracreadFloat	# endereco eh 'e' 'E' ou >ultimo
-			lb 	$t1, 0($t0)			# le o caracter
-			blt 	$t1, '0', erroreadFloat		# nao eh valido
-			bgt 	$t1, '9', erroreadFloat		# nao eh valido
-			addi 	$t1, $t1, -48			# converte ascii para decimal
-			mtc1 	$t1, $f2			# passa para C1				
-			cvt.s.w $f2, $f2			# digito lido em float
+loopfracreadFloat: 	bge 	t0, s3, fimfracreadFloat	# endereco eh 'e' 'E' ou >ultimo
+			lb 	t1, 0(t0)			# le o caracter
+			blt 	t1, '0', erroreadFloat		# nao eh valido
+			bgt 	t1, '9', erroreadFloat		# nao eh valido
+			addi 	t1, t1, -48			# converte ascii para decimal
+			mtc1 	t1, f2			# passa para C1				
+			cvt.s.w f2, f2			# digito lido em float
 
-			mul.s 	$f2, $f2, $f3			# multiplica por ezena/centena
-			add.s 	$f0, $f0, $f2			# soma no resultado
-			div.s 	$f3, $f3, $f10			# proxima frac un/dezena/centena
+			fmul.s 	f2, f2, f3			# multiplica por ezena/centena
+			fadd.s 	f0, f0, f2			# soma no resultado
+			fdiv.s 	f3, f3, f10			# proxima frac un/dezena/centena
 	
-			addi 	$t0, $t0, 1			# proximo endereco
+			addi 	t0, t0, 1			# proximo endereco
 			j 	loopfracreadFloat		# volta ao loop		
 fimfracreadFloat:
 
 ### Encontra a potencia em $f2																																																																																																																																																							
-potreadFloat:		mtc1 	$zero, $f2			# zera potencia
-			addi 	$t0, $s3, 1			# endereco seguinte ao 'e'
-			li 	$s4, 0				# sinal do expoente positivo
-			lb 	$t1, 0($t0)			# le o caractere seguinte ao 'e'
-			beq	$t1, '-', potsinalnegreadFloat	# sinal do expoente esta escrito e eh positivo
-			beq 	$t1, '+', potsinalposreadFloat	# sinal do expoente eh negativo
+potreadFloat:		mtc1 	zero, f2			# zera potencia
+			addi 	t0, s3, 1			# endereco seguinte ao 'e'
+			li 	s4, 0				# sinal do expoente positivo
+			lb 	t1, 0(t0)			# le o caractere seguinte ao 'e'
+			beq	t1, '-', potsinalnegreadFloat	# sinal do expoente esta escrito e eh positivo
+			beq 	t1, '+', potsinalposreadFloat	# sinal do expoente eh negativo
 			j 	pulapotsinalreadFloat		# nao esta escrito o sinal do expoente
-potsinalnegreadFloat:	li 	$s4, 1				# $s4=1 expoente negativo
-potsinalposreadFloat:	addi 	$t0, $t0, 1			# se tiver '-' ou '+' avanca para o proximo endereco
-pulapotsinalreadFloat:	move 	$s5, $t0 			# Neste ponto $s5 contem o endereco do primeiro digito da pot e $s4 o sinal do expoente		
+potsinalnegreadFloat:	li 	s4, 1				# $s4=1 expoente negativo
+potsinalposreadFloat:	addi 	t0, t0, 1			# se tiver '-' ou '+' avanca para o proximo endereco
+pulapotsinalreadFloat:	mv    s5, t0 			# Neste ponto $s5 contem o endereco do primeiro digito da pot e $s4 o sinal do expoente		
 
-			mov.s 	$f3, $f1		# $f3 un/dez/cen = 1
+			mov.s 	f3, f1		# $f3 un/dez/cen = 1
 	
 ### Encontra o expoente inteiro em $t2
-expreadFloat:		li 	$t2, 0			# zera expoente
-			move 	$t0, $s0		# endereco do ultimo caractere da string
-			li 	$t3, 10			# numero dez
-			li 	$t4, 1			# und/dez/cent
+expreadFloat:		li 	t2, 0			# zera expoente
+			mv 	t0, s0		# endereco do ultimo caractere da string
+			li 	t3, 10			# numero dez
+			li 	t4, 1			# und/dez/cent
 				
-loopexpreadFloat:	blt 	$t0, $s5, fimexpreadFloat	# ainda nao eh o endereco do primeiro digito?
-			lb 	$t1, 0($t0)			# le o caracter
-			addi 	$t1, $t1, -48			# converte ascii para decimal
-			mult 	$t1, $t4			# mul digito
-			mflo 	$t1
-			add 	$t2, $t2, $t1			# soma ao exp
-			mult 	$t4, $t3			# proxima casa decimal
-			mflo 	$t4
-			add 	$t0, $t0, -1			# endereco anterior
+loopexpreadFloat:	blt 	t0, s5, fimexpreadFloat	# ainda nao eh o endereco do primeiro digito?
+			lb 	t1, 0(t0)			# le o caracter
+			addi 	t1, t1, -48			# converte ascii para decimal
+			mult 	t1, t4			# mul digito
+			mflo 	t1
+			add 	t2, t2, t1			# soma ao exp
+			mult 	t4, t3			# proxima casa decimal
+			mflo 	t4
+			add 	t0, t0, -1			# endereco anterior
 			j loopexpreadFloat			# volta ao loop
 fimexpreadFloat:
 																																																								
 # calcula o numero em $f2 o numero 10^exp
-			mov.s 	$f2, $f1			# numero 10^exp  inicial=1
-			mov.s 	$f3, $f10			# se o sinal for + $f3 eh 10
-			beq 	$s4, 0, sinalexpPosreadFloat	# se sinal exp positivo
-			div.s 	$f3, $f1, $f10			# se o final for - $f3 eh 0.1
-sinalexpPosreadFloat:	li 	$t0, 0				# contador 
-sinalexpreadFloat: 	beq 	$t0, $t2, fimsinalexpreadFloat	# se chegou ao fim
-			mul.s 	$f2, $f2, $f3			# multiplica pelo fator 10 ou 0.1
-			addi 	$t0, $t0, 1			# incrementa o contador
+			mov.s 	f2, f1			# numero 10^exp  inicial=1
+			mov.s 	f3, f10			# se o sinal for + $f3 eh 10
+			beq 	s4, 0, sinalexpPosreadFloat	# se sinal exp positivo
+			fdiv.s 	f3, f1, f10			# se o final for - $f3 eh 0.1
+sinalexpPosreadFloat:	li 	t0, 0				# contador 
+sinalexpreadFloat: 	beq 	t0, t2, fimsinalexpreadFloat	# se chegou ao fim
+			fmul.s 	f2, f2, f3			# multiplica pelo fator 10 ou 0.1
+			addi 	t0, t0, 1			# incrementa o contador
 			j 	sinalexpreadFloat
 fimsinalexpreadFloat:
 
-		mul.s 	$f0, $f0, $f2		# multiplicacao final!
+		fmul.s 	f0, f0, f2		# multiplicacao final!
 	
-		la 	$t0, TempBuffer		# ajuste final do sinal do numero
-		lb 	$t1, 0($t0)		# le primeiro caractere
-		bne 	$t1, '-', fimreadFloat	# nao eh '-' entao fim
-		neg.s 	$f0, $f0		# nega o numero float
+		la 	t0, TempBuffer		# ajuste final do sinal do numero
+		lb 	t1, 0(t0)		# le primeiro caractere
+		bne 	t1, '-', fimreadFloat	# nao eh '-' entao fim
+		neg.s 	f0, f0		# nega o numero float
 
 erroreadFloat:		
-fimreadFloat: 	lw 	$ra, 0($sp)		# recupera $ra
-		addi 	$sp, $sp, 4		# libera espaco
-		jr 	$ra			# retorna
+fimreadFloat: 	lw 	ra, 0(sp)		# recupera $ra
+		addi 	sp, sp, 4		# libera espaco
+		ret			# retorna
 																														
 
 
@@ -1549,76 +1564,77 @@ fimreadFloat: 	lw 	$ra, 0($sp)		# recupera $ra
 ############################################
 sdRead:		DE2(sdReadDE2)
 		# Faz a leitura do arquivo imagem (raw) do cartão SD: "SD.bin" 
-		move 	$t0, $a0		# Salva Endereco de Origem
-		move 	$t1, $a1		# Salva Endereco de Destino
-		move 	$t2, $a2		# Salva o numero de bytes a serem lidos
-		la 	$a0, SDFile		# Abre o arquivo "SD.bin"
-		li 	$a1, 0	
-		li 	$a2, 0
-		li 	$v0, 13		
-		syscall		
-		move 	$t3, $v0		# Salva o Descritor
-		move 	$a0, $t3		# Define o descritor
-		la 	$a1, TempBuffer		# Define o Endereco de Buffer do cartao SD
-		li 	$a2, 512		# numero de bytes do buffer
-		move 	$t4, $t0		# endereco origem = num bytes a pular
+		mv 	t0, a0		# Salva Endereco de Origem
+		mv 	t1, a1		# Salva Endereco de Destino
+		mv 	t2, a2		# Salva o numero de bytes a serem lidos
+		la 	a0, SDFile		# Abre o arquivo "SD.bin"
+		li 	a1, 0	
+		li 	a2, 0
+		#li 	$v0, 13		#pate anterior, sobre abrir um arquivo
+		li a7, 1024
+		ecall		
+		mv 	t3, $v0		# Salva o Descritor
+		mv 	a0, t3		# Define o descritor
+		la 	a1, TempBuffer		# Define o Endereco de Buffer do cartao SD
+		li 	a2, 512		# numero de bytes do buffer
+		mv 	t4, t0		# endereco origem = num bytes a pular
 	
-LoopSD: 	ble 	$t4, $zero, ForaSD	# leu todos os setores ?
+LoopSD: 	ble 	t4, zero, ForaSD	# leu todos os setores ?
 		li 	$v0, 14			# Le um bloco de 512 bytes
-		syscall			
-		addi 	$t4, $t4, -512		# subtrai o endereco de origem
+		ecall			
+		addi 	t4, t4, -512		# subtrai o endereco de origem
 		j 	LoopSD			# volta ao loop
 	
-ForaSD: 	sub  	$a2, $zero, $t4		# numero de bytes faltantes
-		li	$v0, 14		# le o numero de bytes faltantes a pular
-		syscall		
+ForaSD: 	sub  	a2, zero, t4		# numero de bytes faltantes
+		li	v0, 14		# le o numero de bytes faltantes a pular
+		ecall		
 
-		move 	$a0, $t3		# le os bytes desejados
-		move 	$a1, $t1
-		move 	$a2, $t2
-		li 	$v0, 14
+		mv 	a0, t3		# le os bytes desejados
+		mv 	a1, t1
+		mv 	a2, t2
+		li 	v0, 14
 		syscall		
-		blt 	$v0, $zero, FimSD	# se $v0 <0 entao deu erro
+		blt 	v0, zero, FimSD	# se $v0 <0 entao deu erro
 
-		move 	$a0, $t3		# recupera o descritor
-		li 	$v0, 16			# fecha o arquivo
+		mv 	a0, $t3		# recupera o descritor
+		li 	v0, 16			# fecha o arquivo
 		syscall		
-		li 	$v0, 0			# retorna sem erro
+		li 	v0, 0			# retorna sem erro
 		j 	FimSD			# retorna
 
 
-sdReadDE2:     	la      $s0, SD_INTERFACE_ADDR
-    		la      $s1, SD_INTERFACE_CTRL
-    		la      $s2, SD_BUFFER_INI
+sdReadDE2:     	la      s0, SD_INTERFACE_ADDR
+    		la      s1, SD_INTERFACE_CTRL
+    		la      s2, SD_BUFFER_INI
 
-sdBusy:     	lbu     $t1, 0($s1)                     # $t1 = SDCtrl
-    		bne     $t1, $zero, sdBusy              # $t1 ? BUSY : READY
+sdBusy:     	lbu     t1, 0(s1)                     # $t1 = SDCtrl
+    		bne     t1, zero, sdBusy              # $t1 ? BUSY : READY
 
-sdReadSector:	sw      $a0, 0($s0)                     # &SD_INTERFACE_ADDR = $a0
+sdReadSector:	sw      a0, 0(s0)                     # &SD_INTERFACE_ADDR = $a0
     		nop
     		nop
     		
 
-sdWaitRead:     lbu     $t1, 0($s1)                     # $t1 = SDCtrl
-    		bne     $t1, $zero, sdWaitRead          # $t1 ? BUSY : READY
-    		li      $t0, 512                        # Tamanho do buffer em bytes
+sdWaitRead:     lbu     t1, 0(s1)                     # $t1 = SDCtrl
+    		bne     t1, zero, sdWaitRead          # $t1 ? BUSY : READY
+    		li      t0, 512                        # Tamanho do buffer em bytes
 
-sdDataReady:	lw      $t2, 0($s2)                     # Le word do buffer
-    		sw      $t2, 0($a1)                     # Salva word no destino
-    		addi    $s2, $s2, 4                     # Incrementa endereco do buffer
-    		addi    $a1, $a1, 4                     # Incrementa endereco de destino
-    		addi    $a2, $a2, -4                    # Decrementa quantidade de bytes a serem lidos
-    		addi    $t0, $t0, -4                    # Decrementa contador de bytes lidos no setor
-    		beq     $a2, $zero, FimSDRead           # Se leu todos os bytes desejados, finaliza
-    		bne     $t0, $zero, sdDataReady         # Le proxima word
+sdDataReady:	lw      t2, 0(s2)                     # Le word do buffer
+    		sw      t2, 0(a1)                     # Salva word no destino
+    		addi    s2, s2, 4                     # Incrementa endereco do buffer
+    		addi    a1, a1, 4                     # Incrementa endereco de destino
+    		addi    a2, a2, -4                    # Decrementa quantidade de bytes a serem lidos
+    		addi    t0, t0, -4                    # Decrementa contador de bytes lidos no setor
+    		beq     a2, zero, FimSDRead           # Se leu todos os bytes desejados, finaliza
+    		bne     t0, zero, sdDataReady         # Le proxima word
 
-    		addi    $a0, $a0, 512                   # Define endereco do proximo setor
-    		la      $s2, SD_BUFFER_INI              # Coloca o enderecamento do buffer na posicao inicial
+    		addi    a0, a0, 512                   # Define endereco do proximo setor
+    		la      s2, SD_BUFFER_INI              # Coloca o enderecamento do buffer na posicao inicial
     		j       sdBusy
     
- FimSDRead:	li      $v0, 0                          # Sucesso na transferencia.         NOTE: Hardcoded. Um teste de falha deve ser implementado.
+ FimSDRead:	li      v0, 0                          # Sucesso na transferencia.         NOTE: Hardcoded. Um teste de falha deve ser implementado.
  
- FimSD:		jr      $ra				# retorna
+ FimSD:		ret				# retorna
 ############################################
 
 
@@ -1629,14 +1645,16 @@ sdDataReady:	lw      $t2, 0($s2)                     # Le word do buffer
 #  $a1    =    zero	                   #
 ############################################
 time: 	DE2(timeDE2)
-	li 	$v0,30				# Chama o syscall do Mars
-	syscall
+	#li 	$v0,30				# Chama o syscall do Mars
+	li a7, 30
+	#qual eh o comando 30 no mips?
+	ecall 
 	j 	fimTime				# saida
 
-timeDE2: 	la 	$t0, STOPWATCH			# carrega endereco do TopWatch
-	 	lw 	$a0, 0($t0)			# carrega o valor do contador de ms
-	 	li 	$a1, 0x0000			# contador eh de 32 bits
-fimTime: 	jr 	$ra				# retorna
+timeDE2: 	la 	t0, STOPWATCH			# carrega endereco do TopWatch
+	 	lw 	a0, 0($t0)			# carrega o valor do contador de ms
+	 	li 	a1, 0x0000			# contador eh de 32 bits
+fimTime: 	ret				# retorna
 
 ############################################
 #  Sleep                            	   #
@@ -1647,28 +1665,28 @@ sleep: DE2(sleepDE2)
 	syscall			
 	j 	fimSleep			# Saida
 
-sleepDE2:	la 	$t0, STOPWATCH			# endereco StopWatch
-		lw 	$t1, 0($t0)			# carrega o contador de ms
-		add 	$t2, $a0, $t1			# soma com o tempo solicitado pelo usuario
+sleepDE2:	la 	t0, STOPWATCH			# endereco StopWatch
+		lw 	t1, 0(t0)			# carrega o contador de ms
+		add 	t2, a0, t1			# soma com o tempo solicitado pelo usuario
 		
-LoopSleep: 	lw 	$t1, 0($t0)			# carrega o contador de ms
-		blt 	$t1, $t2, LoopSleep		# nao chegou ao fim volta ao loop
+LoopSleep: 	lw 	t1, 0($t0)			# carrega o contador de ms
+		blt 	t1, t2, LoopSleep		# nao chegou ao fim volta ao loop
 	
-fimSleep: 	jr 	$ra				# retorna
+fimSleep:       ret				# retorna
 
 ############################################
 #  Random                            	   #
 #  $a0    =    numero randomico        	   #
 ############################################
 random: DE2(randomDE2)		
-	li 	$v0,41			# Chama o syscall do Mars
-	syscall	
+	li 	v0,41			# Chama o syscall do Mars
+	ecall	
 	j 	fimRandom		# saida
 	
-randomDE2: 	la 	$t0, LFSR		# carrega endereco do LFSR
-		lw 	$a0, 0($t0)		# le a word em $a0
+randomDE2: 	la 	t0, LFSR		# carrega endereco do LFSR
+		lw 	a0, 0(t0)		# le a word em $a0
 		
-fimRandom:	jr 	$ra			# retorna
+fimRandom:      ret			# retorna
 
 
 #################################
@@ -1677,16 +1695,18 @@ fimRandom:	jr 	$ra			# retorna
 #  $a0 = cor                    #
 #################################
 
-clsCLS:	la      $t1, VGAADDRESSINI           # Memoria VGA
-   	la      $t2, VGAADDRESSFIM
-    	andi    $a0, $a0, 0x00FF
-    	la 	$t0, 0x01010101
-    	mult	$t0, $a0
-    	mflo	$a0
+clsCLS:	la      t1, VGAADDRESSINI           # Memoria VGA
+   	la      t2, VGAADDRESSFIM
+    	andi    a0, a0, 0x00FF
+    	la 	t0, 0x01010101
+    	#traduzir depois:
+    	#mult	$t0, $a0
+    	#mflo	$a0
 
-forCLS:	beq     $t1, $t2, fimCLS
-	sw      $a0, 0($t1)
-    	addi    $t1, $t1, 4
+forCLS:	beq     t1, t2, fimCLS
+	sw      a0, 0(t1)
+    	addi    t1, t1, 4
     	j       forCLS
     	
-fimCLS:	jr      $ra
+fimCLS:	#jr      $ra
+	ret 
