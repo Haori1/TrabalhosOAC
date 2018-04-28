@@ -54,12 +54,12 @@
 
 ######### Macro que verifica se eh a DE2 ###############
 .macro DE2(%salto)
-	andi t0, t0, 0			# zera t0
+	add t0, zero, zero			# zera t0
 	lui t0, 0x10008			# carrega t0 = 0x10008000
 	bne gp,t0,%salto
 .end_macro
 
-.kdata   # endereço 0x9000 0000
+.data
 
 # Tabela de caracteres desenhados segundo a fonte do ZX-Spectrum
 LabelTabChar:
@@ -148,7 +148,22 @@ eventQueueEndPtr:       .word 0x90000E00
 
 ### Obs.: a forma 'LABEL: instrucao' embora fique feio facilita o debug no Rars, por favor nao reformatar!!!
 
+########################################################################################
 .text
+
+exceptionHandling:  addi    sp, sp, -4 # aloca espaco 
+    sw      ra, 0(sp)			# salva ra
+
+   	j syscallException
+	
+endException: 	lw   ra, 0(sp)		# recupera ra
+    	addi    sp, sp, 4
+
+    	csrrw t0, 65, zero	# le o valor de EPC salvo no registrador uepc (reg 65)
+		addi t0, t0, 4		# soma 4 para obter a instruçao seguinte ao ecall
+		csrrw zero, 65, t0	# coloca no registrador uepc
+		uret			# retorna PC=uepc
+
 
 ############# interrupcao de SYSCALL ###################
 syscallException:     addi    sp, sp, -264              # Salva todos os registradores na pilha
@@ -579,6 +594,7 @@ fimprintString:	ret      	    	# retorna
 #   t5 = background color                              #
 #   t6 = foreground color                              #
 #########################################################
+#	t9 foi convertido para s9 pois nao ha registradores temporarios sobrando dentro desta funçao
 
 
 printChar:	 li t4, 0xFF			# t4 temporario
@@ -611,9 +627,9 @@ forChar1I:	beq     t0, zero, endForChar1I	# if(i == 0) end for i
     		addi    t1, zero, 8               	# j = 8
 
 	forChar1J:      beq     t1, zero, endForChar1J    	# if(j == 0) end for j
-        		andi    t9, t3, 0x0001		# primeiro bit do caracter
+        		andi    s9, t3, 0x0001		# primeiro bit do caracter
         		srli     t3, t3, 1             	# retira o primeiro bit
-        		beq     t9, zero, printCharPixelbg1	# pixel eh fundo?
+        		beq     s9, zero, printCharPixelbg1	# pixel eh fundo?
         		sb      t6, 0(t4)             	# imprime pixel com cor de frente
         		j       endCharPixel1
 printCharPixelbg1:     	sb      t5, 0(t4)                 	# imprime pixel com cor de fundo
@@ -631,9 +647,9 @@ forChar2I:     	beq     t0, zero, endForChar2I    	# if(i == 0) end for i
     		addi    t1, zero, 8               # j = 8
 
 	forChar2J:	beq	t1, zero, endForChar2J    	# if(j == 0) end for j
-        		andi    t9, t3, 0x0001	    	# pixel a ser impresso
+        		andi    s9, t3, 0x0001	    	# pixel a ser impresso
         		srli     t3, t3, 1                 	# desloca para o proximo
-        		beq     t9, zero, printCharPixelbg2	# pixel eh fundo?
+        		beq     s9, zero, printCharPixelbg2	# pixel eh fundo?
         		sb      t6, 0(t4)			# imprime cor frente
         		j       endCharPixel2			# volta ao loop
 
@@ -783,7 +799,8 @@ loopReadInt: 	beq	a3,zero, fimReadInt	# Leu todos os digitos
 	addi	a3, a3, -1			# reduz o contador de digitos 
 	j loopReadInt				# volta para buscar proximo digito
 
-naoehReadInt:	j instructionException		# gera erro "instrução" invalida
+naoehReadInt:	#j instructionException		# gera erro "instrução" invalida
+				j fimReadInt				# como nao esta implmentado apenas retorna
 
 ehnegReadInt:	sub a0,zero,a0		# se for negativo
 
@@ -925,6 +942,7 @@ fimmidiOutSync:	ret
 #  a7 = sucesso ? 1 : 0        #
 #  v1 = evento                 #
 #################################
+# nao convertido para risc-v
 #
 #popEvent:     addi    sp, sp, -12
 #    sw      a0, 0(sp)
@@ -989,7 +1007,7 @@ ehposprintFloat: sb 	t0, 0(s0)			# coloca sinal no buffer
 		fcvt.w.s 	t1, fa0			# recupera o numero float
 		lui 	t2, 0x7FFFF
 		srli	t2, t2, 8
-		addi	t2, t2, 0xF				# t8 = 0x007FFFFF
+		addi	t2, t2, 0xF				# t2 = 0x007FFFFF
 		and 	t1, t1, t2		# mascara com 0000 0000 0111 1111 1111... 		 
 			 
 		beq 	t0, zero, ehExp0printFloat	# Expoente = 0
@@ -1022,7 +1040,7 @@ fimloop1printFloat: 	fdiv.s 	f4, f4, f2			# ajusta o numero
 
 			# calcula o expoente positivo de 10
 cont2printFloat:	fmv.s 	f4, f0			# inicia com o numero x 
-		 	mtc1 	zero, f3			# contador começa em 0
+		 	fcvt.s.w 	f3, zero			# contador começa em 0
 loop2printFloat:  	flt.s 	t3, f4, f10			# resultado eh < que 10? entao fim
 		 	fdiv.s 	f4, f4, f2			# divide o numero pelo fator multiplicativo
 		 	bnez 	t3 ,intprintFloat
@@ -1049,7 +1067,7 @@ intprintFloat:		fmul.s 		f4, f4, f2		# ajusta o numero
 		  	li 		t1, 8				# contador de digitos  -  8 casas decimais
 loopfracprintFloat:  	beq 		t1, zero, fimfracprintFloat	# fim dos digitos?
 		  	floor.w.s 	f5, f4			# menor inteiro
-		  	cvt.s.w 	f5, f5			# parte inteira		
+# RETIRAR! 	cvt.s.w 	f5, f5			# parte inteira		
 		  	fsub.s 		f5, f4, f5			# parte fracionaria
 		  	fmul.s 		f5, f5, f10			# mult x 10
 		  	floor.w.s 	f6, f5			# converte para inteiro
@@ -1074,8 +1092,7 @@ expposprintFloat: 	sb 	t0, 0(s0)				# coloca no buffer
 		  	addi 	s0, s0, 1				#incrementa endereco
 				    
 		  	# imprimeo expoente com 2 digitos (maximo E+38)
-			li 	t1, 10				# carrega 10
-			cvt.w.s f3, f3			# converte f3 em inteiro	
+			li 	t1, 10				# carrega 10	
 			fcvt.w.s 	t0, f3			# passa f3 para t0
 			div 	t0, t0, t1			# divide por 10 (dezena)
 			rem		t2, t0, t1			# t0 = quociente, t2 = resto
@@ -1145,8 +1162,8 @@ insere0AreadFloat: mv t0, s0		# endereco do ultimo caractere
 		   addi s0, s0, 1		# desloca o ultimo endereco para o proximo
 	   	   addi s1, s1, 1		# incrementa o num. caracteres
 	   	   sb 	zero, 1(s0)		# \NULL do final de string
-	   	   mv t8, s7		# primeiro caractere
-insere0Aloop:	   beq 	t0, t8, saiinsere0AreadFloat	# chegou no inicio entao fim
+	   	   mv t5, s7		# primeiro caractere
+insere0Aloop:	   beq 	t0, t5, saiinsere0AreadFloat	# chegou no inicio entao fim
 		   lb 	t1, 0(t0)		# le caractere
 		   sb 	t1, 1(t0)		# escreve no proximo
 		   addi t0, t0, -1		# decrementa endereco
@@ -1166,13 +1183,11 @@ insere0PreadFloat: addi	s0, s0, 1		# desloca o ultimo endereco para o proximo
 		   sb 	t1,0(s0)		# escreve '0' no ultimo
 		   sb 	zero,1(s0)		# \null do final de string
 
-inicioreadFloat:  mtc1 	zero,fa0		# fa0 Resultado inicialmente zero
+inicioreadFloat:  fcvt.s.w 	fa0, zero		# fa0 Resultado inicialmente zero
 		li 	t0, 10			# inteiro 10	
-		mtc1 	t0, f10		# passa para o C1
-		cvt.s.w f10, f10		# f10 contem sempre o numero cte 10.0000
+		fcvt.s.w 	f10, t0		# f10 contem sempre o numero cte 10.0000
 		li 	t0, 1			# inteiro 1
-		mtc1 	t0, f1		# passa para o C1
-		cvt.s.w f1, f1		# f1 contem sempre o numero cte 1.0000
+		fcvt.s.w 	f1, t0		# f1 contem sempre o numero cte 1.0000	
 	
 ##### Verifica se tem 'e' ou 'E' na string  resultado em s3			
 procuraEreadFloat:	add 	s3, s0, 1			# inicialmente nao tem 'e' ou 'E' na string (fora da string)
@@ -1198,17 +1213,16 @@ ehPontoreadFloat: 	mv 	s2, t0			# endereco do '.' na string
 naotemPontoreadFloat:						# nao tem '.' s2 = local do 'e' ou \0 da string
 
 ### Encontra a parte inteira em fa0
-intreadFloat:		mtc1 	zero, f2			# zera parte inteira
+intreadFloat:		fcvt.s.w 	f2, zero			# zera parte inteira
 			addi 	t0, s2, -1			# endereco do caractere antes do ponto
 			fmv.s 	f3, f1			# f3 contem unidade/dezenas/centenas		
-			mv 	t8, s7			# Primeiro Endereco
-loopintreadFloat: 	blt 	t0, t8, fimintreadFloat	# sai se o enderefo for < inicio da string
+			mv 	t5, s7			# Primeiro Endereco
+loopintreadFloat: 	blt 	t0, t5, fimintreadFloat	# sai se o enderefo for < inicio da string
 			lb 	t1, 0(t0)			# le o caracter
 			blt 	t1, '0', erroreadFloat		# nao eh caractere valido para numero
 			bgt 	t1, '9', erroreadFloat		# nao eh caractere valido para numero
 			addi 	t1, t1, -48			# converte ascii para decimal
-			mtc1 	t1, f2			# passa para 0 C1
-			cvt.s.w f2, f2			# digito lido em float
+			fcvt.s.w 	f2, t1			# digito lido em float
 
 			fmul.s 	f2,f2,f3			# multiplcica por un/dezena/centena
 			fadd.s 	fa0,fa0,f2			# soma no resultado
@@ -1219,7 +1233,7 @@ loopintreadFloat: 	blt 	t0, t8, fimintreadFloat	# sai se o enderefo for < inicio
 fimintreadFloat:
 
 ### Encontra a parte fracionaria  ja em fa0							
-fracreadFloat:		mtc1 	zero, f2			# zera parte fracionaria
+fracreadFloat:		fcvt.s.w 	f2, zero			# zera parte fracionaria
 			addi 	t0, s2, 1			# endereco depois do ponto
 			fdiv.s 	f3, f1, f10			# f3 inicial 0.1
 	
@@ -1228,8 +1242,7 @@ loopfracreadFloat: 	bge 	t0, s3, fimfracreadFloat	# endereco eh 'e' 'E' ou >ulti
 			blt 	t1, '0', erroreadFloat		# nao eh valido
 			bgt 	t1, '9', erroreadFloat		# nao eh valido
 			addi 	t1, t1, -48			# converte ascii para decimal
-			mtc1 	t1, f2			# passa para C1				
-			cvt.s.w f2, f2			# digito lido em float
+			fcvt.s.w 	f2, t1			# digito lido em float		
 
 			fmul.s 	f2, f2, f3			# multiplica por ezena/centena
 			fadd.s 	fa0, fa0, f2			# soma no resultado
@@ -1240,7 +1253,7 @@ loopfracreadFloat: 	bge 	t0, s3, fimfracreadFloat	# endereco eh 'e' 'E' ou >ulti
 fimfracreadFloat:
 
 ### Encontra a potencia em f2																																																																																																																																																							
-potreadFloat:		mtc1 	zero, f2			# zera potencia
+potreadFloat:		fcvt.s.w 	f2, zero			# zera potencia
 			addi 	t0, s3, 1			# endereco seguinte ao 'e'
 			li 	s4, 0				# sinal do expoente positivo
 			lb 	t1, 0(t0)			# le o caractere seguinte ao 'e'
