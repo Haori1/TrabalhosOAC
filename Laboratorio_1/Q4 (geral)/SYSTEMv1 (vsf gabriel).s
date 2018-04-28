@@ -574,7 +574,7 @@ NaoPulaLinha:	addi    s0, s0, 1			# proximo caractere
     		j       loopprintString       		# volta ao loop
 
 fimloopprintString:	lw      ra, 0(sp)    		# recupera ra
-				lw 	s0, 0(sp)			# recupera s0
+				lw 	s0, 0(sp)			# recupera s0 original
     			addi    sp, sp, 8		# libera espaco
 fimprintString:	ret      	    	# retorna
 
@@ -602,7 +602,7 @@ printChar:	 li t4, 0xFF			# t4 temporario
 		and    	t5, a3, t4   	    # t5 obtem cor de fundo
 		li 		t4, 0xFF
 		and   t6, a3, t4         	# t6 obtem cor de frente
-    	srl     t5, t5, 8			# numero da cor de fundo
+    	srli     t5, t5, 8			# numero da cor de fundo
 
 	blt 	a0, ' ', NAOIMPRIMIVEL		# ascii menor que 32 nao eh imprimivel
 	bgt	a0, '~', NAOIMPRIMIVEL		# ascii Maior que 126  nao eh imprimivel
@@ -617,7 +617,7 @@ IMPRIMIVEL:	li	t5, NUMCOLUNAS		# Num colunas 320
     	la      t6, VGAADDRESSINI          	# Endereco de inicio da memoria VGA
     	add     t4, t4, t6               	# t4 = endereco de impressao do ultimo pixel da primeira linha do char
     	addi    t2, a0, -32               	# indice do char na memoria
-    	sll     t2, t2, 3                 	# offset em bytes em relacao ao endereco inicial
+    	slli     t2, t2, 3                 	# offset em bytes em relacao ao endereco inicial
 	la      t3, LabelTabChar		# endereco dos caracteres na memoria
     	add     t2, t2, t3               	# endereco do caractere na memoria
 	lw      t3, 0(t2)                 	# carrega a primeira word do char
@@ -696,8 +696,8 @@ loopReadCharKDMMIODE2: 	lw     	a0, 0(t0)   			# le o bit de flag do teclado
 						
 												
 ##### Tratamento para uso com o teclado PS2 da DE2 usando Buffer0 teclado
-#### muda a0, t0,t1,t2,t3 e fp
-#### Cuidar: ao entrar fp ja deve conter o endereco la fp,LabelScanCode  #####
+#### muda a0, t0,t1,t2,t3 e s0
+#### Cuidar: ao entrar s0 ja deve conter o endereco la s0,LabelScanCode  #####
 readCharDE2:  	la      t0, Buffer0Teclado 			# Endereco buffer0
     		lw     	t1, 0(t0)				# conteudo inicial do buffer
 	
@@ -713,16 +713,16 @@ buffermodificadoChar:	li t5, 0xFF
 	beq     t3, 0xF000, teclasoltaChar		# eh 0xF0 no 2o scancode? tecla foi solta
 	andi	t3, t2, 0xFF				# mascara 1o scancode	(essa podemos fazer diretamente)
     	bne 	t3, 0x12, atualizaBufferChar		# nao eh o SHIFT que esta pressionado ? volta a ler 
-	la      fp, LabelScanCodeShift			# se for SHIFT que esta pressionado atualiza o endereco da tabel
+	la      s0, LabelScanCodeShift			# se for SHIFT que esta pressionado atualiza o endereco da tabel
     	j       atualizaBufferChar			# volta a ler
 
 teclasoltaChar:		andi t3, t2, 0x00FF		# mascara o 1o scancode
   	bgt	t3, 0x80, atualizaBufferChar		# se o scancode for > 0x80 entao nao eh imprimivel!
 	bne 	t3, 0x12, naoehshiftChar		# nao foi o shift que foi solto? entao processa
-	la 	fp, LabelScanCode			# shift foi solto atualiza o endereco da tabela
+	la 	s0, LabelScanCode			# shift foi solto atualiza o endereco da tabela
 	j 	atualizaBufferChar			# volta a ler
 	
-naoehshiftChar:	   	add     t3, fp, t3                   	# endereco na tabela de scancode da tecla com ou sem shift
+naoehshiftChar:	   	add     t3, s0, t3                   	# endereco na tabela de scancode da tecla com ou sem shift
     	lb      a0, 0(t3)				# le o ascii do caracter para a0
     	beq     a0, zero, atualizaBufferChar		# se for caractere nao imprimivel volta a ler
     	
@@ -736,13 +736,14 @@ fimreadChar: 	ret			# retorna
 # a3 = num de caracteres digitados	#
 # 2018/1                		#
 #########################################
-# muda a2, a3, s2 e fp  
+# muda a2, a3, s2 e s0  
 
-readString: 	addi 	sp, sp, -4			# reserva espaco na pilha
+readString: 	addi 	sp, sp, -8			# reserva espaco na pilha
+		sw 	s0, 4(sp)			# salva s0
 		sw 	ra, 0(sp)			# salva ra
 		li 	a3, 0				# zera o contador de caracteres digitados
 		mv 	s2, a0				# salva o endereço inicial
-    		la      fp, LabelScanCode      	# Endereco da tabela de scancode inicial para readChar
+    		la      s0, LabelScanCode      	# Endereco da tabela de scancode inicial para readChar
     		
 loopreadString: beq 	a1, a3, fimreadString   	# buffer cheio fim
 	
@@ -750,7 +751,7 @@ loopreadString: beq 	a1, a3, fimreadString   	# buffer cheio fim
 		sw ra, 0(sp)				# salva ra
 		sw a0, 4(sp)				# salva a0 pois ele sera reescrito em readChar
 		jal 	readChar			# le um caracter do teclado (retorno em a0)
-		mv 	t6, a0					# t6 eh a letra retornada em readChar
+		mv 	t6, a0					# t6 eh a letra lida em readChar
 		lw ra, 0(sp)
 		lw a0, 4(sp)
 		addi sp, sp, 8
@@ -765,7 +766,8 @@ fimreadString: 	sb 	zero, 0(a0)			# grava NULL no buffer
 		addi 	a2, a0, -1			# Para que a2 tenha o endereco do ultimo caractere digitado
 		mv	a0, s2				# a0 volta a ter o endereço inicial da string
 		lw 	ra, 0(sp)			# recupera ra
-		addi 	sp, sp, 4			# libera espaco
+		lw	s0, 4(sp)			# recupera s0
+		addi 	sp, sp, 8			# libera espaco
 		ret						# retorna
 	
 	
@@ -839,17 +841,17 @@ midiOutDE2:	la      t0, NoteData
 
     		# Definicao do Instrumento
    	 	andi    t2, a2, 0x0000000F
-    		sll     t2, t2, 27
+    		slli     t2, t2, 27
     		or      t1, t1, t2
 
     		# Definicao do Volume
     		andi    t2, a3, 0x0000007F
-    		sll     t2, t2, 20
+    		slli     t2, t2, 20
     		or      t1, t1, t2
 
     		# Definicao do Pitch
     		andi    t2, a0, 0x0000007F
-    		sll     t2, t2, 13
+    		slli     t2, t2, 13
     		or      t1, t1, t2
 
     		# Definicao da Duracao
@@ -895,21 +897,22 @@ midiOutSyncDE2:	la      t0, NoteData
     		add     t1, zero, zero
 
     		# Melody = 1
-    		lui    t1, t1, 0x80000
+    		lui    t1, 0x08000
+			slli	t1, t1, 4			# t1 = 0x80000000
 
     		# Definicao do Instrumento
     		andi    t2, a2, 0x0000000F
-    		sll     t2, t2, 27
+    		slli     t2, t2, 27
     		or      t1, t1, t2
 
     		# Definicao do Volume
     		andi    t2, a3, 0x0000007F
-    		sll     t2, t2, 20
+    		slli     t2, t2, 20
     		or      t1, t1, t2
 
     		# Definicao do Pitch
     		andi    t2, a0, 0x0000007F
-    		sll     t2, t2, 13
+    		slli     t2, t2, 13
     		or      t1, t1, t2
 
     		# Definicao da Duracao
@@ -1000,7 +1003,7 @@ ehposprintFloat: sb 	t0, 0(s0)			# coloca sinal no buffer
 		 fcvt.w.s 	t0, fa0			# recupera o numero float
 		 lui	t1, 0x7F800
 		 and 	t0, t0, t1   		# mascara com 0111 1111 1000 0000 0000 0000...
-		 sll 	t0, t0, 1			# tira o sinal do numero
+		 slli 	t0, t0, 1			# tira o sinal do numero
 		 srli 	t0, t0, 24			# recupera o expoente
 
 		# Encontra a fracao em t1
