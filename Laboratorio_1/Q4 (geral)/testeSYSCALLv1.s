@@ -7,7 +7,7 @@
 
 .data
 FLOAT: .float 3.14159265659
-msg1: .string "Organizacao Arquitetura de Computadores 2017/2 !"
+msg1: .string "Organizacao Arquitetura de Computadores 2018/1 !"
 msg2: .string "Digite seu Nome:"
 msg3: .string "Digite sua Idade:"
 msg4: .string "Digite seu peso:"
