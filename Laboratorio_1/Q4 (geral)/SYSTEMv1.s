@@ -1025,45 +1025,45 @@ ehposprintFloat: sb 	t0, 0(s0)			# coloca sinal no buffer
 		
 		# Eh um numero float normal  t0 eh o expoente e t1 eh a mantissa
 		# Encontra o E tal que 10^E <= x <10^(E+1)
-		fabs.s 	f0, fa0		# f0 recebe o modulo  de x
+		fabs.s 	ft0, fa0		# ft0 recebe o modulo  de x
 		li		t6, 1
-		fcvt.s.w f1, t6		# f1 recebe o numero 1.0
+		fcvt.s.w ft1, t6		# ft1 recebe o numero 1.0
 		li		t6, 10
 		fcvt.s.w f10, t6	# f10 recebe o numero 10.0	
 		
-		flt.s 	t4, f0, f1		# f0 < 1.0 ? Se sim, E deve ser negativo
+		flt.s 	t4, ft0, ft1		# ft0 < 1.0 ? Se sim, E deve ser negativo
 		bnez	t4, menor1printFloat	# se a comparacao deu true (1), pula
-		fmv.s 	f2, f10		# f2  fator de multiplicaçao = 10
+		fmv.s 	ft2, f10		# ft2  fator de multiplicaçao = 10
 		j 	cont2printFloat		# vai para expoente positivo
-menor1printFloat: fdiv.s f2,f1,f10		# f2 fator multiplicativo = 0.1
+menor1printFloat: fdiv.s ft2,ft1,f10		# ft2 fator multiplicativo = 0.1
 
 			# calcula o expoente negativo de 10
-cont1printFloat: 	fmv.s 	f4, f0			# inicia com o numero x 
-		 	fmv.s 	f3, f1			# contador começa em 1
-loop1printFloat: 	fdiv.s 	f4, f4, f2			# divide o numero pelo fator multiplicativo
-		 	fle.s 	t3, f4, f1			# o numero eh > que 1? entao fim
+cont1printFloat: 	fmv.s 	ft4, ft0			# inicia com o numero x 
+		 	fmv.s 	ft3, ft1			# contador começa em 1
+loop1printFloat: 	fdiv.s 	ft4, ft4, ft2			# divide o numero pelo fator multiplicativo
+		 	fle.s 	t3, ft4, ft1			# o numero eh > que 1? entao fim
 		 	beqz 	t3, fimloop1printFloat
-		 	fadd.s 	f3, f3, f1			# incrementa o contador
+		 	fadd.s 	ft3, ft3, ft1			# incrementa o contador
 		 	j 	loop1printFloat			# volta ao loop
-fimloop1printFloat: 	fdiv.s 	f4, f4, f2			# ajusta o numero
+fimloop1printFloat: 	fdiv.s 	ft4, ft4, ft2			# ajusta o numero
 		 	j 	intprintFloat			# vai para imprimir a parte inteira
 
 			# calcula o expoente positivo de 10
-cont2printFloat:	fmv.s 	f4, f0			# inicia com o numero x 
-		 	fcvt.s.w 	f3, zero			# contador começa em 0
-loop2printFloat:  	flt.s 	t3, f4, f10			# resultado eh < que 10? entao fim
-		 	fdiv.s 	f4, f4, f2			# divide o numero pelo fator multiplicativo
+cont2printFloat:	fmv.s 	ft4, ft0			# inicia com o numero x 
+		 	fcvt.s.w 	ft3, zero			# contador começa em 0
+loop2printFloat:  	flt.s 	t3, ft4, f10			# resultado eh < que 10? entao fim
+		 	fdiv.s 	ft4, ft4, ft2			# divide o numero pelo fator multiplicativo
 		 	bnez 	t3 ,intprintFloat
-		 	fadd.s 	f3, f3, f1			# incrementa o contador
+		 	fadd.s 	ft3, ft3, ft1			# incrementa o contador
 		 	j 	loop2printFloat
 
-		# Neste ponto tem-se em t4 se f0<1, em f3 o expoente de 10 e f0 0 modulo do numero e s1 o sinal
-		# e em f4 um numero entre 1 e 10 que multiplicado por Ef3 deve voltar ao numero		
+		# Neste ponto tem-se em t4 se ft0<1, em ft3 o expoente de 10 e ft0 0 modulo do numero e s1 o sinal
+		# e em ft4 um numero entre 1 e 10 que multiplicado por Ef3 deve voltar ao numero		
 		
 	  		# imprime parte inteira (o sinal ja esta no buffer)
-intprintFloat:		fmul.s 		f4, f4, f2		# ajusta o numero
-		  	floor.w.s 	f5, f4		# menor inteiro
-		  	fcvt.w.s 		t0, f5		# passa para t5
+intprintFloat:		fmul.s 		ft4, ft4, ft2		# ajusta o numero
+		  	floor.w.s 	ft5, ft4		# menor inteiro
+		  	fcvt.w.s 		t0, ft5		# passa para t0
 		  	addi 		t0, t0, 48		# converte para ascii
 		  	sb 		t0, 0(s0)		# coloca no buffer
 		  	addi 		s0, s0, 1		# incrementta o buffer
@@ -1073,20 +1073,20 @@ intprintFloat:		fmul.s 		f4, f4, f2		# ajusta o numero
 		  	sb 	t0, 0(s0)			# coloca no buffer
 		  	addi 	s0, s0, 1			# incrementa o buffer
 		  
-		  	# f4 contem a mantissa com 1 casa nao decimal
+		  	# ft4 contem a mantissa com 1 casa nao decimal
 		  	li 		t1, 8				# contador de digitos  -  8 casas decimais
 loopfracprintFloat:  	beq 		t1, zero, fimfracprintFloat	# fim dos digitos?
-		  	floor.w.s 	f5, f4			# menor inteiro
-# RETIRAR! 	cvt.s.w 	f5, f5			# parte inteira		
-		  	fsub.s 		f5, f4, f5			# parte fracionaria
-		  	fmul.s 		f5, f5, f10			# mult x 10
-		  	floor.w.s 	f6, f5			# converte para inteiro
-		  	fcvt.w.s 		t0, f6			# passa para t0
+		  	floor.w.s 	ft5, ft4			# menor inteiro
+# RETIRAR! 	cvt.s.w 	ft5, ft5			# parte inteira		
+		  	fsub.s 		ft5, ft4, ft5			# parte fracionaria
+		  	fmul.s 		ft5, ft5, f10			# mult x 10
+		  	floor.w.s 	ft6, ft5			# converte para inteiro
+		  	fcvt.w.s 		t0, ft6			# passa para t0
 		  	addi 		t0, t0, 48			# converte para ascii
 		  	sb 		t0, 0(s0)			# coloca no buffer
 		  	addi 		s0, s0, 1			# incrementa endereco
 		  	addi 		t1, t1, -1			# decrementa contador
-		  	fmv.s 		f4, f5			# coloca o numero em f4
+		  	fmv.s 		ft4, ft5			# coloca o numero em ft4
 		  	j 		loopfracprintFloat		# volta ao loop
 		  
 		  	# imprime 'E'		  
@@ -1103,7 +1103,7 @@ expposprintFloat: 	sb 	t0, 0(s0)				# coloca no buffer
 				    
 		  	# imprimeo expoente com 2 digitos (maximo E+38)
 			li 	t1, 10				# carrega 10	
-			fcvt.w.s 	t0, f3			# passa f3 para t0
+			fcvt.w.s 	t0, ft3			# passa ft3 para t0
 			div 	t0, t0, t1			# divide por 10 (dezena)
 			rem		t2, t0, t1			# t0 = quociente, t2 = resto
 			addi 	t0, t0, 48			# converte para ascii
@@ -1197,7 +1197,7 @@ inicioreadFloat:  fcvt.s.w 	fa0, zero		# fa0 Resultado inicialmente zero
 		li 	t0, 10			# inteiro 10	
 		fcvt.s.w 	f10, t0		# f10 contem sempre o numero cte 10.0000
 		li 	t0, 1			# inteiro 1
-		fcvt.s.w 	f1, t0		# f1 contem sempre o numero cte 1.0000	
+		fcvt.s.w 	ft1, t0		# ft1 contem sempre o numero cte 1.0000	
 	
 ##### Verifica se tem 'e' ou 'E' na string  resultado em s3			
 procuraEreadFloat:	add 	s3, s0, 1			# inicialmente nao tem 'e' ou 'E' na string (fora da string)
@@ -1223,47 +1223,47 @@ ehPontoreadFloat: 	mv 	s2, t0			# endereco do '.' na string
 naotemPontoreadFloat:						# nao tem '.' s2 = local do 'e' ou \0 da string
 
 ### Encontra a parte inteira em fa0
-intreadFloat:		fcvt.s.w 	f2, zero			# zera parte inteira
+intreadFloat:		fcvt.s.w 	ft2, zero			# zera parte inteira
 			addi 	t0, s2, -1			# endereco do caractere antes do ponto
-			fmv.s 	f3, f1			# f3 contem unidade/dezenas/centenas		
+			fmv.s 	ft3, ft1			# ft3 contem unidade/dezenas/centenas		
 			mv 	t5, s7			# Primeiro Endereco
 loopintreadFloat: 	blt 	t0, t5, fimintreadFloat	# sai se o enderefo for < inicio da string
 			lb 	t1, 0(t0)			# le o caracter
 			blt 	t1, '0', erroreadFloat		# nao eh caractere valido para numero
 			bgt 	t1, '9', erroreadFloat		# nao eh caractere valido para numero
 			addi 	t1, t1, -48			# converte ascii para decimal
-			fcvt.s.w 	f2, t1			# digito lido em float
+			fcvt.s.w 	ft2, t1			# digito lido em float
 
-			fmul.s 	f2,f2,f3			# multiplcica por un/dezena/centena
-			fadd.s 	fa0,fa0,f2			# soma no resultado
-			fmul.s 	f3,f3,f10			# proxima dezena/centena
+			fmul.s 	ft2,ft2,ft3			# multiplcica por un/dezena/centena
+			fadd.s 	fa0,fa0,ft2			# soma no resultado
+			fmul.s 	ft3,ft3,f10			# proxima dezena/centena
 
 			add t0,t0,-1				# endereco anterior
 			j loopintreadFloat			# volta ao loop
 fimintreadFloat:
 
 ### Encontra a parte fracionaria  ja em fa0							
-fracreadFloat:		fcvt.s.w 	f2, zero			# zera parte fracionaria
+fracreadFloat:		fcvt.s.w 	ft2, zero			# zera parte fracionaria
 			addi 	t0, s2, 1			# endereco depois do ponto
-			fdiv.s 	f3, f1, f10			# f3 inicial 0.1
+			fdiv.s 	ft3, ft1, f10			# ft3 inicial 0.1
 	
 loopfracreadFloat: 	bge 	t0, s3, fimfracreadFloat	# endereco eh 'e' 'E' ou >ultimo
 			lb 	t1, 0(t0)			# le o caracter
 			blt 	t1, '0', erroreadFloat		# nao eh valido
 			bgt 	t1, '9', erroreadFloat		# nao eh valido
 			addi 	t1, t1, -48			# converte ascii para decimal
-			fcvt.s.w 	f2, t1			# digito lido em float		
+			fcvt.s.w 	ft2, t1			# digito lido em float		
 
-			fmul.s 	f2, f2, f3			# multiplica por ezena/centena
-			fadd.s 	fa0, fa0, f2			# soma no resultado
-			fdiv.s 	f3, f3, f10			# proxima frac un/dezena/centena
+			fmul.s 	ft2, ft2, ft3			# multiplica por ezena/centena
+			fadd.s 	fa0, fa0, ft2			# soma no resultado
+			fdiv.s 	ft3, ft3, f10			# proxima frac un/dezena/centena
 	
 			addi 	t0, t0, 1			# proximo endereco
 			j 	loopfracreadFloat		# volta ao loop		
 fimfracreadFloat:
 
-### Encontra a potencia em f2																																																																																																																																																							
-potreadFloat:		fcvt.s.w 	f2, zero			# zera potencia
+### Encontra a potencia em ft2																																																																																																																																																							
+potreadFloat:		fcvt.s.w 	ft2, zero			# zera potencia
 			addi 	t0, s3, 1			# endereco seguinte ao 'e'
 			li 	s4, 0				# sinal do expoente positivo
 			lb 	t1, 0(t0)			# le o caractere seguinte ao 'e'
@@ -1274,7 +1274,7 @@ potsinalnegreadFloat:	li 	s4, 1				# s4=1 expoente negativo
 potsinalposreadFloat:	addi 	t0, t0, 1			# se tiver '-' ou '+' avanca para o proximo endereco
 pulapotsinalreadFloat:	mv 	s5, t0 			# Neste ponto s5 contem o endereco do primeiro digito da pot e s4 o sinal do expoente		
 
-			fmv.s 	f3, f1		# f3 un/dez/cen = 1
+			fmv.s 	ft3, ft1		# ft3 un/dez/cen = 1
 	
 ### Encontra o expoente inteiro em t2
 expreadFloat:		li 	t2, 0			# zera expoente
@@ -1292,19 +1292,19 @@ loopexpreadFloat:	blt 	t0, s5, fimexpreadFloat	# ainda nao eh o endereco do prim
 			j loopexpreadFloat			# volta ao loop
 fimexpreadFloat:
 																																																								
-# calcula o numero em f2 o numero 10^exp
-			fmv.s 	f2, f1			# numero 10^exp  inicial=1
-			fmv.s 	f3, f10			# se o sinal for + f3 eh 10
+# calcula o numero em ft2 o numero 10^exp
+			fmv.s 	ft2, ft1			# numero 10^exp  inicial=1
+			fmv.s 	ft3, f10			# se o sinal for + ft3 eh 10
 			beq 	s4, 0, sinalexpPosreadFloat	# se sinal exp positivo
-			fdiv.s 	f3, f1, f10			# se o final for - f3 eh 0.1
+			fdiv.s 	ft3, ft1, f10			# se o final for - ft3 eh 0.1
 sinalexpPosreadFloat:	li 	t0, 0				# contador 
 sinalexpreadFloat: 	beq 	t0, t2, fimsinalexpreadFloat	# se chegou ao fim
-			fmul.s 	f2, f2, f3			# multiplica pelo fator 10 ou 0.1
+			fmul.s 	ft2, ft2, ft3			# multiplica pelo fator 10 ou 0.1
 			addi 	t0, t0, 1			# incrementa o contador
 			j 	sinalexpreadFloat
 fimsinalexpreadFloat:
 
-		fmul.s 	fa0, fa0, f2		# multiplicacao final!
+		fmul.s 	fa0, fa0, ft2		# multiplicacao final!
 	
 		la 	t0, TempBuffer		# ajuste final do sinal do numero
 		lb 	t1, 0(t0)		# le primeiro caractere
