@@ -8,6 +8,13 @@
 # 2018/1								#
 #########################################################################
 
+# Observaçoes sobre a conversao de MIPS para RISC-V
+# - a instruçao la (load address) nao pode ser realizada em constantes(.eqv) acima de 0x7FF,
+#	assim foi substituida por li nesses casos
+# - foram feitas diversas outras adaptaçoes relacionadas a limitaçao do RARS com imediatos grandes,
+#	o que nao acontece no MARS;
+# - o uso do registrador fp, ao compilar o codigo, acusa erro, assim foi substituido por s0
+
 #definicao do mapa de enderecamento de MMIO
 .eqv VGAADDRESSINI      0xFF000000
 .eqv VGAADDRESSFIM      0xFF012C00
@@ -144,7 +151,7 @@ eventQueueEndPtr:       .word 0x90000E00
 #DATA_Y:         .word 0
 #DATA_CLICKS:    .word 0
 
-##### Preparado para considerar syscall similar a jal ktext  para o pipeline
+##### Preparado para considerar ecall similar a jal ktext  para o pipeline
 
 ### Obs.: a forma 'LABEL: instrucao' embora fique feio facilita o debug no Rars, por favor nao reformatar!!!
 
@@ -154,7 +161,7 @@ eventQueueEndPtr:       .word 0x90000E00
 exceptionHandling:  addi    sp, sp, -4 # aloca espaco 
     sw      ra, 0(sp)			# salva ra
 
-   	j syscallException
+   	j ecallException
 	
 endException: 	lw   ra, 0(sp)		# recupera ra
     	addi    sp, sp, 4
@@ -165,8 +172,8 @@ endException: 	lw   ra, 0(sp)		# recupera ra
 		uret			# retorna PC=uepc
 
 
-############# interrupcao de SYSCALL ###################
-syscallException:     addi    sp, sp, -264              # Salva todos os registradores na pilha
+############# interrupcao de ECALL ###################
+ecallException:     addi    sp, sp, -264              # Salva todos os registradores na pilha
     sw      x1,    0(sp)
     sw      x2,    4(sp)
     sw      x3,    8(sp)
