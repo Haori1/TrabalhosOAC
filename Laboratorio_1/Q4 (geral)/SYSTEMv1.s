@@ -1062,7 +1062,28 @@ loop2printFloat:  	flt.s 	t3, ft4, f10			# resultado eh < que 10? entao fim
 		
 	  		# imprime parte inteira (o sinal ja esta no buffer)
 intprintFloat:		fmul.s 		ft4, ft4, ft2		# ajusta o numero
-		  	floor.w.s 	ft5, ft4		# menor inteiro
+		  #	floor.w.s 	ft5, ft4		# menor inteiro
+		  #Inicio do floor
+		  	fcvt.w.s t0, ft4 #passa o float para inteiro
+		  	fcvt.s.w ft8, t0 #passa o inteiro resultante para float
+		  	flt.s t0, ft8, ft4 #compara se o inteiro resultante eh menor que o float original
+		  	li t6, 0 
+		  	fcvt.s.w fs0, t6 #passa 0 para float
+		  	
+		  	li t1, 1 
+		  	beq t0, t1, menor #se for menor, salta para menor
+ 		  	
+		  	li t6, -1 
+		  	fcvt.s.w ft0, t6 #passa -1 para float
+		  	fadd.s ft8, ft8, ft0  #subtrai 1 do inteiro resultante(pois caso seja maior, o resultado foi um teto)
+		  	
+		  	fadd.s ft5, fs0, ft8 #ft5 = ft8
+		  	
+		  	bne t0, t1, fimFloor #floor realizado
+		  	menor:
+		  	fadd.s ft5, fs0, ft8 #caso seja menor, ja foi chao, entao t5 = t8
+		  	fimFloor:
+		  	
 		  	fcvt.w.s 		t0, ft5		# passa para t0
 		  	addi 		t0, t0, 48		# converte para ascii
 		  	sb 		t0, 0(s0)		# coloca no buffer
@@ -1076,11 +1097,51 @@ intprintFloat:		fmul.s 		ft4, ft4, ft2		# ajusta o numero
 		  	# ft4 contem a mantissa com 1 casa nao decimal
 		  	li 		t1, 8				# contador de digitos  -  8 casas decimais
 loopfracprintFloat:  	beq 		t1, zero, fimfracprintFloat	# fim dos digitos?
-		  	floor.w.s 	ft5, ft4			# menor inteiro
+		  	#floor.w.s 	ft5, ft4			# menor inteiro
+		  	#Inicio do floor
+		  	fcvt.w.s t0, ft4 #passa o float para inteiro
+		  	fcvt.s.w ft8, t0 #passa o inteiro resultante para float
+		  	flt.s t0, ft8, ft4 #compara se o inteiro resultante eh menor que o float original
+		  	li t6, 0 
+		  	fcvt.s.w fs0, t6 #passa 0 para float
+		  	
+		  	li t1, 1 
+		  	beq t0, t1, menor #se for menor, salta para menor
+ 		  	
+		  	li t6, -1 
+		  	fcvt.s.w ft0, t6 #passa -1 para float
+		  	fadd.s ft8, ft8, ft0  #subtrai 1 do inteiro resultante(pois caso seja maior, o resultado foi um teto)
+		  	
+		  	fadd.s ft5, fs0, ft8 #ft5 = ft8
+		  	
+		  	bne t0, t1, fimFloor #floor realizado
+		  	menor:
+		  	fadd.s ft5, fs0, ft8 #caso seja menor, ja foi chao, entao t5 = t8
+		  	fimFloor:
 # RETIRAR! 	cvt.s.w 	ft5, ft5			# parte inteira		
 		  	fsub.s 		ft5, ft4, ft5			# parte fracionaria
 		  	fmul.s 		ft5, ft5, f10			# mult x 10
-		  	floor.w.s 	ft6, ft5			# converte para inteiro
+		  	#floor.w.s 	ft6, ft5			# converte para inteiro
+		  	#Inicio do floor
+		  	fcvt.w.s t0, ft5 #passa o float para inteiro
+		  	fcvt.s.w ft8, t0 #passa o inteiro resultante para float
+		  	flt.s t0, ft8, ft5 #compara se o inteiro resultante eh menor que o float original
+		  	li t6, 0 
+		  	fcvt.s.w fs0, t6 #passa 0 para float
+		  	
+		  	li t1, 1 
+		  	beq t0, t1, menor #se for menor, salta para menor
+ 		  	
+		  	li t6, -1 
+		  	fcvt.s.w ft0, t6 #passa -1 para float
+		  	fadd.s ft8, ft8, ft0  #subtrai 1 do inteiro resultante(pois caso seja maior, o resultado foi um teto)
+		  	
+		  	fadd.s ft6, fs0, ft8 #ft6 = ft8
+		  	
+		  	bne t0, t1, fimFloor #floor realizado
+		  	menor:
+		  	fadd.s ft6, fs0, ft8 #caso seja menor, ja foi chao, entao t5 = t8
+		  	fimFloor:
 		  	fcvt.w.s 		t0, ft6			# passa para t0
 		  	addi 		t0, t0, 48			# converte para ascii
 		  	sb 		t0, 0(s0)			# coloca no buffer
