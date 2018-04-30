@@ -802,7 +802,7 @@ readInt: 	addi 	sp,sp,-4		# reserva espaco na pilha
 	mv 	a0, zero			# zera o numero
 	
 loopReadInt: 	beq	a3,zero, fimReadInt	# Leu todos os digitos
-	lbu 	t1, (t0)			# le um digito
+	lb 	t1, (t0)			# le um digito
 	li	tp, 0x0000002D
 	beq 	t1, tp, ehnegReadInt		# = '-'
 	li	tp, 0x0000002B
