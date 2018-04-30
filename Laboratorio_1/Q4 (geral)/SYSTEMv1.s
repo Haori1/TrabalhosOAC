@@ -165,9 +165,9 @@ exceptionHandling:  addi    sp, sp, -4 # aloca espaco
 endException: 	lw   ra, 0(sp)		# recupera ra
     	addi    sp, sp, 4
 
-    	csrrw t0, 65, zero	# le o valor de EPC salvo no registrador uepc (reg 65)
-		addi t0, t0, 4		# soma 4 para obter a instruçao seguinte ao ecall
-		csrrw zero, 65, t0	# coloca no registrador uepc
+    	csrrw tp, 65, zero	# le o valor de EPC salvo no registrador uepc (reg 65)
+		addi tp, tp, 4		# soma 4 para obter a instruçao seguinte ao ecall
+		csrrw zero, 65, tp	# coloca no registrador uepc
 		uret			# retorna PC=uepc
 
 
@@ -618,8 +618,8 @@ printChar:	 li t4, 0xFF			# t4 temporario
     
 NAOIMPRIMIVEL:     li      a0, 32		# Imprime espaco
 
-IMPRIMIVEL:	li	t5, NUMCOLUNAS		# Num colunas 320
-    	mul     t4, t5, a2			# multiplica a2x320  t4 = coordenada y
+IMPRIMIVEL:	li	tp, NUMCOLUNAS		# Num colunas 320
+    	mul     t4, tp, a2			# multiplica a2x320  t4 = coordenada y
     	add     t4, t4, a1               	# t4 = 320*y + x
     	addi    t4, t4, 7                 	# t4 = 320*y + (x+7)
     	li      t6, VGAADDRESSINI          	# Endereco de inicio da memoria VGA
