@@ -1043,13 +1043,13 @@ ehposprintFloat: sb 	t0, 0(s0)			# coloca sinal no buffer
 		li		t6, 1
 		fcvt.s.w ft1, t6		# ft1 recebe o numero 1.0
 		li		t6, 10
-		fcvt.s.w f10, t6		# f10 recebe o numero 10.0	
+		fcvt.s.w ft6, t6		# ft6 recebe o numero 10.0	
 		
 		flt.s 	t4, ft0, ft1		# ft0 < 1.0 ? Se sim, E deve ser negativo
 		bnez	t4, menor1printFloat	# se a comparacao deu true (1), pula
-		fmv.s 	ft2, f10		# ft2  fator de multiplica�ao = 10
+		fmv.s 	ft2, ft6		# ft2  fator de multiplica�ao = 10
 		j 	cont2printFloat		# vai para expoente positivo
-menor1printFloat: fdiv.s ft2,ft1,f10		# ft2 fator multiplicativo = 0.1
+menor1printFloat: fdiv.s ft2,ft1,ft6		# ft2 fator multiplicativo = 0.1
 
 			# calcula o expoente negativo de 10
 cont1printFloat: 	fmv.s 	ft4, ft0			# inicia com o numero x 
@@ -1065,7 +1065,7 @@ fimloop1printFloat: 	fdiv.s 	ft4, ft4, ft2			# ajusta o numero
 			# calcula o expoente positivo de 10
 cont2printFloat:	fmv.s 	ft4, ft0			# inicia com o numero x 
 		 	fcvt.s.w 	ft3, zero		# contador come�a em 0
-loop2printFloat:  	flt.s 	t3, ft4, f10			# resultado eh < que 10? entao fim
+loop2printFloat:  	flt.s 	t3, ft4, ft6			# resultado eh < que 10? entao fim
 		 	fdiv.s 	ft4, ft4, ft2			# divide o numero pelo fator multiplicativo
 		 	bnez 	t3 ,intprintFloat
 		 	fadd.s 	ft3, ft3, ft1			# incrementa o contador
@@ -1092,7 +1092,7 @@ loopfracprintFloat:  	beq t1, zero, fimfracprintFloat			# fim dos digitos?
 			fcvt.w.s 	t5, ft4				# floor de ft4
 			fcvt.s.w	ft5, t5				# reconverte em float so com a parte inteira
 		  	fsub.s 		ft5, ft4, ft5			# parte fracionaria
-		  	fmul.s 		ft5, ft5, f10			# mult x 10
+		  	fmul.s 		ft5, ft5, ft6			# mult x 10
 			fcvt.w.s	t0, ft5				# coloca floor de ft5 em 10
 		  	addi 		t0, t0, 48			# converte para ascii
 		  	sb 		t0, 0(s0)			# coloca no buffer
@@ -1216,7 +1216,7 @@ insere0PreadFloat: addi	s0, s0, 1		# desloca o ultimo endereco para o proximo
 
 inicioreadFloat:  fcvt.s.w 	fa0, zero		# fa0 Resultado inicialmente zero
 		li 	t0, 10			# inteiro 10	
-		fcvt.s.w 	f10, t0		# f10 contem sempre o numero cte 10.0000
+		fcvt.s.w 	ft6, t0		# ft6 contem sempre o numero cte 10.0000
 		li 	t0, 1			# inteiro 1
 		fcvt.s.w 	ft1, t0		# ft1 contem sempre o numero cte 1.0000	
 	
@@ -1262,7 +1262,7 @@ loopintreadFloat: 	blt 	t0, t5, fimintreadFloat	# sai se o enderefo for < inicio
 
 			fmul.s 	ft2,ft2,ft3			# multiplcica por un/dezena/centena
 			fadd.s 	fa0,fa0,ft2			# soma no resultado
-			fmul.s 	ft3,ft3,f10			# proxima dezena/centena
+			fmul.s 	ft3,ft3,ft6			# proxima dezena/centena
 
 			addi t0,t0,-1				# endereco anterior
 			j loopintreadFloat			# volta ao loop
@@ -1271,7 +1271,7 @@ fimintreadFloat:
 ### Encontra a parte fracionaria  ja em fa0							
 fracreadFloat:		fcvt.s.w 	ft2, zero			# zera parte fracionaria
 			addi 	t0, s2, 1			# endereco depois do ponto
-			fdiv.s 	ft3, ft1, f10			# ft3 inicial 0.1
+			fdiv.s 	ft3, ft1, ft6			# ft3 inicial 0.1
 	
 loopfracreadFloat: 	bge 	t0, s3, fimfracreadFloat	# endereco eh 'e' 'E' ou >ultimo
 			lb 	t1, 0(t0)			# le o caracter
@@ -1284,7 +1284,7 @@ loopfracreadFloat: 	bge 	t0, s3, fimfracreadFloat	# endereco eh 'e' 'E' ou >ulti
 
 			fmul.s 	ft2, ft2, ft3			# multiplica por ezena/centena
 			fadd.s 	fa0, fa0, ft2			# soma no resultado
-			fdiv.s 	ft3, ft3, f10			# proxima frac un/dezena/centena
+			fdiv.s 	ft3, ft3, ft6			# proxima frac un/dezena/centena
 	
 			addi 	t0, t0, 1			# proximo endereco
 			j 	loopfracreadFloat		# volta ao loop		
@@ -1324,10 +1324,10 @@ fimexpreadFloat:
 																																																								
 # calcula o numero em ft2 o numero 10^exp
 			fmv.s 	ft2, ft1			# numero 10^exp  inicial=1
-			fmv.s 	ft3, f10			# se o sinal for + ft3 eh 10
+			fmv.s 	ft3, ft6			# se o sinal for + ft3 eh 10
 			li	tp, 0x00000000			# TP = ZERO
 			beq 	s4, tp, sinalexpPosreadFloat	# se sinal exp positivo
-			fdiv.s 	ft3, ft1, f10			# se o final for - ft3 eh 0.1
+			fdiv.s 	ft3, ft1, ft6			# se o final for - ft3 eh 0.1
 sinalexpPosreadFloat:	li 	t0, 0				# contador 
 sinalexpreadFloat: 	beq 	t0, t2, fimsinalexpreadFloat	# se chegou ao fim
 			fmul.s 	ft2, ft2, ft3			# multiplica pelo fator 10 ou 0.1
