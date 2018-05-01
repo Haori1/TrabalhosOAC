@@ -999,12 +999,10 @@ fimmidiOutSync:	ret
 # imprime Float em fa0         #
 # na posicao (a1,a2)	cor a3 #
 #################################
-# muda s0, s1 e s2
+# muda s0, s1
 
 printFloat:	addi 	sp, sp, -4
 		sw 	ra, 0(sp)				# salva ra
-		frrm s2						# salva o modo de arrendondamento das instru�oes FP atual
-		fsrmi 2						# altera o modo para 2 = floor (sempre para baixo)
 		la 	s0, TempBuffer
 
 		# Encontra o sinal do numero e coloca no Buffer
@@ -1043,7 +1041,13 @@ ehposprintFloat: sb 	t0, 0(s0)			# coloca sinal no buffer
 		li		t6, 1
 		fcvt.s.w ft1, t6		# ft1 recebe o numero 1.0
 		li		t6, 10
-		fcvt.s.w ft6, t6		# ft6 recebe o numero 10.0	
+		fcvt.s.w ft6, t6		# ft6 recebe o numero 10.0
+		li		tp, 1
+		fcvt.s.w ft7, tp
+		li		tp, 2
+		fcvt.s.w ft8, tp
+		fdiv.s	ft7, ft7, ft8	# ft7 recebe o numero 0.5
+
 		
 		flt.s 	t4, ft0, ft1		# ft0 < 1.0 ? Se sim, E deve ser negativo
 		bnez	t4, menor1printFloat	# se a comparacao deu true (1), pula
@@ -1076,6 +1080,7 @@ loop2printFloat:  	flt.s 	t3, ft4, ft6			# resultado eh < que 10? entao fim
 		
 	  		# imprime parte inteira (o sinal ja esta no buffer)
 intprintFloat:		fmul.s 		ft4, ft4, ft2		# ajusta o numero
+			fsub.s		ft4, ft4, ft7	# tira 0.5, dessa forma sempre ao converter estaremos fazendo floor
 		  	fcvt.w.s		t0, ft4		# coloca floor de ft4 em t0
 		  	addi 		t0, t0, 48		# converte para ascii
 		  	sb 		t0, 0(s0)		# coloca no buffer
@@ -1089,15 +1094,18 @@ intprintFloat:		fmul.s 		ft4, ft4, ft2		# ajusta o numero
 		  	# ft4 contem a mantissa com 1 casa nao decimal
 		  	li 		t1, 8				# contador de digitos  -  8 casas decimais
 loopfracprintFloat:  	beq t1, zero, fimfracprintFloat			# fim dos digitos?
+			fsub.s		ft4, ft4, ft7		# tira 0.5
 			fcvt.w.s 	t5, ft4				# floor de ft4
 			fcvt.s.w	ft5, t5				# reconverte em float so com a parte inteira
 		  	fsub.s 		ft5, ft4, ft5			# parte fracionaria
 		  	fmul.s 		ft5, ft5, ft6			# mult x 10
+			fsub.s		ft5, ft5, ft7		# tira 0.5
 			fcvt.w.s	t0, ft5				# coloca floor de ft5 em 10
 		  	addi 		t0, t0, 48			# converte para ascii
 		  	sb 		t0, 0(s0)			# coloca no buffer
 		  	addi 		s0, s0, 1			# incrementa endereco
 		  	addi 		t1, t1, -1			# decrementa contador
+			fadd.s		ft5, ft5, ft7		# reincrementa 0.5
 		  	fmv.s 		ft4, ft5			# coloca o numero em ft4
 		  	j 		loopfracprintFloat		# volta ao loop
 		  
@@ -1148,7 +1156,6 @@ ehInfprintFloat:	la 	a0, NumInfP			# string do infinito positivo
 								# imprime string
 		
 fimprintFloat:		jal 	printString			# imprime a string em a0
-			fsrm s2					# retorna modo de arredondamento original
 			lw 	ra, 0(sp)			# recupera ra
 			addi 	sp, sp, 4			# libera sepaco
 			ret					# retorna
