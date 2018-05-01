@@ -1008,11 +1008,11 @@ printFloat:	addi 	sp, sp, -4
 		# Encontra o sinal do numero e coloca no Buffer
 		li 	t0, '+'			# define sinal '+'
 		fmv.x.s 	s1, fa0			# recupera o numero float sem conversao
-		li		t0, 0x8
-		slli	t0, t0, 28			# move o 8 pro final
-		and 	s1, s1, t0		# mascara com 1000
-		beq 	s1, zero, ehposprintFloat	# eh positivo s0=0
-		li 	s1, 1				# numero eh negativo s0=1
+		li		t2, 0x8
+		slli	t2, t0, 28			# move o 8 pro final
+		and 	s1, s1, t2		# mascara com 1000
+		beq 	s1, zero, ehposprintFloat	# eh positivo s1=0
+		li 	s1, 1				# numero eh negativo s1=1
 		li 	t0, '-'			# define sinal '-'
 ehposprintFloat: sb 	t0, 0(s0)			# coloca sinal no buffer
 		addi 	s0, s0,1			# incrementa o endereco do buffer
@@ -1038,10 +1038,10 @@ ehposprintFloat: sb 	t0, 0(s0)			# coloca sinal no buffer
 		# Eh um numero float normal  t0 eh o expoente e t1 eh a mantissa
 		# Encontra o E tal que 10^E <= x <10^(E+1)
 		fabs.s 	ft0, fa0		# ft0 recebe o modulo  de x
-		li		t6, 1
-		fcvt.s.w ft1, t6		# ft1 recebe o numero 1.0
-		li		t6, 10
-		fcvt.s.w ft6, t6		# ft6 recebe o numero 10.0
+		li		tp, 1
+		fcvt.s.w ft1, tp		# ft1 recebe o numero 1.0
+		li		tp, 10
+		fcvt.s.w ft6, tp		# ft6 recebe o numero 10.0
 		li		tp, 1
 		fcvt.s.w ft7, tp
 		li		tp, 2
@@ -1070,8 +1070,8 @@ fimloop1printFloat: 	fdiv.s 	ft4, ft4, ft2			# ajusta o numero
 cont2printFloat:	fmv.s 	ft4, ft0			# inicia com o numero x 
 		 	fcvt.s.w 	ft3, zero		# contador come�a em 0
 loop2printFloat:  	flt.s 	t3, ft4, ft6			# resultado eh < que 10? entao fim
-		 	fdiv.s 	ft4, ft4, ft2			# divide o numero pelo fator multiplicativo
-		 	bnez 	t3 ,intprintFloat
+			bnez 	t3 ,intprintFloat
+			fdiv.s 	ft4, ft4, ft2			# divide o numero pelo fator multiplicativo
 		 	fadd.s 	ft3, ft3, ft1			# incrementa o contador
 		 	j 	loop2printFloat
 
@@ -1079,9 +1079,10 @@ loop2printFloat:  	flt.s 	t3, ft4, ft6			# resultado eh < que 10? entao fim
 		# e em ft4 um numero entre 1 e 10 que multiplicado por Ef3 deve voltar ao numero		
 		
 	  		# imprime parte inteira (o sinal ja esta no buffer)
-intprintFloat:		fmul.s 		ft4, ft4, ft2		# ajusta o numero
+intprintFloat:		#fmul.s 		ft4, ft4, ft2		# ajusta o numero
 			fsub.s		ft4, ft4, ft7	# tira 0.5, dessa forma sempre ao converter estaremos fazendo floor
 		  	fcvt.w.s		t0, ft4		# coloca floor de ft4 em t0
+			fadd.s		ft4, ft4, ft7	# readiciona 0.5
 		  	addi 		t0, t0, 48		# converte para ascii
 		  	sb 		t0, 0(s0)		# coloca no buffer
 		  	addi 		s0, s0, 1		# incrementta o buffer
@@ -1096,6 +1097,7 @@ intprintFloat:		fmul.s 		ft4, ft4, ft2		# ajusta o numero
 loopfracprintFloat:  	beq t1, zero, fimfracprintFloat			# fim dos digitos?
 			fsub.s		ft4, ft4, ft7		# tira 0.5
 			fcvt.w.s 	t5, ft4				# floor de ft4
+			fadd.s		ft4, ft4, ft7		# readiciona 0.5
 			fcvt.s.w	ft5, t5				# reconverte em float so com a parte inteira
 		  	fsub.s 		ft5, ft4, ft5			# parte fracionaria
 		  	fmul.s 		ft5, ft5, ft6			# mult x 10
@@ -1128,9 +1130,8 @@ expposprintFloat: 	sb 	t0, 0(s0)			# coloca no buffer
 			rem	t2, t0, t1			# t0 = quociente, t2 = resto
 			addi 	t0, t0, 48			# converte para ascii
 			sb 	t0, 0(s0)			# coloca no buffer
-			mv 	t0, t2				# move o resto pra t0
-			addi 	t0, t0, 48			# converte para ascii
-			sb 	t0, 1(s0)			# coloca no buffer
+			addi 	t2, t2, 48			# converte para ascii
+			sb 	t2, 1(s0)			# coloca no buffer
 			sb 	zero, 2(s0)			# insere \NULL da string
 			la 	a0, TempBuffer			# endereco do Buffer										
 	  		j 	fimprintFloat			# imprime a string
