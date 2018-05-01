@@ -21,6 +21,7 @@
 	print_i:	.string "i"
 	print_plus:	.string " + "
 	print_minus:	.string " - "
+	print_newread:	.string "Deseja ler outros valores? 1/0 : "
 
 .text
 
@@ -48,8 +49,20 @@ main:
 	
 	jal bhaskara
 	jal show
+	
+	_printNewLine
+	la a0, print_newread	# deseja ler outros valores?
+	li a7, 4
+	ecall
+	li a7, 5
+	ecall
+	mv s0, a0
+	beqz s0, fim
+	_printNewLine
+	_printNewLine
+	j main
 
-	li a7, 10		# fecha programa
+fim:	li a7, 10		# fecha programa
 	ecall
 
 ######################################################################
@@ -87,7 +100,7 @@ delta.caso_positivo:
 	fdiv.s ft5, ft4, ft2	# ft5 = (-b + sqrt(delta)) / 2a
 	fsub.s ft4, ft0, ft1
 	fdiv.s ft6, ft4, ft2	# ft6 = (-b - sqrt(delta)) / 2a
-	
+
 	addi sp, sp, -8
 	fsw ft5, 0(sp)
 	fsw ft6, 4(sp)		# insere-as na pilha
@@ -101,6 +114,11 @@ delta.caso_zero:
 	
 	fdiv.s ft5, ft0, ft2	# ft5 = -b / 2a
 	
+	_loadImmFP(ft10, 0)
+	feq.s t0, ft5, ft10	# se o resultado deu -0, nega denovo
+	beqz t0, fim.delta.caso_zero
+	fneg.s ft5, ft5	
+fim.delta.caso_zero:
 	addi sp, sp, -8
 	fsw ft5, 0(sp)		# insere raiz dupla na pilha
 	fsw ft5, 4(sp)
