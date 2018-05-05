@@ -1,11 +1,11 @@
-Analysis & Synthesis Status : Successful - Sat Apr 14 21:06:21 2018
+Analysis & Synthesis Status : Successful - Sun Apr 22 12:47:03 2018
 Quartus Prime Version : 17.1.0 Build 590 10/25/2017 SJ Lite Edition
 Revision Name : TopDE
-Top-level Entity Name : mux32_8
+Top-level Entity Name : mux32_32
 Family : Cyclone V
 Logic utilization (in ALMs) : N/A
 Total registers : 0
-Total pins : 291
+Total pins : 1,061
 Total virtual pins : 0
 Total block memory bits : 0
 Total DSP Blocks : 0

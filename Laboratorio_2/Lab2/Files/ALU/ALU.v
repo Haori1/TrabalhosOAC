@@ -1,24 +1,21 @@
 /*
  * ALU
  *
- * Arithmetic Logic Unit with control signals as defined by the COD book:
- *
- * Signal controls in ALUOP.v
  */
 
- `ifndef PARAM
+`ifndef PARAM
 	`include "Parametros.v"
 `endif
  
 module ALU (
-	//input [4:0] iControl,
+	input [4:0] iControl,
 	input signed [31:0] iA, 
 	input signed [31:0] iB,
 	output reg oZero,
 	output reg [31:0] oResult
 	);
 
-	wire [4:0] iControl=OPDIV;
+//	wire [4:0] iControl=OPXOR;
 
 assign oZero = (oResult == ZERO);
 

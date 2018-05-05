@@ -1,4 +1,4 @@
- `ifndef PARAM
+`ifndef PARAM
 	`include "Parametros.v"
 `endif
 
@@ -11,7 +11,7 @@ module FPALU (
 	output reg oCompResult
 	);
 	
-//wire [3:0] icontrol = FOPADD;
+//wire [3:0] icontrol = FOPADD; 
 	
 // Para a operacao add e sub
 wire [31:0] resultadd;
@@ -53,7 +53,7 @@ always @(*)
 	begin
 		case (icontrol) 
 			FOPADD,
-			FOPSUB:		//soma
+			FOPSUB:		//soma e Subtração
 			begin
 				oresult = resultadd;
 				onan = nanadd;
@@ -63,7 +63,7 @@ always @(*)
 				oCompResult = 1'b0;
 			end
 			
-			FOPMUL:		//mult
+			FOPMUL:		//multiplicação
 			begin
 				oresult = resultmul;
 				onan = nanmul;
@@ -73,7 +73,7 @@ always @(*)
 				oCompResult = 1'b0;
 			end
 
-			FOPDIV:		//div
+			FOPDIV:		//divisão
 			begin
 				oresult = resultdiv;
 				onan = nandiv;
@@ -188,7 +188,6 @@ add_sub add1 (
 	.result(resultadd),
 	.underflow(underflowadd),
 	.zero(zeroadd));
-	
 
 mul_s mul1 (
 	.clock(iclock),

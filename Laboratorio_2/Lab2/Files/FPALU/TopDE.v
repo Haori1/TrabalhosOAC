@@ -1,4 +1,14 @@
-module TopDE ( /* I/O type definition */
+/* 
+   Colocar valores SW[9:0] e pressionar KEY[0] para armazenar em A
+   Colocar valores SW[9:0] e pressionar KEY[1] para armazenar em B
+	Pressionar KEY[2] para ver o valor de A
+	Pressionar KEY[3] para ver o valor de B
+	As chaves SW[3:0] definem a operação de acordo com Paramentros
+	Os LEDR[9:5]={NaN, CompResult, Underflow, Overflow, Zero}
+	Os LEDR[3:0] mostram a Operação
+*/
+
+module TopDE (
 	input CLOCK_50,
 	input [3:0] KEY,
 	input [9:0] SW,
@@ -7,13 +17,11 @@ module TopDE ( /* I/O type definition */
 	);
 
 
-reg [31:0] idataa,idatab;
+reg [31:0] idataa,idatab,oresult;
 
-reg [31:0] oresult;
 wire [31:0] wresult;
 
-reg onan, ozero, ooverflow, ounderflow;
-reg oCompResult;
+reg onan, ozero, ooverflow, ounderflow, oCompResult;
 
 initial
 	begin
@@ -26,36 +34,37 @@ initial
 		ounderflow <= 1'b0;
 		oCompResult<= 1'b0;
 	end
+
+assign LEDR[3:0]=SW[3:0];
+assign LEDR[5]=ozero;
+assign LEDR[6]=ooverflow;
+assign LEDR[7]=ounderflow;
+assign LEDR[8]=oCompResult;
+assign LEDR[9]=onan;
 	
+	
+always @(negedge KEY[0])
+		idataa <= {SW[9:0],22'b0};
+		
+always @(negedge KEY[1])
+		idatab <= {SW[9:0],22'b0};
 
-always @(SW[0])
-		if (SW[0] == 1'b0)
-			idataa <= {SW[9:1],23'b0};
+always @(posedge CLOCK_50)
+	begin
+		if(~KEY[2])
+			oresult<=idataa;
 		else
-			idatab <= {SW[9:1],23'b0};
-
-always @(CLOCK_50)		
-		if(KEY == 4'b0000)		// Pressionando todos os botões
-			oresult <= idataa;
-		else
-			if (KEY == 4'b0001)
-				oresult <= idatab;
+			if(~KEY[3])
+				oresult<=idatab;
 			else
-				oresult <= wresult;
-	
-	
-assign LEDR[0]=ozero;
-assign LEDR[1]=ooverflow;
-assign LEDR[2]=ounderflow;
-assign LEDR[3]=oCompResult;
-assign LEDR[4]=onan;
-
+				oresult<=wresult;
+	end				
 
 FPALU fpalu1 (
 	.iclock(CLOCK_50), 
 	.idataa(idataa),
 	.idatab(idatab),
-	.icontrol(~KEY),
+	.icontrol(SW[3:0]),
 	.oresult(wresult),
 	.onan(onan),
 	.ozero(ozero),
