@@ -1,5 +1,5 @@
 Flow report for TopDE
-Sat May 05 14:35:01 2018
+Sat May 05 15:58:28 2018
 Quartus Prime Version 17.1.0 Build 590 10/25/2017 SJ Lite Edition
 
 
@@ -40,10 +40,10 @@ refer to the applicable agreement for further details.
 +---------------------------------------------------------------------------+
 ; Flow Summary                                                              ;
 +-----------------------------+---------------------------------------------+
-; Flow Status                 ; Flow Failed - Sat May 05 14:35:01 2018      ;
+; Flow Status                 ; Flow Failed - Sat May 05 15:58:28 2018      ;
 ; Quartus Prime Version       ; 17.1.0 Build 590 10/25/2017 SJ Lite Edition ;
 ; Revision Name               ; TopDE                                       ;
-; Top-level Entity Name       ; mux1_2_TB                                   ;
+; Top-level Entity Name       ; mux1_2_v2_TB                                ;
 ; Family                      ; Cyclone V                                   ;
 ; Device                      ; 5CSEMA5F31C6                                ;
 ; Timing Models               ; Final                                       ;
@@ -62,32 +62,34 @@ refer to the applicable agreement for further details.
 +-------------------+---------------------+
 ; Option            ; Setting             ;
 +-------------------+---------------------+
-; Start date & time ; 05/05/2018 14:34:49 ;
+; Start date & time ; 05/05/2018 15:58:16 ;
 ; Main task         ; Compilation         ;
 ; Revision Name     ; TopDE               ;
 +-------------------+---------------------+
 
 
-+-------------------------------------------------------------------------------------------------------------------------+
-; Flow Non-Default Global Settings                                                                                        ;
-+-------------------------------------+----------------------------------------+---------------+-------------+------------+
-; Assignment Name                     ; Value                                  ; Default Value ; Entity Name ; Section Id ;
-+-------------------------------------+----------------------------------------+---------------+-------------+------------+
-; COMPILER_SIGNATURE_ID               ; 31032336015545.152554168814412         ; --            ; --          ; --         ;
-; EDA_SIMULATION_TOOL                 ; ModelSim-Altera (Verilog)              ; <None>        ; --          ; --         ;
-; MAX_CORE_JUNCTION_TEMP              ; 85                                     ; --            ; --          ; --         ;
-; MIN_CORE_JUNCTION_TEMP              ; 0                                      ; --            ; --          ; --         ;
-; PARTITION_COLOR                     ; -- (Not supported for targeted family) ; --            ; mux1_2_TB   ; Top        ;
-; PARTITION_FITTER_PRESERVATION_LEVEL ; -- (Not supported for targeted family) ; --            ; mux1_2_TB   ; Top        ;
-; PARTITION_NETLIST_TYPE              ; -- (Not supported for targeted family) ; --            ; mux1_2_TB   ; Top        ;
-; POWER_BOARD_THERMAL_MODEL           ; None (CONSERVATIVE)                    ; --            ; --          ; --         ;
-; POWER_PRESET_COOLING_SOLUTION       ; 23 MM HEAT SINK WITH 200 LFPM AIRFLOW  ; --            ; --          ; --         ;
-; PROJECT_OUTPUT_DIRECTORY            ; output_files                           ; --            ; --          ; --         ;
-; SMART_RECOMPILE                     ; On                                     ; Off           ; --          ; --         ;
-; TOP_LEVEL_ENTITY                    ; mux1_2_TB                              ; TopDE         ; --          ; --         ;
-; VERILOG_INPUT_VERSION               ; SystemVerilog_2005                     ; Verilog_2001  ; --          ; --         ;
-; VERILOG_SHOW_LMF_MAPPING_MESSAGES   ; Off                                    ; --            ; --          ; --         ;
-+-------------------------------------+----------------------------------------+---------------+-------------+------------+
++--------------------------------------------------------------------------------------------------------------------------+
+; Flow Non-Default Global Settings                                                                                         ;
++-------------------------------------+----------------------------------------+---------------+--------------+------------+
+; Assignment Name                     ; Value                                  ; Default Value ; Entity Name  ; Section Id ;
++-------------------------------------+----------------------------------------+---------------+--------------+------------+
+; COMPILER_SIGNATURE_ID               ; 31032336015545.152554669609840         ; --            ; --           ; --         ;
+; EDA_SIMULATION_TOOL                 ; ModelSim-Altera (Verilog)              ; <None>        ; --           ; --         ;
+; MAX_CORE_JUNCTION_TEMP              ; 85                                     ; --            ; --           ; --         ;
+; MIN_CORE_JUNCTION_TEMP              ; 0                                      ; --            ; --           ; --         ;
+; PARTITION_COLOR                     ; -- (Not supported for targeted family) ; --            ; mux1_2_v2_TB ; Top        ;
+; PARTITION_FITTER_PRESERVATION_LEVEL ; -- (Not supported for targeted family) ; --            ; mux1_2_v2_TB ; Top        ;
+; PARTITION_NETLIST_TYPE              ; -- (Not supported for targeted family) ; --            ; mux1_2_v2_TB ; Top        ;
+; POWER_BOARD_THERMAL_MODEL           ; None (CONSERVATIVE)                    ; --            ; --           ; --         ;
+; POWER_PRESET_COOLING_SOLUTION       ; 23 MM HEAT SINK WITH 200 LFPM AIRFLOW  ; --            ; --           ; --         ;
+; PROJECT_OUTPUT_DIRECTORY            ; output_files                           ; --            ; --           ; --         ;
+; SMART_RECOMPILE                     ; On                                     ; Off           ; --           ; --         ;
+; TOP_LEVEL_ENTITY                    ; mux1_2_v2_TB                           ; TopDE         ; --           ; --         ;
+; VERILOG_INPUT_VERSION               ; SystemVerilog_2005                     ; Verilog_2001  ; --           ; --         ;
+; VERILOG_SHOW_LMF_MAPPING_MESSAGES   ; Off                                    ; --            ; --           ; --         ;
+; VHDL_INPUT_VERSION                  ; VHDL_2008                              ; VHDL_1993     ; --           ; --         ;
+; VHDL_SHOW_LMF_MAPPING_MESSAGES      ; Off                                    ; --            ; --           ; --         ;
++-------------------------------------+----------------------------------------+---------------+--------------+------------+
 
 
 +--------------------------------------------------------------------------------------------------------------------------+
@@ -95,8 +97,8 @@ refer to the applicable agreement for further details.
 +----------------------+--------------+-------------------------+---------------------+------------------------------------+
 ; Module Name          ; Elapsed Time ; Average Processors Used ; Peak Virtual Memory ; Total CPU Time (on all processors) ;
 +----------------------+--------------+-------------------------+---------------------+------------------------------------+
-; Analysis & Synthesis ; 00:00:13     ; 1.0                     ; 713 MB              ; 00:00:28                           ;
-; Total                ; 00:00:13     ; --                      ; --                  ; 00:00:28                           ;
+; Analysis & Synthesis ; 00:00:12     ; 1.0                     ; 698 MB              ; 00:00:27                           ;
+; Total                ; 00:00:12     ; --                      ; --                  ; 00:00:27                           ;
 +----------------------+--------------+-------------------------+---------------------+------------------------------------+
 
 

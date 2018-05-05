@@ -1,7 +1,7 @@
-Analysis & Synthesis Status : Failed - Sat May 05 14:35:01 2018
+Analysis & Synthesis Status : Failed - Sat May 05 15:58:28 2018
 Quartus Prime Version : 17.1.0 Build 590 10/25/2017 SJ Lite Edition
 Revision Name : TopDE
-Top-level Entity Name : mux1_2_TB
+Top-level Entity Name : mux1_2_v2_TB
 Family : Cyclone V
 Logic utilization (in ALMs) : N/A until Partition Merge
 Total registers : N/A until Partition Merge

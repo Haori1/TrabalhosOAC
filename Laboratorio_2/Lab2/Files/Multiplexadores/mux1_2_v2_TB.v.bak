@@ -1,0 +1,21 @@
+module mux_2x1 ();
+ 
+  reg [1:0] a, b;
+ 
+  function [1:0] mux;
+    input [1:0] i_data;
+    input [0:0] i_sel;
+    begin
+      mux = i_data[i_sel];
+    end
+  endfunction
+ 
+  initial
+    begin
+        a = 2'b11;
+        b = 1'b0;
+        $display("Input = %d, Select = %d, Saida = %d", a, b, mux(a, b));
+        b = 1'b1;
+        $display("Input = %d, Select = %d, Saida = %d", a, b, mux(a, b));
+    end
+endmodule
