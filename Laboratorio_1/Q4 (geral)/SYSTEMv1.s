@@ -1003,8 +1003,8 @@ fimmidiOutSync:	ret
 
 printFloat:	addi 	sp, sp, -4
 		sw 	ra, 0(sp)				# salva ra
-		frrm s2						# salva o modo de arrendondamento das instru�oes FP atual
-		fsrmi 2						# altera o modo para 2 = floor (sempre para baixo)
+		#frrm s2						# salva o modo de arrendondamento das instru�oes FP atual
+		#fsrmi 2						# altera o modo para 2 = floor (sempre para baixo)
 		la 	s0, TempBuffer
 
 		# Encontra o sinal do numero e coloca no Buffer
@@ -1076,6 +1076,12 @@ loop2printFloat:  	flt.s 	t3, ft4, ft6			# resultado eh < que 10? entao fim
 		
 	  		# imprime parte inteira (o sinal ja esta no buffer)
 intprintFloat:		fmul.s 		ft4, ft4, ft2		# ajusta o numero
+			li t0, 1
+			fcvt.s.w ft11, t0
+			li t0, 2
+			fcvt.s.w ft10, t0
+			fdiv.s ft11, ft11, ft10
+			fsub.s ft4, ft4, ft11
 		  	fcvt.w.s		t0, ft4		# coloca floor de ft4 em t0
 		  	addi 		t0, t0, 48		# converte para ascii
 		  	sb 		t0, 0(s0)		# coloca no buffer
@@ -1089,10 +1095,22 @@ intprintFloat:		fmul.s 		ft4, ft4, ft2		# ajusta o numero
 		  	# ft4 contem a mantissa com 1 casa nao decimal
 		  	li 		t1, 8				# contador de digitos  -  8 casas decimais
 loopfracprintFloat:  	beq t1, zero, fimfracprintFloat			# fim dos digitos?
+			li t0, 1
+			fcvt.s.w ft11, t0
+			li t0, 2
+			fcvt.s.w ft10, t0
+			fdiv.s ft11, ft11, ft10
+			fsub.s ft4, ft4, ft11
 			fcvt.w.s 	t5, ft4				# floor de ft4
 			fcvt.s.w	ft5, t5				# reconverte em float so com a parte inteira
 		  	fsub.s 		ft5, ft4, ft5			# parte fracionaria
 		  	fmul.s 		ft5, ft5, ft6			# mult x 10
+		  	li t0, 1
+			fcvt.s.w ft11, t0
+			li t0, 2
+			fcvt.s.w ft10, t0
+			fdiv.s ft11, ft11, ft10
+			fsub.s ft5, ft5, ft11
 			fcvt.w.s	t0, ft5				# coloca floor de ft5 em 10
 		  	addi 		t0, t0, 48			# converte para ascii
 		  	sb 		t0, 0(s0)			# coloca no buffer
@@ -1148,7 +1166,7 @@ ehInfprintFloat:	la 	a0, NumInfP			# string do infinito positivo
 								# imprime string
 		
 fimprintFloat:		jal 	printString			# imprime a string em a0
-			fsrm s2					# retorna modo de arredondamento original
+			#fsrm s2					# retorna modo de arredondamento original
 			lw 	ra, 0(sp)			# recupera ra
 			addi 	sp, sp, 4			# libera sepaco
 			ret					# retorna
