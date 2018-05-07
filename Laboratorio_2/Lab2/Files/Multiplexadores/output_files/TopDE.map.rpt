@@ -1,5 +1,5 @@
 Analysis & Synthesis report for TopDE
-Sat Apr 14 21:06:22 2018
+Sat May 05 15:58:28 2018
 Quartus Prime Version 17.1.0 Build 590 10/25/2017 SJ Lite Edition
 
 
@@ -10,14 +10,7 @@ Quartus Prime Version 17.1.0 Build 590 10/25/2017 SJ Lite Edition
   2. Analysis & Synthesis Summary
   3. Analysis & Synthesis Settings
   4. Parallel Compilation
-  5. Analysis & Synthesis Source Files Read
-  6. Analysis & Synthesis Resource Usage Summary
-  7. Analysis & Synthesis Resource Utilization by Entity
-  8. General Register Statistics
-  9. Multiplexer Restructuring Statistics (Restructuring Performed)
- 10. Post-Synthesis Netlist Statistics for Top Partition
- 11. Elapsed Time Per Partition
- 12. Analysis & Synthesis Messages
+  5. Analysis & Synthesis Messages
 
 
 
@@ -40,27 +33,22 @@ refer to the applicable agreement for further details.
 
 
 
-+-------------------------------------------------------------------------------+
-; Analysis & Synthesis Summary                                                  ;
-+---------------------------------+---------------------------------------------+
-; Analysis & Synthesis Status     ; Successful - Sat Apr 14 21:06:21 2018       ;
-; Quartus Prime Version           ; 17.1.0 Build 590 10/25/2017 SJ Lite Edition ;
-; Revision Name                   ; TopDE                                       ;
-; Top-level Entity Name           ; mux32_8                                     ;
-; Family                          ; Cyclone V                                   ;
-; Logic utilization (in ALMs)     ; N/A                                         ;
-; Total registers                 ; 0                                           ;
-; Total pins                      ; 291                                         ;
-; Total virtual pins              ; 0                                           ;
-; Total block memory bits         ; 0                                           ;
-; Total DSP Blocks                ; 0                                           ;
-; Total HSSI RX PCSs              ; 0                                           ;
-; Total HSSI PMA RX Deserializers ; 0                                           ;
-; Total HSSI TX PCSs              ; 0                                           ;
-; Total HSSI PMA TX Serializers   ; 0                                           ;
-; Total PLLs                      ; 0                                           ;
-; Total DLLs                      ; 0                                           ;
-+---------------------------------+---------------------------------------------+
++---------------------------------------------------------------------------+
+; Analysis & Synthesis Summary                                              ;
++-----------------------------+---------------------------------------------+
+; Analysis & Synthesis Status ; Failed - Sat May 05 15:58:28 2018           ;
+; Quartus Prime Version       ; 17.1.0 Build 590 10/25/2017 SJ Lite Edition ;
+; Revision Name               ; TopDE                                       ;
+; Top-level Entity Name       ; mux1_2_v2_TB                                ;
+; Family                      ; Cyclone V                                   ;
+; Logic utilization (in ALMs) ; N/A until Partition Merge                   ;
+; Total registers             ; N/A until Partition Merge                   ;
+; Total pins                  ; N/A until Partition Merge                   ;
+; Total virtual pins          ; N/A until Partition Merge                   ;
+; Total block memory bits     ; N/A until Partition Merge                   ;
+; Total PLLs                  ; N/A until Partition Merge                   ;
+; Total DLLs                  ; N/A until Partition Merge                   ;
++-----------------------------+---------------------------------------------+
 
 
 +---------------------------------------------------------------------------------------------------------------------------+
@@ -68,12 +56,14 @@ refer to the applicable agreement for further details.
 +---------------------------------------------------------------------------------+--------------------+--------------------+
 ; Option                                                                          ; Setting            ; Default Value      ;
 +---------------------------------------------------------------------------------+--------------------+--------------------+
-; Device                                                                          ; 5CGTFD9E5F35I7     ;                    ;
-; Top-level entity name                                                           ; mux32_8            ; TopDE              ;
+; Device                                                                          ; 5CSEMA5F31C6       ;                    ;
+; Top-level entity name                                                           ; mux1_2_v2_TB       ; TopDE              ;
 ; Family name                                                                     ; Cyclone V          ; Cyclone V          ;
 ; Use smart compilation                                                           ; On                 ; Off                ;
+; VHDL Show LMF Mapping Messages                                                  ; Off                ;                    ;
 ; Verilog Show LMF Mapping Messages                                               ; Off                ;                    ;
 ; Verilog Version                                                                 ; SystemVerilog_2005 ; Verilog_2001       ;
+; VHDL Version                                                                    ; VHDL_2008          ; VHDL_1993          ;
 ; Enable parallel Assembler and TimeQuest Timing Analyzer during compilation      ; On                 ; On                 ;
 ; Enable compact report table                                                     ; Off                ; Off                ;
 ; Restructure Multiplexers                                                        ; Auto               ; Auto               ;
@@ -81,7 +71,6 @@ refer to the applicable agreement for further details.
 ; Create Debugging Nodes for IP Cores                                             ; Off                ; Off                ;
 ; Preserve fewer node names                                                       ; On                 ; On                 ;
 ; Intel FPGA IP Evaluation Mode                                                   ; Enable             ; Enable             ;
-; VHDL Version                                                                    ; VHDL_1993          ; VHDL_1993          ;
 ; State Machine Processing                                                        ; Auto               ; Auto               ;
 ; Safe State Machine                                                              ; Off                ; Off                ;
 ; Extract Verilog State Machines                                                  ; On                 ; On                 ;
@@ -167,139 +156,58 @@ refer to the applicable agreement for further details.
 +----------------------------+-------------+
 
 
-+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-; Analysis & Synthesis Source Files Read                                                                                                                                              ;
-+----------------------------------+-----------------+------------------------+---------------------------------------------------------------------------------------------+---------+
-; File Name with User-Entered Path ; Used in Netlist ; File Type              ; File Name with Absolute Path                                                                ; Library ;
-+----------------------------------+-----------------+------------------------+---------------------------------------------------------------------------------------------+---------+
-; mux32_8.v                        ; yes             ; User Verilog HDL File  ; C:/Users/lamar/Dropbox/kiko/Disciplinas/UnB/OAC/2018-1/Lab2/Files/Multiplexadores/mux32_8.v ;         ;
-+----------------------------------+-----------------+------------------------+---------------------------------------------------------------------------------------------+---------+
-
-
-+------------------------------------------------------------+
-; Analysis & Synthesis Resource Usage Summary                ;
-+---------------------------------------------+--------------+
-; Resource                                    ; Usage        ;
-+---------------------------------------------+--------------+
-; Estimate of Logic utilization (ALMs needed) ; 80           ;
-;                                             ;              ;
-; Combinational ALUT usage for logic          ; 96           ;
-;     -- 7 input functions                    ; 0            ;
-;     -- 6 input functions                    ; 64           ;
-;     -- 5 input functions                    ; 0            ;
-;     -- 4 input functions                    ; 0            ;
-;     -- <=3 input functions                  ; 32           ;
-;                                             ;              ;
-; Dedicated logic registers                   ; 0            ;
-;                                             ;              ;
-; I/O pins                                    ; 291          ;
-;                                             ;              ;
-; Total DSP Blocks                            ; 0            ;
-;                                             ;              ;
-; Maximum fan-out node                        ; sel[0]~input ;
-; Maximum fan-out                             ; 64           ;
-; Total fan-out                               ; 803          ;
-; Average fan-out                             ; 1.18         ;
-+---------------------------------------------+--------------+
-
-
-+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-; Analysis & Synthesis Resource Utilization by Entity                                                                                                                                    ;
-+----------------------------+---------------------+---------------------------+-------------------+------------+------+--------------+---------------------+-------------+--------------+
-; Compilation Hierarchy Node ; Combinational ALUTs ; Dedicated Logic Registers ; Block Memory Bits ; DSP Blocks ; Pins ; Virtual Pins ; Full Hierarchy Name ; Entity Name ; Library Name ;
-+----------------------------+---------------------+---------------------------+-------------------+------------+------+--------------+---------------------+-------------+--------------+
-; |mux32_8                   ; 96 (96)             ; 0 (0)                     ; 0                 ; 0          ; 291  ; 0            ; |mux32_8            ; mux32_8     ; work         ;
-+----------------------------+---------------------+---------------------------+-------------------+------------+------+--------------+---------------------+-------------+--------------+
-Note: For table entries with two numbers listed, the numbers in parentheses indicate the number of resources of the given type used by the specific entity alone. The numbers listed outside of parentheses indicate the total resources of the given type used by the specific entity and all of its sub-entities in the hierarchy.
-
-
-+------------------------------------------------------+
-; General Register Statistics                          ;
-+----------------------------------------------+-------+
-; Statistic                                    ; Value ;
-+----------------------------------------------+-------+
-; Total registers                              ; 0     ;
-; Number of registers using Synchronous Clear  ; 0     ;
-; Number of registers using Synchronous Load   ; 0     ;
-; Number of registers using Asynchronous Clear ; 0     ;
-; Number of registers using Asynchronous Load  ; 0     ;
-; Number of registers using Clock Enable       ; 0     ;
-; Number of registers using Preset             ; 0     ;
-+----------------------------------------------+-------+
-
-
-+------------------------------------------------------------------------------------------------------------------------------------------+
-; Multiplexer Restructuring Statistics (Restructuring Performed)                                                                           ;
-+--------------------+-----------+---------------+----------------------+------------------------+------------+----------------------------+
-; Multiplexer Inputs ; Bus Width ; Baseline Area ; Area if Restructured ; Saving if Restructured ; Registered ; Example Multiplexer Output ;
-+--------------------+-----------+---------------+----------------------+------------------------+------------+----------------------------+
-; 8:1                ; 32 bits   ; 160 LEs       ; 160 LEs              ; 0 LEs                  ; No         ; |mux32_8|Mux31             ;
-+--------------------+-----------+---------------+----------------------+------------------------+------------+----------------------------+
-
-
-+-----------------------------------------------------+
-; Post-Synthesis Netlist Statistics for Top Partition ;
-+-----------------------+-----------------------------+
-; Type                  ; Count                       ;
-+-----------------------+-----------------------------+
-; arriav_lcell_comb     ; 96                          ;
-;     normal            ; 96                          ;
-;         3 data inputs ; 32                          ;
-;         6 data inputs ; 64                          ;
-; boundary_port         ; 291                         ;
-;                       ;                             ;
-; Max LUT depth         ; 2.00                        ;
-; Average LUT depth     ; 2.00                        ;
-+-----------------------+-----------------------------+
-
-
-+-------------------------------+
-; Elapsed Time Per Partition    ;
-+----------------+--------------+
-; Partition Name ; Elapsed Time ;
-+----------------+--------------+
-; Top            ; 00:00:02     ;
-+----------------+--------------+
-
-
 +-------------------------------+
 ; Analysis & Synthesis Messages ;
 +-------------------------------+
 Info: *******************************************************************
 Info: Running Quartus Prime Analysis & Synthesis
     Info: Version 17.1.0 Build 590 10/25/2017 SJ Lite Edition
-    Info: Processing started: Sat Apr 14 21:05:20 2018
+    Info: Processing started: Sat May 05 15:58:16 2018
 Info: Command: quartus_map --read_settings_files=on --write_settings_files=off Multiplexadores -c TopDE
 Warning (18236): Number of processors has not been specified which may cause overloading on shared machines.  Set the global assignment NUM_PARALLEL_PROCESSORS in your QSF to an appropriate value for best performance.
 Info (20030): Parallel compilation is enabled and will use 2 of the 2 processors detected
+Info (12021): Found 1 design units, including 1 entities, in source file mux1_2_tb.v
+    Info (12023): Found entity 1: mux1_2_TB File: C:/Users/henri/TrabalhosOAC/Laboratorio_2/Lab2/Files/Multiplexadores/mux1_2_TB.v Line: 1
 Info (12021): Found 1 design units, including 1 entities, in source file topde.v
-    Info (12023): Found entity 1: TopDE File: C:/Users/lamar/Dropbox/kiko/Disciplinas/UnB/OAC/2018-1/Lab2/Files/Multiplexadores/TopDE.v Line: 1
+    Info (12023): Found entity 1: TopDE File: C:/Users/henri/TrabalhosOAC/Laboratorio_2/Lab2/Files/Multiplexadores/TopDE.v Line: 5
 Info (12021): Found 1 design units, including 1 entities, in source file mux1_2.v
-    Info (12023): Found entity 1: mux1_2 File: C:/Users/lamar/Dropbox/kiko/Disciplinas/UnB/OAC/2018-1/Lab2/Files/Multiplexadores/mux1_2.v Line: 1
+    Info (12023): Found entity 1: mux1_2 File: C:/Users/henri/TrabalhosOAC/Laboratorio_2/Lab2/Files/Multiplexadores/mux1_2.v Line: 1
 Info (12021): Found 1 design units, including 1 entities, in source file mux1_2a.v
-    Info (12023): Found entity 1: mux1_2a File: C:/Users/lamar/Dropbox/kiko/Disciplinas/UnB/OAC/2018-1/Lab2/Files/Multiplexadores/mux1_2a.v Line: 1
+    Info (12023): Found entity 1: mux1_2a File: C:/Users/henri/TrabalhosOAC/Laboratorio_2/Lab2/Files/Multiplexadores/mux1_2a.v Line: 1
 Info (12021): Found 1 design units, including 1 entities, in source file mux1_4.v
-    Info (12023): Found entity 1: mux1_4 File: C:/Users/lamar/Dropbox/kiko/Disciplinas/UnB/OAC/2018-1/Lab2/Files/Multiplexadores/mux1_4.v Line: 1
+    Info (12023): Found entity 1: mux1_4 File: C:/Users/henri/TrabalhosOAC/Laboratorio_2/Lab2/Files/Multiplexadores/mux1_4.v Line: 1
 Info (12021): Found 1 design units, including 1 entities, in source file mux1_8.v
-    Info (12023): Found entity 1: mux1_8 File: C:/Users/lamar/Dropbox/kiko/Disciplinas/UnB/OAC/2018-1/Lab2/Files/Multiplexadores/mux1_8.v Line: 1
+    Info (12023): Found entity 1: mux1_8 File: C:/Users/henri/TrabalhosOAC/Laboratorio_2/Lab2/Files/Multiplexadores/mux1_8.v Line: 1
 Info (12021): Found 1 design units, including 1 entities, in source file mux12_2.v
-    Info (12023): Found entity 1: mux12_2 File: C:/Users/lamar/Dropbox/kiko/Disciplinas/UnB/OAC/2018-1/Lab2/Files/Multiplexadores/mux12_2.v Line: 1
+    Info (12023): Found entity 1: mux12_2 File: C:/Users/henri/TrabalhosOAC/Laboratorio_2/Lab2/Files/Multiplexadores/mux12_2.v Line: 1
 Info (12021): Found 1 design units, including 1 entities, in source file mux32_2.v
-    Info (12023): Found entity 1: mux32_2 File: C:/Users/lamar/Dropbox/kiko/Disciplinas/UnB/OAC/2018-1/Lab2/Files/Multiplexadores/mux32_2.v Line: 1
+    Info (12023): Found entity 1: mux32_2 File: C:/Users/henri/TrabalhosOAC/Laboratorio_2/Lab2/Files/Multiplexadores/mux32_2.v Line: 1
 Info (12021): Found 1 design units, including 1 entities, in source file mux32_8.v
-    Info (12023): Found entity 1: mux32_8 File: C:/Users/lamar/Dropbox/kiko/Disciplinas/UnB/OAC/2018-1/Lab2/Files/Multiplexadores/mux32_8.v Line: 1
-Info (12127): Elaborating entity "mux32_8" for the top level hierarchy
-Info (286030): Timing-Driven Synthesis is running
-Info (16010): Generating hard_block partition "hard_block:auto_generated_inst"
-    Info (16011): Adding 0 node(s), including 0 DDIO, 0 PLL, 0 transceiver and 0 LCELL
-Info (21057): Implemented 387 device resources after synthesis - the final resource count might be different
-    Info (21058): Implemented 259 input pins
-    Info (21059): Implemented 32 output pins
-    Info (21061): Implemented 96 logic cells
-Info: Quartus Prime Analysis & Synthesis was successful. 0 errors, 1 warning
-    Info: Peak virtual memory: 739 megabytes
-    Info: Processing ended: Sat Apr 14 21:06:22 2018
-    Info: Elapsed time: 00:01:02
-    Info: Total CPU time (on all processors): 00:00:58
+    Info (12023): Found entity 1: mux32_8 File: C:/Users/henri/TrabalhosOAC/Laboratorio_2/Lab2/Files/Multiplexadores/mux32_8.v Line: 1
+Info (12021): Found 1 design units, including 1 entities, in source file mux32_32.v
+    Info (12023): Found entity 1: mux32_32 File: C:/Users/henri/TrabalhosOAC/Laboratorio_2/Lab2/Files/Multiplexadores/mux32_32.v Line: 1
+Info (12021): Found 1 design units, including 1 entities, in source file mux32_32a.v
+    Info (12023): Found entity 1: mux32_32a File: C:/Users/henri/TrabalhosOAC/Laboratorio_2/Lab2/Files/Multiplexadores/mux32_32a.v Line: 1
+Warning (12090): Entity "mux" obtained from "mux.v" instead of from Quartus Prime megafunction library File: C:/Users/henri/TrabalhosOAC/Laboratorio_2/Lab2/Files/Multiplexadores/mux.v Line: 1
+Info (12021): Found 1 design units, including 1 entities, in source file mux.v
+    Info (12023): Found entity 1: mux File: C:/Users/henri/TrabalhosOAC/Laboratorio_2/Lab2/Files/Multiplexadores/mux.v Line: 1
+Info (12021): Found 1 design units, including 1 entities, in source file mux1_2_v2_tb.v
+    Info (12023): Found entity 1: mux1_2_v2_TB File: C:/Users/henri/TrabalhosOAC/Laboratorio_2/Lab2/Files/Multiplexadores/mux1_2_v2_TB.v Line: 1
+Info (12127): Elaborating entity "mux1_2_v2_TB" for the top level hierarchy
+Info (10648): Verilog HDL Display System Task info at mux1_2_v2_TB.v(18): Input = 0, Select = 0, Saida = 0 File: C:/Users/henri/TrabalhosOAC/Laboratorio_2/Lab2/Files/Multiplexadores/mux1_2_v2_TB.v Line: 18
+Info (10648): Verilog HDL Display System Task info at mux1_2_v2_TB.v(23): Input = 1, Select = 0, Saida = 1 File: C:/Users/henri/TrabalhosOAC/Laboratorio_2/Lab2/Files/Multiplexadores/mux1_2_v2_TB.v Line: 23
+Info (10648): Verilog HDL Display System Task info at mux1_2_v2_TB.v(28): Input = 2, Select = 0, Saida = 0 File: C:/Users/henri/TrabalhosOAC/Laboratorio_2/Lab2/Files/Multiplexadores/mux1_2_v2_TB.v Line: 28
+Info (10648): Verilog HDL Display System Task info at mux1_2_v2_TB.v(33): Input = 3, Select = 0, Saida = 1 File: C:/Users/henri/TrabalhosOAC/Laboratorio_2/Lab2/Files/Multiplexadores/mux1_2_v2_TB.v Line: 33
+Info (10648): Verilog HDL Display System Task info at mux1_2_v2_TB.v(40): Input = 0, Select = 1, Saida = 0 File: C:/Users/henri/TrabalhosOAC/Laboratorio_2/Lab2/Files/Multiplexadores/mux1_2_v2_TB.v Line: 40
+Info (10648): Verilog HDL Display System Task info at mux1_2_v2_TB.v(45): Input = 1, Select = 1, Saida = 0 File: C:/Users/henri/TrabalhosOAC/Laboratorio_2/Lab2/Files/Multiplexadores/mux1_2_v2_TB.v Line: 45
+Info (10648): Verilog HDL Display System Task info at mux1_2_v2_TB.v(50): Input = 2, Select = 1, Saida = 1 File: C:/Users/henri/TrabalhosOAC/Laboratorio_2/Lab2/Files/Multiplexadores/mux1_2_v2_TB.v Line: 50
+Info (10648): Verilog HDL Display System Task info at mux1_2_v2_TB.v(55): Input = 3, Select = 1, Saida = 1 File: C:/Users/henri/TrabalhosOAC/Laboratorio_2/Lab2/Files/Multiplexadores/mux1_2_v2_TB.v Line: 55
+Warning (12158): Entity "mux1_2_v2_TB" contains only dangling pins
+Error (12061): Can't synthesize current design -- Top partition does not contain any logic
+Error: Quartus Prime Analysis & Synthesis was unsuccessful. 1 error, 3 warnings
+    Error: Peak virtual memory: 698 megabytes
+    Error: Processing ended: Sat May 05 15:58:28 2018
+    Error: Elapsed time: 00:00:12
+    Error: Total CPU time (on all processors): 00:00:27
 
 

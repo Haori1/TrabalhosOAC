@@ -10,7 +10,7 @@ cModel Technology
 Z0 dC:/Users/lamar/Dropbox/kiko/Disciplinas/UnB/OAC/2018-1/Lab2/Files/FPALU/simulation/modelsim
 vabs_s
 Z1 DXx6 sv_std 3 std 0 22 AD7iAPLo6nTIKk<N0eo=D3
-Z2 !s110 1523839640
+Z2 !s110 1524445256
 !i10b 1
 !s100 K6kGiV=SYkkVCSfI4UObm0
 IUffF7OOUzaV16zOb>E_Wa0
@@ -26,7 +26,7 @@ Z8 OV;L;10.5b;63
 r1
 !s85 0
 31
-Z9 !s108 1523839639.000000
+Z9 !s108 1524445256.000000
 Z10 !s107 C:/Users/lamar/Dropbox/kiko/Disciplinas/UnB/OAC/2018-1/Lab2/Files/FPALU/abs_s.v|
 Z11 !s90 -reportprogress|300|-sv|-work|work|+incdir+C:/Users/lamar/Dropbox/kiko/Disciplinas/UnB/OAC/2018-1/Lab2/Files/FPALU|C:/Users/lamar/Dropbox/kiko/Disciplinas/UnB/OAC/2018-1/Lab2/Files/FPALU/abs_s.v|
 !i113 1
@@ -60,7 +60,7 @@ R13
 R14
 vadd_sub
 R1
-Z16 !s110 1523839638
+Z16 !s110 1524445254
 !i10b 1
 !s100 ig[OIoQn_diTcOR@]2fT00
 Ij=Gbj?I`d5]k28YW>cVd22
@@ -76,7 +76,7 @@ R8
 r1
 !s85 0
 31
-Z21 !s108 1523839637.000000
+Z21 !s108 1524445254.000000
 Z22 !s107 C:/Users/lamar/Dropbox/kiko/Disciplinas/UnB/OAC/2018-1/Lab2/Files/FPALU/add_sub.v|
 Z23 !s90 -reportprogress|300|-sv|-work|work|+incdir+C:/Users/lamar/Dropbox/kiko/Disciplinas/UnB/OAC/2018-1/Lab2/Files/FPALU|C:/Users/lamar/Dropbox/kiko/Disciplinas/UnB/OAC/2018-1/Lab2/Files/FPALU/add_sub.v|
 !i113 1
@@ -85,7 +85,7 @@ R13
 R14
 vadd_sub_altbarrel_shift_aeb
 R1
-Z24 !s110 1523839637
+R16
 !i10b 1
 !s100 UAzfN]dN68JR0^7[66eSM3
 I?LhOU6bZ^Bb[1[NKD1WI=3
@@ -110,7 +110,7 @@ R13
 R14
 vadd_sub_altbarrel_shift_ltd
 R1
-R24
+R16
 !i10b 1
 !s100 :[2PBJ]V1m>?kz@oJhALR1
 I?EEoe`CdI2[k^]2e@IU1R0
@@ -121,7 +121,7 @@ R0
 R18
 R19
 R20
-Z25 L0 50
+Z24 L0 50
 R8
 r1
 !s85 0
@@ -160,7 +160,7 @@ R13
 R14
 vadd_sub_altpriority_encoder_3e8
 R1
-R24
+R16
 !i10b 1
 !s100 DYjj_zWFfGHg9YL0c1=S92
 IReW?_cLV?6TF[Nc?lW2Vg2
@@ -185,7 +185,7 @@ R13
 R14
 vadd_sub_altpriority_encoder_3v7
 R1
-R24
+R16
 !i10b 1
 !s100 @2hmX@fPF2XSXCP^<WmgJ3
 I8igS9G@T?Ph=28=Omf0k33
@@ -210,7 +210,7 @@ R13
 R14
 vadd_sub_altpriority_encoder_6e8
 R1
-R24
+R16
 !i10b 1
 !s100 ]^6Pe]2EWWbY?;:B=:X]Q1
 I<Dmd^FMS`EmhjfaRFI5IB2
@@ -235,7 +235,7 @@ R13
 R14
 vadd_sub_altpriority_encoder_6v7
 R1
-R24
+R16
 !i10b 1
 !s100 AzKY@1>mi_4DcZj]M4Q[T2
 IbODg79Z083LG6:aX1UWf62
@@ -260,7 +260,7 @@ R13
 R14
 vadd_sub_altpriority_encoder_be8
 R1
-R24
+R16
 !i10b 1
 !s100 Ul_=PlgVb^RHUWFbOGN`93
 IJ[nd]eUH?ag<=PLK]kJ_j2
@@ -285,7 +285,7 @@ R13
 R14
 vadd_sub_altpriority_encoder_bv7
 R1
-R24
+R16
 !i10b 1
 !s100 M90c1QfDabaa13_3fk@:I3
 IbBeX4:@oaczzi014XO[7b2
@@ -510,7 +510,7 @@ R13
 R14
 vadd_sub_altpriority_encoder_r08
 R1
-R24
+R16
 !i10b 1
 !s100 5@`d41al?eJmj9=ZZ9[<<3
 Il;kGWIheiWeN[<l1BzX<[2
@@ -535,7 +535,7 @@ R13
 R14
 vadd_sub_altpriority_encoder_rf8
 R1
-R24
+R16
 !i10b 1
 !s100 nA[h;YJOOh00=C7R<8Cda1
 I0c<0YH:]FPBKi<dj4n53T2
@@ -610,500 +610,500 @@ R13
 R14
 vc_comp
 R1
-Z26 !s110 1523839631
+Z25 !s110 1524445247
 !i10b 1
 !s100 VX]E_7O<P4cNj^26OC;X[1
 I:zXBmiKNW9Ej_hgnZGAi[0
 R3
-Z27 !s105 c_comp_v_unit
+Z26 !s105 c_comp_v_unit
 S1
 R0
-Z28 w1523212380
-Z29 8C:/Users/lamar/Dropbox/kiko/Disciplinas/UnB/OAC/2018-1/Lab2/Files/FPALU/c_comp.v
-Z30 FC:/Users/lamar/Dropbox/kiko/Disciplinas/UnB/OAC/2018-1/Lab2/Files/FPALU/c_comp.v
+Z27 w1523212380
+Z28 8C:/Users/lamar/Dropbox/kiko/Disciplinas/UnB/OAC/2018-1/Lab2/Files/FPALU/c_comp.v
+Z29 FC:/Users/lamar/Dropbox/kiko/Disciplinas/UnB/OAC/2018-1/Lab2/Files/FPALU/c_comp.v
 L0 351
 R8
 r1
 !s85 0
 31
-Z31 !s108 1523839631.000000
-Z32 !s107 C:/Users/lamar/Dropbox/kiko/Disciplinas/UnB/OAC/2018-1/Lab2/Files/FPALU/c_comp.v|
-Z33 !s90 -reportprogress|300|-sv|-work|work|+incdir+C:/Users/lamar/Dropbox/kiko/Disciplinas/UnB/OAC/2018-1/Lab2/Files/FPALU|C:/Users/lamar/Dropbox/kiko/Disciplinas/UnB/OAC/2018-1/Lab2/Files/FPALU/c_comp.v|
+Z30 !s108 1524445247.000000
+Z31 !s107 C:/Users/lamar/Dropbox/kiko/Disciplinas/UnB/OAC/2018-1/Lab2/Files/FPALU/c_comp.v|
+Z32 !s90 -reportprogress|300|-sv|-work|work|+incdir+C:/Users/lamar/Dropbox/kiko/Disciplinas/UnB/OAC/2018-1/Lab2/Files/FPALU|C:/Users/lamar/Dropbox/kiko/Disciplinas/UnB/OAC/2018-1/Lab2/Files/FPALU/c_comp.v|
 !i113 1
 R12
 R13
 R14
 vc_comp_altfp_compare_mob
 R1
-R26
+R25
 !i10b 1
 !s100 Y_FU>4L^445h::X18D_YS3
 IG7nQh=8n@G^U6gh3dD::G0
 R3
-R27
+R26
 S1
 R0
+R27
 R28
 R29
-R30
 R15
 R8
 r1
 !s85 0
 31
+R30
 R31
 R32
-R33
 !i113 1
 R12
 R13
 R14
 vcvt_s_w
 R1
-Z34 !s110 1523839636
+Z33 !s110 1524445252
 !i10b 1
 !s100 cGXZo@Nd8jc<SjlWdX9Qg0
 IDaEN@@Dkc^_2LQIijX8Kb3
 R3
-Z35 !s105 cvt_s_w_v_unit
+Z34 !s105 cvt_s_w_v_unit
 S1
 R0
-Z36 w1523212473
-Z37 8C:/Users/lamar/Dropbox/kiko/Disciplinas/UnB/OAC/2018-1/Lab2/Files/FPALU/cvt_s_w.v
-Z38 FC:/Users/lamar/Dropbox/kiko/Disciplinas/UnB/OAC/2018-1/Lab2/Files/FPALU/cvt_s_w.v
+Z35 w1523212473
+Z36 8C:/Users/lamar/Dropbox/kiko/Disciplinas/UnB/OAC/2018-1/Lab2/Files/FPALU/cvt_s_w.v
+Z37 FC:/Users/lamar/Dropbox/kiko/Disciplinas/UnB/OAC/2018-1/Lab2/Files/FPALU/cvt_s_w.v
 L0 828
 R8
 r1
 !s85 0
 31
-Z39 !s108 1523839635.000000
-Z40 !s107 C:/Users/lamar/Dropbox/kiko/Disciplinas/UnB/OAC/2018-1/Lab2/Files/FPALU/cvt_s_w.v|
-Z41 !s90 -reportprogress|300|-sv|-work|work|+incdir+C:/Users/lamar/Dropbox/kiko/Disciplinas/UnB/OAC/2018-1/Lab2/Files/FPALU|C:/Users/lamar/Dropbox/kiko/Disciplinas/UnB/OAC/2018-1/Lab2/Files/FPALU/cvt_s_w.v|
+Z38 !s108 1524445252.000000
+Z39 !s107 C:/Users/lamar/Dropbox/kiko/Disciplinas/UnB/OAC/2018-1/Lab2/Files/FPALU/cvt_s_w.v|
+Z40 !s90 -reportprogress|300|-sv|-work|work|+incdir+C:/Users/lamar/Dropbox/kiko/Disciplinas/UnB/OAC/2018-1/Lab2/Files/FPALU|C:/Users/lamar/Dropbox/kiko/Disciplinas/UnB/OAC/2018-1/Lab2/Files/FPALU/cvt_s_w.v|
 !i113 1
 R12
 R13
 R14
 vcvt_s_w_altbarrel_shift_fof
 R1
-Z42 !s110 1523839635
+R33
 !i10b 1
 !s100 Jb:K@ooj=ID=R>LjebKn`1
 I7KB6gl`i1c=m2_@?X7T5L0
 R3
-R35
+R34
 S1
 R0
+R35
 R36
 R37
-R38
-R25
+R24
 R8
 r1
 !s85 0
 31
+R38
 R39
 R40
-R41
 !i113 1
 R12
 R13
 R14
 vcvt_s_w_altfp_convert_7qm
 R1
-R34
+R33
 !i10b 1
 !s100 cmKfCz^?6@gDN8Pm9J7GC1
 IU3[j>AcjTeK:]R9DHF^N72
 R3
-R35
+R34
 S1
 R0
+R35
 R36
 R37
-R38
 L0 417
 R8
 r1
 !s85 0
 31
+R38
 R39
 R40
-R41
 !i113 1
 R12
 R13
 R14
 vcvt_s_w_altpriority_encoder_3e8
 R1
-R42
+R33
 !i10b 1
 !s100 [:W36YU>S`8ghUIGCaKE83
 IKXg7VRE[HiHLE;KXDVIki3
 R3
-R35
+R34
 S1
 R0
+R35
 R36
 R37
-R38
 L0 155
 R8
 r1
 !s85 0
 31
+R38
 R39
 R40
-R41
 !i113 1
 R12
 R13
 R14
 vcvt_s_w_altpriority_encoder_3v7
 R1
-R42
+R33
 !i10b 1
 !s100 6jCYZ3E5b]Z7[O@8:hzDc3
 I054o^G]0acBTe_ofLdKFU1
 R3
-R35
+R34
 S1
 R0
+R35
 R36
 R37
-R38
 L0 289
 R8
 r1
 !s85 0
 31
+R38
 R39
 R40
-R41
 !i113 1
 R12
 R13
 R14
 vcvt_s_w_altpriority_encoder_6e8
 R1
-R42
+R33
 !i10b 1
 !s100 2aUOYC94a4Lc=lg4IWXj21
 Io7nONmGVjUmY3?HC>40Sd2
 R3
-R35
+R34
 S1
 R0
+R35
 R36
 R37
-R38
 L0 174
 R8
 r1
 !s85 0
 31
+R38
 R39
 R40
-R41
 !i113 1
 R12
 R13
 R14
 vcvt_s_w_altpriority_encoder_6v7
 R1
-R42
+R33
 !i10b 1
 !s100 O=Sa1AjM[`M<SF>ho<oBc1
 I5KhbTAZ:AOb^zC:I8]lh60
 R3
-R35
+R34
 S1
 R0
+R35
 R36
 R37
-R38
 L0 305
 R8
 r1
 !s85 0
 31
+R38
 R39
 R40
-R41
 !i113 1
 R12
 R13
 R14
 vcvt_s_w_altpriority_encoder_be8
 R1
-R42
+R33
 !i10b 1
 !s100 ni`S5H9>^oB8nO<0bRJ<l0
 I7Hg:[NbkN__mfWYYL3hJ82
 R3
-R35
+R34
 S1
 R0
+R35
 R36
 R37
-R38
 L0 207
 R8
 r1
 !s85 0
 31
+R38
 R39
 R40
-R41
 !i113 1
 R12
 R13
 R14
 vcvt_s_w_altpriority_encoder_bv7
 R1
-R42
+R33
 !i10b 1
 !s100 To>za3igc58=kmGY]?oWj3
 I_NNnYN0U:T60Rh;;CO6Nk0
 R3
-R35
+R34
 S1
 R0
+R35
 R36
 R37
-R38
 L0 333
 R8
 r1
 !s85 0
 31
+R38
 R39
 R40
-R41
 !i113 1
 R12
 R13
 R14
 vcvt_s_w_altpriority_encoder_qb6
 R1
-R42
+R33
 !i10b 1
 !s100 XSIG;@]6g3lHzNglZ??K13
 IIdaXV>FNV_0=eMB8kcWlK3
 R3
-R35
+R34
 S1
 R0
+R35
 R36
 R37
-R38
 L0 389
 R8
 r1
 !s85 0
 31
+R38
 R39
 R40
-R41
 !i113 1
 R12
 R13
 R14
 vcvt_s_w_altpriority_encoder_r08
 R1
-R42
+R33
 !i10b 1
 !s100 o=3OmYNPe:7LbC3MkPh@E0
 I5zFEbW3jSied6DhoG`O^Y0
 R3
-R35
+R34
 S1
 R0
+R35
 R36
 R37
-R38
 L0 361
 R8
 r1
 !s85 0
 31
+R38
 R39
 R40
-R41
 !i113 1
 R12
 R13
 R14
 vcvt_s_w_altpriority_encoder_rf8
 R1
-R42
+R33
 !i10b 1
 !s100 eC3nM8En]9dDn<b:_hN8g2
 I^c3I^>]fXcZ6?m1DOno6`2
 R3
-R35
+R34
 S1
 R0
+R35
 R36
 R37
-R38
 L0 240
 R8
 r1
 !s85 0
 31
+R38
 R39
 R40
-R41
 !i113 1
 R12
 R13
 R14
 vcvt_w_s
 R1
-Z43 !s110 1523839633
+Z41 !s110 1524445250
 !i10b 1
 !s100 O6e=KUg^mBbN<g5EATVC50
 I2e]ChSlgzd^WgkBNV6gCA2
 R3
-Z44 !s105 cvt_w_s_v_unit
+Z42 !s105 cvt_w_s_v_unit
 S1
 R0
-Z45 w1523212553
-Z46 8C:/Users/lamar/Dropbox/kiko/Disciplinas/UnB/OAC/2018-1/Lab2/Files/FPALU/cvt_w_s.v
-Z47 FC:/Users/lamar/Dropbox/kiko/Disciplinas/UnB/OAC/2018-1/Lab2/Files/FPALU/cvt_w_s.v
+Z43 w1523212553
+Z44 8C:/Users/lamar/Dropbox/kiko/Disciplinas/UnB/OAC/2018-1/Lab2/Files/FPALU/cvt_w_s.v
+Z45 FC:/Users/lamar/Dropbox/kiko/Disciplinas/UnB/OAC/2018-1/Lab2/Files/FPALU/cvt_w_s.v
 L0 939
 R8
 r1
 !s85 0
 31
-Z48 !s108 1523839633.000000
-Z49 !s107 C:/Users/lamar/Dropbox/kiko/Disciplinas/UnB/OAC/2018-1/Lab2/Files/FPALU/cvt_w_s.v|
-Z50 !s90 -reportprogress|300|-sv|-work|work|+incdir+C:/Users/lamar/Dropbox/kiko/Disciplinas/UnB/OAC/2018-1/Lab2/Files/FPALU|C:/Users/lamar/Dropbox/kiko/Disciplinas/UnB/OAC/2018-1/Lab2/Files/FPALU/cvt_w_s.v|
+Z46 !s108 1524445249.000000
+Z47 !s107 C:/Users/lamar/Dropbox/kiko/Disciplinas/UnB/OAC/2018-1/Lab2/Files/FPALU/cvt_w_s.v|
+Z48 !s90 -reportprogress|300|-sv|-work|work|+incdir+C:/Users/lamar/Dropbox/kiko/Disciplinas/UnB/OAC/2018-1/Lab2/Files/FPALU|C:/Users/lamar/Dropbox/kiko/Disciplinas/UnB/OAC/2018-1/Lab2/Files/FPALU/cvt_w_s.v|
 !i113 1
 R12
 R13
 R14
 vcvt_w_s_altbarrel_shift_kof
 R1
-R43
+R41
 !i10b 1
 !s100 Vl`PfRJ9BZC2:AZ@h7H6F0
 I:CKV?6IiY70MGA>;IhW`C1
 R3
-R44
+R42
 S1
 R0
+R43
+R44
 R45
-R46
-R47
-R25
+R24
 R8
 r1
 !s85 0
 31
+R46
+R47
 R48
-R49
-R50
 !i113 1
 R12
 R13
 R14
 vcvt_w_s_altfp_convert_e1p
 R1
-R43
+R41
 !i10b 1
 !s100 _lH<gKlPHGmG5ZeXCRe083
 IeflbJ4F@fNfeLL7MK<Mnh1
 R3
-R44
+R42
 S1
 R0
+R43
+R44
 R45
-R46
-R47
 L0 143
 R8
 r1
 !s85 0
 31
+R46
+R47
 R48
-R49
-R50
 !i113 1
 R12
 R13
 R14
 vdiv_s
 R1
-Z51 !s110 1523839630
+Z49 !s110 1524445245
 !i10b 1
 !s100 <kzB9b1hQeFz7olnLPITh3
 I6;Q`9?]NR<8PEKH6==4j^0
 R3
-Z52 !s105 div_s_v_unit
+Z50 !s105 div_s_v_unit
 S1
 R0
-Z53 w1523212394
-Z54 8C:/Users/lamar/Dropbox/kiko/Disciplinas/UnB/OAC/2018-1/Lab2/Files/FPALU/div_s.v
-Z55 FC:/Users/lamar/Dropbox/kiko/Disciplinas/UnB/OAC/2018-1/Lab2/Files/FPALU/div_s.v
+Z51 w1523212394
+Z52 8C:/Users/lamar/Dropbox/kiko/Disciplinas/UnB/OAC/2018-1/Lab2/Files/FPALU/div_s.v
+Z53 FC:/Users/lamar/Dropbox/kiko/Disciplinas/UnB/OAC/2018-1/Lab2/Files/FPALU/div_s.v
 L0 1079
 R8
 r1
 !s85 0
 31
-Z56 !s108 1523839630.000000
-Z57 !s107 C:/Users/lamar/Dropbox/kiko/Disciplinas/UnB/OAC/2018-1/Lab2/Files/FPALU/div_s.v|
-Z58 !s90 -reportprogress|300|-sv|-work|work|+incdir+C:/Users/lamar/Dropbox/kiko/Disciplinas/UnB/OAC/2018-1/Lab2/Files/FPALU|C:/Users/lamar/Dropbox/kiko/Disciplinas/UnB/OAC/2018-1/Lab2/Files/FPALU/div_s.v|
+Z54 !s108 1524445245.000000
+Z55 !s107 C:/Users/lamar/Dropbox/kiko/Disciplinas/UnB/OAC/2018-1/Lab2/Files/FPALU/div_s.v|
+Z56 !s90 -reportprogress|300|-sv|-work|work|+incdir+C:/Users/lamar/Dropbox/kiko/Disciplinas/UnB/OAC/2018-1/Lab2/Files/FPALU|C:/Users/lamar/Dropbox/kiko/Disciplinas/UnB/OAC/2018-1/Lab2/Files/FPALU/div_s.v|
 !i113 1
 R12
 R13
 R14
 vdiv_s_altfp_div_3rj
 R1
-R51
+R49
 !i10b 1
 !s100 IiAgQKk@NGMV_W5VkGekV3
 I0I7W2Kl6^^5]GLfGBD[NX1
 R3
-R52
+R50
 S1
 R0
+R51
+R52
 R53
-R54
-R55
 L0 1025
 R8
 r1
 !s85 0
 31
+R54
+R55
 R56
-R57
-R58
 !i113 1
 R12
 R13
 R14
 vdiv_s_altfp_div_pst_b2h
 R1
-R51
+R49
 !i10b 1
 !s100 NdQQHjI<CigU[dYC6[o@i2
 IC4oSIKjen4GamfY]i>6]?0
 R3
-R52
+R50
 S1
 R0
+R51
+R52
 R53
-R54
-R55
-R25
+R24
 R8
 r1
 !s85 0
 31
+R54
+R55
 R56
-R57
-R58
 !i113 1
 R12
 R13
@@ -1116,19 +1116,19 @@ r1
 !s85 0
 31
 !i10b 1
-!s100 W;?VXfHfY;]MzZ^8m2b2:1
-IK:^1BmQ;RdIUgz2VZ<I6:2
+!s100 91KR>zVlIA6kY@QzanD0H1
+I36UZP[Vo7z=ICPgU3B?=J3
 !s105 FPALU_v_unit
 S1
 R0
-Z59 w1523834955
-Z60 8C:/Users/lamar/Dropbox/kiko/Disciplinas/UnB/OAC/2018-1/Lab2/Files/FPALU/FPALU.v
-Z61 FC:/Users/lamar/Dropbox/kiko/Disciplinas/UnB/OAC/2018-1/Lab2/Files/FPALU/FPALU.v
+Z57 w1524440592
+Z58 8C:/Users/lamar/Dropbox/kiko/Disciplinas/UnB/OAC/2018-1/Lab2/Files/FPALU/FPALU.v
+Z59 FC:/Users/lamar/Dropbox/kiko/Disciplinas/UnB/OAC/2018-1/Lab2/Files/FPALU/FPALU.v
 L0 5
 R8
-Z62 !s108 1523839649.000000
-Z63 !s107 C:/Users/lamar/Dropbox/kiko/Disciplinas/UnB/OAC/2018-1/Lab2/Files/FPALU/Parametros.v|C:/Users/lamar/Dropbox/kiko/Disciplinas/UnB/OAC/2018-1/Lab2/Files/FPALU/FPALU.v|
-Z64 !s90 -reportprogress|300|-sv|-work|work|+incdir+C:/Users/lamar/Dropbox/kiko/Disciplinas/UnB/OAC/2018-1/Lab2/Files/FPALU|C:/Users/lamar/Dropbox/kiko/Disciplinas/UnB/OAC/2018-1/Lab2/Files/FPALU/FPALU.v|
+Z60 !s108 1524445268.000000
+Z61 !s107 C:/Users/lamar/Dropbox/kiko/Disciplinas/UnB/OAC/2018-1/Lab2/Files/FPALU/Parametros.v|C:/Users/lamar/Dropbox/kiko/Disciplinas/UnB/OAC/2018-1/Lab2/Files/FPALU/FPALU.v|
+Z62 !s90 -reportprogress|300|-sv|-work|work|+incdir+C:/Users/lamar/Dropbox/kiko/Disciplinas/UnB/OAC/2018-1/Lab2/Files/FPALU|C:/Users/lamar/Dropbox/kiko/Disciplinas/UnB/OAC/2018-1/Lab2/Files/FPALU/FPALU.v|
 !i113 1
 R12
 R13
@@ -1147,14 +1147,14 @@ I_0]D2zJhhgT^bPXOG@Z`W2
 !s105 FPALU_tb_v_unit
 S1
 R0
-Z65 w1523839593
-Z66 8C:/Users/lamar/Dropbox/kiko/Disciplinas/UnB/OAC/2018-1/Lab2/Files/FPALU/FPALU_tb.v
-Z67 FC:/Users/lamar/Dropbox/kiko/Disciplinas/UnB/OAC/2018-1/Lab2/Files/FPALU/FPALU_tb.v
+Z63 w1523839593
+Z64 8C:/Users/lamar/Dropbox/kiko/Disciplinas/UnB/OAC/2018-1/Lab2/Files/FPALU/FPALU_tb.v
+Z65 FC:/Users/lamar/Dropbox/kiko/Disciplinas/UnB/OAC/2018-1/Lab2/Files/FPALU/FPALU_tb.v
 L0 8
 R8
-Z68 !s108 1523839651.000000
-Z69 !s107 C:/Users/lamar/Dropbox/kiko/Disciplinas/UnB/OAC/2018-1/Lab2/Files/FPALU/Parametros.v|C:/Users/lamar/Dropbox/kiko/Disciplinas/UnB/OAC/2018-1/Lab2/Files/FPALU/FPALU_tb.v|
-Z70 !s90 -reportprogress|300|-sv|-work|work|+incdir+C:/Users/lamar/Dropbox/kiko/Disciplinas/UnB/OAC/2018-1/Lab2/Files/FPALU|C:/Users/lamar/Dropbox/kiko/Disciplinas/UnB/OAC/2018-1/Lab2/Files/FPALU/FPALU_tb.v|
+Z66 !s108 1524445270.000000
+Z67 !s107 C:/Users/lamar/Dropbox/kiko/Disciplinas/UnB/OAC/2018-1/Lab2/Files/FPALU/Parametros.v|C:/Users/lamar/Dropbox/kiko/Disciplinas/UnB/OAC/2018-1/Lab2/Files/FPALU/FPALU_tb.v|
+Z68 !s90 -reportprogress|300|-sv|-work|work|+incdir+C:/Users/lamar/Dropbox/kiko/Disciplinas/UnB/OAC/2018-1/Lab2/Files/FPALU|C:/Users/lamar/Dropbox/kiko/Disciplinas/UnB/OAC/2018-1/Lab2/Files/FPALU/FPALU_tb.v|
 !i113 1
 R12
 R13
@@ -1172,15 +1172,15 @@ I=fUYE8>C?=Voc`LjKo`^h1
 !i103 1
 S1
 R0
+R63
+R64
 R65
-R66
-R67
-Z71 FC:/Users/lamar/Dropbox/kiko/Disciplinas/UnB/OAC/2018-1/Lab2/Files/FPALU/Parametros.v
+Z69 FC:/Users/lamar/Dropbox/kiko/Disciplinas/UnB/OAC/2018-1/Lab2/Files/FPALU/Parametros.v
 L0 4
 R8
+R66
+R67
 R68
-R69
-R70
 !i113 1
 R12
 R13
@@ -1198,15 +1198,15 @@ I8@[bMD>]]QY`4HXS?P;gn3
 !i103 1
 S1
 R0
+R57
+R58
 R59
-R60
-R61
-R71
+R69
 L0 4
 R8
+R60
+R61
 R62
-R63
-R64
 !i113 1
 R12
 R13
@@ -1214,57 +1214,57 @@ R14
 n@f@p@a@l@u_v_unit
 vmul_s
 R1
-Z72 !s110 1523839628
+Z70 !s110 1524445243
 !i10b 1
 !s100 Q[hnnE;S?@6Jnj;CW9Aa^0
 IN^bNek@3B1FG=:zi;4;jI0
 R3
-Z73 !s105 mul_s_v_unit
+Z71 !s105 mul_s_v_unit
 S1
 R0
-Z74 w1523213041
-Z75 8C:/Users/lamar/Dropbox/kiko/Disciplinas/UnB/OAC/2018-1/Lab2/Files/FPALU/mul_s.v
-Z76 FC:/Users/lamar/Dropbox/kiko/Disciplinas/UnB/OAC/2018-1/Lab2/Files/FPALU/mul_s.v
+Z72 w1523213041
+Z73 8C:/Users/lamar/Dropbox/kiko/Disciplinas/UnB/OAC/2018-1/Lab2/Files/FPALU/mul_s.v
+Z74 FC:/Users/lamar/Dropbox/kiko/Disciplinas/UnB/OAC/2018-1/Lab2/Files/FPALU/mul_s.v
 L0 554
 R8
 r1
 !s85 0
 31
-Z77 !s108 1523839628.000000
-Z78 !s107 C:/Users/lamar/Dropbox/kiko/Disciplinas/UnB/OAC/2018-1/Lab2/Files/FPALU/mul_s.v|
-Z79 !s90 -reportprogress|300|-sv|-work|work|+incdir+C:/Users/lamar/Dropbox/kiko/Disciplinas/UnB/OAC/2018-1/Lab2/Files/FPALU|C:/Users/lamar/Dropbox/kiko/Disciplinas/UnB/OAC/2018-1/Lab2/Files/FPALU/mul_s.v|
+Z75 !s108 1524445243.000000
+Z76 !s107 C:/Users/lamar/Dropbox/kiko/Disciplinas/UnB/OAC/2018-1/Lab2/Files/FPALU/mul_s.v|
+Z77 !s90 -reportprogress|300|-sv|-work|work|+incdir+C:/Users/lamar/Dropbox/kiko/Disciplinas/UnB/OAC/2018-1/Lab2/Files/FPALU|C:/Users/lamar/Dropbox/kiko/Disciplinas/UnB/OAC/2018-1/Lab2/Files/FPALU/mul_s.v|
 !i113 1
 R12
 R13
 R14
 vmul_s_altfp_mult_maq
 R1
-R72
+R70
 !i10b 1
 !s100 Eh<I9TeDcGI2:MJhL2@^;3
 IEz[L<b=hCZFRh=SF:?HnU2
 R3
-R73
+R71
 S1
 R0
+R72
+R73
 R74
-R75
-R76
 R15
 R8
 r1
 !s85 0
 31
+R75
+R76
 R77
-R78
-R79
 !i113 1
 R12
 R13
 R14
 vmult_i5s
 R1
-!s110 1523839644
+!s110 1524445262
 !i10b 1
 !s100 D;P;SnW042@Y`d[=B3gZL3
 ILA[M5=LHAi:Cl<=H4jL5M2
@@ -1272,24 +1272,24 @@ R3
 !s105 mult_i5s_v_unit
 S1
 R0
-Z80 w1523213435
+Z78 w1523213435
 8C:/Users/lamar/Dropbox/kiko/Disciplinas/UnB/OAC/2018-1/Lab2/Files/FPALU/db/mult_i5s.v
 FC:/Users/lamar/Dropbox/kiko/Disciplinas/UnB/OAC/2018-1/Lab2/Files/FPALU/db/mult_i5s.v
-Z81 L0 28
+Z79 L0 28
 R8
 r1
 !s85 0
 31
-!s108 1523839644.000000
+!s108 1524445262.000000
 !s107 C:/Users/lamar/Dropbox/kiko/Disciplinas/UnB/OAC/2018-1/Lab2/Files/FPALU/db/mult_i5s.v|
 !s90 -reportprogress|300|-sv|-work|work|+incdir+C:/Users/lamar/Dropbox/kiko/Disciplinas/UnB/OAC/2018-1/Lab2/Files/FPALU/db|C:/Users/lamar/Dropbox/kiko/Disciplinas/UnB/OAC/2018-1/Lab2/Files/FPALU/db/mult_i5s.v|
 !i113 1
 R12
-Z82 !s92 -sv -work work +incdir+C:/Users/lamar/Dropbox/kiko/Disciplinas/UnB/OAC/2018-1/Lab2/Files/FPALU/db
+Z80 !s92 -sv -work work +incdir+C:/Users/lamar/Dropbox/kiko/Disciplinas/UnB/OAC/2018-1/Lab2/Files/FPALU/db
 R14
 vmult_k5s
 R1
-!s110 1523839643
+!s110 1524445260
 !i10b 1
 !s100 LJnoL^zVC<cW;BA5TTh@d1
 IbP7aPP[[E0TS67<@:g9FD3
@@ -1297,24 +1297,24 @@ R3
 !s105 mult_k5s_v_unit
 S1
 R0
-R80
+R78
 8C:/Users/lamar/Dropbox/kiko/Disciplinas/UnB/OAC/2018-1/Lab2/Files/FPALU/db/mult_k5s.v
 FC:/Users/lamar/Dropbox/kiko/Disciplinas/UnB/OAC/2018-1/Lab2/Files/FPALU/db/mult_k5s.v
-R81
+R79
 R8
 r1
 !s85 0
 31
-!s108 1523839643.000000
+!s108 1524445260.000000
 !s107 C:/Users/lamar/Dropbox/kiko/Disciplinas/UnB/OAC/2018-1/Lab2/Files/FPALU/db/mult_k5s.v|
 !s90 -reportprogress|300|-sv|-work|work|+incdir+C:/Users/lamar/Dropbox/kiko/Disciplinas/UnB/OAC/2018-1/Lab2/Files/FPALU/db|C:/Users/lamar/Dropbox/kiko/Disciplinas/UnB/OAC/2018-1/Lab2/Files/FPALU/db/mult_k5s.v|
 !i113 1
 R12
-R82
+R80
 R14
 vmult_ncs
 R1
-!s110 1523839641
+!s110 1524445258
 !i10b 1
 !s100 MVo`Cn9jC?P4aioO@LRlk0
 IiP=kbg;GM6Z7ZJkGi3Q<g3
@@ -1325,21 +1325,21 @@ R0
 w1523213429
 8C:/Users/lamar/Dropbox/kiko/Disciplinas/UnB/OAC/2018-1/Lab2/Files/FPALU/db/mult_ncs.v
 FC:/Users/lamar/Dropbox/kiko/Disciplinas/UnB/OAC/2018-1/Lab2/Files/FPALU/db/mult_ncs.v
-R81
+R79
 R8
 r1
 !s85 0
 31
-!s108 1523839641.000000
+!s108 1524445258.000000
 !s107 C:/Users/lamar/Dropbox/kiko/Disciplinas/UnB/OAC/2018-1/Lab2/Files/FPALU/db/mult_ncs.v|
 !s90 -reportprogress|300|-sv|-work|work|+incdir+C:/Users/lamar/Dropbox/kiko/Disciplinas/UnB/OAC/2018-1/Lab2/Files/FPALU/db|C:/Users/lamar/Dropbox/kiko/Disciplinas/UnB/OAC/2018-1/Lab2/Files/FPALU/db/mult_ncs.v|
 !i113 1
 R12
-R82
+R80
 R14
 vmult_p5s
 R1
-!s110 1523839648
+!s110 1524445266
 !i10b 1
 !s100 :oiFKVC@05H]Ro<0Ahf371
 Iz[PlVT>f>6JO;4cM_mR^E2
@@ -1347,24 +1347,24 @@ R3
 !s105 mult_p5s_v_unit
 S1
 R0
-Z83 w1523213436
+Z81 w1523213436
 8C:/Users/lamar/Dropbox/kiko/Disciplinas/UnB/OAC/2018-1/Lab2/Files/FPALU/db/mult_p5s.v
 FC:/Users/lamar/Dropbox/kiko/Disciplinas/UnB/OAC/2018-1/Lab2/Files/FPALU/db/mult_p5s.v
-R81
+R79
 R8
 r1
 !s85 0
 31
-!s108 1523839647.000000
+!s108 1524445266.000000
 !s107 C:/Users/lamar/Dropbox/kiko/Disciplinas/UnB/OAC/2018-1/Lab2/Files/FPALU/db/mult_p5s.v|
 !s90 -reportprogress|300|-sv|-work|work|+incdir+C:/Users/lamar/Dropbox/kiko/Disciplinas/UnB/OAC/2018-1/Lab2/Files/FPALU/db|C:/Users/lamar/Dropbox/kiko/Disciplinas/UnB/OAC/2018-1/Lab2/Files/FPALU/db/mult_p5s.v|
 !i113 1
 R12
-R82
+R80
 R14
 vmult_r5s
 R1
-!s110 1523839646
+!s110 1524445264
 !i10b 1
 !s100 LS]JV=0<DFBk>VAeNaN870
 IaoHG91Oem>CDW<Q[0n9ff1
@@ -1372,24 +1372,24 @@ R3
 !s105 mult_r5s_v_unit
 S1
 R0
-R83
+R81
 8C:/Users/lamar/Dropbox/kiko/Disciplinas/UnB/OAC/2018-1/Lab2/Files/FPALU/db/mult_r5s.v
 FC:/Users/lamar/Dropbox/kiko/Disciplinas/UnB/OAC/2018-1/Lab2/Files/FPALU/db/mult_r5s.v
-R81
+R79
 R8
 r1
 !s85 0
 31
-!s108 1523839646.000000
+!s108 1524445264.000000
 !s107 C:/Users/lamar/Dropbox/kiko/Disciplinas/UnB/OAC/2018-1/Lab2/Files/FPALU/db/mult_r5s.v|
 !s90 -reportprogress|300|-sv|-work|work|+incdir+C:/Users/lamar/Dropbox/kiko/Disciplinas/UnB/OAC/2018-1/Lab2/Files/FPALU/db|C:/Users/lamar/Dropbox/kiko/Disciplinas/UnB/OAC/2018-1/Lab2/Files/FPALU/db/mult_r5s.v|
 !i113 1
 R12
-R82
+R80
 R14
 XParametros_v_unit
 R1
-!s110 1523839625
+!s110 1524445239
 !i10b 1
 !s100 T4R8C4eF4<YkkW;9BZj:F1
 IU;c8QU=jU84E_YhPk0W@[1
@@ -1399,13 +1399,13 @@ S1
 R0
 w1523212791
 8C:/Users/lamar/Dropbox/kiko/Disciplinas/UnB/OAC/2018-1/Lab2/Files/FPALU/Parametros.v
-R71
+R69
 L0 4
 R8
 r1
 !s85 0
 31
-!s108 1523839624.000000
+!s108 1524445238.000000
 !s107 C:/Users/lamar/Dropbox/kiko/Disciplinas/UnB/OAC/2018-1/Lab2/Files/FPALU/Parametros.v|
 !s90 -reportprogress|300|-sv|-work|work|+incdir+C:/Users/lamar/Dropbox/kiko/Disciplinas/UnB/OAC/2018-1/Lab2/Files/FPALU|C:/Users/lamar/Dropbox/kiko/Disciplinas/UnB/OAC/2018-1/Lab2/Files/FPALU/Parametros.v|
 !i113 1
@@ -1415,75 +1415,75 @@ R14
 n@parametros_v_unit
 vsqrt_s
 R1
-Z84 !s110 1523839626
+Z82 !s110 1524445241
 !i10b 1
 !s100 O?jjlQ0]OXeVfCN1Nl[aL2
 IVUP9F8ejb_Zc<8Zf8<QT90
 R3
-Z85 !s105 sqrt_s_v_unit
+Z83 !s105 sqrt_s_v_unit
 S1
 R0
-Z86 w1523212230
-Z87 8C:/Users/lamar/Dropbox/kiko/Disciplinas/UnB/OAC/2018-1/Lab2/Files/FPALU/sqrt_s.v
-Z88 FC:/Users/lamar/Dropbox/kiko/Disciplinas/UnB/OAC/2018-1/Lab2/Files/FPALU/sqrt_s.v
+Z84 w1523212230
+Z85 8C:/Users/lamar/Dropbox/kiko/Disciplinas/UnB/OAC/2018-1/Lab2/Files/FPALU/sqrt_s.v
+Z86 FC:/Users/lamar/Dropbox/kiko/Disciplinas/UnB/OAC/2018-1/Lab2/Files/FPALU/sqrt_s.v
 L0 1837
 R8
 r1
 !s85 0
 31
-Z89 !s108 1523839626.000000
-Z90 !s107 C:/Users/lamar/Dropbox/kiko/Disciplinas/UnB/OAC/2018-1/Lab2/Files/FPALU/sqrt_s.v|
-Z91 !s90 -reportprogress|300|-sv|-work|work|+incdir+C:/Users/lamar/Dropbox/kiko/Disciplinas/UnB/OAC/2018-1/Lab2/Files/FPALU|C:/Users/lamar/Dropbox/kiko/Disciplinas/UnB/OAC/2018-1/Lab2/Files/FPALU/sqrt_s.v|
+Z87 !s108 1524445241.000000
+Z88 !s107 C:/Users/lamar/Dropbox/kiko/Disciplinas/UnB/OAC/2018-1/Lab2/Files/FPALU/sqrt_s.v|
+Z89 !s90 -reportprogress|300|-sv|-work|work|+incdir+C:/Users/lamar/Dropbox/kiko/Disciplinas/UnB/OAC/2018-1/Lab2/Files/FPALU|C:/Users/lamar/Dropbox/kiko/Disciplinas/UnB/OAC/2018-1/Lab2/Files/FPALU/sqrt_s.v|
 !i113 1
 R12
 R13
 R14
 vsqrt_s_alt_sqrt_block_ocb
 R1
-R84
+R82
 !i10b 1
 !s100 C9MJkmb_k=FLM[XnIM_OM0
 IR>JA9M82bOO=Cb^H]Uh>=0
 R3
-R85
+R83
 S1
 R0
+R84
+R85
 R86
-R87
-R88
-R25
+R24
 R8
 r1
 !s85 0
 31
+R87
+R88
 R89
-R90
-R91
 !i113 1
 R12
 R13
 R14
 vsqrt_s_altfp_sqrt_i9e
 R1
-R84
+R82
 !i10b 1
 !s100 QFTU=4nYP<ZzA6ThKVb?=1
 InZ:eKB7F8jP_g`N=<RWg71
 R3
-R85
+R83
 S1
 R0
+R84
+R85
 R86
-R87
-R88
 L0 1081
 R8
 r1
 !s85 0
 31
+R87
+R88
 R89
-R90
-R91
 !i113 1
 R12
 R13
