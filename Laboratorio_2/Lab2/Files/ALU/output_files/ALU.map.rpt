@@ -1,5 +1,5 @@
 Analysis & Synthesis report for ALU
-Sat May 05 15:24:51 2018
+Tue May 08 18:58:51 2018
 Quartus Prime Version 17.1.0 Build 590 10/25/2017 SJ Lite Edition
 
 
@@ -10,7 +10,21 @@ Quartus Prime Version 17.1.0 Build 590 10/25/2017 SJ Lite Edition
   2. Analysis & Synthesis Summary
   3. Analysis & Synthesis Settings
   4. Parallel Compilation
-  5. Analysis & Synthesis Messages
+  5. Analysis & Synthesis Source Files Read
+  6. Analysis & Synthesis Resource Usage Summary
+  7. Analysis & Synthesis Resource Utilization by Entity
+  8. Analysis & Synthesis DSP Block Usage Summary
+  9. Registers Removed During Synthesis
+ 10. General Register Statistics
+ 11. Multiplexer Restructuring Statistics (Restructuring Performed)
+ 12. Parameter Settings for Inferred Entity Instance: ALU:ula1|lpm_divide:Mod1
+ 13. Parameter Settings for Inferred Entity Instance: ALU:ula1|lpm_divide:Div1
+ 14. Parameter Settings for Inferred Entity Instance: ALU:ula1|lpm_divide:Div0
+ 15. Parameter Settings for Inferred Entity Instance: ALU:ula1|lpm_divide:Mod0
+ 16. Port Connectivity Checks: "ALU:ula1"
+ 17. Post-Synthesis Netlist Statistics for Top Partition
+ 18. Elapsed Time Per Partition
+ 19. Analysis & Synthesis Messages
 
 
 
@@ -33,22 +47,27 @@ refer to the applicable agreement for further details.
 
 
 
-+---------------------------------------------------------------------------+
-; Analysis & Synthesis Summary                                              ;
-+-----------------------------+---------------------------------------------+
-; Analysis & Synthesis Status ; Failed - Sat May 05 15:24:51 2018           ;
-; Quartus Prime Version       ; 17.1.0 Build 590 10/25/2017 SJ Lite Edition ;
-; Revision Name               ; ALU                                         ;
-; Top-level Entity Name       ; ALU_tb                                      ;
-; Family                      ; Cyclone V                                   ;
-; Logic utilization (in ALMs) ; N/A until Partition Merge                   ;
-; Total registers             ; N/A until Partition Merge                   ;
-; Total pins                  ; N/A until Partition Merge                   ;
-; Total virtual pins          ; N/A until Partition Merge                   ;
-; Total block memory bits     ; N/A until Partition Merge                   ;
-; Total PLLs                  ; N/A until Partition Merge                   ;
-; Total DLLs                  ; N/A until Partition Merge                   ;
-+-----------------------------+---------------------------------------------+
++-------------------------------------------------------------------------------+
+; Analysis & Synthesis Summary                                                  ;
++---------------------------------+---------------------------------------------+
+; Analysis & Synthesis Status     ; Successful - Tue May 08 18:58:51 2018       ;
+; Quartus Prime Version           ; 17.1.0 Build 590 10/25/2017 SJ Lite Edition ;
+; Revision Name                   ; ALU                                         ;
+; Top-level Entity Name           ; TopDE                                       ;
+; Family                          ; Cyclone V                                   ;
+; Logic utilization (in ALMs)     ; N/A                                         ;
+; Total registers                 ; 44                                          ;
+; Total pins                      ; 67                                          ;
+; Total virtual pins              ; 0                                           ;
+; Total block memory bits         ; 0                                           ;
+; Total DSP Blocks                ; 9                                           ;
+; Total HSSI RX PCSs              ; 0                                           ;
+; Total HSSI PMA RX Deserializers ; 0                                           ;
+; Total HSSI TX PCSs              ; 0                                           ;
+; Total HSSI PMA TX Serializers   ; 0                                           ;
+; Total PLLs                      ; 0                                           ;
+; Total DLLs                      ; 0                                           ;
++---------------------------------+---------------------------------------------+
 
 
 +---------------------------------------------------------------------------------------------------------------------------+
@@ -57,7 +76,7 @@ refer to the applicable agreement for further details.
 ; Option                                                                          ; Setting            ; Default Value      ;
 +---------------------------------------------------------------------------------+--------------------+--------------------+
 ; Device                                                                          ; 5CSEMA5F31C6       ;                    ;
-; Top-level entity name                                                           ; ALU_tb             ; ALU                ;
+; Top-level entity name                                                           ; TopDE              ; ALU                ;
 ; Family name                                                                     ; Cyclone V          ; Cyclone V          ;
 ; Use smart compilation                                                           ; On                 ; Off                ;
 ; Maximum processors allowed for parallel compilation                             ; All                ;                    ;
@@ -149,11 +168,310 @@ refer to the applicable agreement for further details.
 ; Maximum allowed            ; 2           ;
 ;                            ;             ;
 ; Average used               ; 1.00        ;
-; Maximum used               ; 1           ;
+; Maximum used               ; 2           ;
 ;                            ;             ;
 ; Usage by Processor         ; % Time Used ;
 ;     Processor 1            ; 100.0%      ;
+;     Processor 2            ;   0.2%      ;
 +----------------------------+-------------+
+
+
++-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+; Analysis & Synthesis Source Files Read                                                                                                                                                                                                                      ;
++----------------------------------+-----------------+------------------------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------+---------+
+; File Name with User-Entered Path ; Used in Netlist ; File Type                    ; File Name with Absolute Path                                                                                                                                  ; Library ;
++----------------------------------+-----------------+------------------------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------+---------+
+; TopDE.v                          ; yes             ; User Verilog HDL File        ; C:/Users/Cleibe/Documents/pdfs curso Ciencia da Computacao/OAC/laboratorios/laboratorio1/TrabalhosOAC/Laboratorio_2/Lab2/Files/ALU/TopDE.v                    ;         ;
+; Parametros.v                     ; yes             ; User Verilog HDL File        ; C:/Users/Cleibe/Documents/pdfs curso Ciencia da Computacao/OAC/laboratorios/laboratorio1/TrabalhosOAC/Laboratorio_2/Lab2/Files/ALU/Parametros.v               ;         ;
+; Decoder7.v                       ; yes             ; User Verilog HDL File        ; C:/Users/Cleibe/Documents/pdfs curso Ciencia da Computacao/OAC/laboratorios/laboratorio1/TrabalhosOAC/Laboratorio_2/Lab2/Files/ALU/Decoder7.v                 ;         ;
+; ALU.v                            ; yes             ; User Verilog HDL File        ; C:/Users/Cleibe/Documents/pdfs curso Ciencia da Computacao/OAC/laboratorios/laboratorio1/TrabalhosOAC/Laboratorio_2/Lab2/Files/ALU/ALU.v                      ;         ;
+; lpm_divide.tdf                   ; yes             ; Megafunction                 ; c:/intelfpga_lite/17.1/quartus/libraries/megafunctions/lpm_divide.tdf                                                                                         ;         ;
+; abs_divider.inc                  ; yes             ; Megafunction                 ; c:/intelfpga_lite/17.1/quartus/libraries/megafunctions/abs_divider.inc                                                                                        ;         ;
+; sign_div_unsign.inc              ; yes             ; Megafunction                 ; c:/intelfpga_lite/17.1/quartus/libraries/megafunctions/sign_div_unsign.inc                                                                                    ;         ;
+; aglobal171.inc                   ; yes             ; Megafunction                 ; c:/intelfpga_lite/17.1/quartus/libraries/megafunctions/aglobal171.inc                                                                                         ;         ;
+; db/lpm_divide_65m.tdf            ; yes             ; Auto-Generated Megafunction  ; C:/Users/Cleibe/Documents/pdfs curso Ciencia da Computacao/OAC/laboratorios/laboratorio1/TrabalhosOAC/Laboratorio_2/Lab2/Files/ALU/db/lpm_divide_65m.tdf      ;         ;
+; db/sign_div_unsign_9nh.tdf       ; yes             ; Auto-Generated Megafunction  ; C:/Users/Cleibe/Documents/pdfs curso Ciencia da Computacao/OAC/laboratorios/laboratorio1/TrabalhosOAC/Laboratorio_2/Lab2/Files/ALU/db/sign_div_unsign_9nh.tdf ;         ;
+; db/alt_u_div_o2f.tdf             ; yes             ; Auto-Generated Megafunction  ; C:/Users/Cleibe/Documents/pdfs curso Ciencia da Computacao/OAC/laboratorios/laboratorio1/TrabalhosOAC/Laboratorio_2/Lab2/Files/ALU/db/alt_u_div_o2f.tdf       ;         ;
+; db/lpm_divide_3dm.tdf            ; yes             ; Auto-Generated Megafunction  ; C:/Users/Cleibe/Documents/pdfs curso Ciencia da Computacao/OAC/laboratorios/laboratorio1/TrabalhosOAC/Laboratorio_2/Lab2/Files/ALU/db/lpm_divide_3dm.tdf      ;         ;
+; db/lpm_divide_rqo.tdf            ; yes             ; Auto-Generated Megafunction  ; C:/Users/Cleibe/Documents/pdfs curso Ciencia da Computacao/OAC/laboratorios/laboratorio1/TrabalhosOAC/Laboratorio_2/Lab2/Files/ALU/db/lpm_divide_rqo.tdf      ;         ;
+; db/abs_divider_4dg.tdf           ; yes             ; Auto-Generated Megafunction  ; C:/Users/Cleibe/Documents/pdfs curso Ciencia da Computacao/OAC/laboratorios/laboratorio1/TrabalhosOAC/Laboratorio_2/Lab2/Files/ALU/db/abs_divider_4dg.tdf     ;         ;
+; db/lpm_abs_4p9.tdf               ; yes             ; Auto-Generated Megafunction  ; C:/Users/Cleibe/Documents/pdfs curso Ciencia da Computacao/OAC/laboratorios/laboratorio1/TrabalhosOAC/Laboratorio_2/Lab2/Files/ALU/db/lpm_abs_4p9.tdf         ;         ;
+; db/lpm_divide_uio.tdf            ; yes             ; Auto-Generated Megafunction  ; C:/Users/Cleibe/Documents/pdfs curso Ciencia da Computacao/OAC/laboratorios/laboratorio1/TrabalhosOAC/Laboratorio_2/Lab2/Files/ALU/db/lpm_divide_uio.tdf      ;         ;
++----------------------------------+-----------------+------------------------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------+---------+
+
+
++----------------------------------------------------------+
+; Analysis & Synthesis Resource Usage Summary              ;
++---------------------------------------------+------------+
+; Resource                                    ; Usage      ;
++---------------------------------------------+------------+
+; Estimate of Logic utilization (ALMs needed) ; 2905       ;
+;                                             ;            ;
+; Combinational ALUT usage for logic          ; 5528       ;
+;     -- 7 input functions                    ; 41         ;
+;     -- 6 input functions                    ; 237        ;
+;     -- 5 input functions                    ; 987        ;
+;     -- 4 input functions                    ; 2316       ;
+;     -- <=3 input functions                  ; 1947       ;
+;                                             ;            ;
+; Dedicated logic registers                   ; 44         ;
+;                                             ;            ;
+; I/O pins                                    ; 67         ;
+;                                             ;            ;
+; Total DSP Blocks                            ; 9          ;
+;                                             ;            ;
+; Maximum fan-out node                        ; idatab[10] ;
+; Maximum fan-out                             ; 1983       ;
+; Total fan-out                               ; 22481      ;
+; Average fan-out                             ; 3.93       ;
++---------------------------------------------+------------+
+
+
++-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+; Analysis & Synthesis Resource Utilization by Entity                                                                                                                                                                                                                                                       ;
++-------------------------------------------+---------------------+---------------------------+-------------------+------------+------+--------------+-----------------------------------------------------------------------------------------------------------------+---------------------+--------------+
+; Compilation Hierarchy Node                ; Combinational ALUTs ; Dedicated Logic Registers ; Block Memory Bits ; DSP Blocks ; Pins ; Virtual Pins ; Full Hierarchy Name                                                                                             ; Entity Name         ; Library Name ;
++-------------------------------------------+---------------------+---------------------------+-------------------+------------+------+--------------+-----------------------------------------------------------------------------------------------------------------+---------------------+--------------+
+; |TopDE                                    ; 5528 (24)           ; 44 (44)                   ; 0                 ; 9          ; 67   ; 0            ; |TopDE                                                                                                          ; TopDE               ; work         ;
+;    |ALU:ula1|                             ; 5462 (590)          ; 0 (0)                     ; 0                 ; 9          ; 0    ; 0            ; |TopDE|ALU:ula1                                                                                                 ; ALU                 ; work         ;
+;       |lpm_divide:Div0|                   ; 1317 (0)            ; 0 (0)                     ; 0                 ; 0          ; 0    ; 0            ; |TopDE|ALU:ula1|lpm_divide:Div0                                                                                 ; lpm_divide          ; work         ;
+;          |lpm_divide_rqo:auto_generated|  ; 1317 (0)            ; 0 (0)                     ; 0                 ; 0          ; 0    ; 0            ; |TopDE|ALU:ula1|lpm_divide:Div0|lpm_divide_rqo:auto_generated                                                   ; lpm_divide_rqo      ; work         ;
+;             |abs_divider_4dg:divider|     ; 1317 (41)           ; 0 (0)                     ; 0                 ; 0          ; 0    ; 0            ; |TopDE|ALU:ula1|lpm_divide:Div0|lpm_divide_rqo:auto_generated|abs_divider_4dg:divider                           ; abs_divider_4dg     ; work         ;
+;                |alt_u_div_o2f:divider|    ; 1256 (1256)         ; 0 (0)                     ; 0                 ; 0          ; 0    ; 0            ; |TopDE|ALU:ula1|lpm_divide:Div0|lpm_divide_rqo:auto_generated|abs_divider_4dg:divider|alt_u_div_o2f:divider     ; alt_u_div_o2f       ; work         ;
+;                |lpm_abs_4p9:my_abs_den|   ; 10 (10)             ; 0 (0)                     ; 0                 ; 0          ; 0    ; 0            ; |TopDE|ALU:ula1|lpm_divide:Div0|lpm_divide_rqo:auto_generated|abs_divider_4dg:divider|lpm_abs_4p9:my_abs_den    ; lpm_abs_4p9         ; work         ;
+;                |lpm_abs_4p9:my_abs_num|   ; 10 (10)             ; 0 (0)                     ; 0                 ; 0          ; 0    ; 0            ; |TopDE|ALU:ula1|lpm_divide:Div0|lpm_divide_rqo:auto_generated|abs_divider_4dg:divider|lpm_abs_4p9:my_abs_num    ; lpm_abs_4p9         ; work         ;
+;       |lpm_divide:Div1|                   ; 1086 (0)            ; 0 (0)                     ; 0                 ; 0          ; 0    ; 0            ; |TopDE|ALU:ula1|lpm_divide:Div1                                                                                 ; lpm_divide          ; work         ;
+;          |lpm_divide_3dm:auto_generated|  ; 1086 (0)            ; 0 (0)                     ; 0                 ; 0          ; 0    ; 0            ; |TopDE|ALU:ula1|lpm_divide:Div1|lpm_divide_3dm:auto_generated                                                   ; lpm_divide_3dm      ; work         ;
+;             |sign_div_unsign_9nh:divider| ; 1086 (0)            ; 0 (0)                     ; 0                 ; 0          ; 0    ; 0            ; |TopDE|ALU:ula1|lpm_divide:Div1|lpm_divide_3dm:auto_generated|sign_div_unsign_9nh:divider                       ; sign_div_unsign_9nh ; work         ;
+;                |alt_u_div_o2f:divider|    ; 1086 (1086)         ; 0 (0)                     ; 0                 ; 0          ; 0    ; 0            ; |TopDE|ALU:ula1|lpm_divide:Div1|lpm_divide_3dm:auto_generated|sign_div_unsign_9nh:divider|alt_u_div_o2f:divider ; alt_u_div_o2f       ; work         ;
+;       |lpm_divide:Mod0|                   ; 1364 (0)            ; 0 (0)                     ; 0                 ; 0          ; 0    ; 0            ; |TopDE|ALU:ula1|lpm_divide:Mod0                                                                                 ; lpm_divide          ; work         ;
+;          |lpm_divide_uio:auto_generated|  ; 1364 (0)            ; 0 (0)                     ; 0                 ; 0          ; 0    ; 0            ; |TopDE|ALU:ula1|lpm_divide:Mod0|lpm_divide_uio:auto_generated                                                   ; lpm_divide_uio      ; work         ;
+;             |abs_divider_4dg:divider|     ; 1364 (41)           ; 0 (0)                     ; 0                 ; 0          ; 0    ; 0            ; |TopDE|ALU:ula1|lpm_divide:Mod0|lpm_divide_uio:auto_generated|abs_divider_4dg:divider                           ; abs_divider_4dg     ; work         ;
+;                |alt_u_div_o2f:divider|    ; 1303 (1303)         ; 0 (0)                     ; 0                 ; 0          ; 0    ; 0            ; |TopDE|ALU:ula1|lpm_divide:Mod0|lpm_divide_uio:auto_generated|abs_divider_4dg:divider|alt_u_div_o2f:divider     ; alt_u_div_o2f       ; work         ;
+;                |lpm_abs_4p9:my_abs_den|   ; 10 (10)             ; 0 (0)                     ; 0                 ; 0          ; 0    ; 0            ; |TopDE|ALU:ula1|lpm_divide:Mod0|lpm_divide_uio:auto_generated|abs_divider_4dg:divider|lpm_abs_4p9:my_abs_den    ; lpm_abs_4p9         ; work         ;
+;                |lpm_abs_4p9:my_abs_num|   ; 10 (10)             ; 0 (0)                     ; 0                 ; 0          ; 0    ; 0            ; |TopDE|ALU:ula1|lpm_divide:Mod0|lpm_divide_uio:auto_generated|abs_divider_4dg:divider|lpm_abs_4p9:my_abs_num    ; lpm_abs_4p9         ; work         ;
+;       |lpm_divide:Mod1|                   ; 1105 (0)            ; 0 (0)                     ; 0                 ; 0          ; 0    ; 0            ; |TopDE|ALU:ula1|lpm_divide:Mod1                                                                                 ; lpm_divide          ; work         ;
+;          |lpm_divide_65m:auto_generated|  ; 1105 (0)            ; 0 (0)                     ; 0                 ; 0          ; 0    ; 0            ; |TopDE|ALU:ula1|lpm_divide:Mod1|lpm_divide_65m:auto_generated                                                   ; lpm_divide_65m      ; work         ;
+;             |sign_div_unsign_9nh:divider| ; 1105 (0)            ; 0 (0)                     ; 0                 ; 0          ; 0    ; 0            ; |TopDE|ALU:ula1|lpm_divide:Mod1|lpm_divide_65m:auto_generated|sign_div_unsign_9nh:divider                       ; sign_div_unsign_9nh ; work         ;
+;                |alt_u_div_o2f:divider|    ; 1105 (1105)         ; 0 (0)                     ; 0                 ; 0          ; 0    ; 0            ; |TopDE|ALU:ula1|lpm_divide:Mod1|lpm_divide_65m:auto_generated|sign_div_unsign_9nh:divider|alt_u_div_o2f:divider ; alt_u_div_o2f       ; work         ;
+;    |Decoder7:d0|                          ; 7 (7)               ; 0 (0)                     ; 0                 ; 0          ; 0    ; 0            ; |TopDE|Decoder7:d0                                                                                              ; Decoder7            ; work         ;
+;    |Decoder7:d1|                          ; 7 (7)               ; 0 (0)                     ; 0                 ; 0          ; 0    ; 0            ; |TopDE|Decoder7:d1                                                                                              ; Decoder7            ; work         ;
+;    |Decoder7:d2|                          ; 7 (7)               ; 0 (0)                     ; 0                 ; 0          ; 0    ; 0            ; |TopDE|Decoder7:d2                                                                                              ; Decoder7            ; work         ;
+;    |Decoder7:d3|                          ; 7 (7)               ; 0 (0)                     ; 0                 ; 0          ; 0    ; 0            ; |TopDE|Decoder7:d3                                                                                              ; Decoder7            ; work         ;
+;    |Decoder7:d4|                          ; 7 (7)               ; 0 (0)                     ; 0                 ; 0          ; 0    ; 0            ; |TopDE|Decoder7:d4                                                                                              ; Decoder7            ; work         ;
+;    |Decoder7:d5|                          ; 7 (7)               ; 0 (0)                     ; 0                 ; 0          ; 0    ; 0            ; |TopDE|Decoder7:d5                                                                                              ; Decoder7            ; work         ;
++-------------------------------------------+---------------------+---------------------------+-------------------+------------+------+--------------+-----------------------------------------------------------------------------------------------------------------+---------------------+--------------+
+Note: For table entries with two numbers listed, the numbers in parentheses indicate the number of resources of the given type used by the specific entity alone. The numbers listed outside of parentheses indicate the total resources of the given type used by the specific entity and all of its sub-entities in the hierarchy.
+
+
++-------------------------------------------------+
+; Analysis & Synthesis DSP Block Usage Summary    ;
++-----------------------------------+-------------+
+; Statistic                         ; Number Used ;
++-----------------------------------+-------------+
+; Two Independent 18x18             ; 6           ;
+; Sum of two 18x18                  ; 3           ;
+; Total number of DSP blocks        ; 9           ;
+;                                   ;             ;
+; Fixed Point Signed Multiplier     ; 1           ;
+; Fixed Point Unsigned Multiplier   ; 9           ;
+; Fixed Point Mixed Sign Multiplier ; 2           ;
++-----------------------------------+-------------+
+
+
++-----------------------------------------------------------------+
+; Registers Removed During Synthesis                              ;
++----------------------------------------+------------------------+
+; Register name                          ; Reason for Removal     ;
++----------------------------------------+------------------------+
+; idatab[9,11..31]                       ; Merged with idatab[10] ;
+; idataa[9,11..31]                       ; Merged with idataa[10] ;
+; Total Number of Removed Registers = 44 ;                        ;
++----------------------------------------+------------------------+
+
+
++------------------------------------------------------+
+; General Register Statistics                          ;
++----------------------------------------------+-------+
+; Statistic                                    ; Value ;
++----------------------------------------------+-------+
+; Total registers                              ; 44    ;
+; Number of registers using Synchronous Clear  ; 0     ;
+; Number of registers using Synchronous Load   ; 24    ;
+; Number of registers using Asynchronous Clear ; 0     ;
+; Number of registers using Asynchronous Load  ; 0     ;
+; Number of registers using Clock Enable       ; 0     ;
+; Number of registers using Preset             ; 0     ;
++----------------------------------------------+-------+
+
+
++-------------------------------------------------------------------------------------------------------------------------------------------+
+; Multiplexer Restructuring Statistics (Restructuring Performed)                                                                            ;
++--------------------+-----------+---------------+----------------------+------------------------+------------+-----------------------------+
+; Multiplexer Inputs ; Bus Width ; Baseline Area ; Area if Restructured ; Saving if Restructured ; Registered ; Example Multiplexer Output  ;
++--------------------+-----------+---------------+----------------------+------------------------+------------+-----------------------------+
+; 3:1                ; 24 bits   ; 48 LEs        ; 48 LEs               ; 0 LEs                  ; Yes        ; |TopDE|oresult[5]           ;
+; 4:1                ; 10 bits   ; 20 LEs        ; 20 LEs               ; 0 LEs                  ; No         ; |TopDE|ALU:ula1|ShiftLeft0  ;
+; 3:1                ; 2 bits    ; 4 LEs         ; 4 LEs                ; 0 LEs                  ; No         ; |TopDE|ALU:ula1|ShiftRight0 ;
+; 3:1                ; 6 bits    ; 12 LEs        ; 12 LEs               ; 0 LEs                  ; No         ; |TopDE|ALU:ula1|ShiftLeft0  ;
+; 4:1                ; 4 bits    ; 8 LEs         ; 8 LEs                ; 0 LEs                  ; No         ; |TopDE|ALU:ula1|ShiftLeft0  ;
+; 4:1                ; 4 bits    ; 8 LEs         ; 8 LEs                ; 0 LEs                  ; No         ; |TopDE|ALU:ula1|ShiftLeft0  ;
+; 35:1               ; 2 bits    ; 46 LEs        ; 32 LEs               ; 14 LEs                 ; No         ; |TopDE|ALU:ula1|Mux24       ;
+; 39:1               ; 2 bits    ; 52 LEs        ; 38 LEs               ; 14 LEs                 ; No         ; |TopDE|ALU:ula1|Mux30       ;
+; 19:1               ; 5 bits    ; 60 LEs        ; 60 LEs               ; 0 LEs                  ; No         ; |TopDE|ALU:ula1|Mux2        ;
+; 19:1               ; 3 bits    ; 36 LEs        ; 36 LEs               ; 0 LEs                  ; No         ; |TopDE|ALU:ula1|Mux18       ;
+; 19:1               ; 2 bits    ; 24 LEs        ; 24 LEs               ; 0 LEs                  ; No         ; |TopDE|ALU:ula1|Mux1        ;
+; 20:1               ; 3 bits    ; 39 LEs        ; 36 LEs               ; 3 LEs                  ; No         ; |TopDE|ALU:ula1|Mux8        ;
+; 21:1               ; 2 bits    ; 28 LEs        ; 26 LEs               ; 2 LEs                  ; No         ; |TopDE|ALU:ula1|Mux14       ;
++--------------------+-----------+---------------+----------------------+------------------------+------------+-----------------------------+
+
+
++---------------------------------------------------------------------------+
+; Parameter Settings for Inferred Entity Instance: ALU:ula1|lpm_divide:Mod1 ;
++------------------------+----------------+---------------------------------+
+; Parameter Name         ; Value          ; Type                            ;
++------------------------+----------------+---------------------------------+
+; LPM_WIDTHN             ; 32             ; Untyped                         ;
+; LPM_WIDTHD             ; 32             ; Untyped                         ;
+; LPM_NREPRESENTATION    ; UNSIGNED       ; Untyped                         ;
+; LPM_DREPRESENTATION    ; UNSIGNED       ; Untyped                         ;
+; LPM_PIPELINE           ; 0              ; Untyped                         ;
+; LPM_REMAINDERPOSITIVE  ; TRUE           ; Untyped                         ;
+; MAXIMIZE_SPEED         ; 5              ; Untyped                         ;
+; CBXI_PARAMETER         ; lpm_divide_65m ; Untyped                         ;
+; CARRY_CHAIN            ; MANUAL         ; Untyped                         ;
+; OPTIMIZE_FOR_SPEED     ; 5              ; Untyped                         ;
+; AUTO_CARRY_CHAINS      ; ON             ; AUTO_CARRY                      ;
+; IGNORE_CARRY_BUFFERS   ; OFF            ; IGNORE_CARRY                    ;
+; AUTO_CASCADE_CHAINS    ; ON             ; AUTO_CASCADE                    ;
+; IGNORE_CASCADE_BUFFERS ; OFF            ; IGNORE_CASCADE                  ;
++------------------------+----------------+---------------------------------+
+Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
+
+
++---------------------------------------------------------------------------+
+; Parameter Settings for Inferred Entity Instance: ALU:ula1|lpm_divide:Div1 ;
++------------------------+----------------+---------------------------------+
+; Parameter Name         ; Value          ; Type                            ;
++------------------------+----------------+---------------------------------+
+; LPM_WIDTHN             ; 32             ; Untyped                         ;
+; LPM_WIDTHD             ; 32             ; Untyped                         ;
+; LPM_NREPRESENTATION    ; UNSIGNED       ; Untyped                         ;
+; LPM_DREPRESENTATION    ; UNSIGNED       ; Untyped                         ;
+; LPM_PIPELINE           ; 0              ; Untyped                         ;
+; LPM_REMAINDERPOSITIVE  ; TRUE           ; Untyped                         ;
+; MAXIMIZE_SPEED         ; 5              ; Untyped                         ;
+; CBXI_PARAMETER         ; lpm_divide_3dm ; Untyped                         ;
+; CARRY_CHAIN            ; MANUAL         ; Untyped                         ;
+; OPTIMIZE_FOR_SPEED     ; 5              ; Untyped                         ;
+; AUTO_CARRY_CHAINS      ; ON             ; AUTO_CARRY                      ;
+; IGNORE_CARRY_BUFFERS   ; OFF            ; IGNORE_CARRY                    ;
+; AUTO_CASCADE_CHAINS    ; ON             ; AUTO_CASCADE                    ;
+; IGNORE_CASCADE_BUFFERS ; OFF            ; IGNORE_CASCADE                  ;
++------------------------+----------------+---------------------------------+
+Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
+
+
++---------------------------------------------------------------------------+
+; Parameter Settings for Inferred Entity Instance: ALU:ula1|lpm_divide:Div0 ;
++------------------------+----------------+---------------------------------+
+; Parameter Name         ; Value          ; Type                            ;
++------------------------+----------------+---------------------------------+
+; LPM_WIDTHN             ; 32             ; Untyped                         ;
+; LPM_WIDTHD             ; 32             ; Untyped                         ;
+; LPM_NREPRESENTATION    ; SIGNED         ; Untyped                         ;
+; LPM_DREPRESENTATION    ; SIGNED         ; Untyped                         ;
+; LPM_PIPELINE           ; 0              ; Untyped                         ;
+; LPM_REMAINDERPOSITIVE  ; FALSE          ; Untyped                         ;
+; MAXIMIZE_SPEED         ; 5              ; Untyped                         ;
+; CBXI_PARAMETER         ; lpm_divide_rqo ; Untyped                         ;
+; CARRY_CHAIN            ; MANUAL         ; Untyped                         ;
+; OPTIMIZE_FOR_SPEED     ; 5              ; Untyped                         ;
+; AUTO_CARRY_CHAINS      ; ON             ; AUTO_CARRY                      ;
+; IGNORE_CARRY_BUFFERS   ; OFF            ; IGNORE_CARRY                    ;
+; AUTO_CASCADE_CHAINS    ; ON             ; AUTO_CASCADE                    ;
+; IGNORE_CASCADE_BUFFERS ; OFF            ; IGNORE_CASCADE                  ;
++------------------------+----------------+---------------------------------+
+Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
+
+
++---------------------------------------------------------------------------+
+; Parameter Settings for Inferred Entity Instance: ALU:ula1|lpm_divide:Mod0 ;
++------------------------+----------------+---------------------------------+
+; Parameter Name         ; Value          ; Type                            ;
++------------------------+----------------+---------------------------------+
+; LPM_WIDTHN             ; 32             ; Untyped                         ;
+; LPM_WIDTHD             ; 32             ; Untyped                         ;
+; LPM_NREPRESENTATION    ; SIGNED         ; Untyped                         ;
+; LPM_DREPRESENTATION    ; SIGNED         ; Untyped                         ;
+; LPM_PIPELINE           ; 0              ; Untyped                         ;
+; LPM_REMAINDERPOSITIVE  ; FALSE          ; Untyped                         ;
+; MAXIMIZE_SPEED         ; 5              ; Untyped                         ;
+; CBXI_PARAMETER         ; lpm_divide_uio ; Untyped                         ;
+; CARRY_CHAIN            ; MANUAL         ; Untyped                         ;
+; OPTIMIZE_FOR_SPEED     ; 5              ; Untyped                         ;
+; AUTO_CARRY_CHAINS      ; ON             ; AUTO_CARRY                      ;
+; IGNORE_CARRY_BUFFERS   ; OFF            ; IGNORE_CARRY                    ;
+; AUTO_CASCADE_CHAINS    ; ON             ; AUTO_CASCADE                    ;
+; IGNORE_CASCADE_BUFFERS ; OFF            ; IGNORE_CASCADE                  ;
++------------------------+----------------+---------------------------------+
+Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
+
+
++---------------------------------------------------------------------------------------------------------------------------+
+; Port Connectivity Checks: "ALU:ula1"                                                                                      ;
++-----------------+--------+----------+-------------------------------------------------------------------------------------+
+; Port            ; Type   ; Severity ; Details                                                                             ;
++-----------------+--------+----------+-------------------------------------------------------------------------------------+
+; oResult[31..24] ; Output ; Info     ; Connected to dangling logic. Logic that only feeds a dangling port will be removed. ;
++-----------------+--------+----------+-------------------------------------------------------------------------------------+
+
+
++-----------------------------------------------------+
+; Post-Synthesis Netlist Statistics for Top Partition ;
++-----------------------+-----------------------------+
+; Type                  ; Count                       ;
++-----------------------+-----------------------------+
+; arriav_ff             ; 44                          ;
+;     SLD               ; 24                          ;
+;     plain             ; 20                          ;
+; arriav_lcell_comb     ; 5535                        ;
+;     arith             ; 2549                        ;
+;         0 data inputs ; 202                         ;
+;         1 data inputs ; 165                         ;
+;         2 data inputs ; 334                         ;
+;         3 data inputs ; 208                         ;
+;         4 data inputs ; 924                         ;
+;         5 data inputs ; 716                         ;
+;     extend            ; 41                          ;
+;         7 data inputs ; 41                          ;
+;     normal            ; 2916                        ;
+;         0 data inputs ; 1                           ;
+;         1 data inputs ; 6                           ;
+;         2 data inputs ; 781                         ;
+;         3 data inputs ; 234                         ;
+;         4 data inputs ; 1386                        ;
+;         5 data inputs ; 271                         ;
+;         6 data inputs ; 237                         ;
+;     shared            ; 29                          ;
+;         0 data inputs ; 6                           ;
+;         2 data inputs ; 17                          ;
+;         4 data inputs ; 6                           ;
+; arriav_mac            ; 9                           ;
+; boundary_port         ; 67                          ;
+;                       ;                             ;
+; Max LUT depth         ; 104.70                      ;
+; Average LUT depth     ; 85.36                       ;
++-----------------------+-----------------------------+
+
+
++-------------------------------+
+; Elapsed Time Per Partition    ;
++----------------+--------------+
+; Partition Name ; Elapsed Time ;
++----------------+--------------+
+; Top            ; 00:00:31     ;
++----------------+--------------+
 
 
 +-------------------------------+
@@ -162,29 +480,88 @@ refer to the applicable agreement for further details.
 Info: *******************************************************************
 Info: Running Quartus Prime Analysis & Synthesis
     Info: Version 17.1.0 Build 590 10/25/2017 SJ Lite Edition
-    Info: Processing started: Sat May 05 15:24:38 2018
+    Info: Processing started: Tue May 08 18:57:55 2018
 Info: Command: quartus_map --read_settings_files=on --write_settings_files=off ALU -c ALU
 Info (20030): Parallel compilation is enabled and will use 2 of the 2 processors detected
 Info (12021): Found 1 design units, including 1 entities, in source file topde.v
-    Info (12023): Found entity 1: TopDE File: C:/Users/henri/TrabalhosOAC/Laboratorio_2/Lab2/Files/ALU/TopDE.v Line: 11
+    Info (12023): Found entity 1: TopDE File: C:/Users/Cleibe/Documents/pdfs curso Ciencia da Computacao/OAC/laboratorios/laboratorio1/TrabalhosOAC/Laboratorio_2/Lab2/Files/ALU/TopDE.v Line: 11
 Info (12021): Found 0 design units, including 0 entities, in source file parametros.v
 Info (12021): Found 1 design units, including 1 entities, in source file decoder7.v
-    Info (12023): Found entity 1: Decoder7 File: C:/Users/henri/TrabalhosOAC/Laboratorio_2/Lab2/Files/ALU/Decoder7.v Line: 3
+    Info (12023): Found entity 1: Decoder7 File: C:/Users/Cleibe/Documents/pdfs curso Ciencia da Computacao/OAC/laboratorios/laboratorio1/TrabalhosOAC/Laboratorio_2/Lab2/Files/ALU/Decoder7.v Line: 3
 Info (12021): Found 1 design units, including 1 entities, in source file alu.v
-    Info (12023): Found entity 1: ALU File: C:/Users/henri/TrabalhosOAC/Laboratorio_2/Lab2/Files/ALU/ALU.v Line: 10
+    Info (12023): Found entity 1: ALU File: C:/Users/Cleibe/Documents/pdfs curso Ciencia da Computacao/OAC/laboratorios/laboratorio1/TrabalhosOAC/Laboratorio_2/Lab2/Files/ALU/ALU.v Line: 10
 Info (12021): Found 1 design units, including 1 entities, in source file alu_tb.v
-    Info (12023): Found entity 1: ALU_tb File: C:/Users/henri/TrabalhosOAC/Laboratorio_2/Lab2/Files/ALU/ALU_tb.v Line: 8
-Info (12127): Elaborating entity "ALU_tb" for the top level hierarchy
-Error (10174): Verilog HDL Unsupported Feature error at ALU_tb.v(26): system function "$time" is not supported for synthesis File: C:/Users/henri/TrabalhosOAC/Laboratorio_2/Lab2/Files/ALU/ALU_tb.v Line: 26
-Info (10648): Verilog HDL Display System Task info at ALU_tb.v(26):  << Starting Simulation >>  File: C:/Users/henri/TrabalhosOAC/Laboratorio_2/Lab2/Files/ALU/ALU_tb.v Line: 26
-Error (10174): Verilog HDL Unsupported Feature error at ALU_tb.v(68): system function "$time" is not supported for synthesis File: C:/Users/henri/TrabalhosOAC/Laboratorio_2/Lab2/Files/ALU/ALU_tb.v Line: 68
-Info (10648): Verilog HDL Display System Task info at ALU_tb.v(68): << Simulation Complete >> File: C:/Users/henri/TrabalhosOAC/Laboratorio_2/Lab2/Files/ALU/ALU_tb.v Line: 68
-Warning (10175): Verilog HDL warning at ALU_tb.v(69): ignoring unsupported system task File: C:/Users/henri/TrabalhosOAC/Laboratorio_2/Lab2/Files/ALU/ALU_tb.v Line: 69
-Error (12153): Can't elaborate top-level user hierarchy
-Error: Quartus Prime Analysis & Synthesis was unsuccessful. 3 errors, 1 warning
-    Error: Peak virtual memory: 711 megabytes
-    Error: Processing ended: Sat May 05 15:24:51 2018
-    Error: Elapsed time: 00:00:13
-    Error: Total CPU time (on all processors): 00:00:28
+    Info (12023): Found entity 1: ALU_tb File: C:/Users/Cleibe/Documents/pdfs curso Ciencia da Computacao/OAC/laboratorios/laboratorio1/TrabalhosOAC/Laboratorio_2/Lab2/Files/ALU/ALU_tb.v Line: 8
+Info (12021): Found 1 design units, including 1 entities, in source file /users/cleibe/documents/pdfs curso ciencia da computacao/oac/laboratorios/laboratorio1/trabalhosoac/laboratorio_2/resolucoes/q3/ula2bits.bdf
+    Info (12023): Found entity 1: Ula2bits
+Info (12127): Elaborating entity "TopDE" for the top level hierarchy
+Warning (10034): Output port "LEDR[8..5]" at TopDE.v(15) has no driver File: C:/Users/Cleibe/Documents/pdfs curso Ciencia da Computacao/OAC/laboratorios/laboratorio1/TrabalhosOAC/Laboratorio_2/Lab2/Files/ALU/TopDE.v Line: 15
+Info (12128): Elaborating entity "ALU" for hierarchy "ALU:ula1" File: C:/Users/Cleibe/Documents/pdfs curso Ciencia da Computacao/OAC/laboratorios/laboratorio1/TrabalhosOAC/Laboratorio_2/Lab2/Files/ALU/TopDE.v Line: 62
+Info (12128): Elaborating entity "Decoder7" for hierarchy "Decoder7:d0" File: C:/Users/Cleibe/Documents/pdfs curso Ciencia da Computacao/OAC/laboratorios/laboratorio1/TrabalhosOAC/Laboratorio_2/Lab2/Files/ALU/TopDE.v Line: 64
+Info (278001): Inferred 4 megafunctions from design logic
+    Info (278004): Inferred divider/modulo megafunction ("lpm_divide") from the following logic: "ALU:ula1|Mod1" File: C:/Users/Cleibe/Documents/pdfs curso Ciencia da Computacao/OAC/laboratorios/laboratorio1/TrabalhosOAC/Laboratorio_2/Lab2/Files/ALU/ALU.v Line: 71
+    Info (278004): Inferred divider/modulo megafunction ("lpm_divide") from the following logic: "ALU:ula1|Div1" File: C:/Users/Cleibe/Documents/pdfs curso Ciencia da Computacao/OAC/laboratorios/laboratorio1/TrabalhosOAC/Laboratorio_2/Lab2/Files/ALU/ALU.v Line: 67
+    Info (278004): Inferred divider/modulo megafunction ("lpm_divide") from the following logic: "ALU:ula1|Div0" File: C:/Users/Cleibe/Documents/pdfs curso Ciencia da Computacao/OAC/laboratorios/laboratorio1/TrabalhosOAC/Laboratorio_2/Lab2/Files/ALU/ALU.v Line: 65
+    Info (278004): Inferred divider/modulo megafunction ("lpm_divide") from the following logic: "ALU:ula1|Mod0" File: C:/Users/Cleibe/Documents/pdfs curso Ciencia da Computacao/OAC/laboratorios/laboratorio1/TrabalhosOAC/Laboratorio_2/Lab2/Files/ALU/ALU.v Line: 69
+Info (12130): Elaborated megafunction instantiation "ALU:ula1|lpm_divide:Mod1" File: C:/Users/Cleibe/Documents/pdfs curso Ciencia da Computacao/OAC/laboratorios/laboratorio1/TrabalhosOAC/Laboratorio_2/Lab2/Files/ALU/ALU.v Line: 71
+Info (12133): Instantiated megafunction "ALU:ula1|lpm_divide:Mod1" with the following parameter: File: C:/Users/Cleibe/Documents/pdfs curso Ciencia da Computacao/OAC/laboratorios/laboratorio1/TrabalhosOAC/Laboratorio_2/Lab2/Files/ALU/ALU.v Line: 71
+    Info (12134): Parameter "LPM_WIDTHN" = "32"
+    Info (12134): Parameter "LPM_WIDTHD" = "32"
+    Info (12134): Parameter "LPM_NREPRESENTATION" = "UNSIGNED"
+    Info (12134): Parameter "LPM_DREPRESENTATION" = "UNSIGNED"
+Info (12021): Found 1 design units, including 1 entities, in source file db/lpm_divide_65m.tdf
+    Info (12023): Found entity 1: lpm_divide_65m File: C:/Users/Cleibe/Documents/pdfs curso Ciencia da Computacao/OAC/laboratorios/laboratorio1/TrabalhosOAC/Laboratorio_2/Lab2/Files/ALU/db/lpm_divide_65m.tdf Line: 24
+Info (12021): Found 1 design units, including 1 entities, in source file db/sign_div_unsign_9nh.tdf
+    Info (12023): Found entity 1: sign_div_unsign_9nh File: C:/Users/Cleibe/Documents/pdfs curso Ciencia da Computacao/OAC/laboratorios/laboratorio1/TrabalhosOAC/Laboratorio_2/Lab2/Files/ALU/db/sign_div_unsign_9nh.tdf Line: 24
+Info (12021): Found 1 design units, including 1 entities, in source file db/alt_u_div_o2f.tdf
+    Info (12023): Found entity 1: alt_u_div_o2f File: C:/Users/Cleibe/Documents/pdfs curso Ciencia da Computacao/OAC/laboratorios/laboratorio1/TrabalhosOAC/Laboratorio_2/Lab2/Files/ALU/db/alt_u_div_o2f.tdf Line: 22
+Info (12130): Elaborated megafunction instantiation "ALU:ula1|lpm_divide:Div1" File: C:/Users/Cleibe/Documents/pdfs curso Ciencia da Computacao/OAC/laboratorios/laboratorio1/TrabalhosOAC/Laboratorio_2/Lab2/Files/ALU/ALU.v Line: 67
+Info (12133): Instantiated megafunction "ALU:ula1|lpm_divide:Div1" with the following parameter: File: C:/Users/Cleibe/Documents/pdfs curso Ciencia da Computacao/OAC/laboratorios/laboratorio1/TrabalhosOAC/Laboratorio_2/Lab2/Files/ALU/ALU.v Line: 67
+    Info (12134): Parameter "LPM_WIDTHN" = "32"
+    Info (12134): Parameter "LPM_WIDTHD" = "32"
+    Info (12134): Parameter "LPM_NREPRESENTATION" = "UNSIGNED"
+    Info (12134): Parameter "LPM_DREPRESENTATION" = "UNSIGNED"
+Info (12021): Found 1 design units, including 1 entities, in source file db/lpm_divide_3dm.tdf
+    Info (12023): Found entity 1: lpm_divide_3dm File: C:/Users/Cleibe/Documents/pdfs curso Ciencia da Computacao/OAC/laboratorios/laboratorio1/TrabalhosOAC/Laboratorio_2/Lab2/Files/ALU/db/lpm_divide_3dm.tdf Line: 24
+Info (12130): Elaborated megafunction instantiation "ALU:ula1|lpm_divide:Div0" File: C:/Users/Cleibe/Documents/pdfs curso Ciencia da Computacao/OAC/laboratorios/laboratorio1/TrabalhosOAC/Laboratorio_2/Lab2/Files/ALU/ALU.v Line: 65
+Info (12133): Instantiated megafunction "ALU:ula1|lpm_divide:Div0" with the following parameter: File: C:/Users/Cleibe/Documents/pdfs curso Ciencia da Computacao/OAC/laboratorios/laboratorio1/TrabalhosOAC/Laboratorio_2/Lab2/Files/ALU/ALU.v Line: 65
+    Info (12134): Parameter "LPM_WIDTHN" = "32"
+    Info (12134): Parameter "LPM_WIDTHD" = "32"
+    Info (12134): Parameter "LPM_NREPRESENTATION" = "SIGNED"
+    Info (12134): Parameter "LPM_DREPRESENTATION" = "SIGNED"
+    Info (12134): Parameter "LPM_HINT" = "LPM_REMAINDERPOSITIVE=FALSE"
+Info (12021): Found 1 design units, including 1 entities, in source file db/lpm_divide_rqo.tdf
+    Info (12023): Found entity 1: lpm_divide_rqo File: C:/Users/Cleibe/Documents/pdfs curso Ciencia da Computacao/OAC/laboratorios/laboratorio1/TrabalhosOAC/Laboratorio_2/Lab2/Files/ALU/db/lpm_divide_rqo.tdf Line: 24
+Info (12021): Found 1 design units, including 1 entities, in source file db/abs_divider_4dg.tdf
+    Info (12023): Found entity 1: abs_divider_4dg File: C:/Users/Cleibe/Documents/pdfs curso Ciencia da Computacao/OAC/laboratorios/laboratorio1/TrabalhosOAC/Laboratorio_2/Lab2/Files/ALU/db/abs_divider_4dg.tdf Line: 26
+Info (12021): Found 1 design units, including 1 entities, in source file db/lpm_abs_4p9.tdf
+    Info (12023): Found entity 1: lpm_abs_4p9 File: C:/Users/Cleibe/Documents/pdfs curso Ciencia da Computacao/OAC/laboratorios/laboratorio1/TrabalhosOAC/Laboratorio_2/Lab2/Files/ALU/db/lpm_abs_4p9.tdf Line: 22
+Info (12130): Elaborated megafunction instantiation "ALU:ula1|lpm_divide:Mod0" File: C:/Users/Cleibe/Documents/pdfs curso Ciencia da Computacao/OAC/laboratorios/laboratorio1/TrabalhosOAC/Laboratorio_2/Lab2/Files/ALU/ALU.v Line: 69
+Info (12133): Instantiated megafunction "ALU:ula1|lpm_divide:Mod0" with the following parameter: File: C:/Users/Cleibe/Documents/pdfs curso Ciencia da Computacao/OAC/laboratorios/laboratorio1/TrabalhosOAC/Laboratorio_2/Lab2/Files/ALU/ALU.v Line: 69
+    Info (12134): Parameter "LPM_WIDTHN" = "32"
+    Info (12134): Parameter "LPM_WIDTHD" = "32"
+    Info (12134): Parameter "LPM_NREPRESENTATION" = "SIGNED"
+    Info (12134): Parameter "LPM_DREPRESENTATION" = "SIGNED"
+    Info (12134): Parameter "LPM_HINT" = "LPM_REMAINDERPOSITIVE=FALSE"
+Info (12021): Found 1 design units, including 1 entities, in source file db/lpm_divide_uio.tdf
+    Info (12023): Found entity 1: lpm_divide_uio File: C:/Users/Cleibe/Documents/pdfs curso Ciencia da Computacao/OAC/laboratorios/laboratorio1/TrabalhosOAC/Laboratorio_2/Lab2/Files/ALU/db/lpm_divide_uio.tdf Line: 24
+Warning (13024): Output pins are stuck at VCC or GND
+    Warning (13410): Pin "LEDR[5]" is stuck at GND File: C:/Users/Cleibe/Documents/pdfs curso Ciencia da Computacao/OAC/laboratorios/laboratorio1/TrabalhosOAC/Laboratorio_2/Lab2/Files/ALU/TopDE.v Line: 15
+    Warning (13410): Pin "LEDR[6]" is stuck at GND File: C:/Users/Cleibe/Documents/pdfs curso Ciencia da Computacao/OAC/laboratorios/laboratorio1/TrabalhosOAC/Laboratorio_2/Lab2/Files/ALU/TopDE.v Line: 15
+    Warning (13410): Pin "LEDR[7]" is stuck at GND File: C:/Users/Cleibe/Documents/pdfs curso Ciencia da Computacao/OAC/laboratorios/laboratorio1/TrabalhosOAC/Laboratorio_2/Lab2/Files/ALU/TopDE.v Line: 15
+    Warning (13410): Pin "LEDR[8]" is stuck at GND File: C:/Users/Cleibe/Documents/pdfs curso Ciencia da Computacao/OAC/laboratorios/laboratorio1/TrabalhosOAC/Laboratorio_2/Lab2/Files/ALU/TopDE.v Line: 15
+Info (286030): Timing-Driven Synthesis is running
+Info (16010): Generating hard_block partition "hard_block:auto_generated_inst"
+    Info (16011): Adding 0 node(s), including 0 DDIO, 0 PLL, 0 transceiver and 0 LCELL
+Info (21057): Implemented 5624 device resources after synthesis - the final resource count might be different
+    Info (21058): Implemented 15 input pins
+    Info (21059): Implemented 52 output pins
+    Info (21061): Implemented 5548 logic cells
+    Info (21062): Implemented 9 DSP elements
+Info: Quartus Prime Analysis & Synthesis was successful. 0 errors, 6 warnings
+    Info: Peak virtual memory: 707 megabytes
+    Info: Processing ended: Tue May 08 18:58:51 2018
+    Info: Elapsed time: 00:00:56
+    Info: Total CPU time (on all processors): 00:01:07
 
 

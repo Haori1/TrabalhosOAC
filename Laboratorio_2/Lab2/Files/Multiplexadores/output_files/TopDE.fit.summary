@@ -1,20 +1,20 @@
-Fitter Status : Failed - Sun Apr 22 12:47:16 2018
+Fitter Status : Failed - Mon May 07 21:07:49 2018
 Quartus Prime Version : 17.1.0 Build 590 10/25/2017 SJ Lite Edition
 Revision Name : TopDE
-Top-level Entity Name : mux32_32
+Top-level Entity Name : mux32_32a
 Family : Cyclone V
-Device : 5CGXFC9E7F35C8
+Device : 5CSEMA5F31C6
 Timing Models : Final
-Logic utilization (in ALMs) : 178 / 113,560 ( < 1 % )
+Logic utilization (in ALMs) : 178 / 32,070 ( < 1 % )
 Total registers : 0
-Total pins : 1,061 / 616 ( 172 % )
+Total pins : 1,061 / 457 ( 232 % )
 Total virtual pins : 0
-Total block memory bits : 0 / 12,492,800 ( 0 % )
-Total RAM Blocks : 0 / 1,220 ( 0 % )
-Total DSP Blocks : 0 / 342 ( 0 % )
-Total HSSI RX PCSs : 0 / 12 ( 0 % )
-Total HSSI PMA RX Deserializers : 0 / 12 ( 0 % )
-Total HSSI TX PCSs : 0 / 12 ( 0 % )
-Total HSSI PMA TX Serializers : 0 / 12 ( 0 % )
-Total PLLs : 0 / 20 ( 0 % )
+Total block memory bits : 0 / 4,065,280 ( 0 % )
+Total RAM Blocks : 0 / 397 ( 0 % )
+Total DSP Blocks : 0 / 87 ( 0 % )
+Total HSSI RX PCSs : 0
+Total HSSI PMA RX Deserializers : 0
+Total HSSI TX PCSs : 0
+Total HSSI PMA TX Serializers : 0
+Total PLLs : 0 / 6 ( 0 % )
 Total DLLs : 0 / 4 ( 0 % )

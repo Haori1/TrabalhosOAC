@@ -1,5 +1,5 @@
 Analysis & Synthesis report for TopDE
-Sat May 05 15:58:28 2018
+Tue May 08 00:27:41 2018
 Quartus Prime Version 17.1.0 Build 590 10/25/2017 SJ Lite Edition
 
 
@@ -10,7 +10,14 @@ Quartus Prime Version 17.1.0 Build 590 10/25/2017 SJ Lite Edition
   2. Analysis & Synthesis Summary
   3. Analysis & Synthesis Settings
   4. Parallel Compilation
-  5. Analysis & Synthesis Messages
+  5. Analysis & Synthesis Source Files Read
+  6. Analysis & Synthesis Resource Usage Summary
+  7. Analysis & Synthesis Resource Utilization by Entity
+  8. General Register Statistics
+  9. Multiplexer Restructuring Statistics (Restructuring Performed)
+ 10. Post-Synthesis Netlist Statistics for Top Partition
+ 11. Elapsed Time Per Partition
+ 12. Analysis & Synthesis Messages
 
 
 
@@ -33,22 +40,27 @@ refer to the applicable agreement for further details.
 
 
 
-+---------------------------------------------------------------------------+
-; Analysis & Synthesis Summary                                              ;
-+-----------------------------+---------------------------------------------+
-; Analysis & Synthesis Status ; Failed - Sat May 05 15:58:28 2018           ;
-; Quartus Prime Version       ; 17.1.0 Build 590 10/25/2017 SJ Lite Edition ;
-; Revision Name               ; TopDE                                       ;
-; Top-level Entity Name       ; mux1_2_v2_TB                                ;
-; Family                      ; Cyclone V                                   ;
-; Logic utilization (in ALMs) ; N/A until Partition Merge                   ;
-; Total registers             ; N/A until Partition Merge                   ;
-; Total pins                  ; N/A until Partition Merge                   ;
-; Total virtual pins          ; N/A until Partition Merge                   ;
-; Total block memory bits     ; N/A until Partition Merge                   ;
-; Total PLLs                  ; N/A until Partition Merge                   ;
-; Total DLLs                  ; N/A until Partition Merge                   ;
-+-----------------------------+---------------------------------------------+
++-------------------------------------------------------------------------------+
+; Analysis & Synthesis Summary                                                  ;
++---------------------------------+---------------------------------------------+
+; Analysis & Synthesis Status     ; Successful - Tue May 08 00:27:41 2018       ;
+; Quartus Prime Version           ; 17.1.0 Build 590 10/25/2017 SJ Lite Edition ;
+; Revision Name                   ; TopDE                                       ;
+; Top-level Entity Name           ; TopDE                                       ;
+; Family                          ; Cyclone V                                   ;
+; Logic utilization (in ALMs)     ; N/A                                         ;
+; Total registers                 ; 1024                                        ;
+; Total pins                      ; 83                                          ;
+; Total virtual pins              ; 0                                           ;
+; Total block memory bits         ; 0                                           ;
+; Total DSP Blocks                ; 0                                           ;
+; Total HSSI RX PCSs              ; 0                                           ;
+; Total HSSI PMA RX Deserializers ; 0                                           ;
+; Total HSSI TX PCSs              ; 0                                           ;
+; Total HSSI PMA TX Serializers   ; 0                                           ;
+; Total PLLs                      ; 0                                           ;
+; Total DLLs                      ; 0                                           ;
++---------------------------------+---------------------------------------------+
 
 
 +---------------------------------------------------------------------------------------------------------------------------+
@@ -57,7 +69,7 @@ refer to the applicable agreement for further details.
 ; Option                                                                          ; Setting            ; Default Value      ;
 +---------------------------------------------------------------------------------+--------------------+--------------------+
 ; Device                                                                          ; 5CSEMA5F31C6       ;                    ;
-; Top-level entity name                                                           ; mux1_2_v2_TB       ; TopDE              ;
+; Top-level entity name                                                           ; TopDE              ; TopDE              ;
 ; Family name                                                                     ; Cyclone V          ; Cyclone V          ;
 ; Use smart compilation                                                           ; On                 ; Off                ;
 ; VHDL Show LMF Mapping Messages                                                  ; Off                ;                    ;
@@ -149,11 +161,113 @@ refer to the applicable agreement for further details.
 ; Maximum allowed            ; 2           ;
 ;                            ;             ;
 ; Average used               ; 1.00        ;
-; Maximum used               ; 1           ;
+; Maximum used               ; 2           ;
 ;                            ;             ;
 ; Usage by Processor         ; % Time Used ;
 ;     Processor 1            ; 100.0%      ;
+;     Processor 2            ;   0.0%      ;
 +----------------------------+-------------+
+
+
++------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+; Analysis & Synthesis Source Files Read                                                                                                                                                                                                         ;
++----------------------------------+-----------------+------------------------+--------------------------------------------------------------------------------------------------------------------------------------------------------+---------+
+; File Name with User-Entered Path ; Used in Netlist ; File Type              ; File Name with Absolute Path                                                                                                                           ; Library ;
++----------------------------------+-----------------+------------------------+--------------------------------------------------------------------------------------------------------------------------------------------------------+---------+
+; TopDE.v                          ; yes             ; User Verilog HDL File  ; C:/Users/Cleibe/Documents/pdfs curso Ciencia da Computacao/OAC/laboratorios/laboratorio1/TrabalhosOAC/Laboratorio_2/Lab2/Files/Multiplexadores/TopDE.v ;         ;
+; mux.v                            ; yes             ; User Verilog HDL File  ; C:/Users/Cleibe/Documents/pdfs curso Ciencia da Computacao/OAC/laboratorios/laboratorio1/TrabalhosOAC/Laboratorio_2/Lab2/Files/Multiplexadores/mux.v   ;         ;
++----------------------------------+-----------------+------------------------+--------------------------------------------------------------------------------------------------------------------------------------------------------+---------+
+
+
++-------------------------------------------------------------+
+; Analysis & Synthesis Resource Usage Summary                 ;
++---------------------------------------------+---------------+
+; Resource                                    ; Usage         ;
++---------------------------------------------+---------------+
+; Estimate of Logic utilization (ALMs needed) ; 705           ;
+;                                             ;               ;
+; Combinational ALUT usage for logic          ; 385           ;
+;     -- 7 input functions                    ; 0             ;
+;     -- 6 input functions                    ; 288           ;
+;     -- 5 input functions                    ; 96            ;
+;     -- 4 input functions                    ; 0             ;
+;     -- <=3 input functions                  ; 1             ;
+;                                             ;               ;
+; Dedicated logic registers                   ; 1024          ;
+;                                             ;               ;
+; I/O pins                                    ; 83            ;
+;                                             ;               ;
+; Total DSP Blocks                            ; 0             ;
+;                                             ;               ;
+; Maximum fan-out node                        ; CLOCK50~input ;
+; Maximum fan-out                             ; 1024          ;
+; Total fan-out                               ; 5397          ;
+; Average fan-out                             ; 3.43          ;
++---------------------------------------------+---------------+
+
+
++----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+; Analysis & Synthesis Resource Utilization by Entity                                                                                                                                    ;
++----------------------------+---------------------+---------------------------+-------------------+------------+------+--------------+---------------------+-------------+--------------+
+; Compilation Hierarchy Node ; Combinational ALUTs ; Dedicated Logic Registers ; Block Memory Bits ; DSP Blocks ; Pins ; Virtual Pins ; Full Hierarchy Name ; Entity Name ; Library Name ;
++----------------------------+---------------------+---------------------------+-------------------+------------+------+--------------+---------------------+-------------+--------------+
+; |TopDE                     ; 385 (32)            ; 1024 (1024)               ; 0                 ; 0          ; 83   ; 0            ; |TopDE              ; TopDE       ; work         ;
+;    |mux:mux0|              ; 353 (353)           ; 0 (0)                     ; 0                 ; 0          ; 0    ; 0            ; |TopDE|mux:mux0     ; mux         ; work         ;
++----------------------------+---------------------+---------------------------+-------------------+------------+------+--------------+---------------------+-------------+--------------+
+Note: For table entries with two numbers listed, the numbers in parentheses indicate the number of resources of the given type used by the specific entity alone. The numbers listed outside of parentheses indicate the total resources of the given type used by the specific entity and all of its sub-entities in the hierarchy.
+
+
++------------------------------------------------------+
+; General Register Statistics                          ;
++----------------------------------------------+-------+
+; Statistic                                    ; Value ;
++----------------------------------------------+-------+
+; Total registers                              ; 1024  ;
+; Number of registers using Synchronous Clear  ; 0     ;
+; Number of registers using Synchronous Load   ; 0     ;
+; Number of registers using Asynchronous Clear ; 0     ;
+; Number of registers using Asynchronous Load  ; 0     ;
+; Number of registers using Clock Enable       ; 1024  ;
+; Number of registers using Preset             ; 0     ;
++----------------------------------------------+-------+
+
+
++------------------------------------------------------------------------------------------------------------------------------------------+
+; Multiplexer Restructuring Statistics (Restructuring Performed)                                                                           ;
++--------------------+-----------+---------------+----------------------+------------------------+------------+----------------------------+
+; Multiplexer Inputs ; Bus Width ; Baseline Area ; Area if Restructured ; Saving if Restructured ; Registered ; Example Multiplexer Output ;
++--------------------+-----------+---------------+----------------------+------------------------+------------+----------------------------+
+; 32:1               ; 32 bits   ; 672 LEs       ; 672 LEs              ; 0 LEs                  ; No         ; |TopDE|mux:mux0|Mux31      ;
++--------------------+-----------+---------------+----------------------+------------------------+------------+----------------------------+
+
+
++-----------------------------------------------------+
+; Post-Synthesis Netlist Statistics for Top Partition ;
++-----------------------+-----------------------------+
+; Type                  ; Count                       ;
++-----------------------+-----------------------------+
+; arriav_ff             ; 1024                        ;
+;     ENA               ; 1024                        ;
+; arriav_lcell_comb     ; 386                         ;
+;     normal            ; 386                         ;
+;         0 data inputs ; 1                           ;
+;         2 data inputs ; 1                           ;
+;         5 data inputs ; 96                          ;
+;         6 data inputs ; 288                         ;
+; boundary_port         ; 83                          ;
+;                       ;                             ;
+; Max LUT depth         ; 3.00                        ;
+; Average LUT depth     ; 2.77                        ;
++-----------------------+-----------------------------+
+
+
++-------------------------------+
+; Elapsed Time Per Partition    ;
++----------------+--------------+
+; Partition Name ; Elapsed Time ;
++----------------+--------------+
+; Top            ; 00:00:01     ;
++----------------+--------------+
 
 
 +-------------------------------+
@@ -162,52 +276,66 @@ refer to the applicable agreement for further details.
 Info: *******************************************************************
 Info: Running Quartus Prime Analysis & Synthesis
     Info: Version 17.1.0 Build 590 10/25/2017 SJ Lite Edition
-    Info: Processing started: Sat May 05 15:58:16 2018
+    Info: Processing started: Tue May 08 00:27:19 2018
 Info: Command: quartus_map --read_settings_files=on --write_settings_files=off Multiplexadores -c TopDE
 Warning (18236): Number of processors has not been specified which may cause overloading on shared machines.  Set the global assignment NUM_PARALLEL_PROCESSORS in your QSF to an appropriate value for best performance.
 Info (20030): Parallel compilation is enabled and will use 2 of the 2 processors detected
 Info (12021): Found 1 design units, including 1 entities, in source file mux1_2_tb.v
-    Info (12023): Found entity 1: mux1_2_TB File: C:/Users/henri/TrabalhosOAC/Laboratorio_2/Lab2/Files/Multiplexadores/mux1_2_TB.v Line: 1
+    Info (12023): Found entity 1: mux1_2_TB File: C:/Users/Cleibe/Documents/pdfs curso Ciencia da Computacao/OAC/laboratorios/laboratorio1/TrabalhosOAC/Laboratorio_2/Lab2/Files/Multiplexadores/mux1_2_TB.v Line: 1
 Info (12021): Found 1 design units, including 1 entities, in source file topde.v
-    Info (12023): Found entity 1: TopDE File: C:/Users/henri/TrabalhosOAC/Laboratorio_2/Lab2/Files/Multiplexadores/TopDE.v Line: 5
+    Info (12023): Found entity 1: TopDE File: C:/Users/Cleibe/Documents/pdfs curso Ciencia da Computacao/OAC/laboratorios/laboratorio1/TrabalhosOAC/Laboratorio_2/Lab2/Files/Multiplexadores/TopDE.v Line: 5
 Info (12021): Found 1 design units, including 1 entities, in source file mux1_2.v
-    Info (12023): Found entity 1: mux1_2 File: C:/Users/henri/TrabalhosOAC/Laboratorio_2/Lab2/Files/Multiplexadores/mux1_2.v Line: 1
+    Info (12023): Found entity 1: mux1_2 File: C:/Users/Cleibe/Documents/pdfs curso Ciencia da Computacao/OAC/laboratorios/laboratorio1/TrabalhosOAC/Laboratorio_2/Lab2/Files/Multiplexadores/mux1_2.v Line: 1
 Info (12021): Found 1 design units, including 1 entities, in source file mux1_2a.v
-    Info (12023): Found entity 1: mux1_2a File: C:/Users/henri/TrabalhosOAC/Laboratorio_2/Lab2/Files/Multiplexadores/mux1_2a.v Line: 1
+    Info (12023): Found entity 1: mux1_2a File: C:/Users/Cleibe/Documents/pdfs curso Ciencia da Computacao/OAC/laboratorios/laboratorio1/TrabalhosOAC/Laboratorio_2/Lab2/Files/Multiplexadores/mux1_2a.v Line: 1
 Info (12021): Found 1 design units, including 1 entities, in source file mux1_4.v
-    Info (12023): Found entity 1: mux1_4 File: C:/Users/henri/TrabalhosOAC/Laboratorio_2/Lab2/Files/Multiplexadores/mux1_4.v Line: 1
+    Info (12023): Found entity 1: mux1_4 File: C:/Users/Cleibe/Documents/pdfs curso Ciencia da Computacao/OAC/laboratorios/laboratorio1/TrabalhosOAC/Laboratorio_2/Lab2/Files/Multiplexadores/mux1_4.v Line: 1
 Info (12021): Found 1 design units, including 1 entities, in source file mux1_8.v
-    Info (12023): Found entity 1: mux1_8 File: C:/Users/henri/TrabalhosOAC/Laboratorio_2/Lab2/Files/Multiplexadores/mux1_8.v Line: 1
+    Info (12023): Found entity 1: mux1_8 File: C:/Users/Cleibe/Documents/pdfs curso Ciencia da Computacao/OAC/laboratorios/laboratorio1/TrabalhosOAC/Laboratorio_2/Lab2/Files/Multiplexadores/mux1_8.v Line: 1
 Info (12021): Found 1 design units, including 1 entities, in source file mux12_2.v
-    Info (12023): Found entity 1: mux12_2 File: C:/Users/henri/TrabalhosOAC/Laboratorio_2/Lab2/Files/Multiplexadores/mux12_2.v Line: 1
+    Info (12023): Found entity 1: mux12_2 File: C:/Users/Cleibe/Documents/pdfs curso Ciencia da Computacao/OAC/laboratorios/laboratorio1/TrabalhosOAC/Laboratorio_2/Lab2/Files/Multiplexadores/mux12_2.v Line: 1
 Info (12021): Found 1 design units, including 1 entities, in source file mux32_2.v
-    Info (12023): Found entity 1: mux32_2 File: C:/Users/henri/TrabalhosOAC/Laboratorio_2/Lab2/Files/Multiplexadores/mux32_2.v Line: 1
+    Info (12023): Found entity 1: mux32_2 File: C:/Users/Cleibe/Documents/pdfs curso Ciencia da Computacao/OAC/laboratorios/laboratorio1/TrabalhosOAC/Laboratorio_2/Lab2/Files/Multiplexadores/mux32_2.v Line: 1
 Info (12021): Found 1 design units, including 1 entities, in source file mux32_8.v
-    Info (12023): Found entity 1: mux32_8 File: C:/Users/henri/TrabalhosOAC/Laboratorio_2/Lab2/Files/Multiplexadores/mux32_8.v Line: 1
+    Info (12023): Found entity 1: mux32_8 File: C:/Users/Cleibe/Documents/pdfs curso Ciencia da Computacao/OAC/laboratorios/laboratorio1/TrabalhosOAC/Laboratorio_2/Lab2/Files/Multiplexadores/mux32_8.v Line: 1
 Info (12021): Found 1 design units, including 1 entities, in source file mux32_32.v
-    Info (12023): Found entity 1: mux32_32 File: C:/Users/henri/TrabalhosOAC/Laboratorio_2/Lab2/Files/Multiplexadores/mux32_32.v Line: 1
+    Info (12023): Found entity 1: mux32_32 File: C:/Users/Cleibe/Documents/pdfs curso Ciencia da Computacao/OAC/laboratorios/laboratorio1/TrabalhosOAC/Laboratorio_2/Lab2/Files/Multiplexadores/mux32_32.v Line: 1
 Info (12021): Found 1 design units, including 1 entities, in source file mux32_32a.v
-    Info (12023): Found entity 1: mux32_32a File: C:/Users/henri/TrabalhosOAC/Laboratorio_2/Lab2/Files/Multiplexadores/mux32_32a.v Line: 1
-Warning (12090): Entity "mux" obtained from "mux.v" instead of from Quartus Prime megafunction library File: C:/Users/henri/TrabalhosOAC/Laboratorio_2/Lab2/Files/Multiplexadores/mux.v Line: 1
+    Info (12023): Found entity 1: mux32_32a File: C:/Users/Cleibe/Documents/pdfs curso Ciencia da Computacao/OAC/laboratorios/laboratorio1/TrabalhosOAC/Laboratorio_2/Lab2/Files/Multiplexadores/mux32_32a.v Line: 1
+Warning (12090): Entity "mux" obtained from "mux.v" instead of from Quartus Prime megafunction library File: C:/Users/Cleibe/Documents/pdfs curso Ciencia da Computacao/OAC/laboratorios/laboratorio1/TrabalhosOAC/Laboratorio_2/Lab2/Files/Multiplexadores/mux.v Line: 1
 Info (12021): Found 1 design units, including 1 entities, in source file mux.v
-    Info (12023): Found entity 1: mux File: C:/Users/henri/TrabalhosOAC/Laboratorio_2/Lab2/Files/Multiplexadores/mux.v Line: 1
+    Info (12023): Found entity 1: mux File: C:/Users/Cleibe/Documents/pdfs curso Ciencia da Computacao/OAC/laboratorios/laboratorio1/TrabalhosOAC/Laboratorio_2/Lab2/Files/Multiplexadores/mux.v Line: 1
 Info (12021): Found 1 design units, including 1 entities, in source file mux1_2_v2_tb.v
-    Info (12023): Found entity 1: mux1_2_v2_TB File: C:/Users/henri/TrabalhosOAC/Laboratorio_2/Lab2/Files/Multiplexadores/mux1_2_v2_TB.v Line: 1
-Info (12127): Elaborating entity "mux1_2_v2_TB" for the top level hierarchy
-Info (10648): Verilog HDL Display System Task info at mux1_2_v2_TB.v(18): Input = 0, Select = 0, Saida = 0 File: C:/Users/henri/TrabalhosOAC/Laboratorio_2/Lab2/Files/Multiplexadores/mux1_2_v2_TB.v Line: 18
-Info (10648): Verilog HDL Display System Task info at mux1_2_v2_TB.v(23): Input = 1, Select = 0, Saida = 1 File: C:/Users/henri/TrabalhosOAC/Laboratorio_2/Lab2/Files/Multiplexadores/mux1_2_v2_TB.v Line: 23
-Info (10648): Verilog HDL Display System Task info at mux1_2_v2_TB.v(28): Input = 2, Select = 0, Saida = 0 File: C:/Users/henri/TrabalhosOAC/Laboratorio_2/Lab2/Files/Multiplexadores/mux1_2_v2_TB.v Line: 28
-Info (10648): Verilog HDL Display System Task info at mux1_2_v2_TB.v(33): Input = 3, Select = 0, Saida = 1 File: C:/Users/henri/TrabalhosOAC/Laboratorio_2/Lab2/Files/Multiplexadores/mux1_2_v2_TB.v Line: 33
-Info (10648): Verilog HDL Display System Task info at mux1_2_v2_TB.v(40): Input = 0, Select = 1, Saida = 0 File: C:/Users/henri/TrabalhosOAC/Laboratorio_2/Lab2/Files/Multiplexadores/mux1_2_v2_TB.v Line: 40
-Info (10648): Verilog HDL Display System Task info at mux1_2_v2_TB.v(45): Input = 1, Select = 1, Saida = 0 File: C:/Users/henri/TrabalhosOAC/Laboratorio_2/Lab2/Files/Multiplexadores/mux1_2_v2_TB.v Line: 45
-Info (10648): Verilog HDL Display System Task info at mux1_2_v2_TB.v(50): Input = 2, Select = 1, Saida = 1 File: C:/Users/henri/TrabalhosOAC/Laboratorio_2/Lab2/Files/Multiplexadores/mux1_2_v2_TB.v Line: 50
-Info (10648): Verilog HDL Display System Task info at mux1_2_v2_TB.v(55): Input = 3, Select = 1, Saida = 1 File: C:/Users/henri/TrabalhosOAC/Laboratorio_2/Lab2/Files/Multiplexadores/mux1_2_v2_TB.v Line: 55
-Warning (12158): Entity "mux1_2_v2_TB" contains only dangling pins
-Error (12061): Can't synthesize current design -- Top partition does not contain any logic
-Error: Quartus Prime Analysis & Synthesis was unsuccessful. 1 error, 3 warnings
-    Error: Peak virtual memory: 698 megabytes
-    Error: Processing ended: Sat May 05 15:58:28 2018
-    Error: Elapsed time: 00:00:12
-    Error: Total CPU time (on all processors): 00:00:27
+    Info (12023): Found entity 1: mux1_2_v2_TB File: C:/Users/Cleibe/Documents/pdfs curso Ciencia da Computacao/OAC/laboratorios/laboratorio1/TrabalhosOAC/Laboratorio_2/Lab2/Files/Multiplexadores/mux1_2_v2_TB.v Line: 1
+Info (12127): Elaborating entity "TopDE" for the top level hierarchy
+Warning (10230): Verilog HDL assignment warning at TopDE.v(16): truncated value with size 36 to match size of target (32) File: C:/Users/Cleibe/Documents/pdfs curso Ciencia da Computacao/OAC/laboratorios/laboratorio1/TrabalhosOAC/Laboratorio_2/Lab2/Files/Multiplexadores/TopDE.v Line: 16
+Info (12128): Elaborating entity "mux" for hierarchy "mux:mux0" File: C:/Users/Cleibe/Documents/pdfs curso Ciencia da Computacao/OAC/laboratorios/laboratorio1/TrabalhosOAC/Laboratorio_2/Lab2/Files/Multiplexadores/TopDE.v Line: 23
+Warning (13024): Output pins are stuck at VCC or GND
+    Warning (13410): Pin "GPIO_0[32]" is stuck at GND File: C:/Users/Cleibe/Documents/pdfs curso Ciencia da Computacao/OAC/laboratorios/laboratorio1/TrabalhosOAC/Laboratorio_2/Lab2/Files/Multiplexadores/TopDE.v Line: 10
+    Warning (13410): Pin "GPIO_0[33]" is stuck at GND File: C:/Users/Cleibe/Documents/pdfs curso Ciencia da Computacao/OAC/laboratorios/laboratorio1/TrabalhosOAC/Laboratorio_2/Lab2/Files/Multiplexadores/TopDE.v Line: 10
+    Warning (13410): Pin "GPIO_0[34]" is stuck at GND File: C:/Users/Cleibe/Documents/pdfs curso Ciencia da Computacao/OAC/laboratorios/laboratorio1/TrabalhosOAC/Laboratorio_2/Lab2/Files/Multiplexadores/TopDE.v Line: 10
+    Warning (13410): Pin "GPIO_0[35]" is stuck at GND File: C:/Users/Cleibe/Documents/pdfs curso Ciencia da Computacao/OAC/laboratorios/laboratorio1/TrabalhosOAC/Laboratorio_2/Lab2/Files/Multiplexadores/TopDE.v Line: 10
+Info (286030): Timing-Driven Synthesis is running
+Info (16010): Generating hard_block partition "hard_block:auto_generated_inst"
+    Info (16011): Adding 0 node(s), including 0 DDIO, 0 PLL, 0 transceiver and 0 LCELL
+Warning (21074): Design contains 9 input pin(s) that do not drive logic
+    Warning (15610): No output dependent on input pin "SW[5]" File: C:/Users/Cleibe/Documents/pdfs curso Ciencia da Computacao/OAC/laboratorios/laboratorio1/TrabalhosOAC/Laboratorio_2/Lab2/Files/Multiplexadores/TopDE.v Line: 6
+    Warning (15610): No output dependent on input pin "SW[6]" File: C:/Users/Cleibe/Documents/pdfs curso Ciencia da Computacao/OAC/laboratorios/laboratorio1/TrabalhosOAC/Laboratorio_2/Lab2/Files/Multiplexadores/TopDE.v Line: 6
+    Warning (15610): No output dependent on input pin "SW[7]" File: C:/Users/Cleibe/Documents/pdfs curso Ciencia da Computacao/OAC/laboratorios/laboratorio1/TrabalhosOAC/Laboratorio_2/Lab2/Files/Multiplexadores/TopDE.v Line: 6
+    Warning (15610): No output dependent on input pin "SW[8]" File: C:/Users/Cleibe/Documents/pdfs curso Ciencia da Computacao/OAC/laboratorios/laboratorio1/TrabalhosOAC/Laboratorio_2/Lab2/Files/Multiplexadores/TopDE.v Line: 6
+    Warning (15610): No output dependent on input pin "SW[9]" File: C:/Users/Cleibe/Documents/pdfs curso Ciencia da Computacao/OAC/laboratorios/laboratorio1/TrabalhosOAC/Laboratorio_2/Lab2/Files/Multiplexadores/TopDE.v Line: 6
+    Warning (15610): No output dependent on input pin "GPIO_1[32]" File: C:/Users/Cleibe/Documents/pdfs curso Ciencia da Computacao/OAC/laboratorios/laboratorio1/TrabalhosOAC/Laboratorio_2/Lab2/Files/Multiplexadores/TopDE.v Line: 8
+    Warning (15610): No output dependent on input pin "GPIO_1[33]" File: C:/Users/Cleibe/Documents/pdfs curso Ciencia da Computacao/OAC/laboratorios/laboratorio1/TrabalhosOAC/Laboratorio_2/Lab2/Files/Multiplexadores/TopDE.v Line: 8
+    Warning (15610): No output dependent on input pin "GPIO_1[34]" File: C:/Users/Cleibe/Documents/pdfs curso Ciencia da Computacao/OAC/laboratorios/laboratorio1/TrabalhosOAC/Laboratorio_2/Lab2/Files/Multiplexadores/TopDE.v Line: 8
+    Warning (15610): No output dependent on input pin "GPIO_1[35]" File: C:/Users/Cleibe/Documents/pdfs curso Ciencia da Computacao/OAC/laboratorios/laboratorio1/TrabalhosOAC/Laboratorio_2/Lab2/Files/Multiplexadores/TopDE.v Line: 8
+Info (21057): Implemented 1492 device resources after synthesis - the final resource count might be different
+    Info (21058): Implemented 47 input pins
+    Info (21059): Implemented 36 output pins
+    Info (21061): Implemented 1409 logic cells
+Info: Quartus Prime Analysis & Synthesis was successful. 0 errors, 18 warnings
+    Info: Peak virtual memory: 659 megabytes
+    Info: Processing ended: Tue May 08 00:27:41 2018
+    Info: Elapsed time: 00:00:22
+    Info: Total CPU time (on all processors): 00:00:46
 
 

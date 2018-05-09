@@ -1,5 +1,5 @@
 Assembler report for ALU
-Sun Apr 22 23:17:35 2018
+Tue May 08 19:03:10 2018
 Quartus Prime Version 17.1.0 Build 590 10/25/2017 SJ Lite Edition
 
 
@@ -10,7 +10,7 @@ Quartus Prime Version 17.1.0 Build 590 10/25/2017 SJ Lite Edition
   2. Assembler Summary
   3. Assembler Settings
   4. Assembler Generated Files
-  5. Assembler Device Options: C:/Users/lamar/Dropbox/kiko/Disciplinas/UnB/OAC/2018-1/Lab2/Files/ALU/output_files/ALU.sof
+  5. Assembler Device Options: C:/Users/Cleibe/Documents/pdfs curso Ciencia da Computacao/OAC/laboratorios/laboratorio1/TrabalhosOAC/Laboratorio_2/Lab2/Files/ALU/output_files/ALU.sof
   6. Assembler Messages
 
 
@@ -37,9 +37,9 @@ refer to the applicable agreement for further details.
 +---------------------------------------------------------------+
 ; Assembler Summary                                             ;
 +-----------------------+---------------------------------------+
-; Assembler Status      ; Successful - Sun Apr 22 23:17:35 2018 ;
+; Assembler Status      ; Successful - Tue May 08 19:03:10 2018 ;
 ; Revision Name         ; ALU                                   ;
-; Top-level Entity Name ; ALU                                   ;
+; Top-level Entity Name ; TopDE                                 ;
 ; Family                ; Cyclone V                             ;
 ; Device                ; 5CSEMA5F31C6                          ;
 +-----------------------+---------------------------------------+
@@ -52,23 +52,23 @@ refer to the applicable agreement for further details.
 +--------+---------+---------------+
 
 
-+--------------------------------------------------------------------------------------------+
-; Assembler Generated Files                                                                  ;
-+--------------------------------------------------------------------------------------------+
-; File Name                                                                                  ;
-+--------------------------------------------------------------------------------------------+
-; C:/Users/lamar/Dropbox/kiko/Disciplinas/UnB/OAC/2018-1/Lab2/Files/ALU/output_files/ALU.sof ;
-+--------------------------------------------------------------------------------------------+
++---------------------------------------------------------------------------------------------------------------------------------------------------------+
+; Assembler Generated Files                                                                                                                               ;
++---------------------------------------------------------------------------------------------------------------------------------------------------------+
+; File Name                                                                                                                                               ;
++---------------------------------------------------------------------------------------------------------------------------------------------------------+
+; C:/Users/Cleibe/Documents/pdfs curso Ciencia da Computacao/OAC/laboratorios/laboratorio1/TrabalhosOAC/Laboratorio_2/Lab2/Files/ALU/output_files/ALU.sof ;
++---------------------------------------------------------------------------------------------------------------------------------------------------------+
 
 
-+----------------------------------------------------------------------------------------------------------------------+
-; Assembler Device Options: C:/Users/lamar/Dropbox/kiko/Disciplinas/UnB/OAC/2018-1/Lab2/Files/ALU/output_files/ALU.sof ;
-+----------------+-----------------------------------------------------------------------------------------------------+
-; Option         ; Setting                                                                                             ;
-+----------------+-----------------------------------------------------------------------------------------------------+
-; JTAG usercode  ; 0x010CFE89                                                                                          ;
-; Checksum       ; 0x010CFE89                                                                                          ;
-+----------------+-----------------------------------------------------------------------------------------------------+
++-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+; Assembler Device Options: C:/Users/Cleibe/Documents/pdfs curso Ciencia da Computacao/OAC/laboratorios/laboratorio1/TrabalhosOAC/Laboratorio_2/Lab2/Files/ALU/output_files/ALU.sof ;
++----------------+------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+; Option         ; Setting                                                                                                                                                          ;
++----------------+------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+; JTAG usercode  ; 0x0111D18D                                                                                                                                                       ;
+; Checksum       ; 0x0111D18D                                                                                                                                                       ;
++----------------+------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 
 
 +--------------------+
@@ -77,13 +77,13 @@ refer to the applicable agreement for further details.
 Info: *******************************************************************
 Info: Running Quartus Prime Assembler
     Info: Version 17.1.0 Build 590 10/25/2017 SJ Lite Edition
-    Info: Processing started: Sun Apr 22 23:17:00 2018
+    Info: Processing started: Tue May 08 19:02:55 2018
 Info: Command: quartus_asm --read_settings_files=off --write_settings_files=off ALU -c ALU
 Info (115030): Assembler is generating device programming files
 Info: Quartus Prime Assembler was successful. 0 errors, 0 warnings
-    Info: Peak virtual memory: 822 megabytes
-    Info: Processing ended: Sun Apr 22 23:17:35 2018
-    Info: Elapsed time: 00:00:35
-    Info: Total CPU time (on all processors): 00:00:23
+    Info: Peak virtual memory: 745 megabytes
+    Info: Processing ended: Tue May 08 19:03:10 2018
+    Info: Elapsed time: 00:00:15
+    Info: Total CPU time (on all processors): 00:00:12
 
 
