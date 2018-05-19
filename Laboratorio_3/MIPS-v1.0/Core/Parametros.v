@@ -1,5 +1,6 @@
 `ifndef PARAM
 `define PARAM
+//Modificar para o riscv
 
 /* Parametros Gerais*/
 parameter
@@ -179,7 +180,7 @@ parameter
     STORE_TYPE_SB       = 2'b10,
     STORE_TYPE_DUMMY    = 2'b11,
 
-
+//Mapeamento da memoria
 /* ADDRESS MACROS *****************************************************************************************************/
 
     BACKGROUND_IMAGE    = "display.mif",
@@ -203,7 +204,7 @@ parameter
 
 	 STACK_ADDRESS       = END_DATA-3,
 
-
+	//Talvez alterar para o riscv, nao sera necessario pois o riscv 
     BEGINNING_KTEXT     = 32'h8000_0000,
 	 KTEXT_WIDTH			= 13,					// 2048 words = 2048x4 = 8192 bytes
     END_KTEXT           = (BEGINNING_KTEXT + 2**KTEXT_WIDTH) - 1,	 	 
@@ -224,6 +225,8 @@ parameter
 	 //LETRAS_MAX = 32'h00001763,
 	 //NUMBER_MIN = 32'h00001764,
 	 //NUMBER_MAX = 32'h00002403,*/
+	 
+	 //Enderecos onde o processador acessa
 	 
     BEGINNING_IODEVICES         = 32'hFF00_0000,
 	 

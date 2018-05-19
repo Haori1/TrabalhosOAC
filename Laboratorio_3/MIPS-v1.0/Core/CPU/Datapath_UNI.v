@@ -1,6 +1,6 @@
 /*
  * Caminho de dados processador Uniciclo
- *
+ *	Modificar para utilizar
  */
 
 module Datapath_UNI (
@@ -69,7 +69,7 @@ assign wULA				= wALUresult;
  */
 
 reg  [31:0] PC, PCgambs;                                    // registrador do PC
-wire [31:0] wPC4;
+wire [31:0] wPC4;	//PC + 4, somador de pc + 4
 wire [31:0] wiPC;
 wire [31:0] wInstr;
 wire [31:0] wMemDataWrite;
@@ -126,6 +126,7 @@ begin
     PCgambs    <= BEGINNING_TEXT;
 end
 
+//Campos de instruções que devem ser modf para o riscv
 assign wPC4         = wPC + 32'h4;                          /* Calculo PC+4 */
 assign wBranchPC    = wPC4 + {wExtImm[29:0],{2'b00}};       /* Endereco do Branch */
 assign wJumpAddr    = {wPC4[31:28],wInstr[25:0],{2'b00}};   /* Endereco do Jump */
@@ -300,7 +301,7 @@ Control_UNI CtrUNI (
     .oFPUparaMem(wCFPUparaMem),
     .oDataRegFPU(wCDataRegFPU),
     .oFPFlagWrite(wCFPFlagWrite),
-    // feito no semestre 2013/1 para implementar a deteccao de excecoes (COP0)
+    // feito no semestre 2013/1 para implementar a deteccao de excecoes (COP0)//Excececoes nao sera utilizado no riscv
     .iExcLevel(wCOP0ExcLevel),
     .iALUOverflow(wOverflow),
     .iFPALUOverflow(wOverflowFPU),
@@ -350,7 +351,7 @@ COP0RegistersUNI cop0reg (
 /* Multiplexadores */
 /*Decide em qual registrador o dado sera escrito*/
 always @(*)
-    case(wCRegDst)
+    case(wCRegDst) //Pode ser retirado pro riscv
         2'b00:      wRegDst <= wAddrRt;
         2'b01:      wRegDst <= wAddrRd;
         2'b10:      wRegDst <= wZero  ? 5'd31: 5'd0;     //  $ra ou $zero    1/2016
@@ -456,7 +457,7 @@ always @(*)
 // feito no semestre 2013/1 para implementar a deteccao de excecoes (COP0)
 /* Decide o que sera escrito no banco de registradores do Coprocessador 0 */
 always @(*)
-    case(wCExcOccurredCOP0)
+    case(wCExcOccurredCOP0) //Nao utilizaremos no riscv
         1'b0:   wDataRegCOP0 <= wRead2;
         1'b1:   wDataRegCOP0 <= PCgambs - 4;   //////  VERIFICAR SE -4 ESTA CORRETO PARA FICAR IGUAL AO MARS
 		  default: wDataRegCOP0 <= 32'bx;
@@ -465,15 +466,15 @@ always @(*)
 
 /* Para cada ciclo de Clock */
 
-always @(posedge iCLK or posedge iRST)
+always @(posedge iCLK or posedge iRST) //A cada subida de clock ou subida do reset
 begin
-    if(iRST)
+    if(iRST) //se resetar o pc volta ao inicial
     begin
         PC      <= iInitialPC;
         PCgambs <= iInitialPC;
     end
     else begin
-        PC 	<= wiPC;
+        PC 	<= wiPC;	//O que vem na entrada do pc ele coloca pra dentro apos a subida de clock
         if (~wCExcOccurredCOP0)
             PCgambs <= wiPC;
     end

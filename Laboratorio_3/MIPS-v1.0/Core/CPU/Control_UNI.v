@@ -39,7 +39,7 @@ assign wFPALUExcCode        = iFPALUOverflow || iFPALUUnderflow ? EXCODEFPALU : 
 
 initial
 begin
-    oRegDst             = 2'b00;
+    oRegDst             = 2'b00;	//sinais de opcode a serem definidos para o riscv
     oOrigALU            = 2'b00;
     oMemparaReg         = 3'b000;
     oEscreveReg         = 1'b0;

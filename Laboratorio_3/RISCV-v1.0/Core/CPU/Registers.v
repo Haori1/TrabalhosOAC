@@ -19,7 +19,7 @@ module Registers (
 /* Local register bank */
 reg [31:0] registers[31:0];
 
-parameter    SPR=5'd02;                    // $SP
+parameter    SPR=5'd02;                    // $SP modficado para o riscv
 
 reg [5:0] i;
 
