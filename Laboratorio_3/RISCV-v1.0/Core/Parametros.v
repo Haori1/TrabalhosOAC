@@ -5,163 +5,165 @@ parameter
     ZERO        = 32'h0,
 
 /* Operacoes da ULA */
-    OPAND       = 5'b00000,             //0
-    OPOR        = 5'b00001,             //1
-    OPADD       = 5'b00010,             //2
-    OPMFHI      = 5'b00011,             //3
-    OPSLL       = 5'b00100,             //4
-    OPMFLO      = 5'b00101,             //5
+	 OPAND		 = 5'd0,
+	 OPOR		    = 5'd1,
+	 OPXOR		 = 5'd2,
+    OPADD		 = 5'd3,
+  	 OPSUB		 = 5'd4,
+  	 OPSLT		 = 5'd5,
+  	 OPSLTU	    = 5'd6,
+  	 OPGE		    = 5'd7,
+  	 OPGEU		 = 5'd8,
+  	 OPSLL		 = 5'd9,
+  	 OPSRL		 = 5'd10,
+  	 OPSRA		 = 5'd11,
+  	 OPLUI		 = 5'd12,
+  	 OPMUL		 = 5'd13,
+  	 OPMULH	    = 5'd14,
+  	 OPMULHU	    = 5'd15,
+  	 OPMULHSU	 = 5'd16,
+  	 OPDIV		 = 5'd17,
+  	 OPDIVU	    = 5'd18,
+  	 OPREM		 = 5'd19,
+	 OPREMU	    = 5'd20,
+	 
+	 
+/*	 OPSLL       = 5'b00011,             //4
     OPSUB       = 5'b00110,             //6
     OPSLT       = 5'b00111,             //7
     OPSRL       = 5'b01000,             //8
     OPSRA       = 5'b01001,             //9
     OPXOR       = 5'b01010,             //10
     OPSLTU      = 5'b01011,             //11
-    OPNOR       = 5'b01100,             //12
-    OPMULT      = 5'b01101,             //13
-    OPDIV       = 5'b01110,             //14
     OPLUI       = 5'b01111,             //15
     OPSLLV      = 5'b10000,             //16
     OPSRAV      = 5'b10001,             //17
     OPSRLV      = 5'b10010,             //18
-    OPMULTU     = 5'b10011,             //19
-    OPDIVU      = 5'b10100,             //20
-    OPMTHI      = 5'b10101,             //21        2015/1
-    OPMTLO      = 5'b10110,             //22        2015/1
     OPSGT       = 5'b10111,             //23        2016/1
-	 OPMADD		 = 5'b11000,				 //24 		 Relatorio questao B.9) - Grupo 2 - (2/2016)
-	 OPMADDU		 = 5'b11001,				 //25 		 Relatorio questao B.9) - Grupo 2 - (2/2016)
-	 OPMSUB		 = 5'b11010,				 //26 		 Relatorio questao B.9) - Grupo 2 - (2/2016)
-	 OPMSUBU		 = 5'b11011,				 //27 		 Relatorio questao B.9) - Grupo 2 - (2/2016)
+*/
+	 
+/* Campo FUNCT3 */
+		FUN3ADD      = 3'h00,
+		FUN3SUB      = 3'h00,
+      FUN3AND      = 3'h07,
+		FUN3OR       = 3'h06,
+		FUN3XOR      = 3'h04,	
+		FUN3SLT      = 3'h02,
+		FUN3SLTU     = 3'h03,	
+		FUN3SLL      = 3'h01,
+		FUN3SRL		 = 3'h05,
+		FUN3SRA		 = 3'h05,
+		FUN3ADDI		 = 3'h00,
+		FUN3ANDI		 = 3'h07,
+		FUN3ORI		 = 3'h06,
+		FUN3XORI		 = 3'h04,
+		FUN3SLTI		 = 3'h02,
+		FUN3SLTIU	 = 3'h03,
+		FUN3SLLI		 = 3'h01,
+		FUN3SRLI		 = 3'h05,
+		FUN3SRAI		 = 3'h05,
+		FUN3BEQ		 = 3'h00,
+		FUN3BNE		 = 3'h01,
+		FUN3BGE		 = 3'h05,
+		FUN3BGEU		 = 3'h07,
+		FUN3BLT		 = 3'h04,
+		FUN3BLTU		 = 3'h06,
+		FUN3JALR		 = 3'h00,
+		FUN3LB		 = 3'h00,
+		FUN3LBU		 = 3'h04,
+		FUN3LH		 = 3'h01,
+		FUN3LHU		 = 3'h05,
+		FUN3LW		 = 3'h02,
+		FUN3SB		 = 3'h00,
+		FUN3SH		 = 3'h01,
+		FUN3SW		 = 3'h02,
+		FUN3MUL		 = 3'h00,
+		FUN3MULH		 = 3'h01,
+		FUN3MULHU	 = 3'h03,
+		FUN3MULHSU	 = 3'h02,
+		FUN3DIV		 = 3'h04,
+		FUN3DIVU		 = 3'h05,
+		FUN3REM		 = 3'h06,
+		FUN3REMU		 = 3'h07,
+		
+/* Campo FUNCT7 */
+		FUN7ADD      = 7'h00,
+		FUN7SUB      = 7'h20,
+      FUN7AND      = 7'h00,
+		FUN7OR       = 7'h00,
+		FUN7XOR      = 7'h00,	
+		FUN7SLT      = 7'h00,
+		FUN7SLTU     = 7'h00,	
+		FUN7SLL      = 7'h00,
+		FUN7SRL		 = 7'h00,
+		FUN7SRA		 = 7'h20,
+		FUN7SLLI		 = 7'h00,
+		FUN7SRLI		 = 7'h00,
+		FUN7SRAI		 = 7'h20,
+		FUN7MUL		 = 3'h01,
+		FUN7MULH		 = 3'h01,
+		FUN7MULHU	 = 3'h01,
+		FUN7MULHSU	 = 3'h01,
+		FUN7DIV		 = 3'h01,
+		FUN7DIVU		 = 3'h01,
+		FUN7REM		 = 3'h01,
+		FUN7REMU		 = 3'h01,
 
-/* Operacoes da ULA FP */
-    OPADDS      = 4'b0001,
-    OPSUBS      = 4'b0010,
-    OPMULS      = 4'b0011,
-    OPDIVS      = 4'b0100,
-    OPSQRT      = 4'b0101,
-    OPABS       = 4'b0110,
-    OPNEG       = 4'b0111,
-    OPCEQ       = 4'b1000,
-    OPCLT       = 4'b1001,
-    OPCLE       = 4'b1010,
-    OPCVTSW     = 4'b1011,
-    OPCVTWS     = 4'b1100,
-    OPCEILWS    = 4'b1101,
-    OPFLOORWS   = 4'b1110,
-    OPROUNDWS   = 4'b1111,
+/* Campo Opcode */
+		OPCADD     = 7'h33,
+		OPCSUB     = 7'h33,
+      OPCAND     = 7'h33,
+		OPCOR      = 7'h33,
+		OPCXOR     = 7'h33,	
+		OPCSLT     = 7'h33,
+		OPCSLTU    = 7'h33,	
+		OPCSLL     = 7'h33,
+		OPCSRL	  = 7'h33,
+		OPCSRA	  = 7'h33,
+		OPCADDI	  = 7'h13,
+		OPCANDI	  = 7'h13,
+		OPCORI	  = 7'h13,
+		OPCXORI	  = 7'h13,
+		OPCSLTI	  = 7'h13,
+		OPCSLTIU	  = 7'h13,
+		OPCSLLI	  = 7'h13,
+		OPCSRLI	  = 7'h13,
+		OPCSRAI	  = 7'h13,
+		OPCAUIPC	  = 7'h17,
+		OPCLUI	  = 7'h37,
+		OPCBEQ	  = 7'h63,
+		OPCBNE	  = 7'h63,
+		OPCBGE	  = 7'h63,
+		OPCBGEU	  = 7'h63,
+		OPCBLT	  = 7'h63,
+		OPCBLTU	  = 7'h63,
+		OPCJALR	  = 7'h67,
+		OPCJAL	  = 7'h6F,
+		OPCLB		  = 7'h03,
+		OPCLBU	  = 7'h03,
+		OPCLH		  = 7'h03,
+		OPCLHU	  = 7'h03,
+		OPCLW		  = 7'h03,
+		OPCSB		  = 7'h23,
+		OPCSH		  = 7'h23,
+		OPCSW		  = 7'h23,
+		OPMUL		  = 7'h33,
+		OPMULH	  = 7'h33,
+		OPMULHU	  = 7'h33,
+		OPMULHSU	  = 7'h33,
+		OPDIV		  = 7'h33,
+		OPDIVU	  = 7'h33,
+		OPREM		  = 7'h33,
+		OPREMU	  = 7'h33,
 
+/* Campo $rs2 */                         // 1/2016
+    RS2BGEZ      = 5'b00001,
+//    RS2BGEZAL    = 5'b10001,
+    RS2BLTZ      = 5'b00000,
+//    RS2BLTZAL    = 5'b10000,
+    RS2ZERO      = 5'B00000,
 
-/* Campo FUNCT */
-    FUNSLL      = 6'h00,
-	 FUNMADD		 = 6'h00,					 // Relatorio questao B.9) - Grupo 2 - (2/2016)
-	 FUNMADDU	 = 6'h01,					 // Relatorio questao B.9) - Grupo 2 - (2/2016)
-    FUNSRL      = 6'h02,
-    FUNSRA      = 6'h03,
-	 FUNMSUB		 = 6'h04,					 // Relatorio questao B.9) - Grupo 2 - (2/2016)
-	 FUNMSUBU	 = 6'h05,					 // Relatorio questao B.9) - Grupo 2 - (2/2016)
-    FUNJR       = 6'h08,
-    FUNSYS      = 6'h0C,
-    FUNMFHI     = 6'h10,
-    FUNMTHI     = 6'h11,                // 2015/1
-    FUNMFLO     = 6'h12,
-    FUNMTLO     = 6'h13,                // 2015/1
-    FUNMULT     = 6'h18,
-    FUNMULTU    = 6'h19,
-    FUNDIV      = 6'h1A,
-    FUNDIVU     = 6'h1B,
-    FUNADD      = 6'h20,
-    FUNADDU     = 6'h21,
-    FUNSUB      = 6'h22,
-    FUNSUBU     = 6'h23,
-    FUNAND      = 6'h24,
-    FUNOR       = 6'h25,
-    FUNXOR      = 6'h26,
-    FUNNOR      = 6'h27,
-    FUNSLT      = 6'h2A,
-    FUNSLTU     = 6'h2B,
-    FUNSLLV     = 6'h04,
-    FUNSRLV     = 6'b000110,
-    FUNSRAV     = 6'b000111,
-    /*Abaixo FUNCT de operacoes em ponto flutuante*/
-    FUNADDS     = 6'h00,
-    FUNSUBS     = 6'h01,
-    FUNMULS     = 6'h02,
-    FUNDIVS     = 6'h03,
-    FUNSQRT     = 6'h04,
-    FUNABS      = 6'h05,
-    FUNMOV      = 6'h06,
-    FUNNEG      = 6'h07,
-    FUNCEQ      = 6'h32,
-    FUNCLT      = 6'h3c,
-    FUNCLE      = 6'h3e,
-    FUNCVTSW    = 6'h20,
-    FUNCVTWS    = 6'h24,
-    FUNERET     = 6'h18,                // feito no semestre 2013/1 para implementar a deteccao de excecoes (COP0)
-    FUNROUNDWS  = 6'h0c,
-	 FUNCEILWS   = 6'h0e,
-	 FUNFLOORWS  = 6'h0f,
-
-/* Campo OPCODE */
-    OPCRFMT     = 6'h00,                /* Tipo-R */
-    OPCJMP      = 6'h02,
-    OPCJAL      = 6'h03,
-    OPCBEQ      = 6'h04,
-    OPCBNE      = 6'h05,
-    OPCADDI     = 6'h08,
-    OPCADDIU    = 6'h09,
-    OPCSLTI     = 6'h0A,
-    OPCSLTIU    = 6'h0B,
-    OPCANDI     = 6'h0C,
-    OPCORI      = 6'h0D,
-    OPCXORI     = 6'h0E,
-    OPCLUI      = 6'h0F,
-    OPCCOP0     = 6'h10,                // feito no semestre 2013/1 para implementar a deteccao de excecoes (COP0)
-    OPCFLT      = 6'h11,                /*OPCODE para operacoes da FPU*/
-	 OPCRM	 	 = 6'h1C,   				 // Grupo 2 - (2/2016)
-	 OPMFUNCT 	 = 6'h1C,   				 // Relatorio questao B.9) - Grupo 2 - (2/2016)
-    OPCLW       = 6'h23,
-    OPCLB       = 6'h20,
-    OPCLBU      = 6'h24,
-    OPCLH       = 6'h21,
-    OPCLHU      = 6'h25,
-    OPCSW       = 6'h2B,
-    OPCSB       = 6'h28,
-    OPCSH       = 6'h29,
-    OPCLWC1     = 6'h31,
-    OPCSWC1     = 6'h39,
-    OPCDUMMY    = 6'h3F,                // Para o MemStore e MemLoad
-    OPCBGE_LTZ  = 6'h01,                // 1/2016: Para as instruções bgez, bgezal, bgltz, bltzal
-    OPCBGTZ     = 6'h07,                // 1/2016
-    OPCBLEZ     = 6'h06,                // 1/2016
-
-/* Campo $rt */                         // 1/2016
-    RTBGEZ      = 5'b00001,
-    RTBGEZAL    = 5'b10001,
-    RTBLTZ      = 5'b00000,
-    RTBLTZAL    = 5'b10000,
-    RTZERO      = 5'B00000,
-
-/* Campo FMT */
-    FMTS        = 5'h10,
-    FMTW        = 5'h14,
-    FMTBC1      = 5'h08,
-    FMTMFC      = 5'h00,
-    FMTMTC      = 5'h04,
-    FMTERET     = 5'h10,                // feito no semestre 2013/1 para implementar a deteccao de excecoes (COP0)
-
-/* Bit 16 da instrucao, usado somente para BC1 da FPU*/
-    FTTRUE      = 1'b1,
-    FTFALSE     = 1'b0,
-
-// feito no semestre 2013/1 para implementar a deteccao de excecoes (COP0)
-    EXCODEINT   = 5'd0,
-    EXCODESYS   = 5'd8,
-    EXCODEINSTR = 5'd10,
-    EXCODEALU   = 5'd12,
-    EXCODEFPALU = 5'd15,
-
-	 INITIAL_INTERRUPT = 32'h00000911,   // 00000111  00000511 ou 00000911 teclado habilitado
+//	 INITIAL_INTERRUPT = 32'h00000911,   // 00000111  00000511 ou 00000911 teclado habilitado
 
 /* Memory access types ***********************************************************************************************/
     LOAD_TYPE_LW        = 3'b000,
@@ -169,22 +171,17 @@ parameter
     LOAD_TYPE_LHU       = 3'b010,
     LOAD_TYPE_LB        = 3'b011,
     LOAD_TYPE_LBU       = 3'b100,
-    LOAD_TYPE_DUMMY     = 3'b111,
+//    LOAD_TYPE_DUMMY     = 3'b111,
 
     STORE_TYPE_SW       = 2'b00,
     STORE_TYPE_SH       = 2'b01,
     STORE_TYPE_SB       = 2'b10,
-    STORE_TYPE_DUMMY    = 2'b11,
+//    STORE_TYPE_DUMMY    = 2'b11,
 
 
 /* ADDRESS MACROS *****************************************************************************************************/
 
     BACKGROUND_IMAGE    = "display.mif",
-
-	 BEGINNING_BOOT      = 32'h0000_0000,
-	 BOOT_WIDTH				= 9,					// 128 words = 128x4 = 512 bytes
-    END_BOOT            = (BEGINNING_BOOT + 2**BOOT_WIDTH) - 1,	 
-//    END_BOOT            = 32'h000001FF,	// 128 words
 
     BEGINNING_TEXT      = 32'h0040_0000,
 	 TEXT_WIDTH				= 14,					// 4096 words = 4096x4 = 16384 bytes
@@ -199,18 +196,6 @@ parameter
 
 
 	 STACK_ADDRESS       = END_DATA-3,
-
-
-    BEGINNING_KTEXT     = 32'h8000_0000,
-	 KTEXT_WIDTH			= 13,					// 2048 words = 2048x4 = 8192 bytes
-    END_KTEXT           = (BEGINNING_KTEXT + 2**KTEXT_WIDTH) - 1,	 	 
-//    END_KTEXT           = 32'h80001FFF,	// 2048 words
-	 
-    BEGINNING_KDATA     = 32'h9000_0000,
-	 KDATA_WIDTH			= 12,					// 1024 words = 1024x4 = 4096 bytes
-    END_KDATA           = (BEGINNING_KDATA + 2**KDATA_WIDTH) - 1,	 	 
-//    END_KDATA           = 32'h900007FF, 	// 1024 words
-
 
 	/* O que isso faz? 
 	 ASCII_MIN           = 32'h00000080,
@@ -274,37 +259,12 @@ parameter
     LW              = 6'd3,
     LW2             = 6'd4,
     SW              = 6'd5,
-    RFMT            = 6'd6,
-    RFMT2           = 6'd7,
     SHIFT           = 6'd8,
-    IFMTL           = 6'd9,
-    IFMTA           = 6'd10,
-    IFMT2           = 6'd11,
     BEQ             = 6'd12,
     BNE             = 6'd13,
     JUMP            = 6'd14,
     JAL             = 6'd15,
     JR              = 6'd16,
-
-    // feito no semestre 2013/1 para implementar a deteccao de excecoes (COP0)
-    COP0MTC0        = 6'd17,
-    COP0MFC0        = 6'd18,
-    COP0ERET        = 6'd19,
-    COP0EXC         = 6'd20,
-    // feito no semestre 2013/1 para implementar a deteccao de excecoes (COP0)
-
-    /*Estados da FPU*/
-    FPUFRSTART      = 6'd38,
-    FPUFR2          = 6'd39,
-    FPUMOV          = 6'd40,
-    FPUMFC1         = 6'd41,
-    FPUMTC1         = 6'd42,
-    FPUBC1T         = 6'd43,
-    FPUBC1F         = 6'd44,
-    FPULWC1         = 6'd45,
-    FPUSWC1         = 6'd46,
-    FPUCOMP         = 6'd47,    //tava assim, vou manter em homenagem aos semestres anteriores
-    FPUFRWAIT       = 6'd48,
 
     //Adicionados em 1/2014
     STATE_LB        = 6'd49,
@@ -316,13 +276,13 @@ parameter
 
      //Adicionados em 1/2016
      BGEZ           = 6'd55,
-     BGEZAL         = 6'd56,
+//     BGEZAL         = 6'd56,
      BLTZ           = 6'd57,
-     BLTZAL         = 6'd58,
+//     BLTZAL         = 6'd58,
      BGTZ           = 6'd59,
      BLEZ           = 6'd60,
 	  
 	  //Adicionados em 2/2016 (Grupo 2)
 	  RM				  = 6'd61,
 
-	  ERRO            = 6'd63;  // Estado de Erro
+	  ERRO           = 6'd63;  // Estado de Erro

@@ -174,8 +174,13 @@ endException: 	lw   ra, 0(sp)		# recupera ra
     	csrrw tp, 65, zero	# le o valor de EPC salvo no registrador uepc (reg 65)
 		addi tp, tp, 4		# soma 4 para obter a instruçao seguinte ao ecall
 		csrrw zero, 65, tp	# coloca no registrador uepc
+
+		########################################################################
+
 		uret			# retorna PC=uepc
 
+		############################################## tem q trocar isso pra jr ###
+		###########################################################################
 
 ############# interrupcao de ECALL ###################
 ecallException:     addi    sp, sp, -264              # Salva todos os registradores na pilha

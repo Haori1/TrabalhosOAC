@@ -5,8 +5,7 @@ module CPU (
     input  wire        iCLK, iCLK50, iRST,
     input  wire [31:0] iInitialPC,
     //sinais de monitoramento
-    output wire [31:0] wRegDisp, wRegDispCOP0,
-	 output wire [31:0] wRegDispFPU,
+    output wire [31:0] wRegDisp,
     input  wire [4:0]  wRegDispSelect,
     output wire [31:0] wDebug,
     output wire [7:0]  flagBank,
@@ -14,9 +13,7 @@ module CPU (
     output wire [17:0] wControlSignals,
     output wire [5:0]  wControlState,
     input  wire [4:0]  wVGASelect,
-	 input  wire [4:0]  wVGASelectFPU,
     output wire [31:0] wVGARead,
-	 output wire [31:0] wVGAReadFPU,
 	 output wire [31:0] wBRReadA,
 	 output wire [31:0] wBRReadB,
 	 output wire [31:0] wBRWrite,
@@ -39,13 +36,6 @@ module CPU (
 );
 
 
-`ifndef FPU // Se a FPU não estiver sendo sintetizada
-	 assign wRegDispFPU 	= 32'h0ACEF0DA;
-	 assign wVGAReadFPU 	= 32'hF0CAF0FA;
-    assign flagBank		= 8'hFF;
-`endif
-
-
 /*************  UNICICLO *********************************/
 `ifdef UNICICLO
 // Visualizacao dos sinais de controle especi­ficos
@@ -53,7 +43,7 @@ wire [2:0]  OrigPC, Mem2Reg;
 wire [1:0]  ALUOp,OrigALU, RegDst;
 wire        RegWrite;
 assign wControlSignals  = {DwReadEnable, DwWriteEnable, RegWrite, RegDst[1:0], 
-									ALUOp[1:0], OrigALU[1:0], Mem2Reg[2:0], OrigPC[2:0]};
+									ALUOp[1:0], OrigALU[1:0], Mem2Reg[2:0], OrigPC[2:0]}; //OrigALU = ALUSrc
 assign wControlState    = 6'b0;
 
 Datapath_UNI Processor (
@@ -71,12 +61,6 @@ Datapath_UNI Processor (
     .wRegDispCOP0(wRegDispCOP0),
     .wVGASelect(wVGASelect),
     .wVGARead(wVGARead),
-`ifdef FPU
-    .wRegDispFPU(wRegDispFPU),
-    .wVGASelectFPU(wVGASelectFPU),
-    .wVGAReadFPU(wVGAReadFPU),
-	 .wFPUFlagBank(flagBank),
-`endif
     .wCALUOp(ALUOp),
     .wCRegWrite(RegWrite),
     .wCRegDst(RegDst),

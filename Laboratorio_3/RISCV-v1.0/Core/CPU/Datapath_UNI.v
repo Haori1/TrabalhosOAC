@@ -13,11 +13,6 @@ module Datapath_UNI (
     output wire [31:0] wRegDisp, wRegDispCOP0,
     input  wire [4:0]  wRegDispSelect,
     output wire [31:0] wDebug,
-
-    output wire [7:0]  wFPUFlagBank,
-	 output wire [31:0] wRegDispFPU,
-	 input       [4:0]  wVGASelectFPU,
-	 output      [31:0] wVGAReadFPU,
 	 
     input       [4:0]  wVGASelect,
     output      [31:0] wVGARead,
@@ -73,51 +68,25 @@ wire [31:0] wPC4;
 wire [31:0] wiPC;
 wire [31:0] wInstr;
 wire [31:0] wMemDataWrite;
-wire [4:0]  wAddrRs, wAddrRt, wAddrRd, wRegDst, wShamt;     // enderecos dos reg rs,rt ,rd e saida do Mux regDst
+wire [4:0]  wAddrRs1, wAddrRs2, wAddrRd, wRegDs2;     // enderecos dos reg rs,rt ,rd e saida do Mux regDs2
 wire [31:0] wOrigALU;
 wire        wZero;
 wire [4:0]  wALUControl;
 wire [31:0] wALUresult, wRead1, wRead2, wMemAccess;
 wire [31:0] wReadData;
 wire [31:0] wDataReg;
-wire [15:0] wImm;
+wire [31:0] wImm, wImmBranch, wImmStore, wImmU, wImmUJ;
 wire [31:0] wExtImm;
 wire [31:0] wBranchPC;
 wire [31:0] wJumpAddr;
 wire        wOverflow;
 wire [31:0] wExtZeroImm;
 wire        wCMemRead, wCMemWrite;
-wire [5:0]  wOpcode, wFunct;
-
-/*Neste bloco estao definidos os controles dos multiplexadores e outras coisas da FPU*/
-wire        wCRegWriteFPU, wCRegDataFPU, wSelectedFlagValue, wCFPFlagWrite, wCompResult;
-wire [1:0]  wCDataRegFPU, wCRegDstFPU, wCFPUparaMem;
-wire        wZeroFPU, wNanFPU, wUnderflowFPU, wOverflowFPU, wBranchC1;
-wire [4:0]  wAddrFt, wAddrFs, wAddrFd, wFmt, wRegDstFPU;
-wire [2:0]  wFlagSelector, wBranchFlagSelector;
-wire [3:0]  wFPALUControl;
-wire [31:0] wDataRegFPU;
-wire [31:0] wFPALUresult;
-wire [31:0] wRead1FPU, wRead2FPU;
-/*******/
-
-// feito no semestre 2013/1 para implementar a deteccao de excecoes (COP0)
-wire        wCRegWriteCOP0;
-wire        wCEretCOP0;
-wire        wCExcOccurredCOP0;
-wire        wCBranchDelayCOP0;
-wire [4:0]  wCExcCodeCOP0;
-wire [31:0] wDataRegCOP0;
-wire [31:0] wCOP0ReadData;
-wire [7:0]  wCOP0InterruptMask;
-wire        wCOP0UserMode;
-wire        wCOP0ExcLevel;
-wire [31:0] wMemStore;
-wire [3:0]  wMemEnableStore;
-wire [3:0]  wMemEnable;
+wire [6:0]  wOpcode, wFunct7;
+wire [2:0]  wFunct3;
 
 //Semestre 2014/2 para implementacao do bootloader
-wire        wCodeMemoryWrite;
+//wire        wCodeMemoryWrite;
 
 /* Inicializacao */
 initial
@@ -126,18 +95,22 @@ begin
     PCgambs    <= BEGINNING_TEXT;
 end
 
-assign wPC4         = wPC + 32'h4;                          /* Calculo PC+4 */
-assign wBranchPC    = wPC4 + {wExtImm[29:0],{2'b00}};       /* Endereco do Branch */
-assign wJumpAddr    = {wPC4[31:28],wInstr[25:0],{2'b00}};   /* Endereco do Jump */
+assign wPC4         = wPC + 32'h4;                          	/* Calculo PC+4 */
+assign wBranchPC    = wPC + {wImmBranch[30:0],{1'b0}};       			/* Endereco do Branch */
+//assign wJumpAddr    = {wPC4[31:28],wInstr[25:0],{2'b00}};   	/* Endereco do Jump */
 assign wPC          = PC;
-assign wOpcode      = wInstr[31:26];
-assign wAddrRs      = wInstr[25:21];
-assign wAddrRt      = wInstr[20:16];
-assign wAddrRd      = wInstr[15:11];
-assign wShamt       = wInstr[10:6];
-assign wFunct       = wInstr[5:0];
-assign wImm         = wInstr[15:0];
-assign wExtZeroImm  = {{16'b0},wImm};
+assign wOpcode      = wInstr[6:0];
+assign wAddrRs1     = wInstr[19:15];
+assign wAddrRs2     = wInstr[24:20];
+assign wAddrRd      = wInstr[11:7];
+assign wFunct7      = wInstr[31:25];
+assign wFunct3		  = wInstr[14:12];
+assign wImm         = {{20{wInstr[31]}}wInstr[31:20]};
+assign wImmBranch   = {{20{wInstr[31]}},wInstr[31], wInstr[7], wInstr[30:25], wInstr[11:8]};
+assign wImmStore	  = {{20{wInstr[31]}},wInstr[31:25], wInstr[11:7]};
+assign wImmU        = {{12{wInstr[31]}},wInstr[31:12]};
+assign wImmUJ       = {{20{wInstr[31]}},wInstr[31],wInstr[12:21],wInstr[22],wInstr[30:23]};
+assign wExtZeroImm  = {16'b0},wImm};
 assign wExtImm      = {{16{wImm[15]}},wImm};
 assign woInstr      = wInstr;
 assign wCodeMemoryWrite     = ((PC >= BEGINNING_BOOT && PC <= END_BOOT) ? 1'b1 : 1'b0);
@@ -233,9 +206,10 @@ FlagBank FlagBankModule(
 
 /* ALU CTRL */
 ALUControl ALUControlunit (
-    .iFunct(wFunct),
-    .iOpcode(wOpcode),
-    .iRt(wAddrRt),          // 1/2016, Implementar intruções bgez, bgezal, bgltz, bltzal.
+    .iFunct7(wFunct7), //funct alterado 18/1
+	 .iFunct3(wFunct3),		//riscv
+    //.iOpcode(wOpcode),
+    //.iRt(wAddrRt),          // 1/2016, Implementar intruções bgez, bgezal, bgltz, bltzal.
     .iALUOp(wCALUOp),
     .oControlSignal(wALUControl)
 	);

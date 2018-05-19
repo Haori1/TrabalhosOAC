@@ -14,7 +14,8 @@
  */
 
 module ALUControl (
-	input wire [5:0] iFunct, iOpcode, iRt,   // 1/2016. Adicionado iRt.
+	input wire [6:0]iFunct7,
+	input wire [2:0] iFunct3,// iOpcode, //iRt,   // 1/2016. Adicionado iRt.
 	input wire [1:0] iALUOp,
 	output reg [4:0] oControlSignal
 	);
@@ -28,60 +29,66 @@ begin
             oControlSignal  = OPSUB;
         2'b10:
         begin
-            case (iFunct)
-                FUNSLL:
-                    oControlSignal  = OPSLL;
-                FUNSRL:
-                    oControlSignal  = OPSRL;
-                FUNSRA:
-                    oControlSignal  = OPSRA;
-                FUNMFHI:
-                    oControlSignal  = OPMFHI;                // 2015/1
-                FUNMTHI:
-                    oControlSignal  = OPMTHI;
-                FUNMFLO:
-                    oControlSignal  = OPMFLO;                // 2015/1
-                FUNMTLO:
-                    oControlSignal  = OPMTLO;
-                FUNMULT:
-                    oControlSignal  = OPMULT;
-                FUNDIV:
-                    oControlSignal  = OPDIV;
-                FUNMULTU:
-                    oControlSignal  = OPMULTU;
-                FUNDIVU:
-                    oControlSignal  = OPDIVU;
-                FUNADD:
+            case (iFunct3)
+					 FUN3ADD:
                     oControlSignal  = OPADD;
-                FUNADDU:
-                    oControlSignal  = OPADD;
-                FUNSUB:
+                FUN3SUB:
                     oControlSignal  = OPSUB;
-                FUNSUBU:
-                    oControlSignal  = OPSUB;
-                FUNAND:
+					 FUN3AND:
                     oControlSignal  = OPAND;
-                FUNOR:
+                FUN3OR:
                     oControlSignal  = OPOR;
-                FUNXOR:
+                FUN3XOR:
                     oControlSignal  = OPXOR;
-                FUNNOR:
-                    oControlSignal  = OPNOR;
-                FUNSLT:
+					 FUN3SLT:
                     oControlSignal  = OPSLT;
-                FUNSLTU:
+                FUN3SLTU:
+                    oControlSignal  = OPSLTU;  
+                FUN3SLL:
+                    oControlSignal  = OPSLL;
+                FUN3SRL:
+                    oControlSignal  = OPSRL;
+                FUN3SRA:
+                    oControlSignal  = OPSRA;
+					 OPCADDI:
+                    oControlSignal  = OPADD;
+                OPCANDI:
+                    oControlSignal  = OPAND;
+					 OPCORI:
+						  oControlSignal  = OPOR;
+					 OPCXORI:
+						  oControlSignal  = OPXOR;
+                OPCSLTI:
+                    oControlSignal  = OPSLT;
+                OPCSLTIU:
                     oControlSignal  = OPSLTU;
-                FUNSRLV:
-                    oControlSignal  = OPSRLV;
-                FUNSLLV:
-                    oControlSignal  = OPSLLV;
-                FUNSRAV:
-                    oControlSignal  = OPSRAV;
+					 OPCSLLI:
+						  oControlSignal  = OPSLL;
+					 OPCSRLI:
+						  oControlSignal  = OPSRL;
+					 OPCSRAI:
+						  oControlSignal  = OPSRA;
+                /*OPCLUI:
+                    oControlSignal  = OPLUI;
+                OPCJAL:                                 //2016/1
+                    oControlSignal  = OPAND;*/
+						  
+                /*`ifdef MULT
+					 FUN3MULT:
+                    oControlSignal  = OPMULT;
+                FUN3DIV:
+                    oControlSignal  = OPDIV;
+                FUN3MULTU:
+                    oControlSignal  = OPMULTU;
+                FUN3DIVU:
+                    oControlSignal  = OPDIVU;
+                `endif*/
+					 
                 default:
                     oControlSignal  = 5'b00000;
             endcase
         end
-        2'b11:
+        /*2'b11:	TALVEZ USAR COMO LUI
             case (iOpcode)
 					 OPMFUNCT:
 					 begin
@@ -98,24 +105,8 @@ begin
 										oControlSignal  = 5'b00000;
 							endcase
 					end	 
-                OPCADDI:
-                    oControlSignal  = OPADD;
-                OPCADDIU:
-                    oControlSignal  = OPADD;
-                OPCSLTI:
-                    oControlSignal  = OPSLT;
-                OPCSLTIU:
-                    oControlSignal  = OPSLTU;
-                OPCANDI:
-                    oControlSignal  = OPAND;
-                OPCORI:
-                    oControlSignal  = OPOR;
-                OPCXORI:
-                    oControlSignal  = OPXOR;
-                OPCLUI:
-                    oControlSignal  = OPLUI;
-                OPCJAL:                                 //2016/1
-                    oControlSignal  = OPAND;
+					
+                
                 OPCBLEZ,                                //2016/1
                 OPCBGTZ:
                     case (iRt)
@@ -136,9 +127,10 @@ begin
                             oControlSignal  = 5'b00000;
                     endcase
                 end
+					 
                 default:
                     oControlSignal  = 5'b00000;
-            endcase
+            endcase*/
     endcase
 end
 
