@@ -1,4 +1,8 @@
+# PROGRAMA QUE SERVE APENAS PARA COMPILAR E VER COMO O RARS MONTA O CÓDIGO DE MÁQUINA NAS INSTRUÇÕES COM IMEDIATO
+
 .eqv ADRR 0xFF100000
+
+
 
 .data
 
@@ -9,7 +13,7 @@ palavra: .word 3
 
 #lui t2, 0x453FF
 
-auipc t0, 1
+auipc t0, -1
 
 addi t2, t2, -2047
 
@@ -24,6 +28,7 @@ addi t4, t4, 0x7FF
 add t3, t3, t4
 
 andi t3, t3, 0xFF
+jal testebranch
 
 li t5, 0xff
 slli t5, t5, 8
@@ -32,12 +37,20 @@ and t2, t2, t5
 testebranch: addi t5, t5, 0xF
 nop
 nop
-fadd.s ft0, ft1, ft2
-j testebranch
+#j testebranch
 
-#flw ft3, -7
 
 li t6, ADRR
-#bne t5, 0x122
+#bnez t5, testebranch
 
-jalr ra, zero, -1
+la t0, palavra
+li t5, 8
+sb t5, 0(t0)
+sb t5, 1(t0)
+sb t5, 3(t0)
+sh t5, 0(t0)
+sh t5, 2(t0)
+sw t5, 0(t0)
+
+li t1, 0x00400000
+jalr ra, t1, 8

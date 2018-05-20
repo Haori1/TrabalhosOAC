@@ -40,10 +40,10 @@ module CPU (
 `ifdef UNICICLO
 // Visualizacao dos sinais de controle especi­ficos
 wire [2:0]  OrigPC, Mem2Reg;
-wire [1:0]  ALUOp,OrigALU, RegDst;
-wire        RegWrite;
-assign wControlSignals  = {DwReadEnable, DwWriteEnable, RegWrite, RegDst[1:0], 
-									ALUOp[1:0], OrigALU[1:0], Mem2Reg[2:0], OrigPC[2:0]}; //OrigALU = ALUSrc
+wire [1:0]  ALUOp;
+wire        RegWrite, OrigALU;
+assign wControlSignals  = {DwReadEnable, DwWriteEnable, RegWrite, 
+									ALUOp[1:0], OrigALU, Mem2Reg[2:0], OrigPC[2:0]}; //OrigALU = ALUSrc
 assign wControlState    = 6'b0;
 
 Datapath_UNI Processor (
@@ -63,7 +63,7 @@ Datapath_UNI Processor (
     .wVGARead(wVGARead),
     .wCALUOp(ALUOp),
     .wCRegWrite(RegWrite),
-    .wCRegDst(RegDst),
+    //.wCRegDst(RegDst),
     .wCOrigALU(OrigALU),
     .wCMem2Reg(Mem2Reg),
     .wCOrigPC(OrigPC),

@@ -8,7 +8,7 @@
  * ALUOp    |    Control signal
  * -------------------------------------------
  * 00        |    The ALU performs an add operation.
- * 01        |    The ALU performs a subtract operation.
+ * 01        |    The ALU performs a lui operation.
  * 10        |    The funct3 (and the funct7, if necessary) field determines the ALU operation (type-R)
  * 11        |    The opcode, the func3 and funct7 fields determine the ALU operation (type-I and type-SB)
  */
@@ -27,7 +27,7 @@ begin
 			2'b00:
             oControlSignal  = OPADD;
 			2'b01:
-            oControlSignal  = OPSUB;
+            oControlSignal  = OPLUI;
 			
 			2'b10:
 			begin

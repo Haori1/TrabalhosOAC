@@ -37,17 +37,17 @@ begin
 		OPSLTU:
 			oALUResult  = $unsigned(iA) < $unsigned(iB);
 		OPGE:
-			oALUResult = iA >= iB;
+			oALUResult 	= iA >= iB;
 		OPGEU:
 			oALUResult  = $unsigned(iA) >= $unsigned(iB);
 		OPSLL:
-			oALUResult  = iB << iA[4:0];
+			oALUResult  = iA << iB[4:0];
 		OPSRL:
-			oALUResult  = iB >> iA[4:0];
+			oALUResult  = iA >> iB[4:0];
 		OPSRA:
-			oALUResult  = iB >>> iA[4:0];
+			oALUResult  = iA >>> iB[4:0];
 		OPLUI:
-			oALUResult  = {iA[19:0],12'b0};
+			oALUResult  = {iB[19:0],12'b0};
 		OPMUL:
 			oALUResult  = mul[31:0];
 		OPMULH:

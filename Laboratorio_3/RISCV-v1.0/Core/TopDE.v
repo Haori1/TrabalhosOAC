@@ -4,8 +4,13 @@
 //`define MULTICICLO 
 //`define PIPELINE //FPU esta incompleta
 
+// Define se a extensão de multipicação/divisão será sintetizada ou não
+`define RV32IM
+
 // Define se a FPU será sintetizada ou não
-`define FPU
+//`define RV32IMF
+
+
 
 /*   ******************  Historico ***********************
  Top Level para processador MIPS UNICICLO v0 baseado no processador desenvolvido por
