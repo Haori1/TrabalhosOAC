@@ -28,21 +28,8 @@ parameter
 	 OPREMU	    = 5'd20,
 	 
 	 
-/*	 OPSLL       = 5'b00011,             //4
-    OPSUB       = 5'b00110,             //6
-    OPSLT       = 5'b00111,             //7
-    OPSRL       = 5'b01000,             //8
-    OPSRA       = 5'b01001,             //9
-    OPXOR       = 5'b01010,             //10
-    OPSLTU      = 5'b01011,             //11
-    OPLUI       = 5'b01111,             //15
-    OPSLLV      = 5'b10000,             //16
-    OPSRAV      = 5'b10001,             //17
-    OPSRLV      = 5'b10010,             //18
-    OPSGT       = 5'b10111,             //23        2016/1
-*/
-	 
 /* Campo FUNCT3 */
+
 		FUN3ADD      = 3'h00,
 		FUN3SUB      = 3'h00,
       FUN3AND      = 3'h07,
@@ -147,23 +134,17 @@ parameter
 		OPCSB		  = 7'h23,
 		OPCSH		  = 7'h23,
 		OPCSW		  = 7'h23,
-		OPMUL		  = 7'h33,
-		OPMULH	  = 7'h33,
-		OPMULHU	  = 7'h33,
-		OPMULHSU	  = 7'h33,
-		OPDIV		  = 7'h33,
-		OPDIVU	  = 7'h33,
-		OPREM		  = 7'h33,
-		OPREMU	  = 7'h33,
+		OPCMUL	  = 7'h33,
+		OPCMULH	  = 7'h33,
+		OPCMULHU	  = 7'h33,
+		OPCMULHSU  = 7'h33,
+		OPCDIV	  = 7'h33,
+		OPCDIVU	  = 7'h33,
+		OPCREM	  = 7'h33,
+		OPCREMU	  = 7'h33,
+		
 
-/* Campo $rs2 */                         // 1/2016
-    RS2BGEZ      = 5'b00001,
-//    RS2BGEZAL    = 5'b10001,
-    RS2BLTZ      = 5'b00000,
-//    RS2BLTZAL    = 5'b10000,
-    RS2ZERO      = 5'B00000,
-
-//	 INITIAL_INTERRUPT = 32'h00000911,   // 00000111  00000511 ou 00000911 teclado habilitado
+	 INITIAL_INTERRUPT = 32'h00000911,   // 00000111  00000511 ou 00000911 teclado habilitado
 
 /* Memory access types ***********************************************************************************************/
     LOAD_TYPE_LW        = 3'b000,
@@ -274,13 +255,6 @@ parameter
     STATE_SB        = 6'd53,
     STATE_SH        = 6'd54,
 
-     //Adicionados em 1/2016
-     BGEZ           = 6'd55,
-//     BGEZAL         = 6'd56,
-     BLTZ           = 6'd57,
-//     BLTZAL         = 6'd58,
-     BGTZ           = 6'd59,
-     BLEZ           = 6'd60,
 	  
 	  //Adicionados em 2/2016 (Grupo 2)
 	  RM				  = 6'd61,

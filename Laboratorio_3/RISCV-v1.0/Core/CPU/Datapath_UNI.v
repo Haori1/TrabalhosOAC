@@ -79,7 +79,6 @@ wire [31:0] wImm, wImmBranch, wImmStore, wImmU, wImmUJ;
 wire [31:0] wExtImm;
 wire [31:0] wBranchPC;
 wire [31:0] wJumpAddr;
-wire        wOverflow;
 wire [31:0] wExtZeroImm;
 wire        wCMemRead, wCMemWrite;
 wire [6:0]  wOpcode, wFunct7;
@@ -189,7 +188,6 @@ ula_fp FPALUunit (
     .onan(wNanFPU),
     .ozero(wZeroFPU),
     .ounderflow(wUnderflowFPU),
-    .ooverflow(wOverflowFPU),
     .oCompResult(wCompResult)
 	);
 
@@ -208,23 +206,20 @@ FlagBank FlagBankModule(
 ALUControl ALUControlunit (
     .iFunct7(wFunct7), //funct alterado 18/1
 	 .iFunct3(wFunct3),		//riscv
-    //.iOpcode(wOpcode),
-    //.iRt(wAddrRt),          // 1/2016, Implementar intruções bgez, bgezal, bgltz, bltzal.
+    .iOpcb6(wOpcode[6]),
     .iALUOp(wCALUOp),
     .oControlSignal(wALUControl)
 	);
 
 /* ALU */
 ALU ALUunit(
-    .iCLK(iCLK),
-    .iRST(iRST),
+    //.iCLK(iCLK),
+    //.iRST(iRST),
     .iControlSignal(wALUControl),
     .iA(wRead1),
     .iB(wOrigALU),
-    .iShamt(wShamt),
     .oALUresult(wALUresult),
     .oZero(wZero),
-    .oOverflow(wOverflow)
 	);
 
 MemStore MemStore0 (
@@ -276,7 +271,6 @@ Control_UNI CtrUNI (
     .oFPFlagWrite(wCFPFlagWrite),
     // feito no semestre 2013/1 para implementar a deteccao de excecoes (COP0)
     .iExcLevel(wCOP0ExcLevel),
-    .iALUOverflow(wOverflow),
     .iFPALUOverflow(wOverflowFPU),
     .iFPALUUnderflow(wUnderflowFPU),
     .iFPALUNaN(wNanFPU),

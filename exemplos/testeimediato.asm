@@ -11,7 +11,7 @@ palavra: .word 3
 
 auipc t0, 1
 
-addi t2, t2, 2047
+addi t2, t2, -2047
 
 #srli t2, t2, 12
 #slli t2, t2, 12
@@ -29,9 +29,15 @@ li t5, 0xff
 slli t5, t5, 8
 and t2, t2, t5
 
-addi t5, t5, 0xF
+testebranch: addi t5, t5, 0xF
+nop
+nop
+fadd.s ft0, ft1, ft2
+j testebranch
 
 #flw ft3, -7
 
 li t6, ADRR
 #bne t5, 0x122
+
+jalr ra, zero, -1
