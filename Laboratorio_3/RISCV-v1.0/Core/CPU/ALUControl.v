@@ -33,51 +33,132 @@ begin
 			begin
             case (iFunct3)
 					 FUN3ADD,
-					 FUN3SUB:
+					 FUN3SUB,
+					 FUN3MUL:
 					 begin
 							case (iFunct7)
 									FUN7ADD:
 										oControlSignal  = OPADD;
 									FUN7SUB:
 										oControlSignal  = OPSUB;
+									
+									`ifdef RV32M 
+									FUN7MUL:
+										oControlSignal	 = OPMUL;
+									`endif
 							endcase
 					 end
-					 FUN3SLL:
-                    oControlSignal  = OPSLL;
-					 FUN3SLT:
-                    oControlSignal  = OPSLT;
-					 FUN3SLTU:
-                    oControlSignal  = OPSLTU;
-					 FUN3XOR:
+					 
+					 FUN3SLL,
+					 FUN3MULH:
+					 `ifdef RV32M
+					 begin
+							case (iFunct7)
+									FUN7SLL:
+										oControlSignal  = OPSLL;
+									FUN7MULH:
+										oControlSignal  = OPMULH;
+							endcase
+					 end
+					 `else
+							oControlSignal  = OPSLL;
+					 `endif
+					
+					 FUN3SLT,
+					 FUN3MULHSU:
+					 `ifdef RV32M
+					 begin
+							case (iFunct7)
+									FUN7SLT:
+										oControlSignal	= OPSLT;
+									FUN7MULHSU:
+										oControlSignal = OPMULHSU;
+							endcase
+					 end
+					 `else
+							oControlSignal  = OPSLT;
+					 `endif
+					 
+                    
+					 FUN3SLTU,
+					 FUN3MULHU:
+					 `ifdef RV32M
+					 begin
+							case (iFunct7)
+									FUN7SLTU:
+										oControlSignal = OPSLTU;
+									FUN7MULHU:
+										oControlSignal = OPMULHU;
+							endcase
+					 end
+					 `else
+							oControlSignal  = OPSLTU;
+					 `endif
+                    
+					 FUN3XOR,
+					 FUN3DIV:
+					 `ifdef RV32M
+					 begin
+							case (iFunct7)
+									FUN7XOR:
+										oControlSignal = OPXOR;
+									FUN7DIV:
+										oControlSignal = OPDIV;
+							endcase
+					 end
+					 `else
                     oControlSignal  = OPXOR;
-		
+					 `endif
+						
+					
                 FUN3SRL,
-					 FUN3SRA:
+					 FUN3SRA,
+					 FUN3DIVU:
 					 begin
 							case (iFunct7)
 									FUN7SRL:
 										oControlSignal  = OPSRL;
 									FUN7SRA:
 										oControlSignal  = OPSRA;
+									
+									`ifdef RV32M
+									FUN7DIVU:
+										oControlSignal = OPDIVU;
+									`endif
 							endcase
 					 end
 					 
-					 FUN3OR:
-                    oControlSignal  = OPOR;
-                FUN3AND:
-                    oControlSignal  = OPAND;
+					 FUN3OR,
+					 FUN3REM:
+					 `ifdef RV32M
+					 begin
+							case (iFunct7)
+									FUN7OR:
+										oControlSignal = OPOR;
+									FUN7DIV:
+										oControlSignal = OPREM;
+							endcase
+					 end
+					 `else
+							oControlSignal = OPOR;
+					 `endif
+											
+                   
+                FUN3AND,
+					 FUN3REMU:
+					 `ifdef RV32M
+					 begin
+							case (iFunct7)
+									FUN7AND:
+										oControlSignal = OPAND;
+									FUN7REMU:
+										oControlSignal = OPREMU;
+							endcase
+					 end
+					 `else
+							oControlSignal  = OPAND;
+					 `endif
 
-						  
-                /*`ifdef MULT
-					 FUN3MUL:
-                    oControlSignal  = OPMUL;
-                FUN3DIV:
-                    oControlSignal  = OPDIV;
-                FUN3MULTU:
-                    oControlSignal  = OPMULTU;
-                FUN3DIVU:
-                    oControlSignal  = OPDIVU;
-                `endif*/
 					 
                 default:
                     oControlSignal  = 5'b00000;

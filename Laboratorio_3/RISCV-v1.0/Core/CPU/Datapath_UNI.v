@@ -70,14 +70,13 @@ wire [31:0] wInstr;
 wire [31:0] wMemDataWrite;
 wire [4:0]  wAddrRs1, wAddrRs2, wAddrRd, wRegDs2;     // enderecos dos reg rs,rt ,rd e saida do Mux regDs2
 wire [31:0] wOrigALU;
-wire        wZero;
+wire        wZero, WBranchPC;
 wire [4:0]  wALUControl;
 wire [31:0] wALUresult, wRead1, wRead2, wMemAccess;
 wire [31:0] wReadData;
 wire [31:0] wDataReg;
 wire [31:0] wImm;
 //wire [31:0] wExtImm;
-wire [31:0] wBranchPC;
 wire [31:0] wJumpAddr;
 wire [31:0] wExtZeroImm;
 wire        wCMemRead, wCMemWrite;
@@ -94,9 +93,8 @@ begin
     PCgambs    <= BEGINNING_TEXT;
 end
 
-assign wPC4         = wPC + 32'h4;                          	/* Calculo PC+4 */
-assign wBranchPC    = wPC + wImm;       								/* Endereco do Branch */
-//assign wJumpAddr    = {wPC4[31:28],wInstr[25:0],{2'b00}};   	/* Endereco do Jump */
+assign wPC4         = wPC + 32'h4;                          	/* Calculo PC+4 */    								/* Endereco do Branch */
+assign wJumpAddr    = {wPC4[31:28],wInstr[25:0],{2'b00}};   	/* Endereco do Jump/branch */
 assign wPC          = PC;
 assign wOpcode      = wInstr[6:0];
 assign wAddrRs1     = wInstr[19:15];
@@ -326,22 +324,22 @@ always @(*)
 /*Decide qual sera o proximo PC*/
 always @(*)
 begin
-    if (wCExcOccurredCOP0)                              // feito no semestre 2013/1 para implementar a deteccao de excecoes (COP0)
-        wiPC <= BEGINNING_KTEXT;                         //.ktext
-    else
-    begin
-        case(wCOrigPC)
-            3'b000:     wiPC <= wPC4;
-            3'b001:     wiPC <= wZero ? wBranchPC: wPC4;
-            3'b010:     wiPC <= wJumpAddr;
-            3'b011:     wiPC <= wRead1;
-            3'b100:     wiPC <= wCOP0ReadData;           // feito no semestre 2013/1 para implementar a deteccao de excecoes (COP0). instrucao eret
-            3'b101:     wiPC <= ~wZero ? wBranchPC: wPC4;
-            3'b110:     wiPC <= wSelectedFlagValue ? wBranchPC : wPC4;
-            3'b111:     wiPC <= ~wSelectedFlagValue ? wBranchPC : wPC4;
-				default:		wiPC <= wPC4;
-        endcase
-    end
+    case(wCOrigPC)
+        3'b001:
+        begin
+            // PAREI AQUI !!!!!!!!!!
+        end
+            default:		wBranchPC <= wPC4;
+    endcase
+end
+always @(*)
+begin
+    case(wBranchPC)
+        3'b000:     WiPC <= wPC4;
+        3'b001:     WiPC <= wJumpAddr;      // endereço do jal/branches
+        3'b010:     WiPC <= wALUresult;     // endereço do jalr, que vem da ULA
+        default:    WiPC <= WPC4;
+    endcase
 end
 
 /*Decide o que sera escrito no banco de registradores*/

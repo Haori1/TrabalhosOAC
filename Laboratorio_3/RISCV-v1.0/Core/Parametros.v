@@ -18,7 +18,8 @@ parameter
   	 OPSRL		 = 5'd10,
   	 OPSRA		 = 5'd11,
   	 OPLUI		 = 5'd12,
-  	 OPMUL		 = 5'd13,
+  	 
+	 OPMUL		 = 5'd13,
   	 OPMULH	    = 5'd14,
   	 OPMULHU	    = 5'd15,
   	 OPMULHSU	 = 5'd16,
@@ -64,6 +65,7 @@ parameter
 		FUN3SB		 = 3'h00,
 		FUN3SH		 = 3'h01,
 		FUN3SW		 = 3'h02,
+		
 		FUN3MUL		 = 3'h00,
 		FUN3MULH		 = 3'h01,
 		FUN3MULHU	 = 3'h03,
@@ -87,6 +89,7 @@ parameter
 		FUN7SLLI		 = 7'h00,
 		FUN7SRLI		 = 7'h00,
 		FUN7SRAI		 = 7'h20,
+		
 		FUN7MUL		 = 3'h01,
 		FUN7MULH		 = 3'h01,
 		FUN7MULHU	 = 3'h01,
@@ -134,6 +137,7 @@ parameter
 		OPCSB		  = 7'h23,
 		OPCSH		  = 7'h23,
 		OPCSW		  = 7'h23,
+		
 		OPCMUL	  = 7'h33,
 		OPCMULH	  = 7'h33,
 		OPCMULHU	  = 7'h33,
