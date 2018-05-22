@@ -5,10 +5,10 @@
 //`define PIPELINE //FPU esta incompleta
 
 // Define se a extensão de multipicação/divisão será sintetizada ou não
-`define RV32IM
+`define RV32M
 
 // Define se a FPU será sintetizada ou não
-//`define RV32IMF
+//`define RV32F
 
 
 

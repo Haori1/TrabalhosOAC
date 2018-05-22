@@ -70,7 +70,8 @@ wire [31:0] wInstr;
 wire [31:0] wMemDataWrite;
 wire [4:0]  wAddrRs1, wAddrRs2, wAddrRd, wRegDs2;     // enderecos dos reg rs,rt ,rd e saida do Mux regDs2
 wire [31:0] wOrigALU;
-wire        wZero, WBranchPC;
+wire        wZero;
+wire [1:0]  WBranchPC;
 wire [4:0]  wALUControl;
 wire [31:0] wALUresult, wRead1, wRead2, wMemAccess;
 wire [31:0] wReadData;
@@ -93,15 +94,15 @@ begin
     PCgambs    <= BEGINNING_TEXT;
 end
 
-assign wPC4         = wPC + 32'h4;                          	/* Calculo PC+4 */    								/* Endereco do Branch */
-assign wJumpAddr    = {wPC4[31:28],wInstr[25:0],{2'b00}};   	/* Endereco do Jump/branch */
+assign wPC4         = wPC + 32'h4;              /* Calculo PC+4 */
+assign wJumpAddr    = {wImm[30:0], 1b'0};   	/* Endereco do Jump/branch */
 assign wPC          = PC;
 assign wOpcode      = wInstr[6:0];
 assign wAddrRs1     = wInstr[19:15];
 assign wAddrRs2     = wInstr[24:20];
 assign wAddrRd      = wInstr[11:7];
 assign wFunct7      = wInstr[31:25];
-assign wFunct3		  = wInstr[14:12];
+assign wFunct3		= wInstr[14:12];
 assign wImm         = {{20{wInstr[31]}}wInstr[31:20]};
 //assign wImmBranch   = {{20{wInstr[31]}},wInstr[31], wInstr[7], wInstr[30:25], wInstr[11:8]};
 //assign wImmStore	  = {{20{wInstr[31]}},wInstr[31:25], wInstr[11:7]};
@@ -201,7 +202,7 @@ FlagBank FlagBankModule(
 /* ALU CTRL */
 ALUControl ALUControlunit (
     .iFunct7(wFunct7), //funct alterado 18/1
-	 .iFunct3(wFunct3),		//riscv
+	.iFunct3(wFunct3),		//riscv
     .iOpcb6(wOpcode[6]),
     .iALUOp(wCALUOp),
     .oControlSignal(wALUControl)
@@ -327,18 +328,41 @@ begin
     case(wCOrigPC)
         3'b001:
         begin
-            // PAREI AQUI !!!!!!!!!!
+            case (wFunct3)
+                3'b000:     // beq
+                begin  
+                    if (wZero)          wiPC <= wJumpAddr;
+                    else                wiPC <= wPC4;
+                end
+
+                3'b001:     // bne
+                begin
+                    if (~wZero)         wiPC <= wJumpAddr;
+                    else                wiPC <= wPC4;
+                end
+
+                3'b100,     // blt
+                3'b101,     // bge
+                3'b110,     // bltu
+                3'b111:     // bgeu
+                begin
+                    if (wALUresult[0])  wiPC <= wJumpAddr;
+                    else                wiPC <= wPC4;
+                end
+
+                default:
+                    wiPC <= wPC4;
+            endcase
         end
-            default:		wBranchPC <= wPC4;
-    endcase
-end
-always @(*)
-begin
-    case(wBranchPC)
-        3'b000:     WiPC <= wPC4;
-        3'b001:     WiPC <= wJumpAddr;      // endereço do jal/branches
-        3'b010:     WiPC <= wALUresult;     // endereço do jalr, que vem da ULA
-        default:    WiPC <= WPC4;
+
+        3'b010:             // jalr - endereço esta na ULA
+            wiPC <= wALUresult;
+        
+        3'b011:             // jal
+            wiPC <= wJumpAddr;
+        
+        default:            // qualquer outra instruçao
+            wiPC <= wPC4;
     endcase
 end
 
@@ -347,8 +371,8 @@ always @(*)
     case(wCMem2Reg)
         3'b000:     wDataReg <= wALUresult;
         3'b001:     wDataReg <= wMemAccess; 	// ler da memória
-        3'b010:	  wDataReg <= wBranchPC;	// auipc
-		  3'b011:     wDataReg <= wPC4;
+        3'b010:	    wDataReg <= wJumpAddr;	// auipc
+		3'b011:     wDataReg <= wPC4;
         default:    wDataReg <= 32'b0;
     endcase
 

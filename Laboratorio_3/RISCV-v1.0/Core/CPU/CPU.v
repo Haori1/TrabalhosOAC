@@ -43,7 +43,7 @@ wire [2:0]  OrigPC, Mem2Reg;
 wire [1:0]  ALUOp;
 wire        RegWrite, OrigALU;
 assign wControlSignals  = {DwReadEnable, DwWriteEnable, RegWrite, 
-									ALUOp[1:0], OrigALU, Mem2Reg[2:0], OrigPC[2:0]};
+						    ALUOp[1:0], OrigALU, Mem2Reg[2:0], OrigPC[2:0]};
 assign wControlState    = 6'b0;
 
 Datapath_UNI Processor (

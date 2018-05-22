@@ -48,6 +48,8 @@ begin
 			oALUResult  = iA >>> iB[4:0];
 		OPLUI:
 			oALUResult  = {iB[19:0],12'b0};
+		
+		`ifdef RV32M
 		OPMUL:
 			oALUResult  = mul[31:0];
 		OPMULH:
@@ -64,6 +66,8 @@ begin
 			oALUResult  = iA % iB;
 		OPREMU:
 			oALUResult  = $unsigned(iA) % $unsigned(iB);
+		`endif
+		
 		default:
 			oALUResult  = ZERO;
     endcase
