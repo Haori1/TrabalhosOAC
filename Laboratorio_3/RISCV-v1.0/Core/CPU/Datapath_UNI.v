@@ -52,7 +52,7 @@ assign wBRReadB		= wRead2;
 assign wBRWrite		= wDataReg;
 assign wULA				= wALUresult;
 
-/* Padrao de nomeclatura
+/* Padrao de nomenclatura
  *
  * XXXXX - registrador XXXX
  * wXXXX - wire XXXX
@@ -77,9 +77,7 @@ wire [31:0] wALUresult, wRead1, wRead2, wMemAccess;
 wire [31:0] wReadData;
 wire [31:0] wDataReg;
 wire [31:0] wImm;
-//wire [31:0] wExtImm;
 wire [31:0] wJumpAddr;
-wire [31:0] wExtZeroImm;
 wire        wCMemRead, wCMemWrite;
 wire [6:0]  wOpcode, wFunct7;
 wire [2:0]  wFunct3;
@@ -94,8 +92,8 @@ begin
     PCgambs    <= BEGINNING_TEXT;
 end
 
-assign wPC4         = wPC + 32'h4;              /* Calculo PC+4 */
-assign wJumpAddr    = {wImm[30:0], 1b'0};   	/* Endereco do Jump/branch */
+assign wPC4         = wPC + 32'h4;              	/* Calculo PC+4 */
+assign wJumpAddr    = wPC + {wImm[30:0],1'b0};   	/* Endereco do Jump/branch */
 assign wPC          = PC;
 assign wOpcode      = wInstr[6:0];
 assign wAddrRs1     = wInstr[19:15];
@@ -199,11 +197,16 @@ FlagBank FlagBankModule(
 	);
 `endif */
 
+/* Geração de imediato */
+ImmGen ImmGen0 (
+	.iOpcode(wOpcode)
+	.oImmResult(wImm)
+	);
+
 /* ALU CTRL */
 ALUControl ALUControlunit (
     .iFunct7(wFunct7), //funct alterado 18/1
-	.iFunct3(wFunct3),		//riscv
-    .iOpcb6(wOpcode[6]),
+	 .iFunct3(wFunct3),		//riscv
     .iALUOp(wCALUOp),
     .oControlSignal(wALUControl)
 	);
@@ -371,8 +374,8 @@ always @(*)
     case(wCMem2Reg)
         3'b000:     wDataReg <= wALUresult;
         3'b001:     wDataReg <= wMemAccess; 	// ler da memória
-        3'b010:	    wDataReg <= wJumpAddr;	// auipc
-		3'b011:     wDataReg <= wPC4;
+        3'b010:	  wDataReg <= wJumpAddr;	// auipc
+		  3'b011:     wDataReg <= wPC4;
         default:    wDataReg <= 32'b0;
     endcase
 

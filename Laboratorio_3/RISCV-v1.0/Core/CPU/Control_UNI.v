@@ -155,7 +155,7 @@ begin
 			oLeMem              = 1'b0;
 			oEscreveMem         = 1'b0;
 			oOrigPC             = 3'b001;
-			oOpALU              = 2'b11;
+			oOpALU              = 2'b01;
 		end
 		
 		7'b1100111:

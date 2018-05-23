@@ -52,5 +52,14 @@ sh t5, 0(t0)
 sh t5, 2(t0)
 sw t5, 0(t0)
 
+la t0, palavra
+lb t5, 0(t0)
+lb t5, 1(t0)
+lb t5, 3(t0)
+lh t5, 0(t0)
+lh t5, 2(t0)
+lw t5, 0(t0)
+lbu t5, 3(t0)
+
 li t1, 0x00400000
 jalr ra, t1, 8
