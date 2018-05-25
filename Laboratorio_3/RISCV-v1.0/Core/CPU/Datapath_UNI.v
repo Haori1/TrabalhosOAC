@@ -101,11 +101,7 @@ assign wAddrRs2     = wInstr[24:20];
 assign wAddrRd      = wInstr[11:7];
 assign wFunct7      = wInstr[31:25];
 assign wFunct3		= wInstr[14:12];
-assign wImm         = {{20{wInstr[31]}}wInstr[31:20]};
-//assign wImmBranch   = {{20{wInstr[31]}},wInstr[31], wInstr[7], wInstr[30:25], wInstr[11:8]};
-//assign wImmStore	  = {{20{wInstr[31]}},wInstr[31:25], wInstr[11:7]};
-//assign wImmU        = {{12{wInstr[31]}},wInstr[31:12]};
-//assign wImmUJ       = {{20{wInstr[31]}},wInstr[31],wInstr[12:21],wInstr[22],wInstr[30:23]};
+
 assign woInstr      = wInstr;
 assign wCodeMemoryWrite     = ((PC >= BEGINNING_BOOT && PC <= END_BOOT) ? 1'b1 : 1'b0);
 
@@ -199,7 +195,7 @@ FlagBank FlagBankModule(
 
 /* Geração de imediato */
 ImmGen ImmGen0 (
-	.iOpcode(wOpcode)
+	.iInstr(wInstr)
 	.oImmResult(wImm)
 	);
 
@@ -208,6 +204,7 @@ ALUControl ALUControlunit (
     .iFunct7(wFunct7), //funct alterado 18/1
 	 .iFunct3(wFunct3),		//riscv
     .iALUOp(wCALUOp),
+    .iOpcb6(wOpcode[6]),
     .oControlSignal(wALUControl)
 	);
 
@@ -285,7 +282,7 @@ Control_UNI CtrUNI (
 	);
 
 // feito no semestre 2013/1 para implementar a deteccao de excecoes (COP0)
-/* Banco de registradores do Coprocessador 0 */
+/* Banco de registradores do Coprocessador 0 
 COP0RegistersUNI cop0reg (
     .iCLK(iCLK),
     .iCLR(iRST),
@@ -313,7 +310,7 @@ COP0RegistersUNI cop0reg (
     .iRegDispSelect(wRegDispSelect),
     .oRegDisp(wRegDispCOP0)
 	);
-
+*/
 
 
 /*Decide o que entrara na segunda entrada da ULA*/
@@ -402,8 +399,23 @@ always @(*)
         default:    wDataRegFPU <= 5'bx;
     endcase
 */
-	 
-/*Decide o que sera escrito na Memoria de Dados
+
+/*Decide o que sera escrito na Memoria de Dados*/
+assign wMemDataWrite        = wMemStore;
+assign wMemEnable           = wMemEnableStore;
+
+always @(*) // mecanismo anterior do case(wCFPUparaMem) simplificado
+    if (wOpcode == 1'b0100011)  // sb, sh ou sw
+    begin
+        wMemDataWrite       <= wMemStore;
+        wMemEnable          <= wMemEnableStore;
+    end
+    else
+    begin
+        wMemDataWrite       <= wRead2;
+        wMemEnable          <= 4'b1111;
+    end
+/*
 always @(*)
     case(wCFPUparaMem)
         2'b00:                                          // Nao deve estar mais sendo usado para sw

@@ -156,17 +156,22 @@ parameter
     LOAD_TYPE_LHU       = 3'b010,
     LOAD_TYPE_LB        = 3'b011,
     LOAD_TYPE_LBU       = 3'b100,
-//    LOAD_TYPE_DUMMY     = 3'b111,
+    LOAD_TYPE_DUMMY     = 3'b111,
 
     STORE_TYPE_SW       = 2'b00,
     STORE_TYPE_SH       = 2'b01,
     STORE_TYPE_SB       = 2'b10,
-//    STORE_TYPE_DUMMY    = 2'b11,
+    STORE_TYPE_DUMMY    = 2'b11,
 
-
+//Mapeamento da memoria
 /* ADDRESS MACROS *****************************************************************************************************/
 
     BACKGROUND_IMAGE    = "display.mif",
+
+	 BEGINNING_BOOT      = 32'h0000_0000,
+	 BOOT_WIDTH				= 9,					// 128 words = 128x4 = 512 bytes
+    END_BOOT            = (BEGINNING_BOOT + 2**BOOT_WIDTH) - 1,	 
+//    END_BOOT            = 32'h000001FF,	// 128 words
 
     BEGINNING_TEXT      = 32'h0040_0000,
 	 TEXT_WIDTH				= 14,					// 4096 words = 4096x4 = 16384 bytes
