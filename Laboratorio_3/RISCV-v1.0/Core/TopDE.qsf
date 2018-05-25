@@ -397,5 +397,5 @@ set_global_assignment -name VERILOG_FILE Tempo/CLOCK_Interface.v
 set_global_assignment -name VERILOG_FILE Tempo/mono.v
 set_global_assignment -name VERILOG_FILE PS2/TecladoPS2_Interface.v
 set_global_assignment -name VERILOG_FILE PS2/keyboard.v
-set_instance_assignment -name PARTITION_HIERARCHY root_partition -to | -section_id Top
 set_global_assignment -name VERILOG_FILE CPU/ImmGen.v
+set_instance_assignment -name PARTITION_HIERARCHY root_partition -to | -section_id Top

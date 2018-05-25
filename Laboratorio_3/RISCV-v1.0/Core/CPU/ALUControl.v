@@ -17,7 +17,7 @@ module ALUControl (
 	input wire [1:0] iALUOp,
 	input wire [2:0] iFunct3,
 	input wire [6:0] iFunct7,
-	input wire		 iOpcb6;			//apenas o bit mais significativo do opcode é necessário
+	input wire		 iOpcb6,		//apenas o bit mais significativo do opcode é necessário
 	output reg [4:0] oControlSignal
 	);
 	

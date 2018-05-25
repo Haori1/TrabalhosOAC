@@ -163,13 +163,13 @@ FPURegisters memRegFPU(
     .oVGARead(wVGAReadFPU)              // para mostrar Regs na tela
 	); 
 	
-/* FP ALU Control
+// FP ALU Control
 FPALUControl FPALUControlUnit (
     .iFunct(wFunct),
     .oControlSignal(wFPALUControl)
 );
 
-/*ULA FPU
+//ULA FPU
 ula_fp FPALUunit (
     .iclock(iCLK50),
     .idataa(wRead1FPU),
@@ -182,7 +182,7 @@ ula_fp FPALUunit (
     .oCompResult(wCompResult)
 	);
 
-/* Banco de flags da FPU
+// Banco de flags da FPU
 FlagBank FlagBankModule(
     .iCLK(iCLK),
     .iCLR(iRST),
@@ -462,7 +462,7 @@ begin
     else begin
         PC 	<= wiPC;
         //if (~wCExcOccurredCOP0)
-            PCgambs <= wiPC;
+            //PCgambs <= wiPC;
     end
 end
 

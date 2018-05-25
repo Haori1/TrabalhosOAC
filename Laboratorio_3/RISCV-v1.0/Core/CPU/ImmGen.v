@@ -3,8 +3,8 @@
  */
  
  module ImmGen (
-	input  wire [31:0] iInstr;
-	output wire [31:0] oImmResult;
+	input  wire [31:0] iInstr,
+	output wire [31:0] oImmResult
 );
 	
 always @(*)
@@ -13,22 +13,38 @@ begin
 		
 		5'b00000,
 		5'b00100:	
-			oImmResult = { 20{iInstr[31]},wInstr[31:20] }									// tipo I	
+		begin
+			oImmResult = { {20{iInstr[31]}},wInstr[31:20] };									// tipo I	
+			end
 		5'b00101:
-			oImmResult = { wInstr[31],wInstr[31:12],11b'0 }									// AUIPC
+		begin
+			oImmResult = { wInstr[31],wInstr[31:12],11'b0 };			//Nao seria 12 em vez de 11						// AUIPC
+			end
 		5'b01000:
-			oImmResult = { 20{wInstr[31]},wInstr[31:25],wInstr[11:7] }					// tipo S
+		begin
+			oImmResult = { {20{wInstr[31]}},wInstr[31:25],wInstr[11:7] };					// tipo S
+			end
 		5'b01101:
-			oImmResult = { 12{wInstr[31]},wInstr[31:12] }									// lui
+		begin
+			oImmResult = { {12{wInstr[31]}},wInstr[31:12] };									// lui
+			end
 		5'b11000:
-			oImmResult = { 21{wInstr[31]},wInstr[7],wInstr[30:25],wInstr[11:8] }		// tipo SB
+		begin
+			oImmResult = { {21{wInstr[31]}},wInstr[7],wInstr[30:25],wInstr[11:8] };		// tipo SB
+			end
 		5'b11001:
-			oImmResult = { 20{wInstr[31]},wInstr[31:20] }									// jalr
+		begin
+			oImmResult = { {20{wInstr[31]}},wInstr[31:20] };									// jalr
+			end
 		5'b11011:
-			oImmResult = { 13{wInstr[31]},wInstr[19:12], wInstr[20],wInstr[30:21]}	// jal
+		begin
+			oImmResult = { {13{wInstr[31]}},wInstr[19:12], wInstr[20],wInstr[30:21]};	// jal
+			end
 					
 		default:
+		begin
 			oImmResult = ZERO;
+			end
 	
 	endcase
 end

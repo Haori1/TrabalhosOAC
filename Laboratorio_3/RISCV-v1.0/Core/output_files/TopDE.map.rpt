@@ -1,0 +1,418 @@
+Analysis & Synthesis report for TopDE
+Fri May 25 20:30:32 2018
+Quartus Prime Version 17.1.0 Build 590 10/25/2017 SJ Lite Edition
+
+
+---------------------
+; Table of Contents ;
+---------------------
+  1. Legal Notice
+  2. Analysis & Synthesis Summary
+  3. Analysis & Synthesis Settings
+  4. Parallel Compilation
+  5. Analysis & Synthesis Messages
+  6. Analysis & Synthesis Suppressed Messages
+
+
+
+----------------
+; Legal Notice ;
+----------------
+Copyright (C) 2017  Intel Corporation. All rights reserved.
+Your use of Intel Corporation's design tools, logic functions 
+and other software and tools, and its AMPP partner logic 
+functions, and any output files from any of the foregoing 
+(including device programming or simulation files), and any 
+associated documentation or information are expressly subject 
+to the terms and conditions of the Intel Program License 
+Subscription Agreement, the Intel Quartus Prime License Agreement,
+the Intel FPGA IP License Agreement, or other applicable license
+agreement, including, without limitation, that your use is for
+the sole purpose of programming logic devices manufactured by
+Intel and sold by Intel or its authorized distributors.  Please
+refer to the applicable agreement for further details.
+
+
+
++---------------------------------------------------------------------------+
+; Analysis & Synthesis Summary                                              ;
++-----------------------------+---------------------------------------------+
+; Analysis & Synthesis Status ; Failed - Fri May 25 20:30:32 2018           ;
+; Quartus Prime Version       ; 17.1.0 Build 590 10/25/2017 SJ Lite Edition ;
+; Revision Name               ; TopDE                                       ;
+; Top-level Entity Name       ; TopDE                                       ;
+; Family                      ; Cyclone V                                   ;
+; Logic utilization (in ALMs) ; N/A until Partition Merge                   ;
+; Total registers             ; N/A until Partition Merge                   ;
+; Total pins                  ; N/A until Partition Merge                   ;
+; Total virtual pins          ; N/A until Partition Merge                   ;
+; Total block memory bits     ; N/A until Partition Merge                   ;
+; Total PLLs                  ; N/A until Partition Merge                   ;
+; Total DLLs                  ; N/A until Partition Merge                   ;
++-----------------------------+---------------------------------------------+
+
+
++---------------------------------------------------------------------------------------------------------------------------+
+; Analysis & Synthesis Settings                                                                                             ;
++---------------------------------------------------------------------------------+--------------------+--------------------+
+; Option                                                                          ; Setting            ; Default Value      ;
++---------------------------------------------------------------------------------+--------------------+--------------------+
+; Device                                                                          ; 5CSEMA5F31C6       ;                    ;
+; Top-level entity name                                                           ; TopDE              ; TopDE              ;
+; Family name                                                                     ; Cyclone V          ; Cyclone V          ;
+; Use smart compilation                                                           ; On                 ; Off                ;
+; Maximum processors allowed for parallel compilation                             ; All                ;                    ;
+; Verilog Show LMF Mapping Messages                                               ; Off                ;                    ;
+; Verilog Version                                                                 ; SystemVerilog_2005 ; Verilog_2001       ;
+; Enable parallel Assembler and TimeQuest Timing Analyzer during compilation      ; On                 ; On                 ;
+; Enable compact report table                                                     ; Off                ; Off                ;
+; Restructure Multiplexers                                                        ; Auto               ; Auto               ;
+; MLAB Add Timing Constraints For Mixed-Port Feed-Through Mode Setting Don't Care ; Off                ; Off                ;
+; Create Debugging Nodes for IP Cores                                             ; Off                ; Off                ;
+; Preserve fewer node names                                                       ; On                 ; On                 ;
+; Intel FPGA IP Evaluation Mode                                                   ; Enable             ; Enable             ;
+; VHDL Version                                                                    ; VHDL_1993          ; VHDL_1993          ;
+; State Machine Processing                                                        ; Auto               ; Auto               ;
+; Safe State Machine                                                              ; Off                ; Off                ;
+; Extract Verilog State Machines                                                  ; On                 ; On                 ;
+; Extract VHDL State Machines                                                     ; On                 ; On                 ;
+; Ignore Verilog initial constructs                                               ; Off                ; Off                ;
+; Iteration limit for constant Verilog loops                                      ; 5000               ; 5000               ;
+; Iteration limit for non-constant Verilog loops                                  ; 250                ; 250                ;
+; Add Pass-Through Logic to Inferred RAMs                                         ; On                 ; On                 ;
+; Infer RAMs from Raw Logic                                                       ; On                 ; On                 ;
+; Parallel Synthesis                                                              ; On                 ; On                 ;
+; DSP Block Balancing                                                             ; Auto               ; Auto               ;
+; NOT Gate Push-Back                                                              ; On                 ; On                 ;
+; Power-Up Don't Care                                                             ; On                 ; On                 ;
+; Remove Redundant Logic Cells                                                    ; Off                ; Off                ;
+; Remove Duplicate Registers                                                      ; On                 ; On                 ;
+; Ignore CARRY Buffers                                                            ; Off                ; Off                ;
+; Ignore CASCADE Buffers                                                          ; Off                ; Off                ;
+; Ignore GLOBAL Buffers                                                           ; Off                ; Off                ;
+; Ignore ROW GLOBAL Buffers                                                       ; Off                ; Off                ;
+; Ignore LCELL Buffers                                                            ; Off                ; Off                ;
+; Ignore SOFT Buffers                                                             ; On                 ; On                 ;
+; Limit AHDL Integers to 32 Bits                                                  ; Off                ; Off                ;
+; Optimization Technique                                                          ; Balanced           ; Balanced           ;
+; Carry Chain Length                                                              ; 70                 ; 70                 ;
+; Auto Carry Chains                                                               ; On                 ; On                 ;
+; Auto Open-Drain Pins                                                            ; On                 ; On                 ;
+; Perform WYSIWYG Primitive Resynthesis                                           ; Off                ; Off                ;
+; Auto ROM Replacement                                                            ; On                 ; On                 ;
+; Auto RAM Replacement                                                            ; On                 ; On                 ;
+; Auto DSP Block Replacement                                                      ; On                 ; On                 ;
+; Auto Shift Register Replacement                                                 ; Auto               ; Auto               ;
+; Allow Shift Register Merging across Hierarchies                                 ; Auto               ; Auto               ;
+; Auto Clock Enable Replacement                                                   ; On                 ; On                 ;
+; Strict RAM Replacement                                                          ; Off                ; Off                ;
+; Allow Synchronous Control Signals                                               ; On                 ; On                 ;
+; Force Use of Synchronous Clear Signals                                          ; Off                ; Off                ;
+; Auto Resource Sharing                                                           ; Off                ; Off                ;
+; Allow Any RAM Size For Recognition                                              ; Off                ; Off                ;
+; Allow Any ROM Size For Recognition                                              ; Off                ; Off                ;
+; Allow Any Shift Register Size For Recognition                                   ; Off                ; Off                ;
+; Use LogicLock Constraints during Resource Balancing                             ; On                 ; On                 ;
+; Ignore translate_off and synthesis_off directives                               ; Off                ; Off                ;
+; Timing-Driven Synthesis                                                         ; On                 ; On                 ;
+; Report Parameter Settings                                                       ; On                 ; On                 ;
+; Report Source Assignments                                                       ; On                 ; On                 ;
+; Report Connectivity Checks                                                      ; On                 ; On                 ;
+; Ignore Maximum Fan-Out Assignments                                              ; Off                ; Off                ;
+; Synchronization Register Chain Length                                           ; 3                  ; 3                  ;
+; Power Optimization During Synthesis                                             ; Normal compilation ; Normal compilation ;
+; HDL message level                                                               ; Level2             ; Level2             ;
+; Suppress Register Optimization Related Messages                                 ; Off                ; Off                ;
+; Number of Removed Registers Reported in Synthesis Report                        ; 5000               ; 5000               ;
+; Number of Swept Nodes Reported in Synthesis Report                              ; 5000               ; 5000               ;
+; Number of Inverted Registers Reported in Synthesis Report                       ; 100                ; 100                ;
+; Clock MUX Protection                                                            ; On                 ; On                 ;
+; Auto Gated Clock Conversion                                                     ; Off                ; Off                ;
+; Block Design Naming                                                             ; Auto               ; Auto               ;
+; SDC constraint protection                                                       ; Off                ; Off                ;
+; Synthesis Effort                                                                ; Auto               ; Auto               ;
+; Shift Register Replacement - Allow Asynchronous Clear Signal                    ; On                 ; On                 ;
+; Pre-Mapping Resynthesis Optimization                                            ; Off                ; Off                ;
+; Analysis & Synthesis Message Level                                              ; Medium             ; Medium             ;
+; Disable Register Merging Across Hierarchies                                     ; Auto               ; Auto               ;
+; Resource Aware Inference For Block RAM                                          ; On                 ; On                 ;
+; Automatic Parallel Synthesis                                                    ; On                 ; On                 ;
+; Partial Reconfiguration Bitstream ID                                            ; Off                ; Off                ;
++---------------------------------------------------------------------------------+--------------------+--------------------+
+
+
++------------------------------------------+
+; Parallel Compilation                     ;
++----------------------------+-------------+
+; Processors                 ; Number      ;
++----------------------------+-------------+
+; Number detected on machine ; 4           ;
+; Maximum allowed            ; 2           ;
+;                            ;             ;
+; Average used               ; 1.00        ;
+; Maximum used               ; 1           ;
+;                            ;             ;
+; Usage by Processor         ; % Time Used ;
+;     Processor 1            ; 100.0%      ;
++----------------------------+-------------+
+
+
++-------------------------------+
+; Analysis & Synthesis Messages ;
++-------------------------------+
+Info: *******************************************************************
+Info: Running Quartus Prime Analysis & Synthesis
+    Info: Version 17.1.0 Build 590 10/25/2017 SJ Lite Edition
+    Info: Processing started: Fri May 25 20:30:15 2018
+Info: Command: quartus_map --read_settings_files=on --write_settings_files=off RISCV -c TopDE
+Info (20030): Parallel compilation is enabled and will use 2 of the 2 processors detected
+Info (12021): Found 1 design units, including 1 entities, in source file topde.v
+    Info (12023): Found entity 1: TopDE File: C:/Users/henri/TrabalhosOAC/Laboratorio_3/RISCV-v1.0/Core/TopDE.v Line: 198
+Info (12021): Found 0 design units, including 0 entities, in source file parametros.v
+Info (12021): Found 1 design units, including 1 entities, in source file cpu/cpu.v
+    Info (12023): Found entity 1: CPU File: C:/Users/henri/TrabalhosOAC/Laboratorio_3/RISCV-v1.0/Core/CPU/CPU.v Line: 4
+Error (10171): Verilog HDL syntax error at Datapath_UNI.v(470) near end of file ;  expecting "endmodule" File: C:/Users/henri/TrabalhosOAC/Laboratorio_3/RISCV-v1.0/Core/CPU/Datapath_UNI.v Line: 470
+Error (10187): Verilog HDL syntax error at Datapath_UNI.v(470): unexpected end of file in If Statement File: C:/Users/henri/TrabalhosOAC/Laboratorio_3/RISCV-v1.0/Core/CPU/Datapath_UNI.v Line: 470
+Info (12021): Found 0 design units, including 0 entities, in source file cpu/datapath_uni.v
+Info (12021): Found 1 design units, including 1 entities, in source file cpu/datapath_multi.v
+    Info (12023): Found entity 1: Datapath_MULTI File: C:/Users/henri/TrabalhosOAC/Laboratorio_3/RISCV-v1.0/Core/CPU/Datapath_MULTI.v Line: 6
+Info (12021): Found 1 design units, including 1 entities, in source file cpu/datapath_pipem.v
+    Info (12023): Found entity 1: Datapath_PIPEM File: C:/Users/henri/TrabalhosOAC/Laboratorio_3/RISCV-v1.0/Core/CPU/Datapath_PIPEM.v Line: 5
+Info (12021): Found 1 design units, including 1 entities, in source file cpu/control_uni.v
+    Info (12023): Found entity 1: Control_UNI File: C:/Users/henri/TrabalhosOAC/Laboratorio_3/RISCV-v1.0/Core/CPU/Control_UNI.v Line: 6
+Info (12021): Found 1 design units, including 1 entities, in source file cpu/control_multi.v
+    Info (12023): Found entity 1: Control_MULTI File: C:/Users/henri/TrabalhosOAC/Laboratorio_3/RISCV-v1.0/Core/CPU/Control_MULTI.v Line: 5
+Info (12021): Found 1 design units, including 1 entities, in source file cpu/control_pipem.v
+    Info (12023): Found entity 1: Control_PIPEM File: C:/Users/henri/TrabalhosOAC/Laboratorio_3/RISCV-v1.0/Core/CPU/Control_PIPEM.v Line: 5
+Info (12021): Found 1 design units, including 1 entities, in source file cpu/alu.v
+    Info (12023): Found entity 1: ALU File: C:/Users/henri/TrabalhosOAC/Laboratorio_3/RISCV-v1.0/Core/CPU/ALU.v Line: 7
+Info (12021): Found 1 design units, including 1 entities, in source file cpu/alucontrol.v
+    Info (12023): Found entity 1: ALUControl File: C:/Users/henri/TrabalhosOAC/Laboratorio_3/RISCV-v1.0/Core/CPU/ALUControl.v Line: 16
+Info (12021): Found 1 design units, including 1 entities, in source file cpu/registers.v
+    Info (12023): Found entity 1: Registers File: C:/Users/henri/TrabalhosOAC/Laboratorio_3/RISCV-v1.0/Core/CPU/Registers.v Line: 10
+Info (12021): Found 1 design units, including 1 entities, in source file cpu/hazardunitm.v
+    Info (12023): Found entity 1: HazardUnitM File: C:/Users/henri/TrabalhosOAC/Laboratorio_3/RISCV-v1.0/Core/CPU/HazardUnitM.v Line: 4
+Info (12021): Found 1 design units, including 1 entities, in source file cpu/forwardunitm.v
+    Info (12023): Found entity 1: ForwardUnitM File: C:/Users/henri/TrabalhosOAC/Laboratorio_3/RISCV-v1.0/Core/CPU/ForwardUnitM.v Line: 21
+Info (12021): Found 1 design units, including 1 entities, in source file cpu/branch_pipem.v
+    Info (12023): Found entity 1: Branch_PIPEM File: C:/Users/henri/TrabalhosOAC/Laboratorio_3/RISCV-v1.0/Core/CPU/Branch_PIPEM.v Line: 21
+Info (12021): Found 1 design units, including 1 entities, in source file cop1/fpuregisters.v
+    Info (12023): Found entity 1: FPURegisters File: C:/Users/henri/TrabalhosOAC/Laboratorio_3/RISCV-v1.0/Core/Cop1/FPURegisters.v Line: 10
+Info (12021): Found 1 design units, including 1 entities, in source file cop1/fpalucontrol.v
+    Info (12023): Found entity 1: FPALUControl File: C:/Users/henri/TrabalhosOAC/Laboratorio_3/RISCV-v1.0/Core/Cop1/FPALUControl.v Line: 1
+Info (12021): Found 1 design units, including 1 entities, in source file cop1/ula_fp.v
+    Info (12023): Found entity 1: ula_fp File: C:/Users/henri/TrabalhosOAC/Laboratorio_3/RISCV-v1.0/Core/Cop1/ula_fp.v Line: 1
+Info (12021): Found 3 design units, including 3 entities, in source file cop1/sqrt_s.v
+    Info (12023): Found entity 1: sqrt_s_alt_sqrt_block_ocb File: C:/Users/henri/TrabalhosOAC/Laboratorio_3/RISCV-v1.0/Core/Cop1/sqrt_s.v Line: 50
+    Info (12023): Found entity 2: sqrt_s_altfp_sqrt_i9e File: C:/Users/henri/TrabalhosOAC/Laboratorio_3/RISCV-v1.0/Core/Cop1/sqrt_s.v Line: 1081
+    Info (12023): Found entity 3: sqrt_s File: C:/Users/henri/TrabalhosOAC/Laboratorio_3/RISCV-v1.0/Core/Cop1/sqrt_s.v Line: 1837
+Info (12021): Found 2 design units, including 2 entities, in source file cop1/mul_s.v
+    Info (12023): Found entity 1: mul_s_altfp_mult_maq File: C:/Users/henri/TrabalhosOAC/Laboratorio_3/RISCV-v1.0/Core/Cop1/mul_s.v Line: 46
+    Info (12023): Found entity 2: mul_s File: C:/Users/henri/TrabalhosOAC/Laboratorio_3/RISCV-v1.0/Core/Cop1/mul_s.v Line: 554
+Info (12021): Found 3 design units, including 3 entities, in source file cop1/div_s.v
+    Info (12023): Found entity 1: div_s_altfp_div_pst_b2h File: C:/Users/henri/TrabalhosOAC/Laboratorio_3/RISCV-v1.0/Core/Cop1/div_s.v Line: 50
+    Info (12023): Found entity 2: div_s_altfp_div_3rj File: C:/Users/henri/TrabalhosOAC/Laboratorio_3/RISCV-v1.0/Core/Cop1/div_s.v Line: 1025
+    Info (12023): Found entity 3: div_s File: C:/Users/henri/TrabalhosOAC/Laboratorio_3/RISCV-v1.0/Core/Cop1/div_s.v Line: 1079
+Info (12021): Found 3 design units, including 3 entities, in source file cop1/cvt_w_s.v
+    Info (12023): Found entity 1: cvt_w_s_altbarrel_shift_kof File: C:/Users/henri/TrabalhosOAC/Laboratorio_3/RISCV-v1.0/Core/Cop1/cvt_w_s.v Line: 50
+    Info (12023): Found entity 2: cvt_w_s_altfp_convert_e1p File: C:/Users/henri/TrabalhosOAC/Laboratorio_3/RISCV-v1.0/Core/Cop1/cvt_w_s.v Line: 143
+    Info (12023): Found entity 3: cvt_w_s File: C:/Users/henri/TrabalhosOAC/Laboratorio_3/RISCV-v1.0/Core/Cop1/cvt_w_s.v Line: 939
+Info (12021): Found 12 design units, including 12 entities, in source file cop1/cvt_s_w.v
+    Info (12023): Found entity 1: cvt_s_w_altbarrel_shift_fof File: C:/Users/henri/TrabalhosOAC/Laboratorio_3/RISCV-v1.0/Core/Cop1/cvt_s_w.v Line: 50
+    Info (12023): Found entity 2: cvt_s_w_altpriority_encoder_3e8 File: C:/Users/henri/TrabalhosOAC/Laboratorio_3/RISCV-v1.0/Core/Cop1/cvt_s_w.v Line: 155
+    Info (12023): Found entity 3: cvt_s_w_altpriority_encoder_6e8 File: C:/Users/henri/TrabalhosOAC/Laboratorio_3/RISCV-v1.0/Core/Cop1/cvt_s_w.v Line: 174
+    Info (12023): Found entity 4: cvt_s_w_altpriority_encoder_be8 File: C:/Users/henri/TrabalhosOAC/Laboratorio_3/RISCV-v1.0/Core/Cop1/cvt_s_w.v Line: 207
+    Info (12023): Found entity 5: cvt_s_w_altpriority_encoder_rf8 File: C:/Users/henri/TrabalhosOAC/Laboratorio_3/RISCV-v1.0/Core/Cop1/cvt_s_w.v Line: 240
+    Info (12023): Found entity 6: cvt_s_w_altpriority_encoder_3v7 File: C:/Users/henri/TrabalhosOAC/Laboratorio_3/RISCV-v1.0/Core/Cop1/cvt_s_w.v Line: 289
+    Info (12023): Found entity 7: cvt_s_w_altpriority_encoder_6v7 File: C:/Users/henri/TrabalhosOAC/Laboratorio_3/RISCV-v1.0/Core/Cop1/cvt_s_w.v Line: 305
+    Info (12023): Found entity 8: cvt_s_w_altpriority_encoder_bv7 File: C:/Users/henri/TrabalhosOAC/Laboratorio_3/RISCV-v1.0/Core/Cop1/cvt_s_w.v Line: 333
+    Info (12023): Found entity 9: cvt_s_w_altpriority_encoder_r08 File: C:/Users/henri/TrabalhosOAC/Laboratorio_3/RISCV-v1.0/Core/Cop1/cvt_s_w.v Line: 361
+    Info (12023): Found entity 10: cvt_s_w_altpriority_encoder_qb6 File: C:/Users/henri/TrabalhosOAC/Laboratorio_3/RISCV-v1.0/Core/Cop1/cvt_s_w.v Line: 389
+    Info (12023): Found entity 11: cvt_s_w_altfp_convert_7qm File: C:/Users/henri/TrabalhosOAC/Laboratorio_3/RISCV-v1.0/Core/Cop1/cvt_s_w.v Line: 417
+    Info (12023): Found entity 12: cvt_s_w File: C:/Users/henri/TrabalhosOAC/Laboratorio_3/RISCV-v1.0/Core/Cop1/cvt_s_w.v Line: 828
+Info (12021): Found 2 design units, including 2 entities, in source file cop1/c_comp.v
+    Info (12023): Found entity 1: c_comp_altfp_compare_mob File: C:/Users/henri/TrabalhosOAC/Laboratorio_3/RISCV-v1.0/Core/Cop1/c_comp.v Line: 46
+    Info (12023): Found entity 2: c_comp File: C:/Users/henri/TrabalhosOAC/Laboratorio_3/RISCV-v1.0/Core/Cop1/c_comp.v Line: 351
+Info (12021): Found 22 design units, including 22 entities, in source file cop1/add_sub.v
+    Info (12023): Found entity 1: add_sub_altbarrel_shift_ltd File: C:/Users/henri/TrabalhosOAC/Laboratorio_3/RISCV-v1.0/Core/Cop1/add_sub.v Line: 50
+    Info (12023): Found entity 2: add_sub_altbarrel_shift_aeb File: C:/Users/henri/TrabalhosOAC/Laboratorio_3/RISCV-v1.0/Core/Cop1/add_sub.v Line: 115
+    Info (12023): Found entity 3: add_sub_altpriority_encoder_3e8 File: C:/Users/henri/TrabalhosOAC/Laboratorio_3/RISCV-v1.0/Core/Cop1/add_sub.v Line: 165
+    Info (12023): Found entity 4: add_sub_altpriority_encoder_6e8 File: C:/Users/henri/TrabalhosOAC/Laboratorio_3/RISCV-v1.0/Core/Cop1/add_sub.v Line: 184
+    Info (12023): Found entity 5: add_sub_altpriority_encoder_be8 File: C:/Users/henri/TrabalhosOAC/Laboratorio_3/RISCV-v1.0/Core/Cop1/add_sub.v Line: 217
+    Info (12023): Found entity 6: add_sub_altpriority_encoder_3v7 File: C:/Users/henri/TrabalhosOAC/Laboratorio_3/RISCV-v1.0/Core/Cop1/add_sub.v Line: 262
+    Info (12023): Found entity 7: add_sub_altpriority_encoder_6v7 File: C:/Users/henri/TrabalhosOAC/Laboratorio_3/RISCV-v1.0/Core/Cop1/add_sub.v Line: 278
+    Info (12023): Found entity 8: add_sub_altpriority_encoder_bv7 File: C:/Users/henri/TrabalhosOAC/Laboratorio_3/RISCV-v1.0/Core/Cop1/add_sub.v Line: 306
+    Info (12023): Found entity 9: add_sub_altpriority_encoder_r08 File: C:/Users/henri/TrabalhosOAC/Laboratorio_3/RISCV-v1.0/Core/Cop1/add_sub.v Line: 334
+    Info (12023): Found entity 10: add_sub_altpriority_encoder_rf8 File: C:/Users/henri/TrabalhosOAC/Laboratorio_3/RISCV-v1.0/Core/Cop1/add_sub.v Line: 366
+    Info (12023): Found entity 11: add_sub_altpriority_encoder_qb6 File: C:/Users/henri/TrabalhosOAC/Laboratorio_3/RISCV-v1.0/Core/Cop1/add_sub.v Line: 399
+    Info (12023): Found entity 12: add_sub_altpriority_encoder_nh8 File: C:/Users/henri/TrabalhosOAC/Laboratorio_3/RISCV-v1.0/Core/Cop1/add_sub.v Line: 447
+    Info (12023): Found entity 13: add_sub_altpriority_encoder_qh8 File: C:/Users/henri/TrabalhosOAC/Laboratorio_3/RISCV-v1.0/Core/Cop1/add_sub.v Line: 466
+    Info (12023): Found entity 14: add_sub_altpriority_encoder_vh8 File: C:/Users/henri/TrabalhosOAC/Laboratorio_3/RISCV-v1.0/Core/Cop1/add_sub.v Line: 499
+    Info (12023): Found entity 15: add_sub_altpriority_encoder_fj8 File: C:/Users/henri/TrabalhosOAC/Laboratorio_3/RISCV-v1.0/Core/Cop1/add_sub.v Line: 532
+    Info (12023): Found entity 16: add_sub_altpriority_encoder_n28 File: C:/Users/henri/TrabalhosOAC/Laboratorio_3/RISCV-v1.0/Core/Cop1/add_sub.v Line: 581
+    Info (12023): Found entity 17: add_sub_altpriority_encoder_q28 File: C:/Users/henri/TrabalhosOAC/Laboratorio_3/RISCV-v1.0/Core/Cop1/add_sub.v Line: 597
+    Info (12023): Found entity 18: add_sub_altpriority_encoder_v28 File: C:/Users/henri/TrabalhosOAC/Laboratorio_3/RISCV-v1.0/Core/Cop1/add_sub.v Line: 625
+    Info (12023): Found entity 19: add_sub_altpriority_encoder_f48 File: C:/Users/henri/TrabalhosOAC/Laboratorio_3/RISCV-v1.0/Core/Cop1/add_sub.v Line: 653
+    Info (12023): Found entity 20: add_sub_altpriority_encoder_e48 File: C:/Users/henri/TrabalhosOAC/Laboratorio_3/RISCV-v1.0/Core/Cop1/add_sub.v Line: 681
+    Info (12023): Found entity 21: add_sub_altfp_add_sub_dsm File: C:/Users/henri/TrabalhosOAC/Laboratorio_3/RISCV-v1.0/Core/Cop1/add_sub.v Line: 709
+    Info (12023): Found entity 22: add_sub File: C:/Users/henri/TrabalhosOAC/Laboratorio_3/RISCV-v1.0/Core/Cop1/add_sub.v Line: 2724
+Info (12021): Found 2 design units, including 2 entities, in source file cop1/abs_s.v
+    Info (12023): Found entity 1: abs_s_altfp_abs_lcg File: C:/Users/henri/TrabalhosOAC/Laboratorio_3/RISCV-v1.0/Core/Cop1/abs_s.v Line: 46
+    Info (12023): Found entity 2: abs_s File: C:/Users/henri/TrabalhosOAC/Laboratorio_3/RISCV-v1.0/Core/Cop1/abs_s.v Line: 97
+Info (12021): Found 1 design units, including 1 entities, in source file cop1/flagbank.v
+    Info (12023): Found entity 1: FlagBank File: C:/Users/henri/TrabalhosOAC/Laboratorio_3/RISCV-v1.0/Core/Cop1/FlagBank.v Line: 2
+Info (12021): Found 1 design units, including 1 entities, in source file cop0/cop0registersuni.v
+    Info (12023): Found entity 1: COP0RegistersUNI File: C:/Users/henri/TrabalhosOAC/Laboratorio_3/RISCV-v1.0/Core/Cop0/COP0RegistersUNI.v Line: 2
+Info (12021): Found 1 design units, including 1 entities, in source file cop0/cop0registersmulti.v
+    Info (12023): Found entity 1: COP0RegistersMULTI File: C:/Users/henri/TrabalhosOAC/Laboratorio_3/RISCV-v1.0/Core/Cop0/COP0RegistersMULTI.v Line: 2
+Info (12021): Found 1 design units, including 1 entities, in source file memoria/memstore.v
+    Info (12023): Found entity 1: MemStore File: C:/Users/henri/TrabalhosOAC/Laboratorio_3/RISCV-v1.0/Core/Memoria/MemStore.v Line: 4
+Info (12021): Found 1 design units, including 1 entities, in source file memoria/memory_interface.v
+    Info (12023): Found entity 1: Memory_Interface File: C:/Users/henri/TrabalhosOAC/Laboratorio_3/RISCV-v1.0/Core/Memoria/Memory_Interface.v Line: 2
+Info (12021): Found 1 design units, including 1 entities, in source file memoria/memload.v
+    Info (12023): Found entity 1: MemLoad File: C:/Users/henri/TrabalhosOAC/Laboratorio_3/RISCV-v1.0/Core/Memoria/MemLoad.v Line: 4
+Info (12021): Found 1 design units, including 1 entities, in source file memoria/datamemory_interface.v
+    Info (12023): Found entity 1: DataMemory_Interface File: C:/Users/henri/TrabalhosOAC/Laboratorio_3/RISCV-v1.0/Core/Memoria/DataMemory_Interface.v Line: 2
+Info (12021): Found 1 design units, including 1 entities, in source file memoria/codememory_interface.v
+    Info (12023): Found entity 1: CodeMemory_Interface File: C:/Users/henri/TrabalhosOAC/Laboratorio_3/RISCV-v1.0/Core/Memoria/CodeMemory_Interface.v Line: 2
+Info (12021): Found 1 design units, including 1 entities, in source file memoria/bootblock.v
+    Info (12023): Found entity 1: BootBlock File: C:/Users/henri/TrabalhosOAC/Laboratorio_3/RISCV-v1.0/Core/Memoria/BootBlock.v Line: 39
+Info (12021): Found 1 design units, including 1 entities, in source file memoria/syscodeblock.v
+    Info (12023): Found entity 1: SysCodeBlock File: C:/Users/henri/TrabalhosOAC/Laboratorio_3/RISCV-v1.0/Core/Memoria/SysCodeBlock.v Line: 39
+Info (12021): Found 1 design units, including 1 entities, in source file memoria/sysdatablock.v
+    Info (12023): Found entity 1: SysDataBlock File: C:/Users/henri/TrabalhosOAC/Laboratorio_3/RISCV-v1.0/Core/Memoria/SysDataBlock.v Line: 39
+Info (12021): Found 1 design units, including 1 entities, in source file memoria/usercodeblock.v
+    Info (12023): Found entity 1: UserCodeBlock File: C:/Users/henri/TrabalhosOAC/Laboratorio_3/RISCV-v1.0/Core/Memoria/UserCodeBlock.v Line: 39
+Info (12021): Found 1 design units, including 1 entities, in source file memoria/userdatablock.v
+    Info (12023): Found entity 1: UserDataBlock File: C:/Users/henri/TrabalhosOAC/Laboratorio_3/RISCV-v1.0/Core/Memoria/UserDataBlock.v Line: 39
+Info (12021): Found 1 design units, including 1 entities, in source file vga/vgaadapter.v
+    Info (12023): Found entity 1: VgaAdapter File: C:/Users/henri/TrabalhosOAC/Laboratorio_3/RISCV-v1.0/Core/VGA/VgaAdapter.v Line: 14
+Info (12021): Found 1 design units, including 1 entities, in source file vga/vga_interface.v
+    Info (12023): Found entity 1: VGA_Interface File: C:/Users/henri/TrabalhosOAC/Laboratorio_3/RISCV-v1.0/Core/VGA/VGA_Interface.v Line: 6
+Info (12021): Found 1 design units, including 1 entities, in source file vga/regdisplay.v
+    Info (12023): Found entity 1: RegDisplay File: C:/Users/henri/TrabalhosOAC/Laboratorio_3/RISCV-v1.0/Core/VGA/RegDisplay.v Line: 1
+Info (12021): Found 1 design units, including 1 entities, in source file vga/hexfont.v
+    Info (12023): Found entity 1: HexFont File: C:/Users/henri/TrabalhosOAC/Laboratorio_3/RISCV-v1.0/Core/VGA/HexFont.v Line: 1
+Info (12021): Found 1 design units, including 1 entities, in source file vga/memoryvga.v
+    Info (12023): Found entity 1: MemoryVGA File: C:/Users/henri/TrabalhosOAC/Laboratorio_3/RISCV-v1.0/Core/VGA/MemoryVGA.v Line: 39
+Info (12021): Found 1 design units, including 1 entities, in source file vga/vgapll.v
+    Info (12023): Found entity 1: VgaPll File: C:/Users/henri/TrabalhosOAC/Laboratorio_3/RISCV-v1.0/Core/VGA/VgaPll.v Line: 8
+Info (12021): Found 1 design units, including 1 entities, in source file vga/vgapll/vgapll_0002.v
+    Info (12023): Found entity 1: VgaPll_0002 File: C:/Users/henri/TrabalhosOAC/Laboratorio_3/RISCV-v1.0/Core/VGA/VgaPll/VgaPll_0002.v Line: 2
+Info (12021): Found 1 design units, including 1 entities, in source file tempo/reset_delay.v
+    Info (12023): Found entity 1: Reset_Delay File: C:/Users/henri/TrabalhosOAC/Laboratorio_3/RISCV-v1.0/Core/Tempo/reset_delay.v Line: 1
+Info (12021): Found 1 design units, including 1 entities, in source file tempo/oneshot.v
+    Info (12023): Found entity 1: oneshot File: C:/Users/henri/TrabalhosOAC/Laboratorio_3/RISCV-v1.0/Core/Tempo/oneshot.v Line: 1
+Info (12021): Found 1 design units, including 1 entities, in source file tempo/break_interface.v
+    Info (12023): Found entity 1: Break_Interface File: C:/Users/henri/TrabalhosOAC/Laboratorio_3/RISCV-v1.0/Core/Tempo/Break_Interface.v Line: 2
+Info (12021): Found 1 design units, including 1 entities, in source file tempo/pll_main.v
+    Info (12023): Found entity 1: PLL_Main File: C:/Users/henri/TrabalhosOAC/Laboratorio_3/RISCV-v1.0/Core/Tempo/PLL_Main.v Line: 8
+Info (12021): Found 1 design units, including 1 entities, in source file tempo/pll_main/pll_main_0002.v
+    Info (12023): Found entity 1: PLL_Main_0002 File: C:/Users/henri/TrabalhosOAC/Laboratorio_3/RISCV-v1.0/Core/Tempo/PLL_Main/PLL_Main_0002.v Line: 2
+Info (12021): Found 2 design units, including 2 entities, in source file tempo/break.v
+    Info (12023): Found entity 1: break_lpm_constant_kva File: C:/Users/henri/TrabalhosOAC/Laboratorio_3/RISCV-v1.0/Core/Tempo/break.v Line: 46
+    Info (12023): Found entity 2: break File: C:/Users/henri/TrabalhosOAC/Laboratorio_3/RISCV-v1.0/Core/Tempo/break.v Line: 74
+Info (12021): Found 1 design units, including 1 entities, in source file stopwatch/stopwatch_interface.v
+    Info (12023): Found entity 1: STOPWATCH_Interface File: C:/Users/henri/TrabalhosOAC/Laboratorio_3/RISCV-v1.0/Core/stopwatch/STOPWATCH_Interface.v Line: 1
+Info (12021): Found 1 design units, including 1 entities, in source file stopwatch/stopwatch_divider_clk.v
+    Info (12023): Found entity 1: Stopwatch_divider_clk File: C:/Users/henri/TrabalhosOAC/Laboratorio_3/RISCV-v1.0/Core/stopwatch/Stopwatch_divider_clk.v Line: 1
+Info (12021): Found 1 design units, including 1 entities, in source file sintetizador/syscallsynthcontrol.sv
+    Info (12023): Found entity 1: SyscallSynthControl File: C:/Users/henri/TrabalhosOAC/Laboratorio_3/RISCV-v1.0/Core/Sintetizador/SyscallSynthControl.sv Line: 1
+Info (12021): Found 2 design units, including 2 entities, in source file sintetizador/synthesizer.sv
+    Info (12023): Found entity 1: SampleSynthesizer File: C:/Users/henri/TrabalhosOAC/Laboratorio_3/RISCV-v1.0/Core/Sintetizador/Synthesizer.sv Line: 3
+    Info (12023): Found entity 2: PolyphonicSynthesizer File: C:/Users/henri/TrabalhosOAC/Laboratorio_3/RISCV-v1.0/Core/Sintetizador/Synthesizer.sv Line: 75
+Info (12021): Found 1 design units, including 1 entities, in source file sintetizador/synthcontrol.v
+    Info (12023): Found entity 1: SynthControl File: C:/Users/henri/TrabalhosOAC/Laboratorio_3/RISCV-v1.0/Core/Sintetizador/SynthControl.v Line: 1
+Info (12021): Found 1 design units, including 1 entities, in source file sintetizador/sintetizador_interface.v
+    Info (12023): Found entity 1: Sintetizador_Interface File: C:/Users/henri/TrabalhosOAC/Laboratorio_3/RISCV-v1.0/Core/Sintetizador/Sintetizador_Interface.v Line: 1
+Info (12021): Found 1 design units, including 1 entities, in source file sintetizador/sintetizador.v
+    Info (12023): Found entity 1: Sintetizador File: C:/Users/henri/TrabalhosOAC/Laboratorio_3/RISCV-v1.0/Core/Sintetizador/Sintetizador.v Line: 1
+Info (12021): Found 1 design units, including 1 entities, in source file sintetizador/sinetable.v
+    Info (12023): Found entity 1: SineTable File: C:/Users/henri/TrabalhosOAC/Laboratorio_3/RISCV-v1.0/Core/Sintetizador/SineTable.v Line: 39
+Info (12021): Found 1 design units, including 1 entities, in source file sintetizador/sinecalculator.sv
+    Info (12023): Found entity 1: SineCalculator File: C:/Users/henri/TrabalhosOAC/Laboratorio_3/RISCV-v1.0/Core/Sintetizador/SineCalculator.sv Line: 3
+Info (12021): Found 2 design units, including 1 entities, in source file sintetizador/oscillator.sv
+    Info (12022): Found design unit 1: OscillatorSine (SystemVerilog) File: C:/Users/henri/TrabalhosOAC/Laboratorio_3/RISCV-v1.0/Core/Sintetizador/Oscillator.sv Line: 40
+    Info (12023): Found entity 1: Oscillator File: C:/Users/henri/TrabalhosOAC/Laboratorio_3/RISCV-v1.0/Core/Sintetizador/Oscillator.sv Line: 3
+Info (12021): Found 1 design units, including 1 entities, in source file sintetizador/notetable.v
+    Info (12023): Found entity 1: NoteTable File: C:/Users/henri/TrabalhosOAC/Laboratorio_3/RISCV-v1.0/Core/Sintetizador/NoteTable.v Line: 39
+Info (12021): Found 2 design units, including 2 entities, in source file sintetizador/note.sv
+    Info (12023): Found entity 1: NoteController File: C:/Users/henri/TrabalhosOAC/Laboratorio_3/RISCV-v1.0/Core/Sintetizador/Note.sv Line: 3
+    Info (12023): Found entity 2: NoteInfoDatabase File: C:/Users/henri/TrabalhosOAC/Laboratorio_3/RISCV-v1.0/Core/Sintetizador/Note.sv Line: 35
+Info (12021): Found 2 design units, including 1 entities, in source file sintetizador/filter.sv
+    Info (12022): Found design unit 1: DigitalFilterSine (SystemVerilog) File: C:/Users/henri/TrabalhosOAC/Laboratorio_3/RISCV-v1.0/Core/Sintetizador/Filter.sv Line: 59
+    Info (12023): Found entity 1: DigitalFilter File: C:/Users/henri/TrabalhosOAC/Laboratorio_3/RISCV-v1.0/Core/Sintetizador/Filter.sv Line: 3
+Info (12021): Found 1 design units, including 1 entities, in source file sintetizador/envelope.sv
+    Info (12023): Found entity 1: Envelope File: C:/Users/henri/TrabalhosOAC/Laboratorio_3/RISCV-v1.0/Core/Sintetizador/Envelope.sv Line: 2
+Info (12021): Found 2 design units, including 2 entities, in source file sintetizador/channel.sv
+    Info (12023): Found entity 1: ChannelBank File: C:/Users/henri/TrabalhosOAC/Laboratorio_3/RISCV-v1.0/Core/Sintetizador/Channel.sv Line: 3
+    Info (12023): Found entity 2: Mixer File: C:/Users/henri/TrabalhosOAC/Laboratorio_3/RISCV-v1.0/Core/Sintetizador/Channel.sv Line: 29
+Info (12021): Found 1 design units, including 1 entities, in source file ps2/tecladops2.v
+    Info (12023): Found entity 1: tecladoPS2 File: C:/Users/henri/TrabalhosOAC/Laboratorio_3/RISCV-v1.0/Core/PS2/tecladoPS2.v Line: 1
+Info (12021): Found 1 design units, including 1 entities, in source file ps2/scan2ascii.v
+    Info (12023): Found entity 1: scan2ascii File: C:/Users/henri/TrabalhosOAC/Laboratorio_3/RISCV-v1.0/Core/PS2/scan2ascii.v Line: 1
+Info (12021): Found 1 design units, including 1 entities, in source file ps2/ps2_controller.v
+    Info (12023): Found entity 1: PS2_Controller File: C:/Users/henri/TrabalhosOAC/Laboratorio_3/RISCV-v1.0/Core/PS2/PS2_Controller.v Line: 9
+Info (12021): Found 1 design units, including 1 entities, in source file ps2/mouseps2_interface.v
+    Info (12023): Found entity 1: MousePS2_Interface File: C:/Users/henri/TrabalhosOAC/Laboratorio_3/RISCV-v1.0/Core/PS2/MousePS2_Interface.v Line: 1
+Info (12021): Found 1 design units, including 1 entities, in source file ps2/mouse_hugo.v
+    Info (12023): Found entity 1: mouse_hugo File: C:/Users/henri/TrabalhosOAC/Laboratorio_3/RISCV-v1.0/Core/PS2/mouse_hugo.v Line: 1
+Info (12021): Found 1 design units, including 1 entities, in source file ps2/keyscan.v
+    Info (12023): Found entity 1: keyscan File: C:/Users/henri/TrabalhosOAC/Laboratorio_3/RISCV-v1.0/Core/PS2/keyscan.v Line: 1
+Info (12021): Found 1 design units, including 1 entities, in source file ps2/altera_up_ps2_data_in.v
+    Info (12023): Found entity 1: Altera_UP_PS2_Data_In File: C:/Users/henri/TrabalhosOAC/Laboratorio_3/RISCV-v1.0/Core/PS2/Altera_UP_PS2_Data_In.v Line: 10
+Info (12021): Found 1 design units, including 1 entities, in source file ps2/altera_up_ps2_command_out.v
+    Info (12023): Found entity 1: Altera_UP_PS2_Command_Out File: C:/Users/henri/TrabalhosOAC/Laboratorio_3/RISCV-v1.0/Core/PS2/Altera_UP_PS2_Command_Out.v Line: 10
+Info (12021): Found 1 design units, including 1 entities, in source file lfsr/lfsr_interface.v
+    Info (12023): Found entity 1: lfsr_interface File: C:/Users/henri/TrabalhosOAC/Laboratorio_3/RISCV-v1.0/Core/lfsr/lfsr_interface.v Line: 1
+Info (12021): Found 1 design units, including 1 entities, in source file lfsr/ifsr_word.v
+    Info (12023): Found entity 1: lfsr_word File: C:/Users/henri/TrabalhosOAC/Laboratorio_3/RISCV-v1.0/Core/lfsr/ifsr_word.v Line: 1
+Info (12021): Found 1 design units, including 1 entities, in source file irda/irda_transmitter.v
+    Info (12023): Found entity 1: IrDA_transmitter File: C:/Users/henri/TrabalhosOAC/Laboratorio_3/RISCV-v1.0/Core/IrDA/IrDA_transmitter.v Line: 1
+Info (12021): Found 1 design units, including 1 entities, in source file irda/irda_receiver.v
+    Info (12023): Found entity 1: IrDA_receiver File: C:/Users/henri/TrabalhosOAC/Laboratorio_3/RISCV-v1.0/Core/IrDA/IrDA_receiver.v Line: 1
+Info (12021): Found 0 design units, including 0 entities, in source file irda/irda_parameters.v
+Info (12021): Found 1 design units, including 1 entities, in source file irda/irda_interface.v
+    Info (12023): Found entity 1: IrDA_Interface File: C:/Users/henri/TrabalhosOAC/Laboratorio_3/RISCV-v1.0/Core/IrDA/IrDA_Interface.v Line: 3
+Info (12021): Found 1 design units, including 1 entities, in source file irda/irda_decoder.v
+    Info (12023): Found entity 1: IrDA_decoder File: C:/Users/henri/TrabalhosOAC/Laboratorio_3/RISCV-v1.0/Core/IrDA/IrDA_decoder.v Line: 1
+Info (12021): Found 1 design units, including 1 entities, in source file irda/irda_clk.v
+    Info (12023): Found entity 1: IrDA_clk File: C:/Users/henri/TrabalhosOAC/Laboratorio_3/RISCV-v1.0/Core/IrDA/IrDA_clk.v Line: 1
+Info (12021): Found 1 design units, including 1 entities, in source file display7/display7_interface.v
+    Info (12023): Found entity 1: Display7_Interface File: C:/Users/henri/TrabalhosOAC/Laboratorio_3/RISCV-v1.0/Core/Display7/Display7_Interface.v Line: 1
+Info (12021): Found 1 design units, including 1 entities, in source file display7/decoder7.v
+    Info (12023): Found entity 1: Decoder7 File: C:/Users/henri/TrabalhosOAC/Laboratorio_3/RISCV-v1.0/Core/Display7/decoder7.v Line: 7
+Info (12021): Found 1 design units, including 1 entities, in source file audiocodec/i2c_controller.v
+    Info (12023): Found entity 1: I2C_Controller File: C:/Users/henri/TrabalhosOAC/Laboratorio_3/RISCV-v1.0/Core/AudioCODEC/I2C_Controller.v Line: 42
+Info (12021): Found 1 design units, including 1 entities, in source file audiocodec/i2c_av_config.v
+    Info (12023): Found entity 1: I2C_AV_Config File: C:/Users/henri/TrabalhosOAC/Laboratorio_3/RISCV-v1.0/Core/AudioCODEC/I2C_AV_Config.v Line: 1
+Info (12021): Found 1 design units, including 1 entities, in source file audiocodec/audiocodec_interface.v
+    Info (12023): Found entity 1: AudioCODEC_Interface File: C:/Users/henri/TrabalhosOAC/Laboratorio_3/RISCV-v1.0/Core/AudioCODEC/AudioCODEC_Interface.v Line: 1
+Info (12021): Found 1 design units, including 1 entities, in source file audiocodec/audio_converter.v
+    Info (12023): Found entity 1: audio_converter File: C:/Users/henri/TrabalhosOAC/Laboratorio_3/RISCV-v1.0/Core/AudioCODEC/audio_converter.v Line: 1
+Info (12021): Found 1 design units, including 1 entities, in source file audiocodec/audio_clock.v
+    Info (12023): Found entity 1: audio_clock File: C:/Users/henri/TrabalhosOAC/Laboratorio_3/RISCV-v1.0/Core/AudioCODEC/audio_clock.v Line: 1
+Info (12021): Found 1 design units, including 1 entities, in source file tempo/clock_interface.v
+    Info (12023): Found entity 1: CLOCK_Interface File: C:/Users/henri/TrabalhosOAC/Laboratorio_3/RISCV-v1.0/Core/Tempo/CLOCK_Interface.v Line: 1
+Info (12021): Found 1 design units, including 1 entities, in source file tempo/mono.v
+    Info (12023): Found entity 1: mono File: C:/Users/henri/TrabalhosOAC/Laboratorio_3/RISCV-v1.0/Core/Tempo/mono.v Line: 2
+Info (12021): Found 1 design units, including 1 entities, in source file ps2/tecladops2_interface.v
+    Info (12023): Found entity 1: TecladoPS2_Interface File: C:/Users/henri/TrabalhosOAC/Laboratorio_3/RISCV-v1.0/Core/PS2/TecladoPS2_Interface.v Line: 1
+Info (12021): Found 1 design units, including 1 entities, in source file ps2/keyboard.v
+    Info (12023): Found entity 1: keyboard File: C:/Users/henri/TrabalhosOAC/Laboratorio_3/RISCV-v1.0/Core/PS2/keyboard.v Line: 1
+Info (12021): Found 1 design units, including 1 entities, in source file cpu/immgen.v
+    Info (12023): Found entity 1: ImmGen File: C:/Users/henri/TrabalhosOAC/Laboratorio_3/RISCV-v1.0/Core/CPU/ImmGen.v Line: 5
+Info (144001): Generated suppressed messages file C:/Users/henri/TrabalhosOAC/Laboratorio_3/RISCV-v1.0/Core/output_files/TopDE.map.smsg
+Error: Quartus Prime Analysis & Synthesis was unsuccessful. 2 errors, 0 warnings
+    Error: Peak virtual memory: 710 megabytes
+    Error: Processing ended: Fri May 25 20:30:32 2018
+    Error: Elapsed time: 00:00:17
+    Error: Total CPU time (on all processors): 00:00:34
+
+
++------------------------------------------+
+; Analysis & Synthesis Suppressed Messages ;
++------------------------------------------+
+The suppressed messages can be found in C:/Users/henri/TrabalhosOAC/Laboratorio_3/RISCV-v1.0/Core/output_files/TopDE.map.smsg.
+
+
