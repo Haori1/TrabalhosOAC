@@ -17,9 +17,9 @@ wire [1:0] iWriteType;
 always @(*)
 begin
 	case (iFunct3)
-		OPCSW:		iWriteType = STORE_TYPE_SW;
-		OPCSH:		iWriteType = STORE_TYPE_SH;
-		OPCSB:		iWriteType = STORE_TYPE_SB;
+		FUN3SW:		iWriteType = STORE_TYPE_SW;
+		FUN3SH:		iWriteType = STORE_TYPE_SH;
+		FUN3SB:		iWriteType = STORE_TYPE_SB;
 		//OPCDUMMY:	iWriteType = iWriteTypeF;   //So para o PIPELINEM
 		default:		iWriteType = STORE_TYPE_DUMMY;
 	endcase 

@@ -71,7 +71,6 @@ wire [31:0] wMemDataWrite;
 wire [4:0]  wAddrRs1, wAddrRs2, wAddrRd, wRegDs2;     // enderecos dos reg rs,rt ,rd e saida do Mux regDs2
 wire [31:0] wOrigALU;
 wire        wZero;
-wire [1:0]  WBranchPC;
 wire [4:0]  wALUControl;
 wire [31:0] wALUresult, wRead1, wRead2, wMemAccess;
 wire [31:0] wReadData;
@@ -220,7 +219,7 @@ ALU ALUunit(
     .iControlSignal(wALUControl),
     .iA(wRead1),
     .iB(wOrigALU),
-    .oALUResult(wALUResult),
+    .oALUResult(wALUresult),
     .oZero(wZero)
 	);
 
@@ -399,7 +398,7 @@ always @(*)
 /*Decide o que sera escrito na Memoria de Dados*/
 always @(*)								// mecanismo anterior do case(wCFPUparaMem) simplificado
 begin
-    if (wOpcode == 7'b0100011)	// sb, sh ou sw
+    if (wOpcode == OPCSW)	// sb, sh ou sw
     begin
         wMemDataWrite       <= wMemStore;
         wMemEnable          <= wMemEnableStore;

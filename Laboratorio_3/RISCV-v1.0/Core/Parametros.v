@@ -147,6 +147,7 @@ parameter
 	OPCREM		= 7'h33,
 	OPCREMU		= 7'h33,
 		
+	//OPCDUMMY    = 6'h3F,                // Para o MemStore e MemLoad
 
 	INITIAL_INTERRUPT = 32'h00000911,   // 00000111  00000511 ou 00000911 teclado habilitado
 
