@@ -2,6 +2,8 @@
  * Bloco de Controle PIPELINE
  *
  */
+
+`ifdef PIPELINE
 module Control_PIPEM (
 	input [5:0]  iOp, iFunct,
 	output 		 oEscreveReg, oLeMem, oEscreveMem, oJump, oBranch, onBranch, oJr, oSavePC,
@@ -1022,3 +1024,4 @@ always @(*)
 	endcase 
 
 endmodule
+`endif

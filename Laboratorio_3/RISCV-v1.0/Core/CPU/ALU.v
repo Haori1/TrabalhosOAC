@@ -5,11 +5,11 @@
 
  
 module ALU (
-	input [4:0] iControlSignal,
+	input wire   [4:0]  iControlSignal,
 	input signed [31:0] iA, 
 	input signed [31:0] iB,
-	output reg oZero,
-	output reg [31:0] oALUResult
+	output wire         oZero,
+	output wire  [31:0] oALUResult
 	);
 
 assign oZero = (oALUResult == ZERO);

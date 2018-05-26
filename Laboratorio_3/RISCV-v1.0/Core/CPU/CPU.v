@@ -5,7 +5,8 @@ module CPU (
     input  wire        iCLK, iCLK50, iRST,
     input  wire [31:0] iInitialPC,
     //sinais de monitoramento
-    output wire [31:0] wRegDisp,
+	 output wire [31:0] wRegDisp, wRegDispCOP0,
+	 output wire [31:0] wRegDispFPU,
     input  wire [4:0]  wRegDispSelect,
     output wire [31:0] wDebug,
     output wire [7:0]  flagBank,
@@ -13,11 +14,13 @@ module CPU (
     output wire [17:0] wControlSignals,
     output wire [5:0]  wControlState,
     input  wire [4:0]  wVGASelect,
+	 input  wire [4:0]  wVGASelectFPU,
     output wire [31:0] wVGARead,
+	 output wire [31:0] wVGAReadFPU,
 	 output wire [31:0] wBRReadA,
 	 output wire [31:0] wBRReadB,
 	 output wire [31:0] wBRWrite,
-	 output wire [31:0] wULA,	 
+	 output wire [31:0] wULA,	  
 	 
     //barramentos de dados
     output wire        DwReadEnable, DwWriteEnable,

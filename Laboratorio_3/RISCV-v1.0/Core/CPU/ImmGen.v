@@ -13,38 +13,28 @@ begin
 		
 		5'b00000,
 		5'b00100:	
-		begin
-			oImmResult = { {20{iInstr[31]}},wInstr[31:20] };									// tipo I	
-			end
+			oImmResult = { {20{iInstr[31]}},iInstr[31:20] };									// tipo I	
+
 		5'b00101:
-		begin
-			oImmResult = { wInstr[31],wInstr[31:12],11'b0 };			//Nao seria 12 em vez de 11						// AUIPC
-			end
+			oImmResult = { iInstr[31],iInstr[31:12],11'b0 };									// AUIPC
+
 		5'b01000:
-		begin
-			oImmResult = { {20{wInstr[31]}},wInstr[31:25],wInstr[11:7] };					// tipo S
-			end
+			oImmResult = { {20{iInstr[31]}},iInstr[31:25],iInstr[11:7] };					// tipo S
+
 		5'b01101:
-		begin
-			oImmResult = { {12{wInstr[31]}},wInstr[31:12] };									// lui
-			end
+			oImmResult = { {12{iInstr[31]}},iInstr[31:12] };									// lui
+
 		5'b11000:
-		begin
-			oImmResult = { {21{wInstr[31]}},wInstr[7],wInstr[30:25],wInstr[11:8] };		// tipo SB
-			end
+			oImmResult = { {21{iInstr[31]}},iInstr[7],iInstr[30:25],iInstr[11:8] };		// tipo SB
+
 		5'b11001:
-		begin
-			oImmResult = { {20{wInstr[31]}},wInstr[31:20] };									// jalr
-			end
+			oImmResult = { {20{iInstr[31]}},iInstr[31:20] };									// jalr
+
 		5'b11011:
-		begin
-			oImmResult = { {13{wInstr[31]}},wInstr[19:12], wInstr[20],wInstr[30:21]};	// jal
-			end
+			oImmResult = { {13{iInstr[31]}},iInstr[19:12], iInstr[20],iInstr[30:21]};	// jal
 					
 		default:
-		begin
 			oImmResult = ZERO;
-			end
 	
 	endcase
 end

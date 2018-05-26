@@ -73,6 +73,9 @@ begin
 							FUN7MUL:
 								oControlSignal	 = OPMUL;
 							`endif
+							
+							default:
+								oControlSignal	 = 5'b0;
 					endcase
 				end
 				
@@ -85,6 +88,9 @@ begin
 								oControlSignal  = OPSLL;
 							FUN7MULH:
 								oControlSignal  = OPMULH;
+							
+							default:
+								oControlSignal	 = 5'b0;
 					endcase
 				end
 				`else
@@ -100,6 +106,9 @@ begin
 								oControlSignal	= OPSLT;
 							FUN7MULHSU:
 								oControlSignal = OPMULHSU;
+							
+							default:
+								oControlSignal	 = 5'b0;
 					endcase
 				end
 				`else
@@ -116,6 +125,9 @@ begin
 								oControlSignal = OPSLTU;
 							FUN7MULHU:
 								oControlSignal = OPMULHU;
+							
+							default:
+								oControlSignal	 = 5'b0;
 					endcase
 				end
 				`else
@@ -131,6 +143,9 @@ begin
 								oControlSignal = OPXOR;
 							FUN7DIV:
 								oControlSignal = OPDIV;
+								
+							default:
+								oControlSignal	 = 5'b0;
 					endcase
 				end
 				`else
@@ -152,6 +167,9 @@ begin
 							FUN7DIVU:
 								oControlSignal = OPDIVU;
 							`endif
+							
+							default:
+								oControlSignal	 = 5'b0;
 					endcase
 				end
 				
@@ -164,6 +182,9 @@ begin
 								oControlSignal = OPOR;
 							FUN7DIV:
 								oControlSignal = OPREM;
+								
+							default:
+								oControlSignal	 = 5'b0;
 					endcase
 				end
 				`else
@@ -180,6 +201,9 @@ begin
 								oControlSignal = OPAND;
 							FUN7REMU:
 								oControlSignal = OPREMU;
+								
+							default:
+								oControlSignal	 = 5'b0;
 					endcase
 				end
 				`else
@@ -187,8 +211,8 @@ begin
 				`endif
 
 				
-                default:
-                    oControlSignal  = 5'b0;
+				default:
+					  oControlSignal  = 5'b0;
             endcase
 			end
 			
@@ -214,6 +238,9 @@ begin
 										oControlSignal  = OPSRL;
 									FUN7SRAI:
 										oControlSignal  = OPSRA;
+									
+									default:
+										oControlSignal	 = 5'b0;
 							endcase
 					 end
 					 

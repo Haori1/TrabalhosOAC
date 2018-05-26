@@ -7,7 +7,7 @@
 // Define se a extensão de multipicação/divisão será sintetizada ou não
 //`define RV32M
 
-// Define se a FPU será sintetizada ou não
+// Define se a FPU será sintetizada ou não (que FPU?)
 //`define RV32F
 
 

@@ -1,7 +1,9 @@
 /*
  * Bloco de Controle MULTICICLO
  *
- */			
+ */	
+
+`ifdef MULTICICLO 
 module Control_MULTI (
 	/* I/O type definition */
 	input wire iCLK, iRST,
@@ -610,3 +612,4 @@ begin
 end
 
 endmodule
+`endif

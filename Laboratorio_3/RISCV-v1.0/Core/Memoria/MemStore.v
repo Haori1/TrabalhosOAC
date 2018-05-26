@@ -3,8 +3,8 @@
 
 module MemStore(
 	input [1:0] iAlignment,
-	input [1:0] iWriteTypeF,
-	input [5:0] iOpcode,
+	//input [1:0] iWriteTypeF,
+	input [2:0] iFunct3,
 	input [31:0] iData,
 	output [31:0] oData,
 	output [3:0] oByteEnable,
@@ -16,11 +16,11 @@ module MemStore(
 wire [1:0] iWriteType;
 always @(*)
 begin
-	case (iOpcode)
+	case (iFunct3)
 		OPCSW:		iWriteType = STORE_TYPE_SW;
 		OPCSH:		iWriteType = STORE_TYPE_SH;
 		OPCSB:		iWriteType = STORE_TYPE_SB;
-		OPCDUMMY:	iWriteType = iWriteTypeF;   //So para o PIPELINEM
+		//OPCDUMMY:	iWriteType = iWriteTypeF;   //So para o PIPELINEM
 		default:		iWriteType = STORE_TYPE_DUMMY;
 	endcase 
 end

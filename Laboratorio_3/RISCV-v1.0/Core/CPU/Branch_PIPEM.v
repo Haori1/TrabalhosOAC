@@ -17,7 +17,7 @@ iRt
 
 //Implemented in 1/21'b016
 /*******************************************************************************************************/
-
+`ifdef PIPELINE
 module Branch_PIPEM (
 iBControlSignal,
 iOpcode,
@@ -127,3 +127,4 @@ else
 	end
 end
 endmodule
+`endif

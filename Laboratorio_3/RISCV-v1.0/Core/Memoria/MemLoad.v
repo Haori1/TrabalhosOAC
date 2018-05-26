@@ -3,8 +3,8 @@
 
 module MemLoad(
 	input [1:0] iAlignment,
-	input [2:0] iLoadTypeF,
-	input [5:0] iOpcode,
+	//input [2:0] iLoadTypeF,
+	input [2:0] iFunct3,
 	input [31:0] iData,
 	output [31:0] oData,
 	output oException
@@ -15,13 +15,13 @@ module MemLoad(
 wire [2:0] iLoadType;
 always @(*)
 begin
-	case (iOpcode)
-		OPCLW:		iLoadType = LOAD_TYPE_LW;
-		OPCLH:		iLoadType = LOAD_TYPE_LH;
-		OPCLHU:		iLoadType = LOAD_TYPE_LHU;
-		OPCLB:		iLoadType = LOAD_TYPE_LB;
-		OPCLBU:		iLoadType = LOAD_TYPE_LBU;
-		OPCDUMMY:	iLoadType = iLoadTypeF;   //So para o PIPELINEM
+	case (iFunct3)
+		FUN3LW:		iLoadType = LOAD_TYPE_LW;
+		FUN3LH:		iLoadType = LOAD_TYPE_LH;
+		FUN3LHU:		iLoadType = LOAD_TYPE_LHU;
+		FUN3LB:		iLoadType = LOAD_TYPE_LB;
+		FUN3LBU:		iLoadType = LOAD_TYPE_LBU;
+		//OPCDUMMY:	iLoadType = iLoadTypeF;   //So para o PIPELINEM
 		default:		iLoadType = LOAD_TYPE_DUMMY;
 	endcase 
 end

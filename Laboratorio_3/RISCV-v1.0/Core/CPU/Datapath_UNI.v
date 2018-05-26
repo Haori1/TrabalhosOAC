@@ -82,8 +82,13 @@ wire        wCMemRead, wCMemWrite;
 wire [6:0]  wOpcode, wFunct7;
 wire [2:0]  wFunct3;
 
+// feito no semestre 2013/1 para implementar a deteccao de excecoes (COP0)
+wire [31:0] wMemStore;
+wire [3:0]  wMemEnableStore;
+wire [3:0]  wMemEnable;
+
 //Semestre 2014/2 para implementacao do bootloader
-//wire        wCodeMemoryWrite;
+wire        wCodeMemoryWrite;
 
 /* Inicializacao */
 initial
@@ -145,8 +150,8 @@ Registers RegsUNI (
     .oVGARead(wVGARead)                 // para mostrar Regs na tela
 	);
 
-`ifdef FPU
-/*Banco de Registradores FPU
+/*`ifdef FPU
+Banco de Registradores FPU
 FPURegisters memRegFPU(
     .iCLK(iCLK),
     .iCLR(iRST),
@@ -195,7 +200,7 @@ FlagBank FlagBankModule(
 
 /* Geração de imediato */
 ImmGen ImmGen0 (
-	.iInstr(wInstr)
+	.iInstr(wInstr),
 	.oImmResult(wImm)
 	);
 
@@ -215,14 +220,14 @@ ALU ALUunit(
     .iControlSignal(wALUControl),
     .iA(wRead1),
     .iB(wOrigALU),
-    .oALUresult(wALUresult),
-    .oZero(wZero),
+    .oALUResult(wALUResult),
+    .oZero(wZero)
 	);
 
 MemStore MemStore0 (
     .iAlignment(wALUresult[1:0]),
-    .iWriteTypeF(STORE_TYPE_DUMMY),
-    .iOpcode(wOpcode),
+    //.iWriteTypeF(STORE_TYPE_DUMMY),
+    .iFunct3(wFunct3),
     .iData(wRead2),
     .oData(wMemStore),
     .oByteEnable(wMemEnableStore),
@@ -239,8 +244,8 @@ assign DwAddress        = wALUresult;
 
 MemLoad MemLoad0 (
     .iAlignment(wALUresult[1:0]),
-    .iLoadTypeF(LOAD_TYPE_DUMMY),
-    .iOpcode(wOpcode),
+    //.iLoadTypeF(LOAD_TYPE_DUMMY),
+    .iFunct3(wFunct3),
     .iData(wReadData),
     .oData(wMemAccess),
     .oException()
@@ -260,7 +265,7 @@ Control_UNI CtrUNI (
     .oLeMem(wCMemRead),
     .oEscreveMem(wCMemWrite),
     .oOpALU(wCALUOp),
-    .oOrigPC(wCOrigPC),
+    .oOrigPC(wCOrigPC)
     /*.oEscreveRegFPU(wCRegWriteFPU),
     .oRegDstFPU(wCRegDstFPU),
     .oFPUparaMem(wCFPUparaMem),
@@ -330,25 +335,16 @@ begin
         begin
             case (wFunct3)
                 3'b000:     // beq
-                begin  
-                    if (wZero)          wiPC <= wJumpAddr;
-                    else                wiPC <= wPC4;
-                end
+						wiPC <= (wZero) ? wJumpAddr : wPC4;
 
                 3'b001:     // bne
-                begin
-                    if (~wZero)         wiPC <= wJumpAddr;
-                    else                wiPC <= wPC4;
-                end
+						wiPC <= (~wZero) ? wJumpAddr : wPC4;
 
                 3'b100,     // blt
                 3'b101,     // bge
                 3'b110,     // bltu
                 3'b111:     // bgeu
-                begin
-                    if (wALUresult[0])  wiPC <= wJumpAddr;
-                    else                wiPC <= wPC4;
-                end
+						wiPC <= (wALUresult[0]) ? wJumpAddr : wPC4;
 
                 default:
                     wiPC <= wPC4;
@@ -401,11 +397,9 @@ always @(*)
 */
 
 /*Decide o que sera escrito na Memoria de Dados*/
-assign wMemDataWrite        = wMemStore;
-assign wMemEnable           = wMemEnableStore;
-
-always @(*) // mecanismo anterior do case(wCFPUparaMem) simplificado
-    if (wOpcode == 1'b0100011)  // sb, sh ou sw
+always @(*)								// mecanismo anterior do case(wCFPUparaMem) simplificado
+begin
+    if (wOpcode == 7'b0100011)	// sb, sh ou sw
     begin
         wMemDataWrite       <= wMemStore;
         wMemEnable          <= wMemEnableStore;
@@ -415,6 +409,7 @@ always @(*) // mecanismo anterior do case(wCFPUparaMem) simplificado
         wMemDataWrite       <= wRead2;
         wMemEnable          <= 4'b1111;
     end
+end
 /*
 always @(*)
     case(wCFPUparaMem)
@@ -459,11 +454,8 @@ begin
         PC      <= iInitialPC;
         PCgambs <= iInitialPC;
     end
-    else begin
+    else
         PC 	<= wiPC;
-        //if (~wCExcOccurredCOP0)
-            //PCgambs <= wiPC;
-    end
 end
 
 endmodule

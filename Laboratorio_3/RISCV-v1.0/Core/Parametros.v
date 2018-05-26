@@ -186,6 +186,17 @@ parameter
 
 
 	 STACK_ADDRESS       = END_DATA-3,
+	 
+	 //Mantidos do MIPS para evitar mais problemas com os códigos das memórias
+    BEGINNING_KTEXT     = 32'h8000_0000,
+	 KTEXT_WIDTH			= 13,					// 2048 words = 2048x4 = 8192 bytes
+    END_KTEXT           = (BEGINNING_KTEXT + 2**KTEXT_WIDTH) - 1,	 	 
+//    END_KTEXT           = 32'h80001FFF,	// 2048 words
+	 
+    BEGINNING_KDATA     = 32'h9000_0000,
+	 KDATA_WIDTH			= 12,					// 1024 words = 1024x4 = 4096 bytes
+    END_KDATA           = (BEGINNING_KDATA + 2**KDATA_WIDTH) - 1,	 	 
+//    END_KDATA           = 32'h900007FF, 	// 1024 words
 
 	/* O que isso faz? 
 	 ASCII_MIN           = 32'h00000080,
