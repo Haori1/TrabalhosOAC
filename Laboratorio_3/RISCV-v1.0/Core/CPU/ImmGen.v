@@ -34,7 +34,7 @@ begin
 			oImmResult = { {13{iInstr[31]}},iInstr[19:12], iInstr[20],iInstr[30:21]};	// jal
 					
 		default:
-			oImmResult = ZERO;
+			oImmResult = { 32{iInstr[31]}};
 	
 	endcase
 end
