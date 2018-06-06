@@ -2,8 +2,6 @@
 # Conectar o BitMap Display e o KD MMIO para executar
 # na DE1-SoC e no Rars deve ter o mesmo comportamento sem alterar nada!
 
-.include "../macros.s"
-
 
 .data
 FLOAT: .float 3.14159265659
@@ -16,25 +14,29 @@ msg6: .string "Tempo do Sistema:"
 buffer: .string "                                "
 
 .text	
-	M_SetEcall(exceptionHandling)	# Macro de SetEcall
+	#M_Setjal exceptionHandling(exceptionHandling)	# Macro de Setjal exceptionHandling
 				
 	jal CLS
 	jal PRINTSTR1
 	jal INPUTSTR
 	jal INPUTINT
-	jal INPUTFP
+	#jal INPUTFP
 	jal RAND
 	jal TIME
 	jal TOCAR
 	jal SLEEP
 
-	M_Exit
-	
+	li a7, 10
+	jal exceptionHandling
 			
 # CLS Clear Screen
 CLS:	li a0,0x07
 	li a7,148
-	ecall
+	addi sp, sp, -4
+	sw ra, 0(sp)
+	jal exceptionHandling
+	lw ra, 0(sp)
+	addi sp, sp, 4
 	ret
 				
 # syscall print string
@@ -43,7 +45,12 @@ PRINTSTR1: li a7,104
 	li a1,0
 	li a2,0
 	li a3,0xFF00
-	ecall
+	
+	addi sp, sp, -4
+	sw ra, 0(sp)
+	jal exceptionHandling
+	lw ra, 0(sp)
+	addi sp, sp, 4
 	ret		
 	
 INPUTSTR: li a7,104
@@ -51,13 +58,23 @@ INPUTSTR: li a7,104
 	li a1,0
 	li a2,24
 	li a3,0xFF00
-	ecall
+	
+	addi sp, sp, -4
+	sw ra, 0(sp)
+	jal exceptionHandling
+	lw ra, 0(sp)
+	addi sp, sp, 4
 	
 # syscall read string
 	li a7,108
 	la a0,buffer
 	li a1,32
-	ecall
+	
+	addi sp, sp, -4
+	sw ra, 0(sp)
+	jal exceptionHandling
+	lw ra, 0(sp)
+	addi sp, sp, 4
 	
 # syscall print string	
 	li a7,104
@@ -65,7 +82,12 @@ INPUTSTR: li a7,104
 	li a1,144
 	li a2,24
 	li a3,0xFF00
-	ecall	
+	
+	addi sp, sp, -4
+	sw ra, 0(sp)
+	jal exceptionHandling
+	lw ra, 0(sp)
+	addi sp, sp, 4	
 	ret
 	
 # syscall read int
@@ -75,11 +97,22 @@ INPUTINT: li a7,104
 	li a1,0
 	li a2,32
 	li a3,0xFF00
-	ecall
+	
+	addi sp, sp, -4
+	sw ra, 0(sp)
+	jal exceptionHandling
+	lw ra, 0(sp)
+	addi sp, sp, 4
 
 	# syscall read int
 	li a7,105
-	ecall
+	
+	addi sp, sp, -4
+	sw ra, 0(sp)
+	jal exceptionHandling
+	lw ra, 0(sp)
+	addi sp, sp, 4
+	
 	mv t0,a0
 
 #PI:	li $t0,-123456
@@ -89,7 +122,12 @@ PRINTINT: li a7,101
 	li a1,152
 	li a2,32
 	li a3,0xFF00
-	ecall
+	
+	addi sp, sp, -4
+	sw ra, 0(sp)
+	jal exceptionHandling
+	lw ra, 0(sp)
+	addi sp, sp, 4
 	ret
 	
 # syscall read float
@@ -105,17 +143,32 @@ INPUTFP: li t0,0
 	li a1,0
 	li a2,40
 	li a3,0xFF00
-	ecall
+	
+	addi sp, sp, -4
+	sw ra, 0(sp)
+	jal exceptionHandling
+	lw ra, 0(sp)
+	addi sp, sp, 4
 	
 	li a7,106
-	ecall
+	
+	addi sp, sp, -4
+	sw ra, 0(sp)
+	jal exceptionHandling
+	lw ra, 0(sp)
+	addi sp, sp, 4
 	
 	# syscall print float
 	li a7,102
 	li a1,144
 	li a2,40
 	li a3,0xFF00
-	ecall
+	
+	addi sp, sp, -4
+	sw ra, 0(sp)
+	jal exceptionHandling
+	lw ra, 0(sp)
+	addi sp, sp, 4
 	
 FORAFP:	ret
 	
@@ -125,28 +178,48 @@ TOCAR:	li a0,62
 	li a2,16
 	li a3,127
 	li a7,133
-	ecall
+	
+	addi sp, sp, -4
+	sw ra, 0(sp)
+	jal exceptionHandling
+	lw ra, 0(sp)
+	addi sp, sp, 4
 	
 	li a0,64
 	li a1,500
 	li a2,16
 	li a3,127
 	li a7,133
-	ecall
+	
+	addi sp, sp, -4
+	sw ra, 0(sp)
+	jal exceptionHandling
+	lw ra, 0(sp)
+	addi sp, sp, 4
 	
 	li a0,61
 	li a1,500
 	li a2,16
 	li a3,127
 	li a7,133
-	ecall
+	
+	addi sp, sp, -4
+	sw ra, 0(sp)
+	jal exceptionHandling
+	lw ra, 0(sp)
+	addi sp, sp, 4
 	
 	li a0,50
 	li a1,500
 	li a2,16
 	li a3,127
 	li a7,133
-	ecall
+	
+	addi sp, sp, -4
+	sw ra, 0(sp)
+	jal exceptionHandling
+	lw ra, 0(sp)
+	addi sp, sp, 4
 	
 	
 	li a0,55
@@ -154,7 +227,12 @@ TOCAR:	li a0,62
 	li a2,16
 	li a3,127
 	li a7,131
-	ecall
+	
+	addi sp, sp, -4
+	sw ra, 0(sp)
+	jal exceptionHandling
+	lw ra, 0(sp)
+	addi sp, sp, 4
 	
 	ret
 			
@@ -165,18 +243,33 @@ RAND:	li a7,104
 	li a1,0
 	li a2,48
 	li a3,0xFF00
-	ecall
+	
+	addi sp, sp, -4
+	sw ra, 0(sp)
+	jal exceptionHandling
+	lw ra, 0(sp)
+	addi sp, sp, 4
 
 	# syscall Rand
 	li a7,141
-	ecall
+	
+	addi sp, sp, -4
+	sw ra, 0(sp)
+	jal exceptionHandling
+	lw ra, 0(sp)
+	addi sp, sp, 4
 	
 	# print int em hex
 	li a7,134  #134
 	li a1,148
 	li a2,48
 	li a3,0xFF00
-	ecall
+	
+	addi sp, sp, -4
+	sw ra, 0(sp)
+	jal exceptionHandling
+	lw ra, 0(sp)
+	addi sp, sp, 4
 	
 	ret
 	
@@ -188,10 +281,20 @@ TIME:	li a7,104
 	li a1,0
 	li a2,56
 	li a3,0xFF00
-	ecall
+	
+	addi sp, sp, -4
+	sw ra, 0(sp)
+	jal exceptionHandling
+	lw ra, 0(sp)
+	addi sp, sp, 4
 
 	li a7,130
-	ecall
+	
+	addi sp, sp, -4
+	sw ra, 0(sp)
+	jal exceptionHandling
+	lw ra, 0(sp)
+	addi sp, sp, 4
 	
 	mv t0,a0
 	mv t1,a1
@@ -202,7 +305,12 @@ TIME:	li a7,104
 	li a1,148
 	li a2,56
 	li a3,0xFF00
-	ecall
+	
+	addi sp, sp, -4
+	sw ra, 0(sp)
+	jal exceptionHandling
+	lw ra, 0(sp)
+	addi sp, sp, 4
 	
 	#print int
 	mv a0,t1
@@ -210,7 +318,12 @@ TIME:	li a7,104
 	li a1,244
 	li a2,56
 	li a3,0xFF00
-	ecall
+	
+	addi sp, sp, -4
+	sw ra, 0(sp)
+	jal exceptionHandling
+	lw ra, 0(sp)
+	addi sp, sp, 4
 	
 	ret
 	
@@ -218,7 +331,12 @@ TIME:	li a7,104
 SLEEP:	li t0,5
 LOOPHMS:li a0,1000   # 1 segundo
 	li a7,132
-	ecall
+	
+	addi sp, sp, -4
+	sw ra, 0(sp)
+	jal exceptionHandling
+	lw ra, 0(sp)
+	addi sp, sp, 4
 	
 	addi t0,t0,-1
 	#print seg
@@ -227,7 +345,12 @@ LOOPHMS:li a0,1000   # 1 segundo
 	li a1,120
 	li a2,120
 	li a3,0xFF00
-	ecall
+	
+	addi sp, sp, -4
+	sw ra, 0(sp)
+	jal exceptionHandling
+	lw ra, 0(sp)
+	addi sp, sp, 4
 	
 	bne t0,zero, LOOPHMS
 		

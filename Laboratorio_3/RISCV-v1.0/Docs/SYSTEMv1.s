@@ -171,13 +171,13 @@ exceptionHandling:  addi    sp, sp, -4 # aloca espaco
 endException: 	lw   ra, 0(sp)		# recupera ra
     	addi    sp, sp, 4
 
-    	csrrw tp, 65, zero	# le o valor de EPC salvo no registrador uepc (reg 65)
-		addi tp, tp, 4		# soma 4 para obter a instruçao seguinte ao ecall
-		csrrw zero, 65, tp	# coloca no registrador uepc
+    	#csrrw tp, 65, zero	# le o valor de EPC salvo no registrador uepc (reg 65)
+		#addi tp, tp, 4		# soma 4 para obter a instruçao seguinte ao ecall
+		#srrw zero, 65, tp	# coloca no registrador uepc
 
 		########################################################################
 
-		uret			# retorna PC=uepc
+		jalr zero, ra, 0			# retorna PC=uepc
 
 		############################################## tem q trocar isso pra jr ###
 		###########################################################################
@@ -215,38 +215,38 @@ ecallException:     addi    sp, sp, -264              # Salva todos os registrad
     sw      x29, 112(sp)
     sw      x30, 116(sp)
     sw      x31, 120(sp)
-    fsw    	f0,  124(sp)
-    fsw    	f1,  128(sp)
-    fsw    	f2,  132(sp)
-    fsw    	f3,  136(sp)
-    fsw    	f4,  140(sp)
-    fsw    	f5,  144(sp)
-    fsw    	f6,  148(sp)
-    fsw    	f7,  152(sp)
-    fsw    	f8,  156(sp)
-    fsw    	f9,  160(sp)
-    fsw    	f10, 164(sp)
-    fsw    	f11, 168(sp)
-    fsw    	f12, 172(sp)
-    fsw    	f13, 176(sp)
-    fsw    	f14, 180(sp)
-    fsw    	f15, 184(sp)
-    fsw    	f16, 188(sp)
-    fsw    	f17, 192(sp)
-    fsw    	f18, 196(sp)
-    fsw    	f19, 200(sp)
-    fsw    	f20, 204(sp)
-    fsw    	f21, 208(sp)
-    fsw    	f22, 212(sp)
-    fsw    	f23, 216(sp)
-    fsw    	f24, 220(sp)
-    fsw    	f25, 224(sp)
-    fsw    	f26, 228(sp)
-    fsw    	f27, 232(sp)
-    fsw    	f28, 236(sp)
-    fsw    	f29, 240(sp)
-    fsw    	f30, 244(sp)
-    fsw    	f31, 248(sp)
+    #fsw    	f0,  124(sp)
+    #fsw    	f1,  128(sp)
+    #fsw    	f2,  132(sp)
+    #fsw    	f3,  136(sp)
+    #fsw    	f4,  140(sp)
+    #fsw    	f5,  144(sp)
+    #fsw    	f6,  148(sp)
+    #fsw    	f7,  152(sp)
+    #fsw    	f8,  156(sp)
+    #fsw    	f9,  160(sp)
+    #fsw    	f10, 164(sp)
+    #fsw    	f11, 168(sp)
+    #fsw    	f12, 172(sp)
+    #fsw    	f13, 176(sp)
+    #fsw    	f14, 180(sp)
+    #fsw    	f15, 184(sp)
+    #fsw    	f16, 188(sp)
+    #fsw    	f17, 192(sp)
+    #fsw    	f18, 196(sp)
+    #fsw    	f19, 200(sp)
+    #fsw    	f20, 204(sp)
+    #fsw    	f21, 208(sp)
+    #fsw    	f22, 212(sp)
+    #fsw    	f23, 216(sp)
+    #fsw    	f24, 220(sp)
+    #fsw    	f25, 224(sp)
+    #fsw    	f26, 228(sp)
+    #fsw    	f27, 232(sp)
+    #fsw    	f28, 236(sp)
+    #fsw    	f29, 240(sp)
+    #fsw    	f30, 244(sp)
+    #fsw    	f31, 248(sp)
     
     # Zera os valores dos registradores temporarios - 2015/1
     add     t0, zero, zero
@@ -378,38 +378,38 @@ endEcall:	lw	x1, 0(sp)  # recupera QUASE todos os registradores na pilha
     lw      x29,  112(sp)
     lw      x30,  116(sp)
     lw      x31,  120(sp)
-	flw    f0,   124(sp)
-    flw    f1,  128(sp)
-    flw    f2,  132(sp)
-    flw    f3,  136(sp)
-    flw    f4,  140(sp)
-    flw    f5,  144(sp)
-    flw    f6,  148(sp)
-    flw    f7,  152(sp)
-    flw    f8,  156(sp)
-    flw    f9,  160(sp)
+#	flw    f0,   124(sp)
+    #flw    f1,  128(sp)
+    #flw    f2,  132(sp)
+    #flw    f3,  136(sp)
+    #flw    f4,  140(sp)
+    #flw    f5,  144(sp)
+    #flw    f6,  148(sp)
+    #flw    f7,  152(sp)
+    #flw    f8,  156(sp)
+    #flw    f9,  160(sp)
 #   flw    f10, 164(sp)		# fa0 retorno de valor
-    flw    f11, 168(sp)
-    flw    f12, 172(sp)
-    flw    f13, 176(sp)
-    flw    f14, 180(sp)
-    flw    f15, 184(sp)
-    flw    f16, 188(sp)
-    flw    f17, 192(sp)
-    flw    f18, 196(sp)
-    flw    f19, 200(sp)
-    flw    f20, 204(sp)
-    flw    f21, 208(sp)
-    flw    f22, 212(sp)
-    flw    f23, 216(sp)
-    flw    f24, 220(sp)
-    flw    f25, 224(sp)
-    flw    f26, 228(sp)
-    flw    f27, 232(sp)
-    flw    f28, 236(sp)
-    flw    f29, 240(sp)
-    flw    f30, 244(sp)
-    flw    f31, 248(sp)
+    #flw    f11, 168(sp)
+    #flw    f12, 172(sp)
+    #flw    f13, 176(sp)
+    #flw    f14, 180(sp)
+    #flw    f15, 184(sp)
+    #flw    f16, 188(sp)
+    #flw    f17, 192(sp)
+    #flw    f18, 196(sp)
+    #flw    f19, 200(sp)
+    #flw    f20, 204(sp)
+    #flw    f21, 208(sp)
+    #flw    f22, 212(sp)
+    #flw    f23, 216(sp)
+    #flw    f24, 220(sp)
+    #flw    f25, 224(sp)
+    #flw    f26, 228(sp)
+    #flw    f27, 232(sp)
+    #flw    f28, 236(sp)
+    #flw    f29, 240(sp)
+    #flw    f30, 244(sp)
+    #flw    f31, 248(sp)
     
     addi    sp, sp, 264
     j endException
@@ -417,11 +417,13 @@ endEcall:	lw	x1, 0(sp)  # recupera QUASE todos os registradores na pilha
 
 goToExit:   	DE2(goToExitDE2)	# se for a DE2
   		li 	a7, 10		# chama o ecall normal do Rars
-  		ecall			# exit ecall
+  		auipc ra, 0
+		jalr zero, ra, 4			# exit ecall
   		
 goToExitDE2:
 		li a7, 110		########### ecall 10 ou 110
-		ecall   
+		auipc ra, 0
+		jalr zero, ra, 4  
 
 goToPrintInt:	jal     printInt               	# chama printInt
 		j       endEcall
@@ -753,12 +755,12 @@ naoehshiftChar:	   	add     t3, s0, t3                   	# endereco na tabela d
 fimreadChar: 	ret			# retorna
 	
 #########################################
-#    ReadString         	 	#
-# a0 = end Inicio      	 	#
-# a1 = tam Max String 		 	#
-# a2 = end do ultimo caractere	 	#
-# a3 = num de caracteres digitados	#
-# 2018/1                		#
+#    ReadString         	 			#
+# a0 = end Inicio      	 				#
+# a1 = tam Max String 		 			#
+# a2 = end do ultimo caractere	 		#
+# a3 = num de caracteres digitados		#
+# 2018/1                				#
 #########################################
 # muda a2, a3, s2 e s0  
 

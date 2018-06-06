@@ -1,5 +1,5 @@
 TimeQuest Timing Analyzer report for TopDE
-Sat May 26 02:01:42 2018
+Tue Jun 05 20:04:04 2018
 Quartus Prime Version 17.1.0 Build 590 10/25/2017 SJ Lite Edition
 
 
@@ -98,19 +98,15 @@ refer to the applicable agreement for further details.
 +----------------------------+-------------+
 ; Processors                 ; Number      ;
 +----------------------------+-------------+
-; Number detected on machine ; 6           ;
-; Maximum allowed            ; 6           ;
+; Number detected on machine ; 4           ;
+; Maximum allowed            ; 2           ;
 ;                            ;             ;
-; Average used               ; 2.60        ;
-; Maximum used               ; 6           ;
+; Average used               ; 1.33        ;
+; Maximum used               ; 2           ;
 ;                            ;             ;
 ; Usage by Processor         ; % Time Used ;
 ;     Processor 1            ; 100.0%      ;
-;     Processor 2            ;  32.1%      ;
-;     Processor 3            ;  32.0%      ;
-;     Processor 4            ;  32.0%      ;
-;     Processor 5            ;  31.7%      ;
-;     Processor 6            ;  31.7%      ;
+;     Processor 2            ;  33.1%      ;
 +----------------------------+-------------+
 
 
@@ -128,7 +124,7 @@ refer to the applicable agreement for further details.
 +-----------+-----------------+---------------------+------+
 ; Fmax      ; Restricted Fmax ; Clock Name          ; Note ;
 +-----------+-----------------+---------------------+------+
-; 73.46 MHz ; 73.46 MHz       ; altera_reserved_tck ;      ;
+; 80.25 MHz ; 80.25 MHz       ; altera_reserved_tck ;      ;
 +-----------+-----------------+---------------------+------+
 This panel reports FMAX for every clock in the design, regardless of the user-specified clock periods.  FMAX is only computed for paths where the source and destination registers or ports are driven by the same clock.  Paths of different clocks, including generated clocks, are ignored.  For paths between a clock and its inversion, FMAX is computed as if the rising and falling edges are scaled along with FMAX, such that the duty cycle (in terms of a percentage) is maintained. Altera recommends that you always use clock constraints and other slack reports for sign-off analysis.
 
@@ -139,13 +135,13 @@ This panel reports FMAX for every clock in the design, regardless of the user-sp
 HTML report is unavailable in plain text report export.
 
 
-+---------------------------------------------+
-; Slow 1100mV 85C Model Setup Summary         ;
-+---------------------+-------+---------------+
-; Clock               ; Slack ; End Point TNS ;
-+---------------------+-------+---------------+
-; altera_reserved_tck ; 9.860 ; 0.000         ;
-+---------------------+-------+---------------+
++----------------------------------------------+
+; Slow 1100mV 85C Model Setup Summary          ;
++---------------------+--------+---------------+
+; Clock               ; Slack  ; End Point TNS ;
++---------------------+--------+---------------+
+; altera_reserved_tck ; 10.436 ; 0.000         ;
++---------------------+--------+---------------+
 
 
 +---------------------------------------------+
@@ -153,7 +149,7 @@ HTML report is unavailable in plain text report export.
 +---------------------+-------+---------------+
 ; Clock               ; Slack ; End Point TNS ;
 +---------------------+-------+---------------+
-; altera_reserved_tck ; 0.328 ; 0.000         ;
+; altera_reserved_tck ; 0.418 ; 0.000         ;
 +---------------------+-------+---------------+
 
 
@@ -162,7 +158,7 @@ HTML report is unavailable in plain text report export.
 +---------------------+--------+---------------+
 ; Clock               ; Slack  ; End Point TNS ;
 +---------------------+--------+---------------+
-; altera_reserved_tck ; 29.811 ; 0.000         ;
+; altera_reserved_tck ; 29.074 ; 0.000         ;
 +---------------------+--------+---------------+
 
 
@@ -171,7 +167,7 @@ HTML report is unavailable in plain text report export.
 +---------------------+-------+---------------+
 ; Clock               ; Slack ; End Point TNS ;
 +---------------------+-------+---------------+
-; altera_reserved_tck ; 0.510 ; 0.000         ;
+; altera_reserved_tck ; 0.673 ; 0.000         ;
 +---------------------+-------+---------------+
 
 
@@ -180,7 +176,7 @@ HTML report is unavailable in plain text report export.
 +---------------------+--------+--------------------+
 ; Clock               ; Slack  ; End Point TNS      ;
 +---------------------+--------+--------------------+
-; altera_reserved_tck ; 15.226 ; 0.000              ;
+; altera_reserved_tck ; 15.190 ; 0.000              ;
 +---------------------+--------+--------------------+
 
 
@@ -195,7 +191,7 @@ No synchronizer chains to report.
 +-----------+-----------------+---------------------+------+
 ; Fmax      ; Restricted Fmax ; Clock Name          ; Note ;
 +-----------+-----------------+---------------------+------+
-; 75.87 MHz ; 75.87 MHz       ; altera_reserved_tck ;      ;
+; 81.56 MHz ; 81.56 MHz       ; altera_reserved_tck ;      ;
 +-----------+-----------------+---------------------+------+
 This panel reports FMAX for every clock in the design, regardless of the user-specified clock periods.  FMAX is only computed for paths where the source and destination registers or ports are driven by the same clock.  Paths of different clocks, including generated clocks, are ignored.  For paths between a clock and its inversion, FMAX is computed as if the rising and falling edges are scaled along with FMAX, such that the duty cycle (in terms of a percentage) is maintained. Altera recommends that you always use clock constraints and other slack reports for sign-off analysis.
 
@@ -205,7 +201,7 @@ This panel reports FMAX for every clock in the design, regardless of the user-sp
 +---------------------+--------+---------------+
 ; Clock               ; Slack  ; End Point TNS ;
 +---------------------+--------+---------------+
-; altera_reserved_tck ; 10.076 ; 0.000         ;
+; altera_reserved_tck ; 10.536 ; 0.000         ;
 +---------------------+--------+---------------+
 
 
@@ -214,7 +210,7 @@ This panel reports FMAX for every clock in the design, regardless of the user-sp
 +---------------------+-------+---------------+
 ; Clock               ; Slack ; End Point TNS ;
 +---------------------+-------+---------------+
-; altera_reserved_tck ; 0.338 ; 0.000         ;
+; altera_reserved_tck ; 0.433 ; 0.000         ;
 +---------------------+-------+---------------+
 
 
@@ -223,7 +219,7 @@ This panel reports FMAX for every clock in the design, regardless of the user-sp
 +---------------------+--------+---------------+
 ; Clock               ; Slack  ; End Point TNS ;
 +---------------------+--------+---------------+
-; altera_reserved_tck ; 29.910 ; 0.000         ;
+; altera_reserved_tck ; 29.258 ; 0.000         ;
 +---------------------+--------+---------------+
 
 
@@ -232,7 +228,7 @@ This panel reports FMAX for every clock in the design, regardless of the user-sp
 +---------------------+-------+---------------+
 ; Clock               ; Slack ; End Point TNS ;
 +---------------------+-------+---------------+
-; altera_reserved_tck ; 0.493 ; 0.000         ;
+; altera_reserved_tck ; 0.651 ; 0.000         ;
 +---------------------+-------+---------------+
 
 
@@ -241,7 +237,7 @@ This panel reports FMAX for every clock in the design, regardless of the user-sp
 +---------------------+--------+-------------------+
 ; Clock               ; Slack  ; End Point TNS     ;
 +---------------------+--------+-------------------+
-; altera_reserved_tck ; 15.229 ; 0.000             ;
+; altera_reserved_tck ; 15.202 ; 0.000             ;
 +---------------------+--------+-------------------+
 
 
@@ -256,7 +252,7 @@ No synchronizer chains to report.
 +---------------------+--------+---------------+
 ; Clock               ; Slack  ; End Point TNS ;
 +---------------------+--------+---------------+
-; altera_reserved_tck ; 12.568 ; 0.000         ;
+; altera_reserved_tck ; 12.770 ; 0.000         ;
 +---------------------+--------+---------------+
 
 
@@ -265,7 +261,7 @@ No synchronizer chains to report.
 +---------------------+-------+---------------+
 ; Clock               ; Slack ; End Point TNS ;
 +---------------------+-------+---------------+
-; altera_reserved_tck ; 0.077 ; 0.000         ;
+; altera_reserved_tck ; 0.116 ; 0.000         ;
 +---------------------+-------+---------------+
 
 
@@ -274,7 +270,7 @@ No synchronizer chains to report.
 +---------------------+--------+---------------+
 ; Clock               ; Slack  ; End Point TNS ;
 +---------------------+--------+---------------+
-; altera_reserved_tck ; 31.014 ; 0.000         ;
+; altera_reserved_tck ; 30.339 ; 0.000         ;
 +---------------------+--------+---------------+
 
 
@@ -283,7 +279,7 @@ No synchronizer chains to report.
 +---------------------+-------+---------------+
 ; Clock               ; Slack ; End Point TNS ;
 +---------------------+-------+---------------+
-; altera_reserved_tck ; 0.197 ; 0.000         ;
+; altera_reserved_tck ; 0.302 ; 0.000         ;
 +---------------------+-------+---------------+
 
 
@@ -292,7 +288,7 @@ No synchronizer chains to report.
 +---------------------+--------+--------------------+
 ; Clock               ; Slack  ; End Point TNS      ;
 +---------------------+--------+--------------------+
-; altera_reserved_tck ; 15.026 ; 0.000              ;
+; altera_reserved_tck ; 14.980 ; 0.000              ;
 +---------------------+--------+--------------------+
 
 
@@ -307,7 +303,7 @@ No synchronizer chains to report.
 +---------------------+--------+---------------+
 ; Clock               ; Slack  ; End Point TNS ;
 +---------------------+--------+---------------+
-; altera_reserved_tck ; 13.060 ; 0.000         ;
+; altera_reserved_tck ; 13.278 ; 0.000         ;
 +---------------------+--------+---------------+
 
 
@@ -316,7 +312,7 @@ No synchronizer chains to report.
 +---------------------+-------+---------------+
 ; Clock               ; Slack ; End Point TNS ;
 +---------------------+-------+---------------+
-; altera_reserved_tck ; 0.084 ; 0.000         ;
+; altera_reserved_tck ; 0.127 ; 0.000         ;
 +---------------------+-------+---------------+
 
 
@@ -325,7 +321,7 @@ No synchronizer chains to report.
 +---------------------+--------+---------------+
 ; Clock               ; Slack  ; End Point TNS ;
 +---------------------+--------+---------------+
-; altera_reserved_tck ; 31.214 ; 0.000         ;
+; altera_reserved_tck ; 30.670 ; 0.000         ;
 +---------------------+--------+---------------+
 
 
@@ -334,7 +330,7 @@ No synchronizer chains to report.
 +---------------------+-------+---------------+
 ; Clock               ; Slack ; End Point TNS ;
 +---------------------+-------+---------------+
-; altera_reserved_tck ; 0.180 ; 0.000         ;
+; altera_reserved_tck ; 0.280 ; 0.000         ;
 +---------------------+-------+---------------+
 
 
@@ -343,7 +339,7 @@ No synchronizer chains to report.
 +---------------------+--------+-------------------+
 ; Clock               ; Slack  ; End Point TNS     ;
 +---------------------+--------+-------------------+
-; altera_reserved_tck ; 15.049 ; 0.000             ;
+; altera_reserved_tck ; 15.015 ; 0.000             ;
 +---------------------+--------+-------------------+
 
 
@@ -353,16 +349,16 @@ No synchronizer chains to report.
 No synchronizer chains to report.
 
 
-+---------------------------------------------------------------------------------+
-; Multicorner Timing Analysis Summary                                             ;
-+----------------------+-------+-------+----------+---------+---------------------+
-; Clock                ; Setup ; Hold  ; Recovery ; Removal ; Minimum Pulse Width ;
-+----------------------+-------+-------+----------+---------+---------------------+
-; Worst-case Slack     ; 9.860 ; 0.077 ; 29.811   ; 0.180   ; 15.026              ;
-;  altera_reserved_tck ; 9.860 ; 0.077 ; 29.811   ; 0.180   ; 15.026              ;
-; Design-wide TNS      ; 0.0   ; 0.0   ; 0.0      ; 0.0     ; 0.0                 ;
-;  altera_reserved_tck ; 0.000 ; 0.000 ; 0.000    ; 0.000   ; 0.000               ;
-+----------------------+-------+-------+----------+---------+---------------------+
++----------------------------------------------------------------------------------+
+; Multicorner Timing Analysis Summary                                              ;
++----------------------+--------+-------+----------+---------+---------------------+
+; Clock                ; Setup  ; Hold  ; Recovery ; Removal ; Minimum Pulse Width ;
++----------------------+--------+-------+----------+---------+---------------------+
+; Worst-case Slack     ; 10.436 ; 0.116 ; 29.074   ; 0.280   ; 14.980              ;
+;  altera_reserved_tck ; 10.436 ; 0.116 ; 29.074   ; 0.280   ; 14.980              ;
+; Design-wide TNS      ; 0.0    ; 0.0   ; 0.0      ; 0.0     ; 0.0                 ;
+;  altera_reserved_tck ; 0.000  ; 0.000 ; 0.000    ; 0.000   ; 0.000               ;
++----------------------+--------+-------+----------+---------+---------------------+
 
 
 +------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
@@ -589,7 +585,6 @@ No synchronizer chains to report.
 ; Pin                 ; I/O Standard ; 10-90 Rise Time ; 90-10 Fall Time ;
 +---------------------+--------------+-----------------+-----------------+
 ; ADC_DOUT            ; 2.5 V        ; 2000 ps         ; 2000 ps         ;
-; AUD_ADCDAT          ; 2.5 V        ; 2000 ps         ; 2000 ps         ;
 ; CLOCK3_50           ; 2.5 V        ; 2000 ps         ; 2000 ps         ;
 ; CLOCK4_50           ; 2.5 V        ; 2000 ps         ; 2000 ps         ;
 ; TD_CLK27            ; 2.5 V        ; 2000 ps         ; 2000 ps         ;
@@ -603,7 +598,6 @@ No synchronizer chains to report.
 ; TD_DATA[7]          ; 2.5 V        ; 2000 ps         ; 2000 ps         ;
 ; TD_HS               ; 2.5 V        ; 2000 ps         ; 2000 ps         ;
 ; TD_VS               ; 2.5 V        ; 2000 ps         ; 2000 ps         ;
-; IRDA_RXD            ; 2.5 V        ; 2000 ps         ; 2000 ps         ;
 ; ADC_CS_N            ; 2.5 V        ; 2000 ps         ; 2000 ps         ;
 ; DRAM_DQ[0]          ; 2.5 V        ; 2000 ps         ; 2000 ps         ;
 ; DRAM_DQ[1]          ; 2.5 V        ; 2000 ps         ; 2000 ps         ;
@@ -701,8 +695,8 @@ No synchronizer chains to report.
 ; FPGA_I2C_SDAT       ; 2.5 V        ; 2000 ps         ; 2000 ps         ;
 ; PS2_CLK             ; 2.5 V        ; 2000 ps         ; 2000 ps         ;
 ; PS2_DAT             ; 2.5 V        ; 2000 ps         ; 2000 ps         ;
-; SW[8]               ; 2.5 V        ; 2000 ps         ; 2000 ps         ;
 ; SW[9]               ; 2.5 V        ; 2000 ps         ; 2000 ps         ;
+; SW[8]               ; 2.5 V        ; 2000 ps         ; 2000 ps         ;
 ; SW[7]               ; 2.5 V        ; 2000 ps         ; 2000 ps         ;
 ; CLOCK_50            ; 2.5 V        ; 2000 ps         ; 2000 ps         ;
 ; SW[6]               ; 2.5 V        ; 2000 ps         ; 2000 ps         ;
@@ -717,6 +711,8 @@ No synchronizer chains to report.
 ; SW[3]               ; 2.5 V        ; 2000 ps         ; 2000 ps         ;
 ; SW[4]               ; 2.5 V        ; 2000 ps         ; 2000 ps         ;
 ; SW[5]               ; 2.5 V        ; 2000 ps         ; 2000 ps         ;
+; AUD_ADCDAT          ; 2.5 V        ; 2000 ps         ; 2000 ps         ;
+; IRDA_RXD            ; 2.5 V        ; 2000 ps         ; 2000 ps         ;
 ; altera_reserved_tms ; 2.5 V        ; 2000 ps         ; 2000 ps         ;
 ; altera_reserved_tck ; 2.5 V        ; 2000 ps         ; 2000 ps         ;
 ; altera_reserved_tdi ; 2.5 V        ; 2000 ps         ; 2000 ps         ;
@@ -1600,7 +1596,7 @@ No synchronizer chains to report.
 +---------------------+---------------------+----------+----------+----------+----------+
 ; From Clock          ; To Clock            ; RR Paths ; FR Paths ; RF Paths ; FF Paths ;
 +---------------------+---------------------+----------+----------+----------+----------+
-; altera_reserved_tck ; altera_reserved_tck ; 10810    ; 0        ; 112      ; 0        ;
+; altera_reserved_tck ; altera_reserved_tck ; 10907    ; 0        ; 112      ; 0        ;
 +---------------------+---------------------+----------+----------+----------+----------+
 Entries labeled "false path" only account for clock-to-clock false paths and not path-based false paths. As a result, actual path counts may be lower than reported.
 
@@ -1610,7 +1606,7 @@ Entries labeled "false path" only account for clock-to-clock false paths and not
 +---------------------+---------------------+----------+----------+----------+----------+
 ; From Clock          ; To Clock            ; RR Paths ; FR Paths ; RF Paths ; FF Paths ;
 +---------------------+---------------------+----------+----------+----------+----------+
-; altera_reserved_tck ; altera_reserved_tck ; 10810    ; 0        ; 112      ; 0        ;
+; altera_reserved_tck ; altera_reserved_tck ; 10907    ; 0        ; 112      ; 0        ;
 +---------------------+---------------------+----------+----------+----------+----------+
 Entries labeled "false path" only account for clock-to-clock false paths and not path-based false paths. As a result, actual path counts may be lower than reported.
 
@@ -1620,7 +1616,7 @@ Entries labeled "false path" only account for clock-to-clock false paths and not
 +---------------------+---------------------+----------+----------+----------+----------+
 ; From Clock          ; To Clock            ; RR Paths ; FR Paths ; RF Paths ; FF Paths ;
 +---------------------+---------------------+----------+----------+----------+----------+
-; altera_reserved_tck ; altera_reserved_tck ; 306      ; 0        ; 0        ; 0        ;
+; altera_reserved_tck ; altera_reserved_tck ; 309      ; 0        ; 0        ; 0        ;
 +---------------------+---------------------+----------+----------+----------+----------+
 Entries labeled "false path" only account for clock-to-clock false paths and not path-based false paths. As a result, actual path counts may be lower than reported.
 
@@ -1630,7 +1626,7 @@ Entries labeled "false path" only account for clock-to-clock false paths and not
 +---------------------+---------------------+----------+----------+----------+----------+
 ; From Clock          ; To Clock            ; RR Paths ; FR Paths ; RF Paths ; FF Paths ;
 +---------------------+---------------------+----------+----------+----------+----------+
-; altera_reserved_tck ; altera_reserved_tck ; 306      ; 0        ; 0        ; 0        ;
+; altera_reserved_tck ; altera_reserved_tck ; 309      ; 0        ; 0        ; 0        ;
 +---------------------+---------------------+----------+----------+----------+----------+
 Entries labeled "false path" only account for clock-to-clock false paths and not path-based false paths. As a result, actual path counts may be lower than reported.
 
@@ -1653,11 +1649,11 @@ No non-DPA dedicated SERDES Receiver circuitry present in device or used in desi
 ; Property                        ; Setup ; Hold  ;
 +---------------------------------+-------+-------+
 ; Illegal Clocks                  ; 0     ; 0     ;
-; Unconstrained Clocks            ; 12    ; 12    ;
-; Unconstrained Input Ports       ; 19    ; 19    ;
-; Unconstrained Input Port Paths  ; 5890  ; 5890  ;
+; Unconstrained Clocks            ; 17    ; 17    ;
+; Unconstrained Input Ports       ; 21    ; 21    ;
+; Unconstrained Input Port Paths  ; 9152  ; 9152  ;
 ; Unconstrained Output Ports      ; 83    ; 83    ;
-; Unconstrained Output Port Paths ; 26107 ; 26107 ;
+; Unconstrained Output Port Paths ; 26111 ; 26111 ;
 +---------------------------------+-------+-------+
 
 
@@ -1677,7 +1673,12 @@ No non-DPA dedicated SERDES Receiver circuitry present in device or used in desi
 ; KEY[2]                                                                                                               ;                     ; Base ; Unconstrained ;
 ; KEY[3]                                                                                                               ;                     ; Base ; Unconstrained ;
 ; MousePS2_Interface:Mouse0|mouse_hugo:mouse1|PS2_Controller:CONT_1|Altera_UP_PS2_Data_In:PS2_Data_In|received_data_en ;                     ; Base ; Unconstrained ;
+; STOPWATCH_Interface:stopwatch0|Stopwatch_divider_clk:divider|new_freq                                                ;                     ; Base ; Unconstrained ;
 ; Sintetizador_Interface:Sintetizador0|Sintetizador:S1|PolyphonicSynthesizer:synth|ChannelBank:channelBank|clk64[1]    ;                     ; Base ; Unconstrained ;
+; TecladoPS2_Interface:TecladoPS20|keyboard:kbd|clock                                                                  ;                     ; Base ; Unconstrained ;
+; TecladoPS2_Interface:TecladoPS20|keyboard:kbd|keyboard_clk_filtered                                                  ;                     ; Base ; Unconstrained ;
+; TecladoPS2_Interface:TecladoPS20|keyboard:kbd|ready_set                                                              ;                     ; Base ; Unconstrained ;
+; TecladoPS2_Interface:TecladoPS20|keyboard:kbd|scan_ready                                                             ;                     ; Base ; Unconstrained ;
 ; altera_reserved_tck                                                                                                  ; altera_reserved_tck ; Base ; Constrained   ;
 +----------------------------------------------------------------------------------------------------------------------+---------------------+------+---------------+
 
@@ -1687,9 +1688,11 @@ No non-DPA dedicated SERDES Receiver circuitry present in device or used in desi
 +---------------------+--------------------------------------------------------------------------------------+
 ; Input Port          ; Comment                                                                              ;
 +---------------------+--------------------------------------------------------------------------------------+
+; AUD_ADCDAT          ; No input delay, min/max delays, false-path exceptions, or max skew assignments found ;
 ; CLOCK2_50           ; No input delay, min/max delays, false-path exceptions, or max skew assignments found ;
 ; CLOCK_50            ; No input delay, min/max delays, false-path exceptions, or max skew assignments found ;
 ; FPGA_I2C_SDAT       ; No input delay, min/max delays, false-path exceptions, or max skew assignments found ;
+; IRDA_RXD            ; No input delay, min/max delays, false-path exceptions, or max skew assignments found ;
 ; KEY[0]              ; No input delay, min/max delays, false-path exceptions, or max skew assignments found ;
 ; KEY[2]              ; No input delay, min/max delays, false-path exceptions, or max skew assignments found ;
 ; PS2_CLK             ; No input delay, min/max delays, false-path exceptions, or max skew assignments found ;
@@ -1805,9 +1808,11 @@ No non-DPA dedicated SERDES Receiver circuitry present in device or used in desi
 +---------------------+--------------------------------------------------------------------------------------+
 ; Input Port          ; Comment                                                                              ;
 +---------------------+--------------------------------------------------------------------------------------+
+; AUD_ADCDAT          ; No input delay, min/max delays, false-path exceptions, or max skew assignments found ;
 ; CLOCK2_50           ; No input delay, min/max delays, false-path exceptions, or max skew assignments found ;
 ; CLOCK_50            ; No input delay, min/max delays, false-path exceptions, or max skew assignments found ;
 ; FPGA_I2C_SDAT       ; No input delay, min/max delays, false-path exceptions, or max skew assignments found ;
+; IRDA_RXD            ; No input delay, min/max delays, false-path exceptions, or max skew assignments found ;
 ; KEY[0]              ; No input delay, min/max delays, false-path exceptions, or max skew assignments found ;
 ; KEY[2]              ; No input delay, min/max delays, false-path exceptions, or max skew assignments found ;
 ; PS2_CLK             ; No input delay, min/max delays, false-path exceptions, or max skew assignments found ;
@@ -1924,10 +1929,10 @@ No non-DPA dedicated SERDES Receiver circuitry present in device or used in desi
 Info: *******************************************************************
 Info: Running Quartus Prime TimeQuest Timing Analyzer
     Info: Version 17.1.0 Build 590 10/25/2017 SJ Lite Edition
-    Info: Processing started: Sat May 26 02:00:56 2018
+    Info: Processing started: Tue Jun 05 20:02:56 2018
 Info: Command: quartus_sta RISCV -c TopDE
 Info: qsta_default_script.tcl version: #3
-Info (20030): Parallel compilation is enabled and will use 6 of the 6 processors detected
+Info (20030): Parallel compilation is enabled and will use 2 of the 2 processors detected
 Info (21077): Low junction temperature is 0 degrees C
 Info (21077): High junction temperature is 85 degrees C
 Warning (335093): TimeQuest Timing Analyzer is analyzing 1 combinational loops as latches. For more details, run the Check Timing command in the TimeQuest Timing Analyzer or view the "User-Specified and Inferred Latches" table in the Analysis & Synthesis report.
@@ -1937,28 +1942,38 @@ Info (332164): Evaluating HDL-embedded SDC commands
         Info (332166): if { [string equal quartus_fit $::TimeQuestInfo(nameofexecutable)] } { set_max_delay -to [get_ports { altera_reserved_tdo } ] 0 }
         Info (332166): set_clock_groups -asynchronous -group {altera_reserved_tck}
 Critical Warning (332012): Synopsys Design Constraints File file not found: 'TopDE.sdc'. A Synopsys Design Constraints File is required by the TimeQuest Timing Analyzer to get proper timing constraints. Without it, the Compiler will not properly optimize the design.
+Warning (332060): Node: AudioCODEC_Interface:Audio0|audio_clock:u4|LRCK_1X was determined to be a clock but was found without an associated clock assignment.
+    Info (13166): Register AudioCODEC_Interface:Audio0|wcaudio_outR[11] is being clocked by AudioCODEC_Interface:Audio0|audio_clock:u4|LRCK_1X
 Warning (332060): Node: CLOCK_50 was determined to be a clock but was found without an associated clock assignment.
-    Info (13166): Register CodeMemory_Interface:MEMCODE|SysCodeBlock:MB1|altsyncram:altsyncram_component|altsyncram_qss1:auto_generated|altsyncram_46j2:altsyncram1|ram_block3a0~PORT_A_DATA_IN_11 is being clocked by CLOCK_50
+    Info (13166): Register AudioCODEC_Interface:Audio0|audio_clock:u4|LRCK_1X is being clocked by CLOCK_50
 Warning (332060): Node: CLOCK_Interface:CLOCK0|CLKAutoFast was determined to be a clock but was found without an associated clock assignment.
-    Info (13166): Register CPU:CPU0|Datapath_UNI:Processor|PC[12] is being clocked by CLOCK_Interface:CLOCK0|CLKAutoFast
+    Info (13166): Register AudioCODEC_Interface:Audio0|Ctrl2[0] is being clocked by CLOCK_Interface:CLOCK0|CLKAutoFast
 Warning (332060): Node: KEY[1] was determined to be a clock but was found without an associated clock assignment.
     Info (13166): Register CLOCK_Interface:CLOCK0|CLKSelectFast is being clocked by KEY[1]
 Warning (332060): Node: KEY[3] was determined to be a clock but was found without an associated clock assignment.
     Info (13166): Register CLOCK_Interface:CLOCK0|CLKManual is being clocked by KEY[3]
 Warning (332060): Node: KEY[2] was determined to be a clock but was found without an associated clock assignment.
     Info (13166): Register CLOCK_Interface:CLOCK0|CLKSelectAuto is being clocked by KEY[2]
-Warning (332060): Node: CLOCK2_50 was determined to be a clock but was found without an associated clock assignment.
-    Info (13166): Register VGA_Interface:VGA0|VgaAdapter:VGA0|MemoryVGA:memVGA|altsyncram:altsyncram_component|altsyncram_noo2:auto_generated|ram_block1a31~porta_datain_reg9 is being clocked by CLOCK2_50
-Warning (332060): Node: Sintetizador_Interface:Sintetizador0|Sintetizador:S1|PolyphonicSynthesizer:synth|ChannelBank:channelBank|clk64[1] was determined to be a clock but was found without an associated clock assignment.
-    Info (13166): Register Sintetizador_Interface:Sintetizador0|Sintetizador:S1|PolyphonicSynthesizer:synth|channelData[7].sample[14]~_Duplicate_1 is being clocked by Sintetizador_Interface:Sintetizador0|Sintetizador:S1|PolyphonicSynthesizer:synth|ChannelBank:channelBank|clk64[1]
-Warning (332060): Node: AudioCODEC_Interface:Audio0|audio_clock:u4|oAUD_BCK was determined to be a clock but was found without an associated clock assignment.
-    Info (13166): Register Sintetizador_Interface:Sintetizador0|Sintetizador:S1|PolyphonicSynthesizer:synth|ChannelBank:channelBank|clk64[1] is being clocked by AudioCODEC_Interface:Audio0|audio_clock:u4|oAUD_BCK
+Warning (332060): Node: STOPWATCH_Interface:stopwatch0|Stopwatch_divider_clk:divider|new_freq was determined to be a clock but was found without an associated clock assignment.
+    Info (13166): Register STOPWATCH_Interface:stopwatch0|time_count[26] is being clocked by STOPWATCH_Interface:stopwatch0|Stopwatch_divider_clk:divider|new_freq
+Warning (332060): Node: TecladoPS2_Interface:TecladoPS20|keyboard:kbd|scan_ready was determined to be a clock but was found without an associated clock assignment.
+    Info (13166): Register TecladoPS2_Interface:TecladoPS20|keyscan:keys1|KeyMap[102] is being clocked by TecladoPS2_Interface:TecladoPS20|keyboard:kbd|scan_ready
+Warning (332060): Node: TecladoPS2_Interface:TecladoPS20|keyboard:kbd|ready_set was determined to be a clock but was found without an associated clock assignment.
+    Info (13166): Register TecladoPS2_Interface:TecladoPS20|keyboard:kbd|scan_ready is being clocked by TecladoPS2_Interface:TecladoPS20|keyboard:kbd|ready_set
+Warning (332060): Node: TecladoPS2_Interface:TecladoPS20|keyboard:kbd|keyboard_clk_filtered was determined to be a clock but was found without an associated clock assignment.
+    Info (13166): Register TecladoPS2_Interface:TecladoPS20|keyboard:kbd|ready_set is being clocked by TecladoPS2_Interface:TecladoPS20|keyboard:kbd|keyboard_clk_filtered
+Warning (332060): Node: TecladoPS2_Interface:TecladoPS20|keyboard:kbd|clock was determined to be a clock but was found without an associated clock assignment.
+    Info (13166): Register TecladoPS2_Interface:TecladoPS20|keyboard:kbd|keyboard_clk_filtered is being clocked by TecladoPS2_Interface:TecladoPS20|keyboard:kbd|clock
 Warning (332060): Node: MousePS2_Interface:Mouse0|mouse_hugo:mouse1|PS2_Controller:CONT_1|Altera_UP_PS2_Data_In:PS2_Data_In|received_data_en was determined to be a clock but was found without an associated clock assignment.
-    Info (13166): Register MousePS2_Interface:Mouse0|mouse_hugo:mouse1|set_command_auto_trigger is being clocked by MousePS2_Interface:Mouse0|mouse_hugo:mouse1|PS2_Controller:CONT_1|Altera_UP_PS2_Data_In:PS2_Data_In|received_data_en
+    Info (13166): Register MousePS2_Interface:Mouse0|mouse_hugo:mouse1|received_data_history[3][5] is being clocked by MousePS2_Interface:Mouse0|mouse_hugo:mouse1|PS2_Controller:CONT_1|Altera_UP_PS2_Data_In:PS2_Data_In|received_data_en
+Warning (332060): Node: AudioCODEC_Interface:Audio0|audio_clock:u4|oAUD_BCK was determined to be a clock but was found without an associated clock assignment.
+    Info (13166): Register AudioCODEC_Interface:Audio0|audio_converter:u5|AUD_inR[7] is being clocked by AudioCODEC_Interface:Audio0|audio_clock:u4|oAUD_BCK
+Warning (332060): Node: CLOCK2_50 was determined to be a clock but was found without an associated clock assignment.
+    Info (13166): Register VGA_Interface:VGA0|VgaAdapter:VGA0|MemoryVGA:memVGA|altsyncram:altsyncram_component|altsyncram_noo2:auto_generated|ram_block1a33~porta_datain_reg9 is being clocked by CLOCK2_50
+Warning (332060): Node: Sintetizador_Interface:Sintetizador0|Sintetizador:S1|PolyphonicSynthesizer:synth|ChannelBank:channelBank|clk64[1] was determined to be a clock but was found without an associated clock assignment.
+    Info (13166): Register Sintetizador_Interface:Sintetizador0|Sintetizador:S1|PolyphonicSynthesizer:synth|Mixer:mixer|mixed[11] is being clocked by Sintetizador_Interface:Sintetizador0|Sintetizador:S1|PolyphonicSynthesizer:synth|ChannelBank:channelBank|clk64[1]
 Warning (332060): Node: AudioCODEC_Interface:Audio0|I2C_AV_Config:u3|mI2C_CTRL_CLK was determined to be a clock but was found without an associated clock assignment.
-    Info (13166): Register AudioCODEC_Interface:Audio0|I2C_AV_Config:u3|I2C_Controller:u0|SD[6] is being clocked by AudioCODEC_Interface:Audio0|I2C_AV_Config:u3|mI2C_CTRL_CLK
-Warning (332060): Node: AudioCODEC_Interface:Audio0|audio_clock:u4|LRCK_1X was determined to be a clock but was found without an associated clock assignment.
-    Info (13166): Register Sintetizador_Interface:Sintetizador0|Sintetizador:S1|SAMPLE_OUT[15] is being clocked by AudioCODEC_Interface:Audio0|audio_clock:u4|LRCK_1X
+    Info (13166): Register AudioCODEC_Interface:Audio0|I2C_AV_Config:u3|I2C_Controller:u0|SD_COUNTER[0]~DUPLICATE is being clocked by AudioCODEC_Interface:Audio0|I2C_AV_Config:u3|mI2C_CTRL_CLK
 Warning (332060): Node: KEY[0] was determined to be a clock but was found without an associated clock assignment.
     Info (13166): Latch CPU:CPU0|Datapath_UNI:Processor|PC[22]~1 is being clocked by KEY[0]
 Info (332143): No user constrained clock uncertainty found in the design. Calling "derive_clock_uncertainty"
@@ -1968,183 +1983,213 @@ Warning (332056): PLL cross checking found inconsistent PLL clock settings:
     Warning (332056): Node: VGA0|VGA0|xx|vgapll_inst|altera_pll_i|general[0].gpll~FRACTIONAL_PLL|vcoph[0] was found missing 1 generated clock that corresponds to a base clock with a period of: 20.000
 Info: Found TIMEQUEST_REPORT_SCRIPT_INCLUDE_DEFAULT_ANALYSIS = ON
 Info: Analyzing Slow 1100mV 85C Model
-Info (332146): Worst-case setup slack is 9.860
+Info (332146): Worst-case setup slack is 10.436
     Info (332119):     Slack       End Point TNS Clock 
     Info (332119): ========= =================== =====================
-    Info (332119):     9.860               0.000 altera_reserved_tck 
-Info (332146): Worst-case hold slack is 0.328
+    Info (332119):    10.436               0.000 altera_reserved_tck 
+Info (332146): Worst-case hold slack is 0.418
     Info (332119):     Slack       End Point TNS Clock 
     Info (332119): ========= =================== =====================
-    Info (332119):     0.328               0.000 altera_reserved_tck 
-Info (332146): Worst-case recovery slack is 29.811
+    Info (332119):     0.418               0.000 altera_reserved_tck 
+Info (332146): Worst-case recovery slack is 29.074
     Info (332119):     Slack       End Point TNS Clock 
     Info (332119): ========= =================== =====================
-    Info (332119):    29.811               0.000 altera_reserved_tck 
-Info (332146): Worst-case removal slack is 0.510
+    Info (332119):    29.074               0.000 altera_reserved_tck 
+Info (332146): Worst-case removal slack is 0.673
     Info (332119):     Slack       End Point TNS Clock 
     Info (332119): ========= =================== =====================
-    Info (332119):     0.510               0.000 altera_reserved_tck 
-Info (332146): Worst-case minimum pulse width slack is 15.226
+    Info (332119):     0.673               0.000 altera_reserved_tck 
+Info (332146): Worst-case minimum pulse width slack is 15.190
     Info (332119):     Slack       End Point TNS Clock 
     Info (332119): ========= =================== =====================
-    Info (332119):    15.226               0.000 altera_reserved_tck 
+    Info (332119):    15.190               0.000 altera_reserved_tck 
 Info: Analyzing Slow 1100mV 0C Model
 Info (334003): Started post-fitting delay annotation
 Info (334004): Delay annotation completed successfully
+Warning (332060): Node: AudioCODEC_Interface:Audio0|audio_clock:u4|LRCK_1X was determined to be a clock but was found without an associated clock assignment.
+    Info (13166): Register AudioCODEC_Interface:Audio0|wcaudio_outR[11] is being clocked by AudioCODEC_Interface:Audio0|audio_clock:u4|LRCK_1X
 Warning (332060): Node: CLOCK_50 was determined to be a clock but was found without an associated clock assignment.
-    Info (13166): Register CodeMemory_Interface:MEMCODE|SysCodeBlock:MB1|altsyncram:altsyncram_component|altsyncram_qss1:auto_generated|altsyncram_46j2:altsyncram1|ram_block3a0~PORT_A_DATA_IN_11 is being clocked by CLOCK_50
+    Info (13166): Register AudioCODEC_Interface:Audio0|audio_clock:u4|LRCK_1X is being clocked by CLOCK_50
 Warning (332060): Node: CLOCK_Interface:CLOCK0|CLKAutoFast was determined to be a clock but was found without an associated clock assignment.
-    Info (13166): Register CPU:CPU0|Datapath_UNI:Processor|PC[12] is being clocked by CLOCK_Interface:CLOCK0|CLKAutoFast
+    Info (13166): Register AudioCODEC_Interface:Audio0|Ctrl2[0] is being clocked by CLOCK_Interface:CLOCK0|CLKAutoFast
 Warning (332060): Node: KEY[1] was determined to be a clock but was found without an associated clock assignment.
     Info (13166): Register CLOCK_Interface:CLOCK0|CLKSelectFast is being clocked by KEY[1]
 Warning (332060): Node: KEY[3] was determined to be a clock but was found without an associated clock assignment.
     Info (13166): Register CLOCK_Interface:CLOCK0|CLKManual is being clocked by KEY[3]
 Warning (332060): Node: KEY[2] was determined to be a clock but was found without an associated clock assignment.
     Info (13166): Register CLOCK_Interface:CLOCK0|CLKSelectAuto is being clocked by KEY[2]
-Warning (332060): Node: CLOCK2_50 was determined to be a clock but was found without an associated clock assignment.
-    Info (13166): Register VGA_Interface:VGA0|VgaAdapter:VGA0|MemoryVGA:memVGA|altsyncram:altsyncram_component|altsyncram_noo2:auto_generated|ram_block1a31~porta_datain_reg9 is being clocked by CLOCK2_50
-Warning (332060): Node: Sintetizador_Interface:Sintetizador0|Sintetizador:S1|PolyphonicSynthesizer:synth|ChannelBank:channelBank|clk64[1] was determined to be a clock but was found without an associated clock assignment.
-    Info (13166): Register Sintetizador_Interface:Sintetizador0|Sintetizador:S1|PolyphonicSynthesizer:synth|channelData[7].sample[14]~_Duplicate_1 is being clocked by Sintetizador_Interface:Sintetizador0|Sintetizador:S1|PolyphonicSynthesizer:synth|ChannelBank:channelBank|clk64[1]
-Warning (332060): Node: AudioCODEC_Interface:Audio0|audio_clock:u4|oAUD_BCK was determined to be a clock but was found without an associated clock assignment.
-    Info (13166): Register Sintetizador_Interface:Sintetizador0|Sintetizador:S1|PolyphonicSynthesizer:synth|ChannelBank:channelBank|clk64[1] is being clocked by AudioCODEC_Interface:Audio0|audio_clock:u4|oAUD_BCK
+Warning (332060): Node: STOPWATCH_Interface:stopwatch0|Stopwatch_divider_clk:divider|new_freq was determined to be a clock but was found without an associated clock assignment.
+    Info (13166): Register STOPWATCH_Interface:stopwatch0|time_count[26] is being clocked by STOPWATCH_Interface:stopwatch0|Stopwatch_divider_clk:divider|new_freq
+Warning (332060): Node: TecladoPS2_Interface:TecladoPS20|keyboard:kbd|scan_ready was determined to be a clock but was found without an associated clock assignment.
+    Info (13166): Register TecladoPS2_Interface:TecladoPS20|keyscan:keys1|KeyMap[102] is being clocked by TecladoPS2_Interface:TecladoPS20|keyboard:kbd|scan_ready
+Warning (332060): Node: TecladoPS2_Interface:TecladoPS20|keyboard:kbd|ready_set was determined to be a clock but was found without an associated clock assignment.
+    Info (13166): Register TecladoPS2_Interface:TecladoPS20|keyboard:kbd|scan_ready is being clocked by TecladoPS2_Interface:TecladoPS20|keyboard:kbd|ready_set
+Warning (332060): Node: TecladoPS2_Interface:TecladoPS20|keyboard:kbd|keyboard_clk_filtered was determined to be a clock but was found without an associated clock assignment.
+    Info (13166): Register TecladoPS2_Interface:TecladoPS20|keyboard:kbd|ready_set is being clocked by TecladoPS2_Interface:TecladoPS20|keyboard:kbd|keyboard_clk_filtered
+Warning (332060): Node: TecladoPS2_Interface:TecladoPS20|keyboard:kbd|clock was determined to be a clock but was found without an associated clock assignment.
+    Info (13166): Register TecladoPS2_Interface:TecladoPS20|keyboard:kbd|keyboard_clk_filtered is being clocked by TecladoPS2_Interface:TecladoPS20|keyboard:kbd|clock
 Warning (332060): Node: MousePS2_Interface:Mouse0|mouse_hugo:mouse1|PS2_Controller:CONT_1|Altera_UP_PS2_Data_In:PS2_Data_In|received_data_en was determined to be a clock but was found without an associated clock assignment.
-    Info (13166): Register MousePS2_Interface:Mouse0|mouse_hugo:mouse1|set_command_auto_trigger is being clocked by MousePS2_Interface:Mouse0|mouse_hugo:mouse1|PS2_Controller:CONT_1|Altera_UP_PS2_Data_In:PS2_Data_In|received_data_en
+    Info (13166): Register MousePS2_Interface:Mouse0|mouse_hugo:mouse1|received_data_history[3][5] is being clocked by MousePS2_Interface:Mouse0|mouse_hugo:mouse1|PS2_Controller:CONT_1|Altera_UP_PS2_Data_In:PS2_Data_In|received_data_en
+Warning (332060): Node: AudioCODEC_Interface:Audio0|audio_clock:u4|oAUD_BCK was determined to be a clock but was found without an associated clock assignment.
+    Info (13166): Register AudioCODEC_Interface:Audio0|audio_converter:u5|AUD_inR[7] is being clocked by AudioCODEC_Interface:Audio0|audio_clock:u4|oAUD_BCK
+Warning (332060): Node: CLOCK2_50 was determined to be a clock but was found without an associated clock assignment.
+    Info (13166): Register VGA_Interface:VGA0|VgaAdapter:VGA0|MemoryVGA:memVGA|altsyncram:altsyncram_component|altsyncram_noo2:auto_generated|ram_block1a33~porta_datain_reg9 is being clocked by CLOCK2_50
+Warning (332060): Node: Sintetizador_Interface:Sintetizador0|Sintetizador:S1|PolyphonicSynthesizer:synth|ChannelBank:channelBank|clk64[1] was determined to be a clock but was found without an associated clock assignment.
+    Info (13166): Register Sintetizador_Interface:Sintetizador0|Sintetizador:S1|PolyphonicSynthesizer:synth|Mixer:mixer|mixed[11] is being clocked by Sintetizador_Interface:Sintetizador0|Sintetizador:S1|PolyphonicSynthesizer:synth|ChannelBank:channelBank|clk64[1]
 Warning (332060): Node: AudioCODEC_Interface:Audio0|I2C_AV_Config:u3|mI2C_CTRL_CLK was determined to be a clock but was found without an associated clock assignment.
-    Info (13166): Register AudioCODEC_Interface:Audio0|I2C_AV_Config:u3|I2C_Controller:u0|SD[6] is being clocked by AudioCODEC_Interface:Audio0|I2C_AV_Config:u3|mI2C_CTRL_CLK
-Warning (332060): Node: AudioCODEC_Interface:Audio0|audio_clock:u4|LRCK_1X was determined to be a clock but was found without an associated clock assignment.
-    Info (13166): Register Sintetizador_Interface:Sintetizador0|Sintetizador:S1|SAMPLE_OUT[15] is being clocked by AudioCODEC_Interface:Audio0|audio_clock:u4|LRCK_1X
+    Info (13166): Register AudioCODEC_Interface:Audio0|I2C_AV_Config:u3|I2C_Controller:u0|SD_COUNTER[0]~DUPLICATE is being clocked by AudioCODEC_Interface:Audio0|I2C_AV_Config:u3|mI2C_CTRL_CLK
 Warning (332060): Node: KEY[0] was determined to be a clock but was found without an associated clock assignment.
     Info (13166): Latch CPU:CPU0|Datapath_UNI:Processor|PC[22]~1 is being clocked by KEY[0]
 Info (332123): Deriving Clock Uncertainty. Please refer to report_sdc in TimeQuest to see clock uncertainties.
 Warning (332056): PLL cross checking found inconsistent PLL clock settings:
     Warning (332056): Node: CLOCK0|PLL1|pll_main_inst|altera_pll_i|general[0].gpll~FRACTIONAL_PLL|vcoph[0] was found missing 1 generated clock that corresponds to a base clock with a period of: 20.000
     Warning (332056): Node: VGA0|VGA0|xx|vgapll_inst|altera_pll_i|general[0].gpll~FRACTIONAL_PLL|vcoph[0] was found missing 1 generated clock that corresponds to a base clock with a period of: 20.000
-Info (332146): Worst-case setup slack is 10.076
+Info (332146): Worst-case setup slack is 10.536
     Info (332119):     Slack       End Point TNS Clock 
     Info (332119): ========= =================== =====================
-    Info (332119):    10.076               0.000 altera_reserved_tck 
-Info (332146): Worst-case hold slack is 0.338
+    Info (332119):    10.536               0.000 altera_reserved_tck 
+Info (332146): Worst-case hold slack is 0.433
     Info (332119):     Slack       End Point TNS Clock 
     Info (332119): ========= =================== =====================
-    Info (332119):     0.338               0.000 altera_reserved_tck 
-Info (332146): Worst-case recovery slack is 29.910
+    Info (332119):     0.433               0.000 altera_reserved_tck 
+Info (332146): Worst-case recovery slack is 29.258
     Info (332119):     Slack       End Point TNS Clock 
     Info (332119): ========= =================== =====================
-    Info (332119):    29.910               0.000 altera_reserved_tck 
-Info (332146): Worst-case removal slack is 0.493
+    Info (332119):    29.258               0.000 altera_reserved_tck 
+Info (332146): Worst-case removal slack is 0.651
     Info (332119):     Slack       End Point TNS Clock 
     Info (332119): ========= =================== =====================
-    Info (332119):     0.493               0.000 altera_reserved_tck 
-Info (332146): Worst-case minimum pulse width slack is 15.229
+    Info (332119):     0.651               0.000 altera_reserved_tck 
+Info (332146): Worst-case minimum pulse width slack is 15.202
     Info (332119):     Slack       End Point TNS Clock 
     Info (332119): ========= =================== =====================
-    Info (332119):    15.229               0.000 altera_reserved_tck 
+    Info (332119):    15.202               0.000 altera_reserved_tck 
 Info: Analyzing Fast 1100mV 85C Model
 Info (334003): Started post-fitting delay annotation
 Info (334004): Delay annotation completed successfully
+Warning (332060): Node: AudioCODEC_Interface:Audio0|audio_clock:u4|LRCK_1X was determined to be a clock but was found without an associated clock assignment.
+    Info (13166): Register AudioCODEC_Interface:Audio0|wcaudio_outR[11] is being clocked by AudioCODEC_Interface:Audio0|audio_clock:u4|LRCK_1X
 Warning (332060): Node: CLOCK_50 was determined to be a clock but was found without an associated clock assignment.
-    Info (13166): Register CodeMemory_Interface:MEMCODE|SysCodeBlock:MB1|altsyncram:altsyncram_component|altsyncram_qss1:auto_generated|altsyncram_46j2:altsyncram1|ram_block3a0~PORT_A_DATA_IN_11 is being clocked by CLOCK_50
+    Info (13166): Register AudioCODEC_Interface:Audio0|audio_clock:u4|LRCK_1X is being clocked by CLOCK_50
 Warning (332060): Node: CLOCK_Interface:CLOCK0|CLKAutoFast was determined to be a clock but was found without an associated clock assignment.
-    Info (13166): Register CPU:CPU0|Datapath_UNI:Processor|PC[12] is being clocked by CLOCK_Interface:CLOCK0|CLKAutoFast
+    Info (13166): Register AudioCODEC_Interface:Audio0|Ctrl2[0] is being clocked by CLOCK_Interface:CLOCK0|CLKAutoFast
 Warning (332060): Node: KEY[1] was determined to be a clock but was found without an associated clock assignment.
     Info (13166): Register CLOCK_Interface:CLOCK0|CLKSelectFast is being clocked by KEY[1]
 Warning (332060): Node: KEY[3] was determined to be a clock but was found without an associated clock assignment.
     Info (13166): Register CLOCK_Interface:CLOCK0|CLKManual is being clocked by KEY[3]
 Warning (332060): Node: KEY[2] was determined to be a clock but was found without an associated clock assignment.
     Info (13166): Register CLOCK_Interface:CLOCK0|CLKSelectAuto is being clocked by KEY[2]
-Warning (332060): Node: CLOCK2_50 was determined to be a clock but was found without an associated clock assignment.
-    Info (13166): Register VGA_Interface:VGA0|VgaAdapter:VGA0|MemoryVGA:memVGA|altsyncram:altsyncram_component|altsyncram_noo2:auto_generated|ram_block1a31~porta_datain_reg9 is being clocked by CLOCK2_50
-Warning (332060): Node: Sintetizador_Interface:Sintetizador0|Sintetizador:S1|PolyphonicSynthesizer:synth|ChannelBank:channelBank|clk64[1] was determined to be a clock but was found without an associated clock assignment.
-    Info (13166): Register Sintetizador_Interface:Sintetizador0|Sintetizador:S1|PolyphonicSynthesizer:synth|channelData[7].sample[14]~_Duplicate_1 is being clocked by Sintetizador_Interface:Sintetizador0|Sintetizador:S1|PolyphonicSynthesizer:synth|ChannelBank:channelBank|clk64[1]
-Warning (332060): Node: AudioCODEC_Interface:Audio0|audio_clock:u4|oAUD_BCK was determined to be a clock but was found without an associated clock assignment.
-    Info (13166): Register Sintetizador_Interface:Sintetizador0|Sintetizador:S1|PolyphonicSynthesizer:synth|ChannelBank:channelBank|clk64[1] is being clocked by AudioCODEC_Interface:Audio0|audio_clock:u4|oAUD_BCK
+Warning (332060): Node: STOPWATCH_Interface:stopwatch0|Stopwatch_divider_clk:divider|new_freq was determined to be a clock but was found without an associated clock assignment.
+    Info (13166): Register STOPWATCH_Interface:stopwatch0|time_count[26] is being clocked by STOPWATCH_Interface:stopwatch0|Stopwatch_divider_clk:divider|new_freq
+Warning (332060): Node: TecladoPS2_Interface:TecladoPS20|keyboard:kbd|scan_ready was determined to be a clock but was found without an associated clock assignment.
+    Info (13166): Register TecladoPS2_Interface:TecladoPS20|keyscan:keys1|KeyMap[102] is being clocked by TecladoPS2_Interface:TecladoPS20|keyboard:kbd|scan_ready
+Warning (332060): Node: TecladoPS2_Interface:TecladoPS20|keyboard:kbd|ready_set was determined to be a clock but was found without an associated clock assignment.
+    Info (13166): Register TecladoPS2_Interface:TecladoPS20|keyboard:kbd|scan_ready is being clocked by TecladoPS2_Interface:TecladoPS20|keyboard:kbd|ready_set
+Warning (332060): Node: TecladoPS2_Interface:TecladoPS20|keyboard:kbd|keyboard_clk_filtered was determined to be a clock but was found without an associated clock assignment.
+    Info (13166): Register TecladoPS2_Interface:TecladoPS20|keyboard:kbd|ready_set is being clocked by TecladoPS2_Interface:TecladoPS20|keyboard:kbd|keyboard_clk_filtered
+Warning (332060): Node: TecladoPS2_Interface:TecladoPS20|keyboard:kbd|clock was determined to be a clock but was found without an associated clock assignment.
+    Info (13166): Register TecladoPS2_Interface:TecladoPS20|keyboard:kbd|keyboard_clk_filtered is being clocked by TecladoPS2_Interface:TecladoPS20|keyboard:kbd|clock
 Warning (332060): Node: MousePS2_Interface:Mouse0|mouse_hugo:mouse1|PS2_Controller:CONT_1|Altera_UP_PS2_Data_In:PS2_Data_In|received_data_en was determined to be a clock but was found without an associated clock assignment.
-    Info (13166): Register MousePS2_Interface:Mouse0|mouse_hugo:mouse1|set_command_auto_trigger is being clocked by MousePS2_Interface:Mouse0|mouse_hugo:mouse1|PS2_Controller:CONT_1|Altera_UP_PS2_Data_In:PS2_Data_In|received_data_en
+    Info (13166): Register MousePS2_Interface:Mouse0|mouse_hugo:mouse1|received_data_history[3][5] is being clocked by MousePS2_Interface:Mouse0|mouse_hugo:mouse1|PS2_Controller:CONT_1|Altera_UP_PS2_Data_In:PS2_Data_In|received_data_en
+Warning (332060): Node: AudioCODEC_Interface:Audio0|audio_clock:u4|oAUD_BCK was determined to be a clock but was found without an associated clock assignment.
+    Info (13166): Register AudioCODEC_Interface:Audio0|audio_converter:u5|AUD_inR[7] is being clocked by AudioCODEC_Interface:Audio0|audio_clock:u4|oAUD_BCK
+Warning (332060): Node: CLOCK2_50 was determined to be a clock but was found without an associated clock assignment.
+    Info (13166): Register VGA_Interface:VGA0|VgaAdapter:VGA0|MemoryVGA:memVGA|altsyncram:altsyncram_component|altsyncram_noo2:auto_generated|ram_block1a33~porta_datain_reg9 is being clocked by CLOCK2_50
+Warning (332060): Node: Sintetizador_Interface:Sintetizador0|Sintetizador:S1|PolyphonicSynthesizer:synth|ChannelBank:channelBank|clk64[1] was determined to be a clock but was found without an associated clock assignment.
+    Info (13166): Register Sintetizador_Interface:Sintetizador0|Sintetizador:S1|PolyphonicSynthesizer:synth|Mixer:mixer|mixed[11] is being clocked by Sintetizador_Interface:Sintetizador0|Sintetizador:S1|PolyphonicSynthesizer:synth|ChannelBank:channelBank|clk64[1]
 Warning (332060): Node: AudioCODEC_Interface:Audio0|I2C_AV_Config:u3|mI2C_CTRL_CLK was determined to be a clock but was found without an associated clock assignment.
-    Info (13166): Register AudioCODEC_Interface:Audio0|I2C_AV_Config:u3|I2C_Controller:u0|SD[6] is being clocked by AudioCODEC_Interface:Audio0|I2C_AV_Config:u3|mI2C_CTRL_CLK
-Warning (332060): Node: AudioCODEC_Interface:Audio0|audio_clock:u4|LRCK_1X was determined to be a clock but was found without an associated clock assignment.
-    Info (13166): Register Sintetizador_Interface:Sintetizador0|Sintetizador:S1|SAMPLE_OUT[15] is being clocked by AudioCODEC_Interface:Audio0|audio_clock:u4|LRCK_1X
+    Info (13166): Register AudioCODEC_Interface:Audio0|I2C_AV_Config:u3|I2C_Controller:u0|SD_COUNTER[0]~DUPLICATE is being clocked by AudioCODEC_Interface:Audio0|I2C_AV_Config:u3|mI2C_CTRL_CLK
 Warning (332060): Node: KEY[0] was determined to be a clock but was found without an associated clock assignment.
     Info (13166): Latch CPU:CPU0|Datapath_UNI:Processor|PC[22]~1 is being clocked by KEY[0]
 Info (332123): Deriving Clock Uncertainty. Please refer to report_sdc in TimeQuest to see clock uncertainties.
 Warning (332056): PLL cross checking found inconsistent PLL clock settings:
     Warning (332056): Node: CLOCK0|PLL1|pll_main_inst|altera_pll_i|general[0].gpll~FRACTIONAL_PLL|vcoph[0] was found missing 1 generated clock that corresponds to a base clock with a period of: 20.000
     Warning (332056): Node: VGA0|VGA0|xx|vgapll_inst|altera_pll_i|general[0].gpll~FRACTIONAL_PLL|vcoph[0] was found missing 1 generated clock that corresponds to a base clock with a period of: 20.000
-Info (332146): Worst-case setup slack is 12.568
+Info (332146): Worst-case setup slack is 12.770
     Info (332119):     Slack       End Point TNS Clock 
     Info (332119): ========= =================== =====================
-    Info (332119):    12.568               0.000 altera_reserved_tck 
-Info (332146): Worst-case hold slack is 0.077
+    Info (332119):    12.770               0.000 altera_reserved_tck 
+Info (332146): Worst-case hold slack is 0.116
     Info (332119):     Slack       End Point TNS Clock 
     Info (332119): ========= =================== =====================
-    Info (332119):     0.077               0.000 altera_reserved_tck 
-Info (332146): Worst-case recovery slack is 31.014
+    Info (332119):     0.116               0.000 altera_reserved_tck 
+Info (332146): Worst-case recovery slack is 30.339
     Info (332119):     Slack       End Point TNS Clock 
     Info (332119): ========= =================== =====================
-    Info (332119):    31.014               0.000 altera_reserved_tck 
-Info (332146): Worst-case removal slack is 0.197
+    Info (332119):    30.339               0.000 altera_reserved_tck 
+Info (332146): Worst-case removal slack is 0.302
     Info (332119):     Slack       End Point TNS Clock 
     Info (332119): ========= =================== =====================
-    Info (332119):     0.197               0.000 altera_reserved_tck 
-Info (332146): Worst-case minimum pulse width slack is 15.026
+    Info (332119):     0.302               0.000 altera_reserved_tck 
+Info (332146): Worst-case minimum pulse width slack is 14.980
     Info (332119):     Slack       End Point TNS Clock 
     Info (332119): ========= =================== =====================
-    Info (332119):    15.026               0.000 altera_reserved_tck 
+    Info (332119):    14.980               0.000 altera_reserved_tck 
 Info: Analyzing Fast 1100mV 0C Model
+Warning (332060): Node: AudioCODEC_Interface:Audio0|audio_clock:u4|LRCK_1X was determined to be a clock but was found without an associated clock assignment.
+    Info (13166): Register AudioCODEC_Interface:Audio0|wcaudio_outR[11] is being clocked by AudioCODEC_Interface:Audio0|audio_clock:u4|LRCK_1X
 Warning (332060): Node: CLOCK_50 was determined to be a clock but was found without an associated clock assignment.
-    Info (13166): Register CodeMemory_Interface:MEMCODE|SysCodeBlock:MB1|altsyncram:altsyncram_component|altsyncram_qss1:auto_generated|altsyncram_46j2:altsyncram1|ram_block3a0~PORT_A_DATA_IN_11 is being clocked by CLOCK_50
+    Info (13166): Register AudioCODEC_Interface:Audio0|audio_clock:u4|LRCK_1X is being clocked by CLOCK_50
 Warning (332060): Node: CLOCK_Interface:CLOCK0|CLKAutoFast was determined to be a clock but was found without an associated clock assignment.
-    Info (13166): Register CPU:CPU0|Datapath_UNI:Processor|PC[12] is being clocked by CLOCK_Interface:CLOCK0|CLKAutoFast
+    Info (13166): Register AudioCODEC_Interface:Audio0|Ctrl2[0] is being clocked by CLOCK_Interface:CLOCK0|CLKAutoFast
 Warning (332060): Node: KEY[1] was determined to be a clock but was found without an associated clock assignment.
     Info (13166): Register CLOCK_Interface:CLOCK0|CLKSelectFast is being clocked by KEY[1]
 Warning (332060): Node: KEY[3] was determined to be a clock but was found without an associated clock assignment.
     Info (13166): Register CLOCK_Interface:CLOCK0|CLKManual is being clocked by KEY[3]
 Warning (332060): Node: KEY[2] was determined to be a clock but was found without an associated clock assignment.
     Info (13166): Register CLOCK_Interface:CLOCK0|CLKSelectAuto is being clocked by KEY[2]
-Warning (332060): Node: CLOCK2_50 was determined to be a clock but was found without an associated clock assignment.
-    Info (13166): Register VGA_Interface:VGA0|VgaAdapter:VGA0|MemoryVGA:memVGA|altsyncram:altsyncram_component|altsyncram_noo2:auto_generated|ram_block1a31~porta_datain_reg9 is being clocked by CLOCK2_50
-Warning (332060): Node: Sintetizador_Interface:Sintetizador0|Sintetizador:S1|PolyphonicSynthesizer:synth|ChannelBank:channelBank|clk64[1] was determined to be a clock but was found without an associated clock assignment.
-    Info (13166): Register Sintetizador_Interface:Sintetizador0|Sintetizador:S1|PolyphonicSynthesizer:synth|channelData[7].sample[14]~_Duplicate_1 is being clocked by Sintetizador_Interface:Sintetizador0|Sintetizador:S1|PolyphonicSynthesizer:synth|ChannelBank:channelBank|clk64[1]
-Warning (332060): Node: AudioCODEC_Interface:Audio0|audio_clock:u4|oAUD_BCK was determined to be a clock but was found without an associated clock assignment.
-    Info (13166): Register Sintetizador_Interface:Sintetizador0|Sintetizador:S1|PolyphonicSynthesizer:synth|ChannelBank:channelBank|clk64[1] is being clocked by AudioCODEC_Interface:Audio0|audio_clock:u4|oAUD_BCK
+Warning (332060): Node: STOPWATCH_Interface:stopwatch0|Stopwatch_divider_clk:divider|new_freq was determined to be a clock but was found without an associated clock assignment.
+    Info (13166): Register STOPWATCH_Interface:stopwatch0|time_count[26] is being clocked by STOPWATCH_Interface:stopwatch0|Stopwatch_divider_clk:divider|new_freq
+Warning (332060): Node: TecladoPS2_Interface:TecladoPS20|keyboard:kbd|scan_ready was determined to be a clock but was found without an associated clock assignment.
+    Info (13166): Register TecladoPS2_Interface:TecladoPS20|keyscan:keys1|KeyMap[102] is being clocked by TecladoPS2_Interface:TecladoPS20|keyboard:kbd|scan_ready
+Warning (332060): Node: TecladoPS2_Interface:TecladoPS20|keyboard:kbd|ready_set was determined to be a clock but was found without an associated clock assignment.
+    Info (13166): Register TecladoPS2_Interface:TecladoPS20|keyboard:kbd|scan_ready is being clocked by TecladoPS2_Interface:TecladoPS20|keyboard:kbd|ready_set
+Warning (332060): Node: TecladoPS2_Interface:TecladoPS20|keyboard:kbd|keyboard_clk_filtered was determined to be a clock but was found without an associated clock assignment.
+    Info (13166): Register TecladoPS2_Interface:TecladoPS20|keyboard:kbd|ready_set is being clocked by TecladoPS2_Interface:TecladoPS20|keyboard:kbd|keyboard_clk_filtered
+Warning (332060): Node: TecladoPS2_Interface:TecladoPS20|keyboard:kbd|clock was determined to be a clock but was found without an associated clock assignment.
+    Info (13166): Register TecladoPS2_Interface:TecladoPS20|keyboard:kbd|keyboard_clk_filtered is being clocked by TecladoPS2_Interface:TecladoPS20|keyboard:kbd|clock
 Warning (332060): Node: MousePS2_Interface:Mouse0|mouse_hugo:mouse1|PS2_Controller:CONT_1|Altera_UP_PS2_Data_In:PS2_Data_In|received_data_en was determined to be a clock but was found without an associated clock assignment.
-    Info (13166): Register MousePS2_Interface:Mouse0|mouse_hugo:mouse1|set_command_auto_trigger is being clocked by MousePS2_Interface:Mouse0|mouse_hugo:mouse1|PS2_Controller:CONT_1|Altera_UP_PS2_Data_In:PS2_Data_In|received_data_en
+    Info (13166): Register MousePS2_Interface:Mouse0|mouse_hugo:mouse1|received_data_history[3][5] is being clocked by MousePS2_Interface:Mouse0|mouse_hugo:mouse1|PS2_Controller:CONT_1|Altera_UP_PS2_Data_In:PS2_Data_In|received_data_en
+Warning (332060): Node: AudioCODEC_Interface:Audio0|audio_clock:u4|oAUD_BCK was determined to be a clock but was found without an associated clock assignment.
+    Info (13166): Register AudioCODEC_Interface:Audio0|audio_converter:u5|AUD_inR[7] is being clocked by AudioCODEC_Interface:Audio0|audio_clock:u4|oAUD_BCK
+Warning (332060): Node: CLOCK2_50 was determined to be a clock but was found without an associated clock assignment.
+    Info (13166): Register VGA_Interface:VGA0|VgaAdapter:VGA0|MemoryVGA:memVGA|altsyncram:altsyncram_component|altsyncram_noo2:auto_generated|ram_block1a33~porta_datain_reg9 is being clocked by CLOCK2_50
+Warning (332060): Node: Sintetizador_Interface:Sintetizador0|Sintetizador:S1|PolyphonicSynthesizer:synth|ChannelBank:channelBank|clk64[1] was determined to be a clock but was found without an associated clock assignment.
+    Info (13166): Register Sintetizador_Interface:Sintetizador0|Sintetizador:S1|PolyphonicSynthesizer:synth|Mixer:mixer|mixed[11] is being clocked by Sintetizador_Interface:Sintetizador0|Sintetizador:S1|PolyphonicSynthesizer:synth|ChannelBank:channelBank|clk64[1]
 Warning (332060): Node: AudioCODEC_Interface:Audio0|I2C_AV_Config:u3|mI2C_CTRL_CLK was determined to be a clock but was found without an associated clock assignment.
-    Info (13166): Register AudioCODEC_Interface:Audio0|I2C_AV_Config:u3|I2C_Controller:u0|SD[6] is being clocked by AudioCODEC_Interface:Audio0|I2C_AV_Config:u3|mI2C_CTRL_CLK
-Warning (332060): Node: AudioCODEC_Interface:Audio0|audio_clock:u4|LRCK_1X was determined to be a clock but was found without an associated clock assignment.
-    Info (13166): Register Sintetizador_Interface:Sintetizador0|Sintetizador:S1|SAMPLE_OUT[15] is being clocked by AudioCODEC_Interface:Audio0|audio_clock:u4|LRCK_1X
+    Info (13166): Register AudioCODEC_Interface:Audio0|I2C_AV_Config:u3|I2C_Controller:u0|SD_COUNTER[0]~DUPLICATE is being clocked by AudioCODEC_Interface:Audio0|I2C_AV_Config:u3|mI2C_CTRL_CLK
 Warning (332060): Node: KEY[0] was determined to be a clock but was found without an associated clock assignment.
     Info (13166): Latch CPU:CPU0|Datapath_UNI:Processor|PC[22]~1 is being clocked by KEY[0]
 Info (332123): Deriving Clock Uncertainty. Please refer to report_sdc in TimeQuest to see clock uncertainties.
 Warning (332056): PLL cross checking found inconsistent PLL clock settings:
     Warning (332056): Node: CLOCK0|PLL1|pll_main_inst|altera_pll_i|general[0].gpll~FRACTIONAL_PLL|vcoph[0] was found missing 1 generated clock that corresponds to a base clock with a period of: 20.000
     Warning (332056): Node: VGA0|VGA0|xx|vgapll_inst|altera_pll_i|general[0].gpll~FRACTIONAL_PLL|vcoph[0] was found missing 1 generated clock that corresponds to a base clock with a period of: 20.000
-Info (332146): Worst-case setup slack is 13.060
+Info (332146): Worst-case setup slack is 13.278
     Info (332119):     Slack       End Point TNS Clock 
     Info (332119): ========= =================== =====================
-    Info (332119):    13.060               0.000 altera_reserved_tck 
-Info (332146): Worst-case hold slack is 0.084
+    Info (332119):    13.278               0.000 altera_reserved_tck 
+Info (332146): Worst-case hold slack is 0.127
     Info (332119):     Slack       End Point TNS Clock 
     Info (332119): ========= =================== =====================
-    Info (332119):     0.084               0.000 altera_reserved_tck 
-Info (332146): Worst-case recovery slack is 31.214
+    Info (332119):     0.127               0.000 altera_reserved_tck 
+Info (332146): Worst-case recovery slack is 30.670
     Info (332119):     Slack       End Point TNS Clock 
     Info (332119): ========= =================== =====================
-    Info (332119):    31.214               0.000 altera_reserved_tck 
-Info (332146): Worst-case removal slack is 0.180
+    Info (332119):    30.670               0.000 altera_reserved_tck 
+Info (332146): Worst-case removal slack is 0.280
     Info (332119):     Slack       End Point TNS Clock 
     Info (332119): ========= =================== =====================
-    Info (332119):     0.180               0.000 altera_reserved_tck 
-Info (332146): Worst-case minimum pulse width slack is 15.049
+    Info (332119):     0.280               0.000 altera_reserved_tck 
+Info (332146): Worst-case minimum pulse width slack is 15.015
     Info (332119):     Slack       End Point TNS Clock 
     Info (332119): ========= =================== =====================
-    Info (332119):    15.049               0.000 altera_reserved_tck 
+    Info (332119):    15.015               0.000 altera_reserved_tck 
 Info (332102): Design is not fully constrained for setup requirements
 Info (332102): Design is not fully constrained for hold requirements
-Info: Quartus Prime TimeQuest Timing Analyzer was successful. 0 errors, 62 warnings
-    Info: Peak virtual memory: 5398 megabytes
-    Info: Processing ended: Sat May 26 02:01:42 2018
-    Info: Elapsed time: 00:00:46
-    Info: Total CPU time (on all processors): 00:01:39
+Info: Quartus Prime TimeQuest Timing Analyzer was successful. 0 errors, 82 warnings
+    Info: Peak virtual memory: 1316 megabytes
+    Info: Processing ended: Tue Jun 05 20:04:04 2018
+    Info: Elapsed time: 00:01:08
+    Info: Total CPU time (on all processors): 00:01:26
 
 
