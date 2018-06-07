@@ -8,6 +8,12 @@
 # 2018/1								#
 #########################################################################
 
+# v1.0 2018/1 by
+# Gabriel Alves Castro - 17/0033813
+# Henrique Mendes de Freitas Mariano - 17/0012280
+# Luthiery Costa Cavalcante - 17/0040631
+# Matheus Breder Branquinho Nogueira - 17/0018997
+#
 # Observaçoes sobre a conversao de MIPS para RISC-V
 # - a instruçao la (load address) nao pode ser realizada em constantes(.eqv) acima de 0x7FF,
 #	assim foi substituida por li nesses casos
@@ -742,12 +748,12 @@ naoehshiftChar:	   	add     t3, s0, t3                   	# endereco na tabela d
 fimreadChar: 	ret			# retorna
 	
 #########################################
-#    ReadString         	 	#
-# a0 = end Inicio      	 	#
-# a1 = tam Max String 		 	#
-# a2 = end do ultimo caractere	 	#
-# a3 = num de caracteres digitados	#
-# 2018/1                		#
+#    ReadString         	 			#
+# a0 = end Inicio      	 				#
+# a1 = tam Max String 		 			#
+# a2 = end do ultimo caractere	 		#
+# a3 = num de caracteres digitados		#
+# 2018/1                				#
 #########################################
 # muda a2, a3, s2 e s0  
 
@@ -1003,11 +1009,6 @@ fimmidiOutSync:	ret
 
 printFloat:	addi 	sp, sp, -4
 		sw 	ra, 0(sp)				# salva ra
-<<<<<<< HEAD
-		#frrm s2						# salva o modo de arrendondamento das instru�oes FP atual
-		#fsrmi 2						# altera o modo para 2 = floor (sempre para baixo)
-=======
->>>>>>> b0ee43b6cfa6b070376e73282f65aabd23d8e83d
 		la 	s0, TempBuffer
 
 		# Encontra o sinal do numero e coloca no Buffer
@@ -1084,18 +1085,8 @@ loop2printFloat:  	flt.s 	t3, ft4, ft6			# resultado eh < que 10? entao fim
 		# e em ft4 um numero entre 1 e 10 que multiplicado por Ef3 deve voltar ao numero		
 		
 	  		# imprime parte inteira (o sinal ja esta no buffer)
-<<<<<<< HEAD
-intprintFloat:		fmul.s 		ft4, ft4, ft2		# ajusta o numero
-			li t0, 1
-			fcvt.s.w ft11, t0
-			li t0, 2
-			fcvt.s.w ft10, t0
-			fdiv.s ft11, ft11, ft10
-			fsub.s ft4, ft4, ft11
-=======
 intprintFloat:		#fmul.s 		ft4, ft4, ft2		# ajusta o numero
 			fsub.s		ft4, ft4, ft7	# tira 0.5, dessa forma sempre ao converter estaremos fazendo floor
->>>>>>> b0ee43b6cfa6b070376e73282f65aabd23d8e83d
 		  	fcvt.w.s		t0, ft4		# coloca floor de ft4 em t0
 			fadd.s		ft4, ft4, ft7	# readiciona 0.5
 		  	addi 		t0, t0, 48		# converte para ascii
@@ -1110,20 +1101,13 @@ intprintFloat:		#fmul.s 		ft4, ft4, ft2		# ajusta o numero
 		  	# ft4 contem a mantissa com 1 casa nao decimal
 		  	li 		t1, 8				# contador de digitos  -  8 casas decimais
 loopfracprintFloat:  	beq t1, zero, fimfracprintFloat			# fim dos digitos?
-
+			fsub.s		ft4, ft4, ft7		# tira 0.5
 			fcvt.w.s 	t5, ft4				# floor de ft4
 			fadd.s		ft4, ft4, ft7		# readiciona 0.5
 			fcvt.s.w	ft5, t5				# reconverte em float so com a parte inteira
 		  	fsub.s 		ft5, ft4, ft5			# parte fracionaria
 		  	fmul.s 		ft5, ft5, ft6			# mult x 10
-		  	li t0, 1
-			fcvt.s.w ft11, t0
-			li t0, 2
-			fcvt.s.w ft10, t0
-			fdiv.s ft11, ft11, ft10
-			fsub.s ft5, ft5, ft11
 			fsub.s		ft5, ft5, ft7		# tira 0.5
-
 			fcvt.w.s	t0, ft5				# coloca floor de ft5 em 10
 		  	addi 		t0, t0, 48			# converte para ascii
 		  	sb 		t0, 0(s0)			# coloca no buffer
@@ -1179,7 +1163,6 @@ ehInfprintFloat:	la 	a0, NumInfP			# string do infinito positivo
 								# imprime string
 		
 fimprintFloat:		jal 	printString			# imprime a string em a0
-			#fsrm s2					# retorna modo de arredondamento original
 			lw 	ra, 0(sp)			# recupera ra
 			addi 	sp, sp, 4			# libera sepaco
 			ret					# retorna
