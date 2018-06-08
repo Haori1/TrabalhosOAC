@@ -15,15 +15,14 @@ begin
 		5'b00100:	
 			oImmResult = { {20{iInstr[31]}},iInstr[31:20] };									// tipo I	
 
-		5'b00101:
-			oImmResult = { iInstr[31],iInstr[31:12],11'b0 };									// AUIPC
+		5'b00101,
+		5'b01101:
+			oImmResult = { iInstr[31],iInstr[31:12],11'b0 };									// tipo U
 
 		5'b01000:
 			oImmResult = { {20{iInstr[31]}},iInstr[31:25],iInstr[11:7] };					// tipo S
 
-		5'b01101:
-			oImmResult = { {12{iInstr[31]}},iInstr[31:12] };									// lui
-
+		
 		5'b11000:
 			oImmResult = { {21{iInstr[31]}},iInstr[7],iInstr[30:25],iInstr[11:8] };		// tipo SB
 

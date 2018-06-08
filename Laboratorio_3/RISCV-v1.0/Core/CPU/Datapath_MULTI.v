@@ -2,7 +2,7 @@
  * Caminho de Dados do Processador Multiciclo
  *
  */
-
+`ifdef MULTICICLO
 module Datapath_MULTI (
 // Inputs e clocks
 input wire iCLK, iCLK50, iRST,
@@ -591,3 +591,4 @@ COP0RegistersMULTI cop0reg (
 
 
 endmodule
+`endif

@@ -333,20 +333,14 @@ begin
         3'b001:
         begin
             case (wFunct3)
-                3'b000:     // beq
+                FUN3BEQ:     // beq
 						wiPC <= (wZero) ? wJumpAddr : wPC4;
 
-                3'b001:     // bne
+                FUN3BNE:     // bne
 						wiPC <= (~wZero) ? wJumpAddr : wPC4;
 
-                3'b100,     // blt
-                3'b101,     // bge
-                3'b110,     // bltu
-                3'b111:     // bgeu
-						wiPC <= (wALUresult[0]) ? wJumpAddr : wPC4;
-
                 default:
-                    wiPC <= wPC4;
+                   wiPC <= (wALUresult) ? wJumpAddr : wPC4;
             endcase
         end
 

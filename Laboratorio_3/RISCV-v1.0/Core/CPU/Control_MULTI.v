@@ -2,8 +2,7 @@
  * Bloco de Controle MULTICICLO
  *
  */	
-
-`ifdef MULTICICLO 
+`ifdef MULTICICLO
 module Control_MULTI (
 	/* I/O type definition */
 	input wire iCLK, iRST,
@@ -39,16 +38,16 @@ wire [40:0] word;			// sinais de controle do caminho de dados
 reg [5:0] pr_state;		// present state
 wire [5:0] nx_state;		// next estate
 
-assign   oFPStart 			= word[40];
-assign	oWriteCase 			= word[39:38];		//  1/2014
-assign	oLoadCase		 	= word[37:35];		//  1/2014
-assign	oFPRegDst 			= word[34:33];
-assign	oFPDataReg 			= word[32:31];
-assign	oFPRegWrite 		= word[30];
-assign	oFPPCWriteBc1t 	= word[29];
-assign	oFPPCWriteBc1f 	= word[28];
-assign	oFPFlagWrite 		= word[27];
-assign	oFPU2Mem 			= word[26];
+//assign   oFPStart 			= word[40];
+//assign	oWriteCase 			= word[39:38];		//  1/2014
+//assign	oLoadCase		 	= word[37:35];		//  1/2014
+//assign	oFPRegDst 			= word[34:33];
+//assign	oFPDataReg 			= word[32:31];
+//assign	oFPRegWrite 		= word[30];
+//assign	oFPPCWriteBc1t 	= word[29];
+//assign	oFPPCWriteBc1f 	= word[28];
+//assign	oFPFlagWrite 		= word[27];
+//assign	oFPU2Mem 			= word[26];
 //assign	oClearJAction = word[25]; // fio Disponivel
 //assign	oJReset 	= word[24];  // fio Disponivel
 //assign	oSleepWrite = word[23]; // fio Disponivel

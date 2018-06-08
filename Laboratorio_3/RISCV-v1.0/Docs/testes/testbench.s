@@ -330,7 +330,7 @@ ERRO:
 	jal exceptionHandling
 	
 	#print endereco erro
-	addi t0, t0, -16 #Endereco onde ocorreu o erro
+	addi t0, t0, -8 #Endereco onde ocorreu o erro
 	mv a0, t0
 	li a7, 134
 	li a1, 148
