@@ -80,6 +80,7 @@ wire [31:0] wJumpAddr;
 wire        wCMemRead, wCMemWrite;
 wire [6:0]  wOpcode, wFunct7;
 wire [2:0]  wFunct3;
+wire [1:0]  wNextPC;
 
 // feito no semestre 2013/1 para implementar a deteccao de excecoes (COP0)
 wire [31:0] wMemStore;
@@ -208,7 +209,6 @@ ALUControl ALUControlunit (
     .iFunct7(wFunct7), //funct alterado 18/1
 	 .iFunct3(wFunct3),		//riscv
     .iALUOp(wCALUOp),
-    .iOpcb6(wOpcode[6]),
     .oControlSignal(wALUControl)
 	);
 
@@ -334,40 +334,51 @@ begin
         begin
             case (wFunct3)
                 FUN3BEQ:
-						wiPC <= (wZero) ? wJumpAddr : wPC4;
+						wNextPC <= (wZero) ? 2'b01 : 2'b00;
 
                 FUN3BNE:
-						wiPC <= (~wZero) ? wJumpAddr : wPC4;
+						wNextPC <= (~wZero) ? 2'b01 : 2'b00;
 
                 FUN3BLT,
                 FUN3BGE,
                 FUN3BLTU,
                 FUN3BGEU:
-						wiPC <= (wALUresult[0]) ? wJumpAddr : wPC4;
+						wNextPC <= (wALUresult[0]) ? 2'b01 : 2'b00;
 					 
 					 default:
-						wiPC <= wPC4;
+						wNextPC <= wPC4;
             endcase
         end
 
         3'b010:             // jalr - endereço esta na ULA
-            wiPC <= wALUresult;
+            wNextPC <= 2'b10;
         
         3'b011:             // jal
-            wiPC <= wJumpAddr;
+            wNextPC <= 2'b01;
         
         default:            // qualquer outra instruçao
-            wiPC <= wPC4;
+            wNextPC <= 2'b00;
     endcase
+end
+
+always@(*)
+begin
+	case(wNextPC)
+		2'b00:	wiPC <= wPC4;
+		2'b01:	wiPC <= wJumpAddr;
+		2'b10:	wiPC <= wALUresult;
+		default:	wiPC <= wPC4;
+	endcase
 end
 
 /*Decide o que sera escrito no banco de registradores*/
 always @(*)
     case(wCMem2Reg)
-        3'b000:     wDataReg <= wALUresult;
-        3'b001:     wDataReg <= wMemAccess; 	// ler da memória
-        3'b010:	  wDataReg <= wJumpAddr;	// auipc
-		  3'b011:     wDataReg <= wPC4;
+        3'b000:     wDataReg <= wALUresult;				// saída da ula
+        3'b001:     wDataReg <= wMemAccess; 				// ler da memória
+        3'b010:	  wDataReg <= wJumpAddr;				// auipc
+		  3'b011:     wDataReg <= wPC4;						// pc+4 (resto das instruções)
+		  3'b100:     wDataReg <= {wImm[30:0], 1'b0};	// lui
         default:    wDataReg <= 32'b0;
     endcase
 

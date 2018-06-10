@@ -17,7 +17,7 @@ parameter
 	OPSLL			= 5'd9,
 	OPSRL			= 5'd10,
 	OPSRA			= 5'd11,
-	OPLUI			= 5'd12,
+	//OPLUI			= 5'd12,
 	
 	OPMUL			= 5'd13,
 	OPMULH		= 5'd14,

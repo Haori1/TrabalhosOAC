@@ -46,8 +46,6 @@ begin
 			oALUResult  = iA >> iB[4:0];
 		OPSRA:
 			oALUResult  = iA >>> iB[4:0];
-		OPLUI:
-			oALUResult  = {iB[30:0], 1'b0};		// o numero ja vem do immgen deslocado em 11 posições
 		
 		`ifdef RV32M
 		OPMUL:

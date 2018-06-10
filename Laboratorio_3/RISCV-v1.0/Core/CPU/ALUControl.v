@@ -8,7 +8,7 @@
  * ALUOp    |    Control signal
  * -------------------------------------------
  * 00        |    The ALU performs an add operation.
- * 01        |    The funct3 field determines the ALU operation (type-SB + lui)
+ * 01        |    The funct3 field determines the ALU operation (type-SB)
  * 10        |    The funct3 (and the funct7, if necessary) field determines the ALU operation (type-R)
  * 11        |    The funct3 (and the funct7, if necessary) field determines the ALU operation (type-I)
  */
@@ -17,7 +17,6 @@ module ALUControl (
 	input wire [1:0] iALUOp,
 	input wire [2:0] iFunct3,
 	input wire [6:0] iFunct7,
-	input wire		 iOpcb6,		//apenas o bit mais significativo do opcode é necessário
 	output reg [4:0] oControlSignal
 	);
 	
@@ -28,33 +27,25 @@ begin
             	oControlSignal  = OPADD;
 			
 			2'b01:
-			begin
-				case (iOpcb6)
-					1'b0:
-						oControlSignal  = OPLUI;
-					
-					1'b1:
-					begin
-						case (iFunct3)
-							FUN3BEQ,
-							FUN3BNE:
-								oControlSignal  = OPSUB;
-								
-							FUN3BLT:
-								oControlSignal  = OPSLT;
-							FUN3BGE:
-								oControlSignal	 = OPGE;
-							FUN3BLTU:
-								oControlSignal	 = OPSLTU;
-							FUN3BGEU:
-								oControlSignal	 = OPGEU;
-								
-							default:
-								oControlSignal  = 5'b0;
-						endcase
-					end
-				endcase
-			end
+				begin
+					case (iFunct3)
+						FUN3BEQ,
+						FUN3BNE:
+							oControlSignal  = OPSUB;
+							
+						FUN3BLT:
+							oControlSignal  = OPSLT;
+						FUN3BGE:
+							oControlSignal	 = OPGE;
+						FUN3BLTU:
+							oControlSignal	 = OPSLTU;
+						FUN3BGEU:
+							oControlSignal	 = OPGEU;
+							
+						default:
+							oControlSignal  = 5'b0;
+					endcase
+				end
 			
 			2'b10:
 			begin

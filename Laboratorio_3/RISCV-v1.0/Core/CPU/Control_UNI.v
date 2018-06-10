@@ -97,12 +97,12 @@ begin
 		OPCLUI:
 		begin
 			oOrigALU            = 1'b1;
-			oMemparaReg         = 3'b000;
+			oMemparaReg         = 3'b100;
 			oEscreveReg         = 1'b1;
 			oLeMem              = 1'b0;
 			oEscreveMem         = 1'b0;
 			oOrigPC             = 3'b000;
-			oOpALU              = 2'b01;
+			oOpALU              = 2'b00;
 		end
 		
 		OPCBRANCH:
