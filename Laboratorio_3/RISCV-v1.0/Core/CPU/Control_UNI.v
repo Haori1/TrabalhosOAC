@@ -38,12 +38,7 @@ end
 always @(*)
 begin
     case(iOp)
-		7'b0000011:
-		/* lb,
-			lh,
-			lbu,
-			lw, 
-			lhu */
+		OPCLOAD:
 		begin	
 			oOrigALU            = 1'b1;
 			oMemparaReg         = 3'b001;
@@ -54,16 +49,7 @@ begin
 			oOpALU              = 2'b00;
 		end
 		
-		7'b0010011:
-		/* addi,
-			slli,
-			slti,
-			sltiu,
-			xori,
-			srli,
-			srai,
-			ori,
-			andi */
+		OPCIARI:
 		begin	
 			oOrigALU            = 1'b1;
 			oMemparaReg         = 3'b000;
@@ -74,8 +60,7 @@ begin
 			oOpALU              = 2'b11;
 		end
 		
-		7'b0010111:
-		/* auipc */
+		OPCAUIPC:
 		begin
 			oOrigALU            = 1'b0;
 			oMemparaReg         = 3'b010;
@@ -86,10 +71,7 @@ begin
 			oOpALU              = 2'b00;
 		end
 		
-		7'b0100011:
-		/* sb,
-			sh, 
-			sw */
+		OPCSTORE:
 		begin
 			oOrigALU            = 1'b1;
 			oMemparaReg         = 3'b000;
@@ -100,25 +82,8 @@ begin
 			oOpALU              = 2'b00;
 		end
 		
-		7'b0110011:
-		/* add, 
-			sub,
-			sll,
-			slt,
-			sltu,
-			xor,
-			srl,
-			sra,
-			or,
-			and,
-			mul,
-			mulh,
-			mulhsu,
-			mulhu,
-			div,
-			divu,
-			rem,
-			remu */
+		OPCR,
+		OPCMUL:
 		begin
 			oOrigALU            = 1'b0;
 			oMemparaReg         = 3'b000;
@@ -129,8 +94,7 @@ begin
 			oOpALU              = 2'b10;
 		end
 		
-		7'b0110111:
-		/* lui */
+		OPCLUI:
 		begin
 			oOrigALU            = 1'b1;
 			oMemparaReg         = 3'b000;
@@ -141,13 +105,7 @@ begin
 			oOpALU              = 2'b01;
 		end
 		
-		7'b1100011:
-		/* beq,
-			bne,
-			blt,
-			bge,
-			bltu,
-			bgeu */
+		OPCBRANCH:
 		begin
 			oOrigALU            = 1'b0;
 			oMemparaReg         = 3'b000;
@@ -158,8 +116,7 @@ begin
 			oOpALU              = 2'b01;
 		end
 		
-		7'b1100111:
-		/* jalr */
+		OPCJALR:
 		begin
 			oOrigALU            = 1'b1;
 			oMemparaReg         = 3'b011;
@@ -170,8 +127,7 @@ begin
 			oOpALU              = 2'b00;
 		end
 		
-		7'b1101111:
-		/* jal */
+		OPCJAL:
 		begin
 			oOrigALU            = 1'b0;
 			oMemparaReg         = 3'b011;

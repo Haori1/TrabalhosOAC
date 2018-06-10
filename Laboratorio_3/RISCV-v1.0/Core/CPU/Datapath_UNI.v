@@ -333,14 +333,20 @@ begin
         3'b001:
         begin
             case (wFunct3)
-                FUN3BEQ:     // beq
+                FUN3BEQ:
 						wiPC <= (wZero) ? wJumpAddr : wPC4;
 
-                FUN3BNE:     // bne
+                FUN3BNE:
 						wiPC <= (~wZero) ? wJumpAddr : wPC4;
 
-                default:
-                   wiPC <= (wALUresult) ? wJumpAddr : wPC4;
+                FUN3BLT,
+                FUN3BGE,
+                FUN3BLTU,
+                FUN3BGEU:
+						wiPC <= (wALUresult[0]) ? wJumpAddr : wPC4;
+					 
+					 default:
+						wiPC <= wPC4;
             endcase
         end
 
@@ -392,7 +398,7 @@ always @(*)
 /*Decide o que sera escrito na Memoria de Dados*/
 always @(*)								// mecanismo anterior do case(wCFPUparaMem) simplificado
 begin
-    if (wOpcode == OPCSW)	// sb, sh ou sw
+    if (wOpcode == OPCSTORE)
     begin
         wMemDataWrite       <= wMemStore;
         wMemEnable          <= wMemEnableStore;
