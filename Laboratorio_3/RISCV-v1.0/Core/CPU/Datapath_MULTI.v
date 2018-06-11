@@ -2,7 +2,7 @@
  * Caminho de Dados do Processador Multiciclo
  *
  */
-`ifdef MULTICICLO
+
 module Datapath_MULTI (
 // Inputs e clocks
 input wire iCLK, iCLK50, iRST,
@@ -23,7 +23,7 @@ output wire [31:0] wVGARead,
 
 output wire [1:0] oALUOp, oALUSrcA,
 output wire [2:0] oALUSrcB, oPCSource,
-output wire oIRWrite, oIorD, oPCWrite, oRegWrite, oRegDst,
+output wire oIRWrite, oIorD, oPCWrite, oRegWrite,
 output wire [5:0] owControlState,
 
  output wire [31:0] wBRReadA,
@@ -93,10 +93,12 @@ reg FPALUoverflow, FPALUunderflow, FPALUnan;
  * Wires that are unnamed in the COD are named as 'w' followed by a short
  * description.
  */
-wire [5:0] 	wOpcode, wFunct;
-wire [4:0] 	wRS, wRT, wRD, wShamt, wWriteRegister, wRtorRd;
+wire [5:0] 	wOpcode;
+wire [2:0]  wFunct3;
+wire [6:0]  wFunct7;
+wire [4:0] 	wAddrRs1, wAddrRs2, wAddrRd, wWriteRegister, wRtorRd;
 wire IRWrite, MemtoReg, MemWrite, MemRead, IorD, PCWrite, PCWriteBEQ, PCWriteBNE,
-	  RegWrite, RegDst, wALUZero, wALUOverflow, RtorRd;
+	  RegWrite, wALUZero, wALUOverflow, RtorRd;
 wire [1:0] 	ALUOp, ALUSrcA;
 wire [2:0] 	ALUSrcB, PCSource, Store;
 wire [4:0] 	wALUControlSignal;
@@ -138,12 +140,12 @@ wire [4:0] 	COP0ExcCode;
  *
  * 2 to 1 multiplexers are also handled here.
  */
-assign wOpcode			= IR[31:26];
-assign wRS				= IR[25:21];
-assign wRT				= IR[20:16];
-assign wRD				= IR[15:11];
-assign wShamt			= IR[10:6];
-assign wFunct			= IR[5:0];
+assign wOpcode			= IR[6:0];
+assign wFunct3			= IR[14:12];
+assign wFunct7			= IR[31:25];
+assign wAddrRs1			= IR[19:15];
+assign wAddrRs2			= IR[24:20];
+assign wAddrRd			= IR[11:7];
 assign wImmediate		= {{16{IR[15]}}, IR[15: 0]};
 assign wuImmediate	= {16'b0, IR[15: 0]};
 assign wLabelAddress	= {{14{IR[15]}}, IR[15: 0], 2'b0};
@@ -151,12 +153,12 @@ assign wJumpAddress	= {PC[31:28], IR[25:0], 2'b0};
 
 assign wMemWriteData	= FPU2Mem ? FP_B : B;
 
-assign wRtorRd			= RegDst ? wRD : wRT;
+//assign wRtorRd			= RegDst ? wRD : wRT;
 assign wMemorALU		= MemtoReg ? MDR : ALUOut;
 assign wMemAddress	= IorD ? ALUOut : PC;
 
 
-/* Floating Point wires assignments*/
+/* Floating Point wires assignments*//*
 assign wFs 				= IR[15:11];
 assign wFt 				= IR[20:16];
 assign wFd 				= IR[10:6];
@@ -165,7 +167,7 @@ assign wBranchFlagSelector = IR[20:18];
 assign wSelectedFlagValue = wFPUFlagBank[wBranchFlagSelector];
 assign wFPFlagSelector 	= IR[10:8];
 assign wBranchTouF 		= IR[16];
-
+*/
 /* Output wires */
 assign oPC			= PC;
 assign oALUOp		= ALUOp;
@@ -176,7 +178,6 @@ assign oIorD		= IorD;
 assign oPCWrite	= PCWrite;
 assign oALUSrcA	= ALUSrcA;
 assign oRegWrite	= RegWrite;
-assign oRegDst		= RegDst;
 assign oInstr 		= IR;
 assign oFPUFlagBank = wFPUFlagBank;
 
@@ -343,9 +344,9 @@ Control_MULTI CrlMULTI (
 Registers RegsMULTI (
 	.iCLK(iCLK),
 	.iCLR(iRST),
-	.iReadRegister1(wRS),
-	.iReadRegister2(wRT),
-	.iWriteRegister(wWriteRegister),
+	.iReadRegister1(wAddrRs1),
+	.iReadRegister2(wAddrRs2),
+	.iWriteRegister(wAddrRd),
 	.iWriteData(wTreatedToRegister),
 	.iRegWrite(RegWrite),
 	.oReadData1(wReadData1),
@@ -390,22 +391,17 @@ always @(*)
 
 /* Arithmetic Logic Unit module */
 ALU ALU0 (
-	.iCLK(iCLK),
-	.iRST(iRST),
 	.iA(wALUMuxA),
 	.iB(wALUMuxB),
-	.iShamt(wShamt),
 	.iControlSignal(wALUControlSignal),
 	.oZero(wALUZero),
 	.oALUresult(wALUResult),
-	.oOverflow(wALUOverflow)
 	);
 
 /* Arithmetic Logic Unit control module */
 ALUControl ALUcont0 (
-	.iFunct(wFunct),
-	.iOpcode(wOpcode),
-	.iRt (wRT),		//1/2016
+	.iFunct3(wFunct3),
+	.iFunct7(wFunct7),
 	.iALUOp(ALUOp),
 	.oControlSignal(wALUControlSignal)
 	);
@@ -450,7 +446,7 @@ always @(*)
 	MemStore MemStore0 (
 	.iAlignment(wMemAddress[1:0]),
 	.iWriteTypeF(wWriteCase),
-	.iOpcode(wOpcode),
+	.iFunct3(wFunct3),
 	.iData(wMemWriteData),
 	.oData(wTreatedToMemory),
 	.oByteEnable(wByteEnabler),
@@ -471,7 +467,7 @@ assign DwByteEnable 	= wByteEnabler;
 MemLoad MemLoad0 (
 	.iAlignment(wLigaULA_PASSADA),
 	.iLoadTypeF(wLoadCase),
-	.iOpcode(OPCDUMMY),
+	.iFunct3(wFunct3),
 	.iData(wRegWriteData),
 	.oData(wTreatedToRegister),
 	.oException()
@@ -591,4 +587,3 @@ COP0RegistersMULTI cop0reg (
 
 
 endmodule
-`endif

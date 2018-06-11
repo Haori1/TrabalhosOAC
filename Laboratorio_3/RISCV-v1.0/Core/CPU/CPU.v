@@ -99,9 +99,9 @@ Datapath_UNI Processor (
 // Sinais de controle especi­ficos
 wire [1:0]  ALUOp, ALUSrcA;
 wire [2:0]  ALUSrcB, PCSource;
-wire        IRWrite, IorD, PCWrite, RegDst;
+wire        IRWrite, IorD, PCWrite;
 wire        RegWrite;
-assign wControlSignals  = { DwReadEnable, DwWriteEnable, RegWrite, RegDst, 
+assign wControlSignals  = { DwReadEnable, DwWriteEnable, RegWrite, 
 									ALUOp[1:0], ALUSrcA[1:0], ALUSrcB[2:0], IorD, IRWrite, PCWrite, PCSource[2:0]};
 assign IwReadEnable     = 1'b0;
 assign IwWriteEnable    = 1'b0;
@@ -139,7 +139,6 @@ Datapath_MULTI Processor (
     .oPCWrite(PCWrite),
     .oALUSrcA(ALUSrcA),
     .oRegWrite(RegWrite),
-    .oRegDst(RegDst),
 	 .wBRReadA(wBRReadA),
 	 .wBRReadB(wBRReadB),
 	 .wBRWrite(wBRWrite),
