@@ -43,7 +43,8 @@ output wire [3:0] DwByteEnable,
 //Adicionado no semestre 2014/1 para os load/stores
 wire [2:0] 	wLoadCase;
 wire [1:0] 	wWriteCase;
-wire [3:0] 	wByteEnabler;		
+wire [3:0] 	wByteEnabler;
+wire [31:0] wTreatedToRegister;		
 wire [31:0] wTreatedToMemory;
 wire [1:0]	wLigaULA_PASSADA;
 reg [1:0]	ULA_PASSADA; /*em um ciclo a gente puxa o dado da memoria e no segundo a gente escreve. Eu preciso saber
@@ -53,7 +54,7 @@ assign wLigaULA_PASSADA = ULA_PASSADA;
 
 assign wBRReadA		= wReadData1;
 assign wBRReadB		= wReadData2;
-assign wBRWrite		= wDataReg;
+assign wBRWrite		= wTreatedtoRegister;
 assign wULA				= wALUResult;
 
 	
@@ -300,7 +301,7 @@ Registers RegsMULTI (
 	.iReadRegister1(wAddrRs1),
 	.iReadRegister2(wAddrRs2),
 	.iWriteRegister(wAddrRd),
-	.iWriteData(wDataReg),
+	.iWriteData(wTreatedtoRegister),
 	.iRegWrite(RegWrite),
 	.oReadData1(wReadData1),
 	.oReadData2(wReadData2),
@@ -402,7 +403,7 @@ MemLoad MemLoad0 (
 	//.iLoadTypeF(wLoadCase),
 	.iFunct3(wFunct3),
 	.iData(wRegWriteData),
-	.oData(wDataReg),
+	.oData(wTreatedtoRegister),
 	.oException()
 	);
 
