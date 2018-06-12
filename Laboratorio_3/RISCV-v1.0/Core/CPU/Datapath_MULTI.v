@@ -10,20 +10,19 @@ input wire [31:0] iInitialPC,
 
 // Para testes
 
-input wire 	[4:0] iRegDispSelect,
+input wire 	[4:0]  iRegDispSelect,
 output wire [31:0] oPC, oDebug, oInstr, oRegDisp, oRegDispCOP0,
 
 output wire [31:0] oFPRegDisp,
-output wire [7:0] oFPUFlagBank,
-input wire 	[4:0] wVGASelectFPU,
+output wire [7:0]  oFPUFlagBank,
+input wire 	[4:0]  wVGASelectFPU,
 output wire [31:0] wVGAReadFPU,
 
-input wire 	[4:0] wVGASelect,
+input wire 	[4:0]  wVGASelect,
 output wire [31:0] wVGARead,
 
-output wire [1:0] oALUOp, oALUSrcA,
-output wire [2:0] oALUSrcB, oPCSource,
-output wire oIRWrite, oIorD, oPCWrite, oRegWrite,
+output wire [1:0] oALUOp, oALUSrcB,
+output wire       oALUSrcA,oIRWrite, oIorD, oPCWrite, oRegWrite, oPCSource,
 output wire [5:0] owControlState,
 
  output wire [31:0] wBRReadA,
@@ -38,19 +37,13 @@ input wire 	[31:0] DwReadData,
 output wire DwWriteEnable, DwReadEnable,
 output wire [3:0] DwByteEnable,
 
-// feito no semestre 2013/1 para implementar a deteccao de excecoes (COP0)
-//output oCOP0Interrupted,
-//output [4:0] oCOP0ExcCode,
-//output wire oCOP0InterruptEnable,
-input [7:0] iPendingInterrupt
 );
 
 
 //Adicionado no semestre 2014/1 para os load/stores
 wire [2:0] 	wLoadCase;
 wire [1:0] 	wWriteCase;
-wire [3:0] 	wByteEnabler;
-wire [31:0] wTreatedToRegister;
+wire [3:0] 	wByteEnabler;		
 wire [31:0] wTreatedToMemory;
 wire [1:0]	wLigaULA_PASSADA;
 reg [1:0]	ULA_PASSADA; /*em um ciclo a gente puxa o dado da memoria e no segundo a gente escreve. Eu preciso saber
@@ -60,7 +53,7 @@ assign wLigaULA_PASSADA = ULA_PASSADA;
 
 assign wBRReadA		= wReadData1;
 assign wBRReadB		= wReadData2;
-assign wBRWrite		= wTreatedToRegister;
+assign wBRWrite		= wDataReg;
 assign wULA				= wALUResult;
 
 	
@@ -70,21 +63,7 @@ assign wULA				= wALUResult;
  * Registers are named in camel case and use shortcuts to describe each word
  * in the full name as defined by the COD datapath.
  */
-reg [31:0] A, B, MDR, IR, PC, ALUOut, RegTimerHI, RegTimerLO ;
-
-/*
- * Local FPU registers
- */
-reg [31:0] FP_A, FP_B, FPALUOut;
-
-// feito no semestre 2013/1 para implementar a deteccao de excecoes (COP0)
-/*
- * Local COP0 registers
- */
-
-reg [31:0] COP0_A, PC_original;
-reg ALUoverflow;
-reg FPALUoverflow, FPALUunderflow, FPALUnan;
+reg [31:0] A, B, MDR, IR, PC, ALUOut;
 
 /*
  * Local wires
@@ -96,35 +75,36 @@ reg FPALUoverflow, FPALUunderflow, FPALUnan;
 wire [5:0] 	wOpcode;
 wire [2:0]  wFunct3;
 wire [6:0]  wFunct7;
-wire [4:0] 	wAddrRs1, wAddrRs2, wAddrRd, wWriteRegister, wRtorRd;
+wire [4:0] 	wAddrRs1, wAddrRs2, wAddrRd;
 wire IRWrite, MemtoReg, MemWrite, MemRead, IorD, PCWrite, PCWriteBEQ, PCWriteBNE,
-	  RegWrite, wALUZero, wALUOverflow, RtorRd;
-wire [1:0] 	ALUOp, ALUSrcA;
-wire [2:0] 	ALUSrcB, PCSource, Store;
+	  RegWrite, wALUZero, wALUOverflow, ALUSrcA;
+wire [1:0] 	ALUOp, ALUSrcB;
+wire [2:0] 	Store;
 wire [4:0] 	wALUControlSignal;
-wire [31:0] wALUMuxA, wALUMuxB, wALUResult, wImmediate, wuImmediate, wLabelAddress,
-				wReadData1, wReadData2, wJumpAddress, wRegWriteData, wMemorALU, wMemWriteData, 
-				wMemReadData, wMemAddress, wPCMux;
-wire [63:0] wTimerOut, wEndTime;
+wire [31:0] wALUMuxA, wALUMuxB, wALUResult, wImm, wShiftImm,
+				wReadData1, wReadData2, wDataReg, wRegWriteData, wMemorALU,
+				wMemWriteData, wMemReadData, wMemAddress, wPCMux, PCSource;
+//wire [63:0] wTimerOut, wEndTime;
 
 /*
  * Local FP wires
- */
+ 
 wire [7:0] 	wFPUFlagBank;
 wire [4:0] 	wFs, wFt, wFd, wFmt, wFPWriteRegister;
 wire [3:0] 	wFPALUControlSignal;
 wire [2:0] 	wBranchFlagSelector, wFPFlagSelector;
 wire [31:0] wFPALUResult, wFPWriteData, wFPReadData1, wFPReadData2, wFPRegDisp;
 wire wFPOverflow, wFPZero, wFPUnderflow, wSelectedFlagValue, wFPNan, wBranchTouF, wCompResult;
+*/
 
-/* FPU Control Signals*/
+/* FPU Control Signals*//*
 wire [1:0] 	FPDataReg, FPRegDst;
 wire FPPCWriteBc1t, FPPCWriteBc1f, FPRegWrite, FPU2Mem, FPFlagWrite;
 
 wire wFPStart, wFPBusy;
 wire [4:0] 	wFPBusyTime;
 
-
+*/
 // feito no semestre 2013/1 para implementar a deteccao de excecoes (COP0)
 /*
  * Local COP0 wires
@@ -146,12 +126,9 @@ assign wFunct7			= IR[31:25];
 assign wAddrRs1			= IR[19:15];
 assign wAddrRs2			= IR[24:20];
 assign wAddrRd			= IR[11:7];
-assign wImmediate		= {{16{IR[15]}}, IR[15: 0]};
-assign wuImmediate	= {16'b0, IR[15: 0]};
-assign wLabelAddress	= {{14{IR[15]}}, IR[15: 0], 2'b0};
-assign wJumpAddress	= {PC[31:28], IR[25:0], 2'b0};
+assign wShiftImm		= {wImm[30:0], 1'b0};
 
-assign wMemWriteData	= FPU2Mem ? FP_B : B;
+assign wMemWriteData	= B;
 
 //assign wRtorRd			= RegDst ? wRD : wRT;
 assign wMemorALU		= MemtoReg ? MDR : ALUOut;
@@ -179,7 +156,7 @@ assign oPCWrite	= PCWrite;
 assign oALUSrcA	= ALUSrcA;
 assign oRegWrite	= RegWrite;
 assign oInstr 		= IR;
-assign oFPUFlagBank = wFPUFlagBank;
+//assign oFPUFlagBank = wFPUFlagBank;
 
 assign oDebug = COP0ExcCode; //32'hB0DEF0F0;
 
@@ -199,16 +176,6 @@ begin
 	MDR 		<= 32'b0;
 	A 			<= 32'b0;
 	B 			<= 32'b0;
-	FP_A 		<= 32'b0;
-	FP_B 		<= 32'b0;
-	FPALUOut <= 32'b0;
-	// feito no semestre 2013/1 para implementar a deteccao de excecoes (COP0)
-	COP0_A 		<= 32'b0;
-	PC_original <= BEGINNING_TEXT;
-	ALUoverflow <= 1'b0;
-	FPALUoverflow 	<= 1'b0;
-	FPALUunderflow <= 1'b0;
-	FPALUnan 		<= 1'b0;
 end
 
 /*
@@ -226,17 +193,6 @@ begin
 		MDR 		<= 32'b0;
 		A 			<= 32'b0;
 		B 			<= 32'b0;
-		FP_A 		<= 32'b0;
-		FP_B 		<= 32'b0;
-		FPALUOut <= 32'b0;
-
-		// feito no semestre 2013/1 para implementar a deteccao de excecoes (COP0)
-		COP0_A 		<= 32'b0;
-		PC_original <= iInitialPC;
-		ALUoverflow <= 1'b0;
-		FPALUoverflow 	<= 1'b0;
-		FPALUunderflow <= 1'b0;
-		FPALUnan 		<= 1'b0;
 	end
 	else
 	begin
@@ -246,15 +202,7 @@ begin
 		A			<= wReadData1;
 		B			<= wReadData2;
 		MDR		<= wMemReadData;
-		FPALUOut <= wFPALUResult;
-		FP_A 		<= wFPReadData1;
-		FP_B 		<= wFPReadData2;
-		// feito no semestre 2013/1 para implementar a deteccao de excecoes (COP0)
-		COP0_A 		<= wCOP0ReadData;
-		ALUoverflow <= wALUOverflow;
-		FPALUoverflow 	<= wFPOverflow;
-		FPALUunderflow <= wFPUnderflow;
-		FPALUnan 		<= wFPNan;
+
 
 		/* Conditional */
 		if (PCWrite || (PCWriteBEQ && wALUZero) || (PCWriteBNE && ~wALUZero)|| 
@@ -282,6 +230,11 @@ end
 /*
  * Modules instantiation
  */
+
+ImmGen ImmGen0 (
+	.iInstr(IR),
+	.oImmResult(wImm)
+	);
 
 /* Control module - State Machine*/
 Control_MULTI CrlMULTI (
@@ -347,7 +300,7 @@ Registers RegsMULTI (
 	.iReadRegister1(wAddrRs1),
 	.iReadRegister2(wAddrRs2),
 	.iWriteRegister(wAddrRd),
-	.iWriteData(wTreatedToRegister),
+	.iWriteData(wDataReg),
 	.iRegWrite(RegWrite),
 	.oReadData1(wReadData1),
 	.oReadData2(wReadData2),
@@ -357,19 +310,6 @@ Registers RegsMULTI (
 	.oVGARead(wVGARead)
 	);
 
-// Mux WriteReg
-always @(*)
-	case (Store)
-		3'd0: wWriteRegister <= wRtorRd;  //Normal mode
-		3'd1: wWriteRegister <= wALUZero ? 5'd31: 5'd0;     //  $ra ou $zero    1/2016
-//		3'd2: wWriteRegister <= 5'd04;    //$a0 Store timer LO  // Disponivel
-//		3'd3: wWriteRegister <= 5'd05;    //$a0 Store timer HI  // Disponivel
-//		3'd4: wWriteRegister <= 5'd04;    //$a0 Store Random  // Disponivel
-		3'd5: wWriteRegister <= wRT;      //mfc1
-		3'd6: wWriteRegister <= wRT;      //mfc0 - feito no semestre 2013/1 para implementar a deteccao de excecoes (COP0)
-		3'd7: wWriteRegister <= ~wALUZero ? 5'd31: 5'd0;     //  $ra ou $zero    1/2016
-		default: wWriteRegister <= 5'd0;
-	endcase
 
 
 
@@ -410,8 +350,8 @@ ALUControl ALUcont0 (
 // Mux ALU input 'A'
 always @(*)
 	case (ALUSrcA)
-		2'd0: wALUMuxA <= PC;
-		2'd1: wALUMuxA <= A;
+		1'b0: wALUMuxA <= PC;
+		1'b1: wALUMuxA <= A;
 		default: wALUMuxA <= 32'd0;
 	endcase
 
@@ -419,12 +359,10 @@ always @(*)
 // Mux ALU input 'B'
 always @(*)
 	case (ALUSrcB)
-		3'd0: wALUMuxB <= B;
-		3'd1: wALUMuxB <= 32'd4;
-		3'd2: wALUMuxB <= wImmediate;
-		3'd3: wALUMuxB <= wLabelAddress;
-		3'd4: wALUMuxB <= wuImmediate;
-		3'd5: wALUMuxB <= 32'd0;					//adicionado em 1/2016 para calculo dos branchs
+		2'b00: wALUMuxB <= B;
+		2'b01: wALUMuxB <= 32'd4;
+		2'b10: wALUMuxB <= wImm;
+		2'b11: wALUMuxB <= wShiftImm;			//adicionado em 1/2016 para calculo dos branchs
 		default: wALUMuxB <= 32'd0;
 	endcase
 
@@ -433,19 +371,14 @@ always @(*)
 // Mux OrigPC
 always @(*)
 	case (PCSource)
-		3'd0: wPCMux <= wALUResult;		//For PC <= PC + 4
-		3'd1: wPCMux <= ALUOut;			//For BEQ, BNE, BGEZ, BGEZAL, BLTZ, BLTZAL, BLEZ, BGTZ, BC1T and BC1F
-		3'd2: wPCMux <= wJumpAddress;	//For Jump and Jal
-		3'd3: wPCMux <= A;				//For Jr
-		3'd4: wPCMux <= BEGINNING_KTEXT;	//For syscall
-		3'd5: wPCMux <= wCOP0ReadData-32'h4; //+32'h4),	//eret - feito no semestre 2013/1 para implementar a deteccao de excecoes (COP0)  PCgambs-4 ???
-		default: wPCMux <= 32'd0;
+		1'b0: wPCMux <= wALUResult;		
+		1'b1: wPCMux <= ALUOut;
 	endcase
 
 
 	MemStore MemStore0 (
 	.iAlignment(wMemAddress[1:0]),
-	.iWriteTypeF(wWriteCase),
+	//.iWriteTypeF(wWriteCase),
 	.iFunct3(wFunct3),
 	.iData(wMemWriteData),
 	.oData(wTreatedToMemory),
@@ -466,91 +399,12 @@ assign DwByteEnable 	= wByteEnabler;
 
 MemLoad MemLoad0 (
 	.iAlignment(wLigaULA_PASSADA),
-	.iLoadTypeF(wLoadCase),
+	//.iLoadTypeF(wLoadCase),
 	.iFunct3(wFunct3),
 	.iData(wRegWriteData),
-	.oData(wTreatedToRegister),
+	.oData(wDataReg),
 	.oException()
 	);
-
-
-
-`ifdef FPU
-/* Floating Point register bank module*/
-FPURegisters FPURegBank (
-	.iCLK(iCLK),
-	.iCLR(iRST),
-	.iReadRegister1(wFs),
-	.iReadRegister2(wFt),
-	.iWriteRegister(wFPWriteRegister),
-	.iWriteData(wFPWriteData),
-	.iRegWrite(FPRegWrite),
-	.oReadData1(wFPReadData1),
-	.oReadData2(wFPReadData2),
-	.iRegDispSelect(iRegDispSelect),
-	.oRegDisp(oFPRegDisp),
-	.iVGASelect(wVGASelectFPU),
-	.oVGARead(wVGAReadFPU)
-	);
-
-
-// Mux FPRegDest
-always @(*)
-	case (FPRegDst)
-		2'd0: wFPWriteRegister <= wFd;	//For normal, FR instructions
-		2'd1: wFPWriteRegister <= wFs;	//For mtc1
-		2'd2: wFPWriteRegister <= wFt;	//For lwc1
-		default:  wFPWriteRegister <= 5'd0;
-	endcase
-
-
-// Mux FPDataReg
-always @(*)
-	case (FPDataReg)
-		2'd0: wFPWriteData <= FPALUOut;
-		2'd1: wFPWriteData <= MDR;
-		2'd2: wFPWriteData <= B;
-		2'd3: wFPWriteData <= FP_A;
-		default: wFPWriteData <= ZERO;
-	endcase
-
-
-/* Floating Point ALU*/
-ula_fp FPALUUnit (
-	.iclock(iCLK),
-	//.iclock(iCLK50),
-	.idataa(FP_A),
-	.idatab(FP_B),
-	.icontrol(wFPALUControlSignal),
-	.oresult(wFPALUResult),
-	.onan(wFPNan),
-	.ozero(wFPZero),
-	.ooverflow(wFPOverflow),
-	.ounderflow(wFPUnderflow),
-	.oCompResult(wCompResult),
-	
-	.iFPBusyTime(wFPBusyTime),
-	.iFPStart(wFPStart),
-	.oFPBusy(wFPBusy)
-	);
-
-/*FPU Flag Bank*/
-FlagBank FlagBankModule(
-	.iCLK(iCLK),
-	.iCLR(iRST),
-	.iFlag(wFPFlagSelector),
-	.iFlagWrite(FPFlagWrite),
-	.iData(wCompResult),
-	.oFlags(wFPUFlagBank)
-	);
-
-/* Floating Point ALU Control*/
-FPALUControl FPALUControlUnit (
-	.iFunct(wFunct),
-	.oControlSignal(wFPALUControlSignal),
-	.oFPBusyTime(wFPBusyTime)
-	);
-`endif
 
 
 // feito no semestre 2013/1 para implementar a deteccao de excecoes (COP0)

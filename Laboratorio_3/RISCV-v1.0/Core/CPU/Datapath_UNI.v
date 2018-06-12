@@ -68,7 +68,7 @@ wire [31:0] wPC4;
 wire [31:0] wiPC;
 wire [31:0] wInstr;
 wire [31:0] wMemDataWrite;
-wire [4:0]  wAddrRs1, wAddrRs2, wAddrRd, wRegDs2;     // enderecos dos reg rs,rt ,rd e saida do Mux regDs2
+wire [4:0]  wAddrRs1, wAddrRs2, wAddrRd;     // enderecos dos reg rs,rt ,rd e saida do Mux regDs2
 wire [31:0] wOrigALU;
 wire        wZero;
 wire [4:0]  wALUControl;
@@ -376,9 +376,9 @@ always @(*)
     case(wCMem2Reg)
         3'b000:     wDataReg <= wALUresult;				// saída da ula
         3'b001:     wDataReg <= wMemAccess; 				// ler da memória
-        3'b010:	  wDataReg <= wJumpAddr;				// auipc
-		  3'b011:     wDataReg <= wPC4;						// pc+4 (resto das instruções)
-		  3'b100:     wDataReg <= {wImm[30:0], 1'b0};	// lui
+        3'b010:	    wDataReg <= wJumpAddr;				// auipc
+	    3'b011:     wDataReg <= wPC4;						// pc+4 (resto das instruções)
+	    3'b100:     wDataReg <= {wImm[30:0], 1'b0};	// lui
         default:    wDataReg <= 32'b0;
     endcase
 

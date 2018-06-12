@@ -35,8 +35,8 @@ module Control_MULTI (
 
 
 wire [40:0] word;			// sinais de controle do caminho de dados
-reg [5:0] pr_state;		// present state
-wire [5:0] nx_state;		// next estate
+reg [5:0] current_state;		// present state
+wire [5:0] next_state;		// next estate
 
 //assign   oFPStart 			= word[40];
 //assign	oWriteCase 			= word[39:38];		//  1/2014
@@ -65,17 +65,17 @@ assign	oALUOp				= word[8:7];
 assign	oALUSrcB				= word[6:4];
 assign	oALUSrcA				= word[3:2];
 assign	oRegWrite			= word[1];
-assign	oRegDst				= word[0];
+//assign	oRegDst				= word[0];
 
-assign	oState		= pr_state;
+assign	oState		= current_state;
 
 // feito no semestre 2013/1 para implementar a deteccao de excecoes (COP0)
-assign 	oCOP0PCOriginalWrite = pr_state != COP0EXC;
-assign 	oCOP0Interrupted = pr_state == COP0EXC && oCOP0ExcCode == EXCODEINT;
+assign 	oCOP0PCOriginalWrite = current_state != COP0EXC;
+assign 	oCOP0Interrupted = current_state == COP0EXC && oCOP0ExcCode == EXCODEINT;
 
 initial
 begin
-	pr_state	<= FETCH;
+	current_state	<= FETCH;
 end
 
 // feito no semestre 2013/1 para implementar a deteccao de excecoes (COP0)
@@ -92,9 +92,9 @@ assign wCOP0PendingInterrupt = iCOP0PendingInterrupt != 8'b0 && ~iCOP0ExcLevel;
 always @(posedge iCLK or posedge iRST)
 begin
 	if (iRST)
-		pr_state	<= FETCH;
+		current_state	<= FETCH;
 	else
-		pr_state	<= nx_state;
+		current_state	<= next_state;
 end
 
 // feito no semestre 2013/1 para implementar a deteccao de excecoes (COP0)
@@ -128,17 +128,17 @@ end
 always @(*)
 begin
 	// feito no semestre 2013/1 para implementar a deteccao de excecoes (COP0)
-	oCOP0RegWrite <= pr_state == COP0MTC0;
-	oCOP0Eret <= pr_state == COP0ERET;
-	oCOP0ExcOccurred <= pr_state == COP0EXC;
+	oCOP0RegWrite <= current_state == COP0MTC0;
+	oCOP0Eret <= current_state == COP0ERET;
+	oCOP0ExcOccurred <= current_state == COP0EXC;
 	// feito no semestre 2013/1 para implementar a deteccao de excecoes (COP0)
 	
-	case (pr_state)
+	case (current_state)
 	
 		FETCH:
 		begin
 			word	<= 41'b00000000000000000000010001010000000010000;
-			nx_state	<= DECODE;
+			next_state	<= DECODE;
 		end
 		
 		DECODE:
@@ -147,55 +147,55 @@ begin
 			case (iOp)
 				OPCRM: 	// Grupo 2 - (2/2016)
 					if (iFunct == FUNMADD || iFunct == FUNMSUB || iFunct == FUNMADDU || iFunct == FUNMSUBU)
-						nx_state	<= wCOP0PendingInterrupt ? COP0EXC : RM;
+						next_state	<= wCOP0PendingInterrupt ? COP0EXC : RM;
 					else
-						nx_state	<= FETCH;
+						next_state	<= FETCH;
 						
 				OPCRFMT:
 					case (iFunct)
 						FUNJR:
-							nx_state <= wCOP0PendingInterrupt ? COP0EXC : JR;
+							next_state <= wCOP0PendingInterrupt ? COP0EXC : JR;
 						FUNSLL, 
 						FUNSRL, 
 						FUNSRA: 						
-							nx_state	<= SHIFT;
+							next_state	<= SHIFT;
 						FUNSYS:
-							nx_state	<= iCOP0UserMode ? COP0EXC : FETCH;
+							next_state	<= iCOP0UserMode ? COP0EXC : FETCH;
 						default:
-							nx_state	<= RFMT;
+							next_state	<= RFMT;
 					endcase
 									
 				OPCJMP:
-					nx_state	<= wCOP0PendingInterrupt ? COP0EXC : JUMP;
+					next_state	<= wCOP0PendingInterrupt ? COP0EXC : JUMP;
 					
 				OPCBEQ:
-					nx_state	<= wCOP0PendingInterrupt ? COP0EXC : BEQ;
+					next_state	<= wCOP0PendingInterrupt ? COP0EXC : BEQ;
 					
 				OPCBNE:
-					nx_state	<= wCOP0PendingInterrupt ? COP0EXC : BNE;
+					next_state	<= wCOP0PendingInterrupt ? COP0EXC : BNE;
 					
 				OPCJAL:
-					nx_state	<= wCOP0PendingInterrupt ? COP0EXC : JAL;
+					next_state	<= wCOP0PendingInterrupt ? COP0EXC : JAL;
 
 				//operações implementadas em 1/2016 - bgtz, blez, bgez, bgezal, bgltz, bltzal.
 				OPCBGTZ:
-					nx_state	<= wCOP0PendingInterrupt ? COP0EXC : BGTZ;
+					next_state	<= wCOP0PendingInterrupt ? COP0EXC : BGTZ;
 					
 				OPCBLEZ:
-					nx_state	<= wCOP0PendingInterrupt ? COP0EXC : BLEZ;
+					next_state	<= wCOP0PendingInterrupt ? COP0EXC : BLEZ;
 					
 				OPCBGE_LTZ:
 					case (iRt)
 						RTBGEZ:
-							nx_state	<= wCOP0PendingInterrupt ? COP0EXC : BGEZ;
+							next_state	<= wCOP0PendingInterrupt ? COP0EXC : BGEZ;
 						RTBGEZAL:
-							nx_state	<= wCOP0PendingInterrupt ? COP0EXC : BGEZAL;
+							next_state	<= wCOP0PendingInterrupt ? COP0EXC : BGEZAL;
 						RTBLTZ:
-							nx_state	<= wCOP0PendingInterrupt ? COP0EXC : BLTZ;
+							next_state	<= wCOP0PendingInterrupt ? COP0EXC : BLTZ;
 						RTBLTZAL:
-							nx_state	<= wCOP0PendingInterrupt ? COP0EXC : BLTZAL;
+							next_state	<= wCOP0PendingInterrupt ? COP0EXC : BLTZAL;
 						default:
-							nx_state	<= ERRO;
+							next_state	<= ERRO;
 					endcase
 				
 				//operaçoes adicionadas em 1/2014
@@ -209,50 +209,50 @@ begin
 				OPCSW,
 				OPCLWC1,	//Load e Store da FPU
 				OPCSWC1:
-					nx_state	<= LWSW;
+					next_state	<= LWSW;
 
 				OPCANDI,
 				OPCORI,
 				OPCXORI:
-					nx_state	<= IFMTL;
+					next_state	<= IFMTL;
 					
 				OPCADDI,
 				OPCADDIU,
 				OPCSLTI,
 				OPCSLTIU,
 				OPCLUI:
-					nx_state	<= IFMTA;
+					next_state	<= IFMTA;
 					
 				OPCFLT:
 					case (iFmt)
 						FMTMTC:
-							nx_state <= FPUMTC1;
+							next_state <= FPUMTC1;
 						FMTMFC:
-							nx_state <= FPUMFC1;
+							next_state <= FPUMFC1;
 						FMTBC1:
 						begin
 							if (wCOP0PendingInterrupt)
-								nx_state <= COP0EXC;
+								next_state <= COP0EXC;
 							else 
 								if (iFt)
-									nx_state <= FPUBC1T;
+									next_state <= FPUBC1T;
 								else
-									nx_state <= FPUBC1F;
+									next_state <= FPUBC1F;
 						end
 						FMTW,
 						FMTS:
 							case(iFunct)
 								FUNMOV:
-									nx_state	<= FPUMOV;
+									next_state	<= FPUMOV;
 								FUNCEQ,
 								FUNCLT,
 								FUNCLE:
-									nx_state	<= FPUCOMP;
+									next_state	<= FPUCOMP;
 								default:
-									nx_state	<= FPUFRSTART;
+									next_state	<= FPUFRSTART;
 							endcase
 						default:
-							nx_state <= COP0EXC;
+							next_state <= COP0EXC;
 					endcase
 					
 				// feito no semestre 2013/1 para implementar a deteccao de excecoes (COP0)
@@ -260,68 +260,68 @@ begin
 				begin
 					case (iFmt)
 						FMTMTC:
-							nx_state <= iCOP0UserMode ? COP0EXC : COP0MTC0;
+							next_state <= iCOP0UserMode ? COP0EXC : COP0MTC0;
 						FMTMFC:
-							nx_state <= iCOP0UserMode ? COP0EXC : COP0MFC0;
+							next_state <= iCOP0UserMode ? COP0EXC : COP0MFC0;
 						FMTERET:
-							nx_state <= (iFunct != FUNERET) || iCOP0UserMode ? COP0EXC : COP0ERET;
+							next_state <= (iFunct != FUNERET) || iCOP0UserMode ? COP0EXC : COP0ERET;
 						default:
-							nx_state <= COP0EXC;
+							next_state <= COP0EXC;
 					endcase
 				end
 				// feito no semestre 2013/1 para implementar a deteccao de excecoes (COP0)
 				
 				default:
-					nx_state	<= COP0EXC;
+					next_state	<= COP0EXC;
 			endcase
 		end
 		
 		FPUMTC1:
 		begin
 			word	<= 41'b00000001101000000000000000000000000000000;
-			nx_state	<= wCOP0PendingInterrupt ? COP0EXC : FETCH;
+			next_state	<= wCOP0PendingInterrupt ? COP0EXC : FETCH;
 		end
 		
 		FPUMFC1:
 		begin
 			word	<= 41'b00000000000000000010100000000000000000010;
-			nx_state <= wCOP0PendingInterrupt ? COP0EXC : FETCH;
+			next_state <= wCOP0PendingInterrupt ? COP0EXC : FETCH;
 		end
 		
 		FPUBC1T:
 		begin
 			word	<= 41'b00000000000100000000000000000001000000000;
-			nx_state <= FETCH;
+			next_state <= FETCH;
 		end
 		
 		FPUBC1F:
 		begin
 			word	<= 41'b00000000000010000000000000000001000000000;
-			nx_state <= FETCH;
+			next_state <= FETCH;
 		end
 		
 		FPUMOV:
 		begin
 			word	<= 41'b00000000111000000000000000000000000000000;
-			nx_state <= wCOP0PendingInterrupt ? COP0EXC : FETCH;
+			next_state <= wCOP0PendingInterrupt ? COP0EXC : FETCH;
 		end
 		
 		FPUCOMP:
 		begin
 			word	<= 41'b00000000000001000000000000000000000000000;
-			nx_state <= wCOP0PendingInterrupt ? COP0EXC : FETCH;
+			next_state <= wCOP0PendingInterrupt ? COP0EXC : FETCH;
 		end
 		
 		FPUFRSTART:
 		begin
 			word	<= 41'b10000000000000000000000000000000000000000;
-			nx_state <= FPUFRWAIT;
+			next_state <= FPUFRWAIT;
 		end
 		
 		FPUFRWAIT:
 		begin
 			word	<= 41'b00000000000000000000000000000000000000000;
-			nx_state <= iFPBusy ? FPUFRWAIT : FPUFR2;
+			next_state <= iFPBusy ? FPUFRWAIT : FPUFR2;
 		end
 		
 		FPUFR2:
@@ -341,9 +341,9 @@ begin
 					~iCOP0ExcLevel
 				)
 			)
-				nx_state <= COP0EXC;
+				next_state <= COP0EXC;
 			else
-				nx_state <= FETCH;
+				next_state <= FETCH;
 		end
 		
 		LWSW:
@@ -356,17 +356,17 @@ begin
 				OPCLH,
 				OPCLHU,		// 1/2014
 				OPCLWC1:
-					nx_state	<= LW;
+					next_state	<= LW;
 				OPCSB:								// 1/2014
-					nx_state <= STATE_SB;		// 1/2014
+					next_state <= STATE_SB;		// 1/2014
 				OPCSH:								// 1/2014
-					nx_state <= STATE_SH;		// 1/2014
+					next_state <= STATE_SH;		// 1/2014
 				OPCSW:
-					nx_state	<= SW;
+					next_state	<= SW;
 				OPCSWC1:
-					nx_state	<= FPUSWC1;
+					next_state	<= FPUSWC1;
 				default:
-					nx_state	<= ERRO;
+					next_state	<= ERRO;
 			endcase
 		end
 		
@@ -375,87 +375,87 @@ begin
 			word	<= 41'b00000000000000000000000011000000000000000;
 			case (iOp)
 				OPCLW:
-					nx_state	<= LW2;
+					next_state	<= LW2;
 				OPCLWC1:
-					nx_state	<= FPULWC1;
+					next_state	<= FPULWC1;
 				//Listinha de casos 1/2014
 				OPCLB:
-					nx_state <= STATE_LB;
+					next_state <= STATE_LB;
 				OPCLBU:
-					nx_state <= STATE_LBU;
+					next_state <= STATE_LBU;
 				OPCLH:
-					nx_state <= STATE_LH;
+					next_state <= STATE_LH;
 				OPCLHU:
-					nx_state <= STATE_LHU;
+					next_state <= STATE_LHU;
 				default:
-					nx_state	<= ERRO;
+					next_state	<= ERRO;
 			endcase
 		end
 		
 		FPULWC1:
 		begin
 			word	<= 41'b00000010011000000000000000000000000000000;
-			nx_state	<= wCOP0PendingInterrupt ? COP0EXC : FETCH;
+			next_state	<= wCOP0PendingInterrupt ? COP0EXC : FETCH;
 		end
 		
 		FPUSWC1:
 		begin
 			word	<= 41'b00000000000000100000000010100000000000000;
-			nx_state	<= wCOP0PendingInterrupt ? COP0EXC : FETCH;
+			next_state	<= wCOP0PendingInterrupt ? COP0EXC : FETCH;
 		end
 		
 		LW2:
 		begin
 			word	<= 41'b00000000000000000000000000001000000000010;
-			nx_state	<= wCOP0PendingInterrupt ? COP0EXC : FETCH;
+			next_state	<= wCOP0PendingInterrupt ? COP0EXC : FETCH;
 		end
 		
 		STATE_LB:
 		begin
 			word	<= 41'b00001100000000000000000000001000000000010;
-			nx_state	<= wCOP0PendingInterrupt ? COP0EXC : FETCH;
+			next_state	<= wCOP0PendingInterrupt ? COP0EXC : FETCH;
 		end
 		
 		STATE_LBU:
 		begin
 			word	<= 41'b00010000000000000000000000001000000000010;
-			nx_state	<= wCOP0PendingInterrupt ? COP0EXC : FETCH;
+			next_state	<= wCOP0PendingInterrupt ? COP0EXC : FETCH;
 		end
 		
 		STATE_LH:
 		begin
 			word	<= 41'b00000100000000000000000000001000000000010;
-			nx_state	<= wCOP0PendingInterrupt ? COP0EXC : FETCH;
+			next_state	<= wCOP0PendingInterrupt ? COP0EXC : FETCH;
 		end
 		
 		STATE_LHU:
 		begin
 			word	<= 41'b00001000000000000000000000001000000000010;
-			nx_state	<= wCOP0PendingInterrupt ? COP0EXC : FETCH;
+			next_state	<= wCOP0PendingInterrupt ? COP0EXC : FETCH;
 		end
 		
 		STATE_SB:
 		begin
 			word	<= 41'b01000000000000000000000010100000000000000;
-			nx_state	<= wCOP0PendingInterrupt ? COP0EXC : FETCH;
+			next_state	<= wCOP0PendingInterrupt ? COP0EXC : FETCH;
 		end
 		
 		STATE_SH:
 		begin
 			word	<= 41'b00100000000000000000000010100000000000000;
-			nx_state	<= wCOP0PendingInterrupt ? COP0EXC : FETCH;
+			next_state	<= wCOP0PendingInterrupt ? COP0EXC : FETCH;
 		end
 		
 		SW:
 		begin
 			word	<= 41'b00000000000000000000000010100000000000000;
-			nx_state	<= wCOP0PendingInterrupt ? COP0EXC : FETCH;
+			next_state	<= wCOP0PendingInterrupt ? COP0EXC : FETCH;
 		end
 		
 		RM:
 		begin
 			word	<= 41'b00000000000000000000000000000000110000100;
-			nx_state	<= FETCH;
+			next_state	<= FETCH;
 		end
 		
 		RFMT:
@@ -466,145 +466,145 @@ begin
 				FUNDIV,
 				FUNMULTU,
 				FUNDIVU:
-					nx_state	<= FETCH;
+					next_state	<= FETCH;
 				default:
-					nx_state	<= RFMT2;
+					next_state	<= RFMT2;
 			endcase
 		end
 		
 		RFMT2:
 		begin
 			word	<= 41'b00000000000000000000000000000000000000011;
-			nx_state	<= ((iFunct == FUNADD || iFunct == FUNSUB) && iCOP0ALUoverflow && ~iCOP0ExcLevel) || wCOP0PendingInterrupt ? COP0EXC : FETCH;
+			next_state	<= ((iFunct == FUNADD || iFunct == FUNSUB) && iCOP0ALUoverflow && ~iCOP0ExcLevel) || wCOP0PendingInterrupt ? COP0EXC : FETCH;
 		end
 		
 		SHIFT:
 		begin
 			word	<= 41'b00000000000000000000000000000000100001000;
-			nx_state	<= RFMT2;
+			next_state	<= RFMT2;
 		end
 		
 		IFMTL:
 		begin
 			word	<= 41'b00000000000000000000000000000000111000100;
-			nx_state	<= IFMT2;
+			next_state	<= IFMT2;
 		end
 		
 		IFMTA:
 		begin
 			word	<= 41'b00000000000000000000000000000000110100100;
-			nx_state	<= IFMT2;
+			next_state	<= IFMT2;
 		end
 		
 		IFMT2:
 		begin
 			word	<= 41'b00000000000000000000000000000000000000010;
-			nx_state	<= (iOp == OPCADDI && iCOP0ALUoverflow && ~iCOP0ExcLevel) || wCOP0PendingInterrupt ? COP0EXC : FETCH;
+			next_state	<= (iOp == OPCADDI && iCOP0ALUoverflow && ~iCOP0ExcLevel) || wCOP0PendingInterrupt ? COP0EXC : FETCH;
 		end
 		
 		BEQ:
 		begin
 			word	<= 41'b00000000000000000000000100000001010000100;
-			nx_state	<= FETCH;
+			next_state	<= FETCH;
 		end
 
 		BNE:
 		begin
 			word	<= 41'b00000000000000000000001000000001010000100;
-			nx_state	<= FETCH;
+			next_state	<= FETCH;
 		end
 
 		JUMP:
 		begin
 			word	<= 41'b00000000000000000000010000000010000000000;
-			nx_state	<= FETCH;
+			next_state	<= FETCH;
 		end
 
 		JAL:
 		begin
 			word	<= 41'b00000000000000000000110000000010111010010;
-			nx_state	<= FETCH;
+			next_state	<= FETCH;
 		end		
 		
 		//adicionado em 1/2016, bgez, bgezal, bltz, bltzal.
 		BGEZ:
 		begin
 			word	<= 41'b00000000000000000000000100000001111010100;
-			nx_state	<= FETCH;
+			next_state	<= FETCH;
 		end
 		
 		BGEZAL:
 		begin
 			word	<= 41'b00000000000000000000100100000001111010110;
-			nx_state	<= FETCH;
+			next_state	<= FETCH;
 		end
 		
 		BLTZ:
 		begin
 			word	<= 41'b00000000000000000000001000000001111010100;
-			nx_state	<= FETCH;
+			next_state	<= FETCH;
 		end
 		
 		BLTZAL:
 		begin
 			word	<= 41'b00000000000000000011101000000001111010110;
-			nx_state	<= FETCH;
+			next_state	<= FETCH;
 		end
 		
 		BGTZ: //1/2016
 		begin
 			word	<= 41'b00000000000000000000000100000001111010100;
-			nx_state	<= FETCH;
+			next_state	<= FETCH;
 		end
 		
 		BLEZ://1/2016
 		begin
 			word	<= 41'b00000000000000000000001000000001111010100;
-			nx_state	<= FETCH;
+			next_state	<= FETCH;
 		end
 
 		JR:
 		begin
 			word	<= 41'b00000000000000000000010000000011000000000;
-			nx_state	<= FETCH;
+			next_state	<= FETCH;
 		end
 		
 		// feito no semestre 2013/1 para implementar a deteccao de excecoes (COP0)
 		COP0MTC0:
 		begin
 			word	<= 41'b00000000000000000000000000000000000000000;
-			nx_state	<= FETCH;
+			next_state	<= FETCH;
 		end
 		
 		COP0MFC0:
 		begin
 			word	<= 41'b00000000000000000011000000000000000000010;
-			nx_state	<= FETCH;
+			next_state	<= FETCH;
 		end
 		
 		COP0ERET:
 		begin
 			word	<= 41'b00000000000000000000010000000101000000000;
-			nx_state	<= FETCH;
+			next_state	<= FETCH;
 		end
 		
 		COP0EXC:
 		begin
 			word	<= 41'b00000000000000000000010000000100000000000;
-			nx_state	<= FETCH;
+			next_state	<= FETCH;
 		end
 		// feito no semestre 2013/1 para implementar a deteccao de excecoes (COP0)
 				
 		ERRO:
 		begin
 			word  <= 41'b00000000000000000000000000000000000000001;
-			nx_state	<= ERRO;
+			next_state	<= ERRO;
 		end
 
 		default:
 		begin
 			word	<= 41'b0;
-			nx_state	<= ERRO;
+			next_state	<= ERRO;
 		end
 		
 	endcase

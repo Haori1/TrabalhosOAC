@@ -97,12 +97,11 @@ Datapath_UNI Processor (
 /*************  MULTICICLO **********************************/
 `ifdef MULTICICLO
 // Sinais de controle especi­ficos
-wire [1:0]  ALUOp, ALUSrcA;
-wire [2:0]  ALUSrcB, PCSource;
-wire        IRWrite, IorD, PCWrite;
+wire [1:0]  ALUOp, ALUSrcB;
+wire        ALUSrcA, IRWrite, IorD, PCWrite, PCSource;
 wire        RegWrite;
 assign wControlSignals  = { DwReadEnable, DwWriteEnable, RegWrite, 
-									ALUOp[1:0], ALUSrcA[1:0], ALUSrcB[2:0], IorD, IRWrite, PCWrite, PCSource[2:0]};
+									ALUOp[1:0], ALUSrcA, ALUSrcB[1:0], IorD, IRWrite, PCWrite, PCSource };
 assign IwReadEnable     = 1'b0;
 assign IwWriteEnable    = 1'b0;
 assign IwByteEnable     = 4'b0000;
