@@ -207,7 +207,7 @@ ImmGen ImmGen0 (
 /* ALU CTRL */
 ALUControl ALUControlunit (
     .iFunct7(wFunct7), //funct alterado 18/1
-	 .iFunct3(wFunct3),		//riscv
+    .iFunct3(wFunct3),		//riscv
     .iALUOp(wCALUOp),
     .oControlSignal(wALUControl)
 	);

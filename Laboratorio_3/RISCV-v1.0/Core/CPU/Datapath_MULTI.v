@@ -64,7 +64,7 @@ assign wULA				= wALUResult;
  * Registers are named in camel case and use shortcuts to describe each word
  * in the full name as defined by the COD datapath.
  */
-reg [31:0] A, B, MDR, IR, PC, ALUOut;
+reg [31:0] A, B, MDR, IR, PC, ALUOut, PCBACK;
 
 /*
  * Local wires
@@ -73,18 +73,18 @@ reg [31:0] A, B, MDR, IR, PC, ALUOut;
  * Wires that are unnamed in the COD are named as 'w' followed by a short
  * description.
  */
-wire [5:0] 	wOpcode;
+wire [6:0] 	wOpcode;
 wire [2:0]  wFunct3;
 wire [6:0]  wFunct7;
 wire [4:0] 	wAddrRs1, wAddrRs2, wAddrRd;
-wire IRWrite, MemtoReg, MemWrite, MemRead, IorD, PCWrite, PCWriteBEQ, PCWriteBNE,
-	  RegWrite, wALUZero, wALUOverflow, ALUSrcA;
-wire [1:0] 	ALUOp, ALUSrcB;
-wire [2:0] 	Store;
+wire wCIRWrite, wCMemtoReg, wCMemWrite, wCMemRead, wCIorD, wCPCWrite, wCPCWriteCond,
+	  wCRegWrite, wALUZero, wCALUSrcA;
+wire [1:0] 	wCALUOp, wCALUSrcB;
+//wire [2:0] 	Store;
 wire [4:0] 	wALUControlSignal;
 wire [31:0] wALUMuxA, wALUMuxB, wALUResult, wImm, wShiftImm,
 				wReadData1, wReadData2, wDataReg, wRegWriteData, wMemorALU,
-				wMemWriteData, wMemReadData, wMemAddress, wPCMux, PCSource;
+				wMemWriteData, wMemReadData, wMemAddress, wPCMux, wCPCSource;
 //wire [63:0] wTimerOut, wEndTime;
 
 /*
@@ -109,12 +109,13 @@ wire [4:0] 	wFPBusyTime;
 // feito no semestre 2013/1 para implementar a deteccao de excecoes (COP0)
 /*
  * Local COP0 wires
- */
+ 
 wire [31:0] wCOP0DataReg, wCOP0ReadData;
 wire [7:0] 	wCOP0InterruptMask;
 wire PCOriginalWrite, COP0RegWrite, COP0Eret, COP0ExcOccurred, COP0BranchDelay, 
 	  COP0Interrupted, wCOP0UserMode, wCOP0ExcLevel;
 wire [4:0] 	COP0ExcCode;
+*/
 
 /*
  * Wires assignments
@@ -131,9 +132,8 @@ assign wShiftImm		= {wImm[30:0], 1'b0};
 
 assign wMemWriteData	= B;
 
-//assign wRtorRd			= RegDst ? wRD : wRT;
-assign wMemorALU		= MemtoReg ? MDR : ALUOut;
-assign wMemAddress	= IorD ? ALUOut : PC;
+assign wMemorALU		= wCMemtoReg ? MDR : ALUOut;
+assign wMemAddress	= wCIorD ? ALUOut : PC;
 
 
 /* Floating Point wires assignments*//*
@@ -148,21 +148,21 @@ assign wBranchTouF 		= IR[16];
 */
 /* Output wires */
 assign oPC			= PC;
-assign oALUOp		= ALUOp;
-assign oPCSource	= PCSource;
-assign oALUSrcB	= ALUSrcB;
-assign oIRWrite	= IRWrite;
-assign oIorD		= IorD;
-assign oPCWrite	= PCWrite;
-assign oALUSrcA	= ALUSrcA;
-assign oRegWrite	= RegWrite;
+assign oALUOp		= wCALUOp;
+assign oPCSource	= wCPCSource;
+assign oALUSrcB	= wCALUSrcB;
+assign oIRWrite	= wCIRWrite;
+assign oIorD		= wCIorD;
+assign oPCWrite	= wCPCWrite;
+assign oALUSrcA	= wCALUSrcA;
+assign oRegWrite	= wCRegWrite;
 assign oInstr 		= IR;
 //assign oFPUFlagBank = wFPUFlagBank;
 
 assign oDebug = COP0ExcCode; //32'hB0DEF0F0;
 
 // feito no semestre 2013/1 para implementar a deteccao de excecoes (COP0)
-assign wCOP0DataReg = COP0ExcOccurred ? PC_original : B;
+//assign wCOP0DataReg = COP0ExcOccurred ? PC_original : B;
 //assign oCOP0Interrupted = COP0Interrupted;
 //assign oCOP0ExcCode = COP0ExcCode;
 
@@ -172,11 +172,12 @@ assign wCOP0DataReg = COP0ExcOccurred ? PC_original : B;
 initial
 begin
 	PC			<= BEGINNING_TEXT;
-	IR			<= 32'b0;
-	ALUOut	<= 32'b0;
-	MDR 		<= 32'b0;
-	A 			<= 32'b0;
-	B 			<= 32'b0;
+	PCBACK		<= BEGINNING_TEXT;
+	IR			<= ZERO;
+	ALUOut		<= ZERO;
+	MDR 		<= ZERO;
+	A 			<= ZERO;
+	B 			<= ZERO;
 end
 
 /*
@@ -189,6 +190,7 @@ begin
 	if (iRST)
 	begin
 		PC			<= iInitialPC;
+		PCBACK		<= iInitialPC;
 		IR			<= 32'b0;
 		ALUOut	<= 32'b0;
 		MDR 		<= 32'b0;
@@ -203,10 +205,11 @@ begin
 		A			<= wReadData1;
 		B			<= wReadData2;
 		MDR		<= wMemReadData;
+		PCBACK <= PC;
 
 
-		/* Conditional */
-		if (PCWrite || (PCWriteBEQ && wALUZero) || (PCWriteBNE && ~wALUZero)|| 
+		/* Conditional ALTERAR!*/
+		if (wCPCWrite || (PCWriteBEQ && wALUZero) || (PCWriteBNE && ~wALUZero)|| 
 			(FPPCWriteBc1t && wSelectedFlagValue) || (FPPCWriteBc1f && ~wSelectedFlagValue)
 			 )
 		begin
@@ -216,7 +219,7 @@ begin
 				PC_original <= wPCMux;
 		end
 
-		if (IRWrite)
+		if (wCIRWrite)
 			IR	<= wMemReadData;
 
 		//2014, detecta que e um load ou write que nao precisa do resultado passado da ula passada
@@ -241,25 +244,25 @@ ImmGen ImmGen0 (
 Control_MULTI CrlMULTI (
 	.iCLK(iCLK),
 	.iRST(iRST),
-	.iOp(wOpcode),
-	.iFmt(wFmt),
-	.iFt(wBranchTouF),
-	.iFunct(wFunct),
-	.oIRWrite(IRWrite),
-	.oMemtoReg(MemtoReg),
-	.oMemWrite(MemWrite),
-	.oMemRead(MemRead),
-	.oIorD(IorD),
-	.oPCWrite(PCWrite),
-	.oPCWriteBEQ(PCWriteBEQ),
-	.oPCWriteBNE(PCWriteBNE),
-	.oPCSource(PCSource),
-	.oALUOp(ALUOp),
-	.oALUSrcB(ALUSrcB),
-	.oALUSrcA(ALUSrcA),
-	.oRegWrite(RegWrite),
-	.oRegDst(RegDst),
+	.iOpcode(wOpcode),
+	
+	.oIorD(wCIorD),
+	.oMemRead(wCMemRead),
+	.oMemWrite(wCMemWrite),
+	.oIRWrite(wCIRWrite),
+	.oALUSrcA(wCALUSrcA),
+	.oALUSrcB(wCALUSrcB),
+	.oALUOp(wCALUOp),
+	.oMemtoReg(wCMemtoReg),
+	.oRegWrite(wCRegWrite),
+	.oPCWrite(wCPCWrite),
+	.oPCWriteCond(wCPCWriteCond),	// não declarado
+	//.oPCWriteBEQ(PCWriteBEQ),
+	//.oPCWriteBNE(PCWriteBNE),
+	.oPCSource(wCPCSource),
+
 	.oState(owControlState),
+	/*
 	.oStore(Store),
 	
 	.oFPDataReg(FPDataReg),
@@ -292,6 +295,7 @@ Control_MULTI CrlMULTI (
 	
 	.iFPBusy(wFPBusy),
 	.oFPStart(wFPStart)
+	*/
 	);
 
 /* Register bank module */
@@ -302,7 +306,7 @@ Registers RegsMULTI (
 	.iReadRegister2(wAddrRs2),
 	.iWriteRegister(wAddrRd),
 	.iWriteData(wTreatedtoRegister),
-	.iRegWrite(RegWrite),
+	.iRegWrite(wCRegWrite),
 	.oReadData1(wReadData1),
 	.oReadData2(wReadData2),
 	.iRegDispSelect(iRegDispSelect),
@@ -343,14 +347,14 @@ ALU ALU0 (
 ALUControl ALUcont0 (
 	.iFunct3(wFunct3),
 	.iFunct7(wFunct7),
-	.iALUOp(ALUOp),
+	.iALUOp(wCALUOp),
 	.oControlSignal(wALUControlSignal)
 	);
 
 
 // Mux ALU input 'A'
 always @(*)
-	case (ALUSrcA)
+	case (wCALUSrcA)
 		1'b0: wALUMuxA <= PC;
 		1'b1: wALUMuxA <= A;
 		default: wALUMuxA <= 32'd0;
@@ -359,7 +363,7 @@ always @(*)
 
 // Mux ALU input 'B'
 always @(*)
-	case (ALUSrcB)
+	case (wCALUSrcB)
 		2'b00: wALUMuxB <= B;
 		2'b01: wALUMuxB <= 32'd4;
 		2'b10: wALUMuxB <= wImm;
@@ -371,9 +375,10 @@ always @(*)
 
 // Mux OrigPC
 always @(*)
-	case (PCSource)
+	case (wCPCSource)
 		1'b0: wPCMux <= wALUResult;		
 		1'b1: wPCMux <= ALUOut;
+		default: wPCMux <= ZERO;
 	endcase
 
 
@@ -393,8 +398,8 @@ always @(*)
 assign DwAddress 		= wMemAddress;
 assign DwWriteData 	= wTreatedToMemory;
 assign wMemReadData 	= DwReadData;
-assign DwWriteEnable = MemWrite;
-assign DwReadEnable 	= MemRead;
+assign DwWriteEnable = wCMemWrite;
+assign DwReadEnable 	= wCMemRead;
 assign DwByteEnable 	= wByteEnabler;
 
 
@@ -409,7 +414,7 @@ MemLoad MemLoad0 (
 
 
 // feito no semestre 2013/1 para implementar a deteccao de excecoes (COP0)
-/* Banco de registradores do Coprocessador 0 */
+/* Banco de registradores do Coprocessador 0 
 COP0RegistersMULTI cop0reg (
 	.iCLK(iCLK),
 	.iCLR(iRST),
@@ -439,6 +444,6 @@ COP0RegistersMULTI cop0reg (
 	.oRegDisp(oRegDispCOP0)
 	);
 
-
+*/
 
 endmodule

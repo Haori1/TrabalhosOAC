@@ -223,15 +223,44 @@ parameter
     FETCH           = 6'd0,
     DECODE          = 6'd1,
     LWSW            = 6'd2,
-    LW              = 6'd3,
-    LW2             = 6'd4,
-    SW              = 6'd5,
-    SHIFT           = 6'd8,
-    BEQ             = 6'd12,
-    BNE             = 6'd13,
-    JUMP            = 6'd14,
-    JAL             = 6'd15,
-    JR              = 6'd16,
+    LOAD            = 6'd3,
+    MEM2RD          = 6'd4,
+    STORE           = 6'd5,
+    RCALC           = 6'd6,
+    ICALC           = 6'd7,
+    ALU2RD          = 6'd8,
+    IMM2RD          = 6'd9,
+    BRANCH          = 6'd10,
+	JAL             = 6'd11,
+	JALR            = 6'd12,
+
+/* guia:
+	oIorD         = wOutput[14]
+	oMemRead      = wOutput[13]
+	oMemWrite     = wOutput[12]
+	oIRWrite      = wOutput[11]
+	oALUSrcA      = wOutput[10]
+	oALUSrcB      = wOutput[9:8]
+	oALUOp        = wOutput[7:6]
+	oMemtoReg     = wOutput[5:4]
+	oRegWrite     = wOutput[3]
+	oPCWrite      = wOutput[2]
+	oPCWriteCond  = wOutput[1]
+	oPCSource     = wOutput[0]
+*/
+	FETCH_OUTPUT    = 15'b0_1_0_1_0_01_00_00_0_1_0_0,
+	DECODE_OUTPUT   = 15'b0_0_0_0_0_11_00_00_0_0_0_0,
+	LWSW_OUTPUT     = 15'b0_0_0_0_1_10_00_00_0_0_0_0,
+	LOAD_OUTPUT     = 15'b1_1_0_0_1_00_00_00_0_0_0_0,
+	MEM2RD_OUTPUT   = 15'b0_0_0_0_1_00_00_10_1_0_0_0,
+	STORE_OUTPUT    = 15'b1_0_1_0_1_00_00_00_0_0_0_0,
+	RCALC_OUTPUT    = 15'b0_0_0_0_1_00_10_00_0_0_0_0,
+	ICALC_OUTPUT    = 15'b0_0_0_0_1_10_11_00_0_0_0_0,
+	ALU2RD_OUTPUT   = 15'b0_0_0_0_1_00_00_00_1_0_0_0,
+	IMM2RD_OUTPUT   = 15'b0_0_0_0_1_00_00_11_1_0_0_0,
+	BRANCH_OUTPUT   = 15'b0_0_0_0_1_00_01_00_0_0_1_1,
+	JAL_OUTPUT      = 15'b0_0_0_0_1_00_01_00_1_1_0_1,
+	JALR_OUTPUT     = 15'b0_0_0_0_1_10_00_01_1_1_0_0,
 
     //Adicionados em 1/2014
     STATE_LB        = 6'd49,
