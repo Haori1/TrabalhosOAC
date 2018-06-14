@@ -1,0 +1,206 @@
+Restore Archived Project report for TopDE
+Wed Jun 13 14:40:10 2018
+Quartus Prime Version 17.1.0 Build 590 10/25/2017 SJ Lite Edition
+
+
+---------------------
+; Table of Contents ;
+---------------------
+  1. Legal Notice
+  2. Restore Archived Project Summary
+  3. Restore Archived Project Messages
+  4. Files Restored
+  5. Files Not Restored
+
+
+
+----------------
+; Legal Notice ;
+----------------
+Copyright (C) 2017  Intel Corporation. All rights reserved.
+Your use of Intel Corporation's design tools, logic functions 
+and other software and tools, and its AMPP partner logic 
+functions, and any output files from any of the foregoing 
+(including device programming or simulation files), and any 
+associated documentation or information are expressly subject 
+to the terms and conditions of the Intel Program License 
+Subscription Agreement, the Intel Quartus Prime License Agreement,
+the Intel FPGA IP License Agreement, or other applicable license
+agreement, including, without limitation, that your use is for
+the sole purpose of programming logic devices manufactured by
+Intel and sold by Intel or its authorized distributors.  Please
+refer to the applicable agreement for further details.
+
+
+
++-------------------------------------------------------------------------+
+; Restore Archived Project Summary                                        ;
++---------------------------------+---------------------------------------+
+; Restore Archived Project Status ; Successful - Wed Jun 13 14:40:10 2018 ;
+; Revision Name                   ; TopDE                                 ;
+; Top-level Entity Name           ; TopDE                                 ;
+; Family                          ; Cyclone V                             ;
++---------------------------------+---------------------------------------+
+
+
++-----------------------------------+
+; Restore Archived Project Messages ;
++-----------------------------------+
+Info: Successfully restored 'C:/Users/henri/TrabalhosOAC/Laboratorio_5/MIPSv1.3/MIPSv1.3/Core.qar' into the 'C:/Users/henri/TrabalhosOAC/Laboratorio_5/MIPSv1.3/MIPSv1.3/Core/' directory
+Info: Generated report 'TopDE.restore.rpt'
+Info (23030): Evaluation of Tcl script c:/intelfpga_lite/17.1/quartus/common/tcl/apps/qpm/qar.tcl was successful
+Info: Quartus Prime Shell was successful. 0 errors, 132 warnings
+    Info: Peak virtual memory: 4868 megabytes
+    Info: Processing ended: Wed Jun 13 14:40:10 2018
+    Info: Elapsed time: 00:00:05
+    Info: Total CPU time (on all processors): 00:00:01
+
+
++------------------+
+; Files Restored   ;
++------------------+
+; File Name        ;
++------------------+
+; db/TopDE.cmp.rdb ;
++------------------+
+
+
++---------------------------------------+
+; Files Not Restored                    ;
++---------------------------------------+
+; File Name                             ;
++---------------------------------------+
+; qar_info.json                         ;
+; AudioCODEC/AudioCODEC_Interface.v     ;
+; AudioCODEC/AudioVideo_PLL.v           ;
+; AudioCODEC/I2C_AV_Config.v            ;
+; AudioCODEC/I2C_Controller.v           ;
+; AudioCODEC/audio_clock.v              ;
+; AudioCODEC/audio_converter.v          ;
+; CPU/ALU.v                             ;
+; CPU/ALUControl.v                      ;
+; CPU/Branch_PIPEM.v                    ;
+; CPU/CPU.v                             ;
+; CPU/Control_MULTI.v                   ;
+; CPU/Control_PIPEM.v                   ;
+; CPU/Control_UNI.v                     ;
+; CPU/Datapath_MULTI.v                  ;
+; CPU/Datapath_PIPEM.v                  ;
+; CPU/Datapath_UNI.v                    ;
+; CPU/ForwardUnitM.v                    ;
+; CPU/HazardUnitM.v                     ;
+; CPU/Registers.v                       ;
+; Cop0/COP0RegistersMULTI.v             ;
+; Cop0/COP0RegistersUNI.v               ;
+; Cop1/FPALUControl.v                   ;
+; Cop1/FPURegisters.v                   ;
+; Cop1/FlagBank.v                       ;
+; Cop1/abs_s.v                          ;
+; Cop1/add_sub.qip                      ;
+; Cop1/add_sub.v                        ;
+; Cop1/add_sub_bb.v                     ;
+; Cop1/c_comp.v                         ;
+; Cop1/cvt_s_w.v                        ;
+; Cop1/cvt_w_s.v                        ;
+; Cop1/div_s.hex                        ;
+; Cop1/div_s.v                          ;
+; Cop1/mul_s.v                          ;
+; Cop1/sqrt_s.v                         ;
+; Cop1/ula_fp.v                         ;
+; Display7/Display7_Interface.v         ;
+; Display7/decoder7.v                   ;
+; IrDA/IrDA_Interface.v                 ;
+; IrDA/IrDA_clk.v                       ;
+; IrDA/IrDA_decoder.v                   ;
+; IrDA/IrDA_parameters.v                ;
+; IrDA/IrDA_receiver.v                  ;
+; IrDA/IrDA_transmitter.v               ;
+; MIPS.qpf                              ;
+; Memoria/BootBlock.qip                 ;
+; Memoria/BootBlock.v                   ;
+; Memoria/CodeMemory_Interface.v        ;
+; Memoria/DataMemory_Interface.v        ;
+; Memoria/MemLoad.v                     ;
+; Memoria/MemStore.v                    ;
+; Memoria/Memory_Interface.v            ;
+; Memoria/SysCodeBlock.qip              ;
+; Memoria/SysCodeBlock.v                ;
+; Memoria/SysDataBlock.qip              ;
+; Memoria/SysDataBlock.v                ;
+; Memoria/UserCodeBlock.qip             ;
+; Memoria/UserCodeBlock.v               ;
+; Memoria/UserDataBlock.qip             ;
+; Memoria/UserDataBlock.v               ;
+; PS2/Altera_UP_PS2_Command_Out.v       ;
+; PS2/Altera_UP_PS2_Data_In.v           ;
+; PS2/MousePS2_Interface.v              ;
+; PS2/PS2_Controller.v                  ;
+; PS2/TecladoPS2_Interface.v            ;
+; PS2/keyboard.v                        ;
+; PS2/keyscan.v                         ;
+; PS2/mouse_hugo.v                      ;
+; PS2/scan2ascii.v                      ;
+; PS2/tecladoPS2.v                      ;
+; Parametros.v                          ;
+; Sintetizador/Channel.sv               ;
+; Sintetizador/Envelope.sv              ;
+; Sintetizador/Filter.sv                ;
+; Sintetizador/Note.sv                  ;
+; Sintetizador/NoteTable.v              ;
+; Sintetizador/Oscillator.sv            ;
+; Sintetizador/SineCalculator.sv        ;
+; Sintetizador/SineTable.v              ;
+; Sintetizador/Sintetizador.v           ;
+; Sintetizador/Sintetizador_Interface.v ;
+; Sintetizador/SynthControl.v           ;
+; Sintetizador/Synthesizer.sv           ;
+; Sintetizador/SyscallSynthControl.sv   ;
+; Sintetizador/notes.mif                ;
+; Sintetizador/sine.mif                 ;
+; Tempo/Break_Interface.v               ;
+; Tempo/CLOCK_Interface.v               ;
+; Tempo/PLL_Main.cmp                    ;
+; Tempo/PLL_Main.qip                    ;
+; Tempo/PLL_Main.v                      ;
+; Tempo/PLL_Main/PLL_Main_0002.qip      ;
+; Tempo/PLL_Main/PLL_Main_0002.v        ;
+; Tempo/breaker.qip                     ;
+; Tempo/breaker.v                       ;
+; Tempo/breaker_bb.v                    ;
+; Tempo/mono.v                          ;
+; Tempo/oneshot.v                       ;
+; Tempo/reset_delay.v                   ;
+; Testes/CLOCK_Interface.vwf            ;
+; Testes/TopDE_tb.v                     ;
+; Testes/Waveform1.vwf                  ;
+; Testes/Waveform2.vwf                  ;
+; TopDE.qsf                             ;
+; TopDE.v                               ;
+; VGA/HexFont.v                         ;
+; VGA/MemoryVGA.qip                     ;
+; VGA/MemoryVGA.v                       ;
+; VGA/RegDisplay.v                      ;
+; VGA/VGA_Audio_PLL.v                   ;
+; VGA/VGA_Interface.v                   ;
+; VGA/VgaAdapter.v                      ;
+; VGA/VgaPll.cmp                        ;
+; VGA/VgaPll.qip                        ;
+; VGA/VgaPll.v                          ;
+; VGA/VgaPll/VgaPll_0002.qip            ;
+; VGA/VgaPll/VgaPll_0002.v              ;
+; VGA/display.mif                       ;
+; VGA/gba.mif                           ;
+; assignment_defaults.qdf               ;
+; bootloader.mif                        ;
+; de1_data.mif                          ;
+; de1_kdata.mif                         ;
+; de1_ktext.mif                         ;
+; de1_text.mif                          ;
+; lfsr/LFSR_word.v                      ;
+; lfsr/lfsr_interface.v                 ;
+; output_files/Chain2.cdf               ;
+; stopwatch/STOPWATCH_Interface.v       ;
+; stopwatch/Stopwatch_divider_clk.v     ;
++---------------------------------------+
+
+

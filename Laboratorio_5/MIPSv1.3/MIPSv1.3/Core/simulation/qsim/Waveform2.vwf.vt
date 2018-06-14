@@ -1,0 +1,330 @@
+// Copyright (C) 2017  Intel Corporation. All rights reserved.
+// Your use of Intel Corporation's design tools, logic functions 
+// and other software and tools, and its AMPP partner logic 
+// functions, and any output files from any of the foregoing 
+// (including device programming or simulation files), and any 
+// associated documentation or information are expressly subject 
+// to the terms and conditions of the Intel Program License 
+// Subscription Agreement, the Intel Quartus Prime License Agreement,
+// the Intel FPGA IP License Agreement, or other applicable license
+// agreement, including, without limitation, that your use is for
+// the sole purpose of programming logic devices manufactured by
+// Intel and sold by Intel or its authorized distributors.  Please
+// refer to the applicable agreement for further details.
+
+// *****************************************************************************
+// This file contains a Verilog test bench with test vectors .The test vectors  
+// are exported from a vector file in the Quartus Waveform Editor and apply to  
+// the top level entity of the current Quartus project .The user can use this   
+// testbench to simulate his design using a third-party simulation tool .       
+// *****************************************************************************
+// Generated on "06/13/2018 14:46:21"
+                                                                                
+// Verilog Test Bench (with test vectors) for design :                          TopDE
+// 
+// Simulation tool : 3rd Party
+// 
+
+`timescale 1 ps/ 1 ps
+module TopDE_vlg_vec_tst();
+// constants                                           
+// general purpose registers
+reg treg_ADC_CS_N;
+reg ADC_DOUT;
+reg AUD_ADCDAT;
+reg treg_AUD_ADCLRCK;
+reg treg_AUD_BCLK;
+reg treg_AUD_DACLRCK;
+reg CLOCK2_50;
+reg CLOCK3_50;
+reg CLOCK4_50;
+reg CLOCK_50;
+reg [15:0] treg_DRAM_DQ;
+reg treg_FPGA_I2C_SDAT;
+reg [35:0] treg_GPIO_0;
+reg [35:0] treg_GPIO_1;
+reg IRDA_RXD;
+reg [3:0] KEY;
+reg treg_PS2_CLK;
+reg treg_PS2_CLK2;
+reg treg_PS2_DAT;
+reg treg_PS2_DAT2;
+reg [4:0] RegDispSelect;
+reg [9:0] SW;
+reg TD_CLK27;
+reg [7:0] TD_DATA;
+reg TD_HS;
+reg TD_VS;
+// wires                                               
+wire ADC_CS_N;
+wire ADC_DIN;
+wire ADC_SCLK;
+wire AUD_ADCLRCK;
+wire AUD_BCLK;
+wire AUD_DACDAT;
+wire AUD_DACLRCK;
+wire AUD_XCK;
+wire [31:0] BR_Escrita;
+wire [31:0] BR_Leitura1;
+wire [31:0] BR_Leitura2;
+wire [12:0] DRAM_ADDR;
+wire [1:0] DRAM_BA;
+wire DRAM_CAS_N;
+wire DRAM_CKE;
+wire DRAM_CLK;
+wire DRAM_CS_N;
+wire [15:0] DRAM_DQ;
+wire DRAM_LDQM;
+wire DRAM_RAS_N;
+wire DRAM_UDQM;
+wire DRAM_WE_N;
+wire [31:0] Debug;
+wire [6:0] Estado;
+wire FAN_CTRL;
+wire FPGA_I2C_SCLK;
+wire FPGA_I2C_SDAT;
+wire [7:0] FlagsFPU;
+wire [35:0] GPIO_0;
+wire [35:0] GPIO_1;
+wire [6:0] HEX0;
+wire [6:0] HEX1;
+wire [6:0] HEX2;
+wire [6:0] HEX3;
+wire [6:0] HEX4;
+wire [6:0] HEX5;
+wire IRDA_TXD;
+wire [31:0] Instrucao;
+wire [9:0] LEDR;
+wire [3:0] MemD_ByteEnable;
+wire [31:0] MemD_DadoEscrita;
+wire [31:0] MemD_DadoLeitura;
+wire [31:0] MemD_Endereco;
+wire [31:0] PC;
+wire PS2_CLK;
+wire PS2_CLK2;
+wire PS2_DAT;
+wire PS2_DAT2;
+wire [31:0] RegDisp;
+wire [31:0] RegDispFPU;
+wire [31:0] Saida_ULA;
+wire TD_RESET_N;
+wire [7:0] VGA_B;
+wire VGA_BLANK_N;
+wire VGA_CLK;
+wire [7:0] VGA_G;
+wire VGA_HS;
+wire [7:0] VGA_R;
+wire VGA_SYNC_N;
+wire VGA_VS;
+
+// assign statements (if any)                          
+assign ADC_CS_N = treg_ADC_CS_N;
+assign AUD_ADCLRCK = treg_AUD_ADCLRCK;
+assign AUD_BCLK = treg_AUD_BCLK;
+assign AUD_DACLRCK = treg_AUD_DACLRCK;
+assign DRAM_DQ = treg_DRAM_DQ;
+assign FPGA_I2C_SDAT = treg_FPGA_I2C_SDAT;
+assign GPIO_0 = treg_GPIO_0;
+assign GPIO_1 = treg_GPIO_1;
+assign PS2_CLK = treg_PS2_CLK;
+assign PS2_CLK2 = treg_PS2_CLK2;
+assign PS2_DAT = treg_PS2_DAT;
+assign PS2_DAT2 = treg_PS2_DAT2;
+TopDE i1 (
+// port map - connection between master ports and signals/registers   
+	.ADC_CS_N(ADC_CS_N),
+	.ADC_DIN(ADC_DIN),
+	.ADC_DOUT(ADC_DOUT),
+	.ADC_SCLK(ADC_SCLK),
+	.AUD_ADCDAT(AUD_ADCDAT),
+	.AUD_ADCLRCK(AUD_ADCLRCK),
+	.AUD_BCLK(AUD_BCLK),
+	.AUD_DACDAT(AUD_DACDAT),
+	.AUD_DACLRCK(AUD_DACLRCK),
+	.AUD_XCK(AUD_XCK),
+	.BR_Escrita(BR_Escrita),
+	.BR_Leitura1(BR_Leitura1),
+	.BR_Leitura2(BR_Leitura2),
+	.CLOCK2_50(CLOCK2_50),
+	.CLOCK3_50(CLOCK3_50),
+	.CLOCK4_50(CLOCK4_50),
+	.CLOCK_50(CLOCK_50),
+	.DRAM_ADDR(DRAM_ADDR),
+	.DRAM_BA(DRAM_BA),
+	.DRAM_CAS_N(DRAM_CAS_N),
+	.DRAM_CKE(DRAM_CKE),
+	.DRAM_CLK(DRAM_CLK),
+	.DRAM_CS_N(DRAM_CS_N),
+	.DRAM_DQ(DRAM_DQ),
+	.DRAM_LDQM(DRAM_LDQM),
+	.DRAM_RAS_N(DRAM_RAS_N),
+	.DRAM_UDQM(DRAM_UDQM),
+	.DRAM_WE_N(DRAM_WE_N),
+	.Debug(Debug),
+	.Estado(Estado),
+	.FAN_CTRL(FAN_CTRL),
+	.FPGA_I2C_SCLK(FPGA_I2C_SCLK),
+	.FPGA_I2C_SDAT(FPGA_I2C_SDAT),
+	.FlagsFPU(FlagsFPU),
+	.GPIO_0(GPIO_0),
+	.GPIO_1(GPIO_1),
+	.HEX0(HEX0),
+	.HEX1(HEX1),
+	.HEX2(HEX2),
+	.HEX3(HEX3),
+	.HEX4(HEX4),
+	.HEX5(HEX5),
+	.IRDA_RXD(IRDA_RXD),
+	.IRDA_TXD(IRDA_TXD),
+	.Instrucao(Instrucao),
+	.KEY(KEY),
+	.LEDR(LEDR),
+	.MemD_ByteEnable(MemD_ByteEnable),
+	.MemD_DadoEscrita(MemD_DadoEscrita),
+	.MemD_DadoLeitura(MemD_DadoLeitura),
+	.MemD_Endereco(MemD_Endereco),
+	.PC(PC),
+	.PS2_CLK(PS2_CLK),
+	.PS2_CLK2(PS2_CLK2),
+	.PS2_DAT(PS2_DAT),
+	.PS2_DAT2(PS2_DAT2),
+	.RegDisp(RegDisp),
+	.RegDispFPU(RegDispFPU),
+	.RegDispSelect(RegDispSelect),
+	.SW(SW),
+	.Saida_ULA(Saida_ULA),
+	.TD_CLK27(TD_CLK27),
+	.TD_DATA(TD_DATA),
+	.TD_HS(TD_HS),
+	.TD_RESET_N(TD_RESET_N),
+	.TD_VS(TD_VS),
+	.VGA_B(VGA_B),
+	.VGA_BLANK_N(VGA_BLANK_N),
+	.VGA_CLK(VGA_CLK),
+	.VGA_G(VGA_G),
+	.VGA_HS(VGA_HS),
+	.VGA_R(VGA_R),
+	.VGA_SYNC_N(VGA_SYNC_N),
+	.VGA_VS(VGA_VS)
+);
+initial 
+begin 
+#20000000 $finish;
+end 
+
+// CLOCK2_50
+always
+begin
+	CLOCK2_50 = 1'b0;
+	CLOCK2_50 = #10000 1'b1;
+	#10000;
+end 
+
+// CLOCK_50
+always
+begin
+	CLOCK_50 = 1'b0;
+	CLOCK_50 = #10000 1'b1;
+	#10000;
+end 
+// SW[ 9 ]
+initial
+begin
+	SW[9] = 1'b0;
+end 
+// SW[ 8 ]
+initial
+begin
+	SW[8] = 1'b0;
+end 
+// SW[ 7 ]
+initial
+begin
+	SW[7] = 1'b0;
+end 
+// SW[ 6 ]
+initial
+begin
+	SW[6] = 1'b0;
+end 
+// SW[ 5 ]
+initial
+begin
+	SW[5] = 1'b0;
+end 
+// SW[ 4 ]
+initial
+begin
+	SW[4] = 1'b0;
+end 
+// SW[ 3 ]
+initial
+begin
+	SW[3] = 1'b0;
+end 
+// SW[ 2 ]
+initial
+begin
+	SW[2] = 1'b0;
+end 
+// SW[ 1 ]
+initial
+begin
+	SW[1] = 1'b1;
+end 
+// SW[ 0 ]
+initial
+begin
+	SW[0] = 1'b0;
+end 
+// KEY[ 3 ]
+initial
+begin
+	KEY[3] = 1'b1;
+end 
+// KEY[ 2 ]
+initial
+begin
+	KEY[2] = 1'b1;
+	KEY[2] = #20000 1'b0;
+	KEY[2] = #50000 1'b1;
+end 
+// KEY[ 1 ]
+initial
+begin
+	KEY[1] = 1'b1;
+	KEY[1] = #20000 1'b0;
+	KEY[1] = #50000 1'b1;
+end 
+// KEY[ 0 ]
+initial
+begin
+	KEY[0] = 1'b1;
+end 
+// RegDispSelect[ 4 ]
+initial
+begin
+	RegDispSelect[4] = 1'b0;
+end 
+// RegDispSelect[ 3 ]
+initial
+begin
+	RegDispSelect[3] = 1'b1;
+end 
+// RegDispSelect[ 2 ]
+initial
+begin
+	RegDispSelect[2] = 1'b0;
+end 
+// RegDispSelect[ 1 ]
+initial
+begin
+	RegDispSelect[1] = 1'b0;
+end 
+// RegDispSelect[ 0 ]
+initial
+begin
+	RegDispSelect[0] = 1'b0;
+end 
+endmodule
+

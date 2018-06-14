@@ -1,0 +1,160 @@
+Quartus Prime Archive log --	C:/Users/lamar/Dropbox/kiko/Disciplinas/UnB/OAC/2018-1/MIPSv1.2/Core.qarlog
+
+Archive:	C:/Users/lamar/Dropbox/kiko/Disciplinas/UnB/OAC/2018-1/MIPSv1.2/Core.qar
+Date:		Sun Jun 10 22:06:18 2018
+Quartus Prime		17.1.0 Build 590 10/25/2017 SJ Lite Edition
+
+	=========== Files Selected: ===========
+C:/Users/lamar/Dropbox/kiko/Disciplinas/UnB/OAC/2018-1/MIPSv1.2/Core/AudioCODEC/AudioCODEC_Interface.v
+C:/Users/lamar/Dropbox/kiko/Disciplinas/UnB/OAC/2018-1/MIPSv1.2/Core/AudioCODEC/AudioVideo_PLL.v
+C:/Users/lamar/Dropbox/kiko/Disciplinas/UnB/OAC/2018-1/MIPSv1.2/Core/AudioCODEC/I2C_AV_Config.v
+C:/Users/lamar/Dropbox/kiko/Disciplinas/UnB/OAC/2018-1/MIPSv1.2/Core/AudioCODEC/I2C_Controller.v
+C:/Users/lamar/Dropbox/kiko/Disciplinas/UnB/OAC/2018-1/MIPSv1.2/Core/AudioCODEC/audio_clock.v
+C:/Users/lamar/Dropbox/kiko/Disciplinas/UnB/OAC/2018-1/MIPSv1.2/Core/AudioCODEC/audio_converter.v
+C:/Users/lamar/Dropbox/kiko/Disciplinas/UnB/OAC/2018-1/MIPSv1.2/Core/CPU/ALU.v
+C:/Users/lamar/Dropbox/kiko/Disciplinas/UnB/OAC/2018-1/MIPSv1.2/Core/CPU/ALUControl.v
+C:/Users/lamar/Dropbox/kiko/Disciplinas/UnB/OAC/2018-1/MIPSv1.2/Core/CPU/Branch_PIPEM.v
+C:/Users/lamar/Dropbox/kiko/Disciplinas/UnB/OAC/2018-1/MIPSv1.2/Core/CPU/CPU.v
+C:/Users/lamar/Dropbox/kiko/Disciplinas/UnB/OAC/2018-1/MIPSv1.2/Core/CPU/Control_MULTI.v
+C:/Users/lamar/Dropbox/kiko/Disciplinas/UnB/OAC/2018-1/MIPSv1.2/Core/CPU/Control_PIPEM.v
+C:/Users/lamar/Dropbox/kiko/Disciplinas/UnB/OAC/2018-1/MIPSv1.2/Core/CPU/Control_UNI.v
+C:/Users/lamar/Dropbox/kiko/Disciplinas/UnB/OAC/2018-1/MIPSv1.2/Core/CPU/Datapath_MULTI.v
+C:/Users/lamar/Dropbox/kiko/Disciplinas/UnB/OAC/2018-1/MIPSv1.2/Core/CPU/Datapath_PIPEM.v
+C:/Users/lamar/Dropbox/kiko/Disciplinas/UnB/OAC/2018-1/MIPSv1.2/Core/CPU/Datapath_UNI.v
+C:/Users/lamar/Dropbox/kiko/Disciplinas/UnB/OAC/2018-1/MIPSv1.2/Core/CPU/ForwardUnitM.v
+C:/Users/lamar/Dropbox/kiko/Disciplinas/UnB/OAC/2018-1/MIPSv1.2/Core/CPU/HazardUnitM.v
+C:/Users/lamar/Dropbox/kiko/Disciplinas/UnB/OAC/2018-1/MIPSv1.2/Core/CPU/Registers.v
+C:/Users/lamar/Dropbox/kiko/Disciplinas/UnB/OAC/2018-1/MIPSv1.2/Core/Cop0/COP0RegistersMULTI.v
+C:/Users/lamar/Dropbox/kiko/Disciplinas/UnB/OAC/2018-1/MIPSv1.2/Core/Cop0/COP0RegistersUNI.v
+C:/Users/lamar/Dropbox/kiko/Disciplinas/UnB/OAC/2018-1/MIPSv1.2/Core/Cop1/FPALUControl.v
+C:/Users/lamar/Dropbox/kiko/Disciplinas/UnB/OAC/2018-1/MIPSv1.2/Core/Cop1/FPURegisters.v
+C:/Users/lamar/Dropbox/kiko/Disciplinas/UnB/OAC/2018-1/MIPSv1.2/Core/Cop1/FlagBank.v
+C:/Users/lamar/Dropbox/kiko/Disciplinas/UnB/OAC/2018-1/MIPSv1.2/Core/Cop1/abs_s.v
+C:/Users/lamar/Dropbox/kiko/Disciplinas/UnB/OAC/2018-1/MIPSv1.2/Core/Cop1/add_sub.qip
+C:/Users/lamar/Dropbox/kiko/Disciplinas/UnB/OAC/2018-1/MIPSv1.2/Core/Cop1/add_sub.v
+C:/Users/lamar/Dropbox/kiko/Disciplinas/UnB/OAC/2018-1/MIPSv1.2/Core/Cop1/add_sub_bb.v
+C:/Users/lamar/Dropbox/kiko/Disciplinas/UnB/OAC/2018-1/MIPSv1.2/Core/Cop1/c_comp.v
+C:/Users/lamar/Dropbox/kiko/Disciplinas/UnB/OAC/2018-1/MIPSv1.2/Core/Cop1/cvt_s_w.v
+C:/Users/lamar/Dropbox/kiko/Disciplinas/UnB/OAC/2018-1/MIPSv1.2/Core/Cop1/cvt_w_s.v
+C:/Users/lamar/Dropbox/kiko/Disciplinas/UnB/OAC/2018-1/MIPSv1.2/Core/Cop1/div_s.hex
+C:/Users/lamar/Dropbox/kiko/Disciplinas/UnB/OAC/2018-1/MIPSv1.2/Core/Cop1/div_s.v
+C:/Users/lamar/Dropbox/kiko/Disciplinas/UnB/OAC/2018-1/MIPSv1.2/Core/Cop1/mul_s.v
+C:/Users/lamar/Dropbox/kiko/Disciplinas/UnB/OAC/2018-1/MIPSv1.2/Core/Cop1/sqrt_s.v
+C:/Users/lamar/Dropbox/kiko/Disciplinas/UnB/OAC/2018-1/MIPSv1.2/Core/Cop1/ula_fp.v
+C:/Users/lamar/Dropbox/kiko/Disciplinas/UnB/OAC/2018-1/MIPSv1.2/Core/Display7/Display7_Interface.v
+C:/Users/lamar/Dropbox/kiko/Disciplinas/UnB/OAC/2018-1/MIPSv1.2/Core/Display7/decoder7.v
+C:/Users/lamar/Dropbox/kiko/Disciplinas/UnB/OAC/2018-1/MIPSv1.2/Core/IrDA/IrDA_Interface.v
+C:/Users/lamar/Dropbox/kiko/Disciplinas/UnB/OAC/2018-1/MIPSv1.2/Core/IrDA/IrDA_clk.v
+C:/Users/lamar/Dropbox/kiko/Disciplinas/UnB/OAC/2018-1/MIPSv1.2/Core/IrDA/IrDA_decoder.v
+C:/Users/lamar/Dropbox/kiko/Disciplinas/UnB/OAC/2018-1/MIPSv1.2/Core/IrDA/IrDA_parameters.v
+C:/Users/lamar/Dropbox/kiko/Disciplinas/UnB/OAC/2018-1/MIPSv1.2/Core/IrDA/IrDA_receiver.v
+C:/Users/lamar/Dropbox/kiko/Disciplinas/UnB/OAC/2018-1/MIPSv1.2/Core/IrDA/IrDA_transmitter.v
+C:/Users/lamar/Dropbox/kiko/Disciplinas/UnB/OAC/2018-1/MIPSv1.2/Core/MIPS.qpf
+C:/Users/lamar/Dropbox/kiko/Disciplinas/UnB/OAC/2018-1/MIPSv1.2/Core/Memoria/BootBlock.qip
+C:/Users/lamar/Dropbox/kiko/Disciplinas/UnB/OAC/2018-1/MIPSv1.2/Core/Memoria/BootBlock.v
+C:/Users/lamar/Dropbox/kiko/Disciplinas/UnB/OAC/2018-1/MIPSv1.2/Core/Memoria/CodeMemory_Interface.v
+C:/Users/lamar/Dropbox/kiko/Disciplinas/UnB/OAC/2018-1/MIPSv1.2/Core/Memoria/DataMemory_Interface.v
+C:/Users/lamar/Dropbox/kiko/Disciplinas/UnB/OAC/2018-1/MIPSv1.2/Core/Memoria/MemLoad.v
+C:/Users/lamar/Dropbox/kiko/Disciplinas/UnB/OAC/2018-1/MIPSv1.2/Core/Memoria/MemStore.v
+C:/Users/lamar/Dropbox/kiko/Disciplinas/UnB/OAC/2018-1/MIPSv1.2/Core/Memoria/Memory_Interface.v
+C:/Users/lamar/Dropbox/kiko/Disciplinas/UnB/OAC/2018-1/MIPSv1.2/Core/Memoria/SysCodeBlock.qip
+C:/Users/lamar/Dropbox/kiko/Disciplinas/UnB/OAC/2018-1/MIPSv1.2/Core/Memoria/SysCodeBlock.v
+C:/Users/lamar/Dropbox/kiko/Disciplinas/UnB/OAC/2018-1/MIPSv1.2/Core/Memoria/SysDataBlock.qip
+C:/Users/lamar/Dropbox/kiko/Disciplinas/UnB/OAC/2018-1/MIPSv1.2/Core/Memoria/SysDataBlock.v
+C:/Users/lamar/Dropbox/kiko/Disciplinas/UnB/OAC/2018-1/MIPSv1.2/Core/Memoria/UserCodeBlock.qip
+C:/Users/lamar/Dropbox/kiko/Disciplinas/UnB/OAC/2018-1/MIPSv1.2/Core/Memoria/UserCodeBlock.v
+C:/Users/lamar/Dropbox/kiko/Disciplinas/UnB/OAC/2018-1/MIPSv1.2/Core/Memoria/UserDataBlock.qip
+C:/Users/lamar/Dropbox/kiko/Disciplinas/UnB/OAC/2018-1/MIPSv1.2/Core/Memoria/UserDataBlock.v
+C:/Users/lamar/Dropbox/kiko/Disciplinas/UnB/OAC/2018-1/MIPSv1.2/Core/PS2/Altera_UP_PS2_Command_Out.v
+C:/Users/lamar/Dropbox/kiko/Disciplinas/UnB/OAC/2018-1/MIPSv1.2/Core/PS2/Altera_UP_PS2_Data_In.v
+C:/Users/lamar/Dropbox/kiko/Disciplinas/UnB/OAC/2018-1/MIPSv1.2/Core/PS2/MousePS2_Interface.v
+C:/Users/lamar/Dropbox/kiko/Disciplinas/UnB/OAC/2018-1/MIPSv1.2/Core/PS2/PS2_Controller.v
+C:/Users/lamar/Dropbox/kiko/Disciplinas/UnB/OAC/2018-1/MIPSv1.2/Core/PS2/TecladoPS2_Interface.v
+C:/Users/lamar/Dropbox/kiko/Disciplinas/UnB/OAC/2018-1/MIPSv1.2/Core/PS2/keyboard.v
+C:/Users/lamar/Dropbox/kiko/Disciplinas/UnB/OAC/2018-1/MIPSv1.2/Core/PS2/keyscan.v
+C:/Users/lamar/Dropbox/kiko/Disciplinas/UnB/OAC/2018-1/MIPSv1.2/Core/PS2/mouse_hugo.v
+C:/Users/lamar/Dropbox/kiko/Disciplinas/UnB/OAC/2018-1/MIPSv1.2/Core/PS2/scan2ascii.v
+C:/Users/lamar/Dropbox/kiko/Disciplinas/UnB/OAC/2018-1/MIPSv1.2/Core/PS2/tecladoPS2.v
+C:/Users/lamar/Dropbox/kiko/Disciplinas/UnB/OAC/2018-1/MIPSv1.2/Core/Parametros.v
+C:/Users/lamar/Dropbox/kiko/Disciplinas/UnB/OAC/2018-1/MIPSv1.2/Core/Sintetizador/Channel.sv
+C:/Users/lamar/Dropbox/kiko/Disciplinas/UnB/OAC/2018-1/MIPSv1.2/Core/Sintetizador/Envelope.sv
+C:/Users/lamar/Dropbox/kiko/Disciplinas/UnB/OAC/2018-1/MIPSv1.2/Core/Sintetizador/Filter.sv
+C:/Users/lamar/Dropbox/kiko/Disciplinas/UnB/OAC/2018-1/MIPSv1.2/Core/Sintetizador/Note.sv
+C:/Users/lamar/Dropbox/kiko/Disciplinas/UnB/OAC/2018-1/MIPSv1.2/Core/Sintetizador/NoteTable.v
+C:/Users/lamar/Dropbox/kiko/Disciplinas/UnB/OAC/2018-1/MIPSv1.2/Core/Sintetizador/Oscillator.sv
+C:/Users/lamar/Dropbox/kiko/Disciplinas/UnB/OAC/2018-1/MIPSv1.2/Core/Sintetizador/SineCalculator.sv
+C:/Users/lamar/Dropbox/kiko/Disciplinas/UnB/OAC/2018-1/MIPSv1.2/Core/Sintetizador/SineTable.v
+C:/Users/lamar/Dropbox/kiko/Disciplinas/UnB/OAC/2018-1/MIPSv1.2/Core/Sintetizador/Sintetizador.v
+C:/Users/lamar/Dropbox/kiko/Disciplinas/UnB/OAC/2018-1/MIPSv1.2/Core/Sintetizador/Sintetizador_Interface.v
+C:/Users/lamar/Dropbox/kiko/Disciplinas/UnB/OAC/2018-1/MIPSv1.2/Core/Sintetizador/SynthControl.v
+C:/Users/lamar/Dropbox/kiko/Disciplinas/UnB/OAC/2018-1/MIPSv1.2/Core/Sintetizador/Synthesizer.sv
+C:/Users/lamar/Dropbox/kiko/Disciplinas/UnB/OAC/2018-1/MIPSv1.2/Core/Sintetizador/SyscallSynthControl.sv
+C:/Users/lamar/Dropbox/kiko/Disciplinas/UnB/OAC/2018-1/MIPSv1.2/Core/Sintetizador/notes.mif
+C:/Users/lamar/Dropbox/kiko/Disciplinas/UnB/OAC/2018-1/MIPSv1.2/Core/Sintetizador/sine.mif
+C:/Users/lamar/Dropbox/kiko/Disciplinas/UnB/OAC/2018-1/MIPSv1.2/Core/Tempo/Break_Interface.v
+C:/Users/lamar/Dropbox/kiko/Disciplinas/UnB/OAC/2018-1/MIPSv1.2/Core/Tempo/CLOCK_Interface.v
+C:/Users/lamar/Dropbox/kiko/Disciplinas/UnB/OAC/2018-1/MIPSv1.2/Core/Tempo/PLL_Main.cmp
+C:/Users/lamar/Dropbox/kiko/Disciplinas/UnB/OAC/2018-1/MIPSv1.2/Core/Tempo/PLL_Main.qip
+C:/Users/lamar/Dropbox/kiko/Disciplinas/UnB/OAC/2018-1/MIPSv1.2/Core/Tempo/PLL_Main.v
+C:/Users/lamar/Dropbox/kiko/Disciplinas/UnB/OAC/2018-1/MIPSv1.2/Core/Tempo/PLL_Main/PLL_Main_0002.qip
+C:/Users/lamar/Dropbox/kiko/Disciplinas/UnB/OAC/2018-1/MIPSv1.2/Core/Tempo/PLL_Main/PLL_Main_0002.v
+C:/Users/lamar/Dropbox/kiko/Disciplinas/UnB/OAC/2018-1/MIPSv1.2/Core/Tempo/breaker.qip
+C:/Users/lamar/Dropbox/kiko/Disciplinas/UnB/OAC/2018-1/MIPSv1.2/Core/Tempo/breaker.v
+C:/Users/lamar/Dropbox/kiko/Disciplinas/UnB/OAC/2018-1/MIPSv1.2/Core/Tempo/breaker_bb.v
+C:/Users/lamar/Dropbox/kiko/Disciplinas/UnB/OAC/2018-1/MIPSv1.2/Core/Tempo/mono.v
+C:/Users/lamar/Dropbox/kiko/Disciplinas/UnB/OAC/2018-1/MIPSv1.2/Core/Tempo/oneshot.v
+C:/Users/lamar/Dropbox/kiko/Disciplinas/UnB/OAC/2018-1/MIPSv1.2/Core/Tempo/reset_delay.v
+C:/Users/lamar/Dropbox/kiko/Disciplinas/UnB/OAC/2018-1/MIPSv1.2/Core/Testes/CLOCK_Interface.vwf
+C:/Users/lamar/Dropbox/kiko/Disciplinas/UnB/OAC/2018-1/MIPSv1.2/Core/Testes/TopDE_tb.v
+C:/Users/lamar/Dropbox/kiko/Disciplinas/UnB/OAC/2018-1/MIPSv1.2/Core/Testes/Waveform1.vwf
+C:/Users/lamar/Dropbox/kiko/Disciplinas/UnB/OAC/2018-1/MIPSv1.2/Core/Testes/Waveform2.vwf
+C:/Users/lamar/Dropbox/kiko/Disciplinas/UnB/OAC/2018-1/MIPSv1.2/Core/TopDE.qsf
+C:/Users/lamar/Dropbox/kiko/Disciplinas/UnB/OAC/2018-1/MIPSv1.2/Core/TopDE.v
+C:/Users/lamar/Dropbox/kiko/Disciplinas/UnB/OAC/2018-1/MIPSv1.2/Core/VGA/HexFont.v
+C:/Users/lamar/Dropbox/kiko/Disciplinas/UnB/OAC/2018-1/MIPSv1.2/Core/VGA/MemoryVGA.qip
+C:/Users/lamar/Dropbox/kiko/Disciplinas/UnB/OAC/2018-1/MIPSv1.2/Core/VGA/MemoryVGA.v
+C:/Users/lamar/Dropbox/kiko/Disciplinas/UnB/OAC/2018-1/MIPSv1.2/Core/VGA/RegDisplay.v
+C:/Users/lamar/Dropbox/kiko/Disciplinas/UnB/OAC/2018-1/MIPSv1.2/Core/VGA/VGA_Audio_PLL.v
+C:/Users/lamar/Dropbox/kiko/Disciplinas/UnB/OAC/2018-1/MIPSv1.2/Core/VGA/VGA_Interface.v
+C:/Users/lamar/Dropbox/kiko/Disciplinas/UnB/OAC/2018-1/MIPSv1.2/Core/VGA/VgaAdapter.v
+C:/Users/lamar/Dropbox/kiko/Disciplinas/UnB/OAC/2018-1/MIPSv1.2/Core/VGA/VgaPll.cmp
+C:/Users/lamar/Dropbox/kiko/Disciplinas/UnB/OAC/2018-1/MIPSv1.2/Core/VGA/VgaPll.qip
+C:/Users/lamar/Dropbox/kiko/Disciplinas/UnB/OAC/2018-1/MIPSv1.2/Core/VGA/VgaPll.v
+C:/Users/lamar/Dropbox/kiko/Disciplinas/UnB/OAC/2018-1/MIPSv1.2/Core/VGA/VgaPll/VgaPll_0002.qip
+C:/Users/lamar/Dropbox/kiko/Disciplinas/UnB/OAC/2018-1/MIPSv1.2/Core/VGA/VgaPll/VgaPll_0002.v
+C:/Users/lamar/Dropbox/kiko/Disciplinas/UnB/OAC/2018-1/MIPSv1.2/Core/VGA/display.mif
+C:/Users/lamar/Dropbox/kiko/Disciplinas/UnB/OAC/2018-1/MIPSv1.2/Core/VGA/gba.mif
+C:/Users/lamar/Dropbox/kiko/Disciplinas/UnB/OAC/2018-1/MIPSv1.2/Core/assignment_defaults.qdf
+C:/Users/lamar/Dropbox/kiko/Disciplinas/UnB/OAC/2018-1/MIPSv1.2/Core/bootloader.mif
+C:/Users/lamar/Dropbox/kiko/Disciplinas/UnB/OAC/2018-1/MIPSv1.2/Core/db/TopDE.cmp.rdb
+C:/Users/lamar/Dropbox/kiko/Disciplinas/UnB/OAC/2018-1/MIPSv1.2/Core/de1_data.mif
+C:/Users/lamar/Dropbox/kiko/Disciplinas/UnB/OAC/2018-1/MIPSv1.2/Core/de1_kdata.mif
+C:/Users/lamar/Dropbox/kiko/Disciplinas/UnB/OAC/2018-1/MIPSv1.2/Core/de1_ktext.mif
+C:/Users/lamar/Dropbox/kiko/Disciplinas/UnB/OAC/2018-1/MIPSv1.2/Core/de1_text.mif
+C:/Users/lamar/Dropbox/kiko/Disciplinas/UnB/OAC/2018-1/MIPSv1.2/Core/lfsr/LFSR_word.v
+C:/Users/lamar/Dropbox/kiko/Disciplinas/UnB/OAC/2018-1/MIPSv1.2/Core/lfsr/lfsr_interface.v
+C:/Users/lamar/Dropbox/kiko/Disciplinas/UnB/OAC/2018-1/MIPSv1.2/Core/output_files/Chain2.cdf
+C:/Users/lamar/Dropbox/kiko/Disciplinas/UnB/OAC/2018-1/MIPSv1.2/Core/stopwatch/STOPWATCH_Interface.v
+C:/Users/lamar/Dropbox/kiko/Disciplinas/UnB/OAC/2018-1/MIPSv1.2/Core/stopwatch/Stopwatch_divider_clk.v
+	======= Total: 131 files to archive =======
+
+	================ Status: ===============
+All files archived successfully.
+
+
+******* Archived project restoration attempt on Sun Jun 10 22:07:08 2018
+Source archive file:	C:/Users/lamar/Dropbox/kiko/Disciplinas/UnB/OAC/2018-1/MIPSv1.2/Core.qar
+Archive was extracted into	C:/Users/lamar/Dropbox/kiko/Disciplinas/UnB/OAC/2018-1/MIPSv1.2/Core_restored/
+		 - successfully.
+
+
+******* Archived project restoration attempt on Mon Jun 11 14:33:41 2018
+Source archive file:	C:/Users/henri/TrabalhosOAC/Laboratorio_5/MIPSv1.3/MIPSv1.3/Core.qar
+Archive was extracted into	C:/Users/henri/TrabalhosOAC/Laboratorio_5/MIPSv1.3/MIPSv1.3/Core/
+		 - successfully.
+
+
+******* Archived project restoration attempt on Wed Jun 13 14:40:09 2018
+Source archive file:	C:/Users/henri/TrabalhosOAC/Laboratorio_5/MIPSv1.3/MIPSv1.3/Core.qar
+Archive was extracted into	C:/Users/henri/TrabalhosOAC/Laboratorio_5/MIPSv1.3/MIPSv1.3/Core/
+		 - successfully.
