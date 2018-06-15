@@ -54,7 +54,7 @@ assign wLigaULA_PASSADA = ULA_PASSADA;
 
 assign wBRReadA		= wReadData1;
 assign wBRReadB		= wReadData2;
-assign wBRWrite		= wTreatedtoRegister;
+assign wBRWrite		= wDataReg;
 assign wULA				= wALUResult;
 
 	
@@ -78,7 +78,7 @@ wire [2:0]  wFunct3;
 wire [6:0]  wFunct7;
 wire [4:0] 	wAddrRs1, wAddrRs2, wAddrRd;
 wire wCIRWrite, wCMemWrite, wCMemRead, wCIorD, wCPCWrite, wCPCWriteCond,
-	  wCRegWrite, wALUZero, wCALUSrcA;
+	  wCRegWrite, wALUZero, wCALUSrcA, wBranchControl;
 wire [1:0] 	wCALUOp, wCALUSrcB, wCMemtoReg;
 //wire [2:0] 	Store;
 wire [4:0] 	wALUControlSignal;
@@ -208,16 +208,9 @@ begin
 		PCBACK <= PC;
 
 
-		/* Conditional ALTERAR!*/
-		if (wCPCWrite || (PCWriteBEQ && wALUZero) || (PCWriteBNE && ~wALUZero)|| 
-			(FPPCWriteBc1t && wSelectedFlagValue) || (FPPCWriteBc1f && ~wSelectedFlagValue)
-			 )
-		begin
+		/* Conditional */
+		if (wCPCWrite || (wCPCWriteCond && wBranchControl))
 			PC	<= wPCMux;
-			// feito no semestre 2013/1 para implementar a deteccao de excecoes <--- ? que porra eh essa lut (COP0)
-			if (PCOriginalWrite)
-				PC_original <= wPCMux;
-		end
 
 		if (wCIRWrite)
 			IR	<= wMemReadData;
@@ -305,7 +298,7 @@ Registers RegsMULTI (
 	.iReadRegister1(wAddrRs1),
 	.iReadRegister2(wAddrRs2),
 	.iWriteRegister(wAddrRd),
-	.iWriteData(wTreatedtoRegister),
+	.iWriteData(wDataReg),
 	.iRegWrite(wCRegWrite),
 	.oReadData1(wReadData1),
 	.oReadData2(wReadData2),
@@ -314,20 +307,6 @@ Registers RegsMULTI (
 	.iVGASelect(wVGASelect),
 	.oVGARead(wVGARead)
 	);
-
-
-
-
-// Mux WriteData
-always @(*)
-	case (wCMemtoReg)
-		2'b00: wRegWriteData <= ALUOut;	//Normal mode
-		2'b01: wRegWriteData <= PC;			// $RA Jal
-		2'b10: wRegWriteData <= MDR;
-		2'b11: wRegWriteData <= wShiftImm;
-		default: wRegWriteData <= ZERO;
-	endcase
-
 
 
 /* Arithmetic Logic Unit module */
@@ -367,7 +346,31 @@ always @(*)
 		default: wALUMuxB <= 32'd0;
 	endcase
 
+// Mux MemToReg
+always @(*)
+	case (wCMemtoReg)
+		2'b00: wDataReg <= ALUOut;
+		2'b01: wDataReg <= PC;
+		2'b10: wDataReg <= wTreatedToRegister;	//dado do MDR tratado pelo memload
+		2'b11: wDataReg <= wShiftImm;
+		default: wDataReg <= ZERO;
+	endcase
 
+// Branch Control
+always @(*)
+	case (iFunct3)
+		FUN3BEQ:
+			wBranchControl <= wALUZero;
+		FUN3BNE:
+			wBranchControl <= ~wALUZero;
+		FUN3BLT,
+		FUN3BGE,
+		FUN3BLTU,
+		FUN3BGEU:
+			wBranchControl <= wALUResult[0];
+		default:
+			wBranchControl <= 1'b0;
+	endcase
 
 // Mux OrigPC
 always @(*)
@@ -378,7 +381,7 @@ always @(*)
 	endcase
 
 
-	MemStore MemStore0 (
+MemStore MemStore0 (
 	.iAlignment(wMemAddress[1:0]),
 	//.iWriteTypeF(wWriteCase),
 	.iFunct3(wFunct3),
@@ -403,8 +406,8 @@ MemLoad MemLoad0 (
 	.iAlignment(wLigaULA_PASSADA),
 	//.iLoadTypeF(wLoadCase),
 	.iFunct3(wFunct3),
-	.iData(wRegWriteData),
-	.oData(wTreatedtoRegister),
+	.iData(MDR),
+	.oData(wTreatedToRegister),
 	.oException()
 	);
 
