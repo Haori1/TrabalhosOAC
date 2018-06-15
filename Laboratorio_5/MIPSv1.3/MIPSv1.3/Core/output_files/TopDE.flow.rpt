@@ -1,5 +1,5 @@
 Flow report for TopDE
-Wed Jun 13 14:46:29 2018
+Fri Jun 15 12:25:08 2018
 Quartus Prime Version 17.1.0 Build 590 10/25/2017 SJ Lite Edition
 
 
@@ -40,7 +40,7 @@ refer to the applicable agreement for further details.
 +-------------------------------------------------------------------------------+
 ; Flow Summary                                                                  ;
 +---------------------------------+---------------------------------------------+
-; Flow Status                     ; Successful - Wed Jun 13 14:46:29 2018       ;
+; Flow Status                     ; Successful - Fri Jun 15 12:25:08 2018       ;
 ; Quartus Prime Version           ; 17.1.0 Build 590 10/25/2017 SJ Lite Edition ;
 ; Revision Name                   ; TopDE                                       ;
 ; Top-level Entity Name           ; TopDE                                       ;
@@ -67,7 +67,7 @@ refer to the applicable agreement for further details.
 +-------------------+---------------------+
 ; Option            ; Setting             ;
 +-------------------+---------------------+
-; Start date & time ; 06/13/2018 14:44:00 ;
+; Start date & time ; 06/15/2018 12:23:25 ;
 ; Main task         ; Compilation         ;
 ; Revision Name     ; TopDE               ;
 +-------------------+---------------------+
@@ -78,7 +78,7 @@ refer to the applicable agreement for further details.
 +--------------------------------------+----------------------------------------+---------------+-------------+----------------+
 ; Assignment Name                      ; Value                                  ; Default Value ; Entity Name ; Section Id     ;
 +--------------------------------------+----------------------------------------+---------------+-------------+----------------+
-; COMPILER_SIGNATURE_ID                ; 31032336015545.152891184005448         ; --            ; --          ; --             ;
+; COMPILER_SIGNATURE_ID                ; 31032336015545.152907620412408         ; --            ; --          ; --             ;
 ; EDA_DESIGN_INSTANCE_NAME             ; NA                                     ; --            ; --          ; --             ;
 ; EDA_NATIVELINK_SIMULATION_TEST_BENCH ; TopDE                                  ; --            ; --          ; eda_simulation ;
 ; EDA_NETLIST_WRITER_OUTPUT_DIR        ; simulation/qsim                        ; --            ; --          ; eda_simulation ;
@@ -113,10 +113,8 @@ refer to the applicable agreement for further details.
 +----------------------+--------------+-------------------------+---------------------+------------------------------------+
 ; Module Name          ; Elapsed Time ; Average Processors Used ; Peak Virtual Memory ; Total CPU Time (on all processors) ;
 +----------------------+--------------+-------------------------+---------------------+------------------------------------+
-; Analysis & Synthesis ; 00:01:27     ; 1.0                     ; 5137 MB             ; 00:01:52                           ;
-; EDA Netlist Writer   ; 00:00:02     ; 1.0                     ; 4794 MB             ; 00:00:03                           ;
-; EDA Netlist Writer   ; 00:00:07     ; 1.0                     ; 4934 MB             ; 00:00:06                           ;
-; Total                ; 00:01:36     ; --                      ; --                  ; 00:02:01                           ;
+; Analysis & Synthesis ; 00:01:33     ; 1.0                     ; 5112 MB             ; 00:01:54                           ;
+; Total                ; 00:01:33     ; --                      ; --                  ; 00:01:54                           ;
 +----------------------+--------------+-------------------------+---------------------+------------------------------------+
 
 
@@ -126,8 +124,6 @@ refer to the applicable agreement for further details.
 ; Module Name          ; Machine Hostname ; OS Name    ; OS Version ; Processor type ;
 +----------------------+------------------+------------+------------+----------------+
 ; Analysis & Synthesis ; Henrique-PC      ; Windows 10 ; 10.0       ; x86_64         ;
-; EDA Netlist Writer   ; Henrique-PC      ; Windows 10 ; 10.0       ; x86_64         ;
-; EDA Netlist Writer   ; Henrique-PC      ; Windows 10 ; 10.0       ; x86_64         ;
 +----------------------+------------------+------------+------------+----------------+
 
 
@@ -135,8 +131,6 @@ refer to the applicable agreement for further details.
 ; Flow Log ;
 ------------
 quartus_map --read_settings_files=on --write_settings_files=off MIPS -c TopDE
-quartus_eda --gen_testbench --tool=modelsim_oem --format=verilog --write_settings_files=off MIPS -c TopDE --vector_source=Testes/Waveform2.vwf --testbench_file=simulation/qsim/Waveform2.vwf.vt
-quartus_eda --write_settings_files=off --simulation=on --functional=on --flatten_buses=off --tool=modelsim_oem --format=verilog --output_directory=simulation/qsim/ MIPS -c TopDE
 
 
 
