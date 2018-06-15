@@ -274,4 +274,4 @@ parameter
 	  //Adicionados em 2/2016 (Grupo 2)
 	  RM				  = 6'd61,
 
-	  ERRO           = 6'd63;  // Estado de Erro
+	  ERRO           = 6'd63;  // Estado de Erro ---> boa sorte pessoal dos proximos semestre :)

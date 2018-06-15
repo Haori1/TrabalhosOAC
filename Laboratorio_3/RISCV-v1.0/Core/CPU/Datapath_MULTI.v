@@ -77,9 +77,9 @@ wire [6:0] 	wOpcode;
 wire [2:0]  wFunct3;
 wire [6:0]  wFunct7;
 wire [4:0] 	wAddrRs1, wAddrRs2, wAddrRd;
-wire wCIRWrite, wCMemtoReg, wCMemWrite, wCMemRead, wCIorD, wCPCWrite, wCPCWriteCond,
+wire wCIRWrite, wCMemWrite, wCMemRead, wCIorD, wCPCWrite, wCPCWriteCond,
 	  wCRegWrite, wALUZero, wCALUSrcA;
-wire [1:0] 	wCALUOp, wCALUSrcB;
+wire [1:0] 	wCALUOp, wCALUSrcB, wCMemtoReg;
 //wire [2:0] 	Store;
 wire [4:0] 	wALUControlSignal;
 wire [31:0] wALUMuxA, wALUMuxB, wALUResult, wImm, wShiftImm,
@@ -132,7 +132,7 @@ assign wShiftImm		= {wImm[30:0], 1'b0};
 
 assign wMemWriteData	= B;
 
-assign wMemorALU		= wCMemtoReg ? MDR : ALUOut;
+//assign wMemorALU		= wCMemtoReg ? MDR : ALUOut;
 assign wMemAddress	= wCIorD ? ALUOut : PC;
 
 
@@ -214,7 +214,7 @@ begin
 			 )
 		begin
 			PC	<= wPCMux;
-			// feito no semestre 2013/1 para implementar a deteccao de excecoes (COP0)
+			// feito no semestre 2013/1 para implementar a deteccao de excecoes <--- ? que porra eh essa lut (COP0)
 			if (PCOriginalWrite)
 				PC_original <= wPCMux;
 		end
@@ -256,7 +256,7 @@ Control_MULTI CrlMULTI (
 	.oMemtoReg(wCMemtoReg),
 	.oRegWrite(wCRegWrite),
 	.oPCWrite(wCPCWrite),
-	.oPCWriteCond(wCPCWriteCond),	// não declarado
+	.oPCWriteCond(wCPCWriteCond),
 	//.oPCWriteBEQ(PCWriteBEQ),
 	//.oPCWriteBNE(PCWriteBNE),
 	.oPCSource(wCPCSource),
@@ -320,15 +320,11 @@ Registers RegsMULTI (
 
 // Mux WriteData
 always @(*)
-	case (Store)
-		3'd0: wRegWriteData <= wMemorALU;	//Normal mode
-		3'd1: wRegWriteData <= PC;			// $RA Jal
-//		3'd2: wRegWriteData <= RegTimerLO;	//Store timer LO   // Disponivel
-//		3'd3: wRegWriteData <= RegTimerHI;	//Store timer HI   // Disponivel
-//		3'd4: wRegWriteData <= RandInt;		//Store Random   // Disponivel
-		3'd5: wRegWriteData <= FP_A;		//mfc1
-		3'd6: wRegWriteData <= COP0_A;		//mfc0 - feito no semestre 2013/1 para implementar a deteccao de excecoes (COP0)
-		3'd7: wRegWriteData <= PC;     //1/2016
+	case (wCMemtoReg)
+		2'b00: wRegWriteData <= ALUOut;	//Normal mode
+		2'b01: wRegWriteData <= PC;			// $RA Jal
+		2'b10: wRegWriteData <= MDR;
+		2'b11: wRegWriteData <= wShiftImm;
 		default: wRegWriteData <= ZERO;
 	endcase
 
@@ -355,7 +351,7 @@ ALUControl ALUcont0 (
 // Mux ALU input 'A'
 always @(*)
 	case (wCALUSrcA)
-		1'b0: wALUMuxA <= PC;
+		1'b0: wALUMuxA <= PCBACK;
 		1'b1: wALUMuxA <= A;
 		default: wALUMuxA <= 32'd0;
 	endcase
