@@ -35,7 +35,7 @@ output wire [5:0] owControlState,
 output wire [31:0] DwAddress, DwWriteData,
 input wire 	[31:0] DwReadData,
 output wire DwWriteEnable, DwReadEnable,
-output wire [3:0] DwByteEnable,
+output wire [3:0] DwByteEnable
 
 );
 
@@ -159,8 +159,6 @@ assign oRegWrite	= wCRegWrite;
 assign oInstr 		= IR;
 //assign oFPUFlagBank = wFPUFlagBank;
 
-assign oDebug = COP0ExcCode; //32'hB0DEF0F0;
-
 // feito no semestre 2013/1 para implementar a deteccao de excecoes (COP0)
 //assign wCOP0DataReg = COP0ExcOccurred ? PC_original : B;
 //assign oCOP0Interrupted = COP0Interrupted;
@@ -172,9 +170,9 @@ assign oDebug = COP0ExcCode; //32'hB0DEF0F0;
 initial
 begin
 	PC			<= BEGINNING_TEXT;
-	PCBACK		<= BEGINNING_TEXT;
+	PCBACK	<= ZERO;
 	IR			<= ZERO;
-	ALUOut		<= ZERO;
+	ALUOut	<= ZERO;
 	MDR 		<= ZERO;
 	A 			<= ZERO;
 	B 			<= ZERO;
@@ -190,7 +188,7 @@ begin
 	if (iRST)
 	begin
 		PC			<= iInitialPC;
-		PCBACK		<= iInitialPC;
+		PCBACK	<= iInitialPC;
 		IR			<= 32'b0;
 		ALUOut	<= 32'b0;
 		MDR 		<= 32'b0;
@@ -358,7 +356,7 @@ always @(*)
 
 // Branch Control
 always @(*)
-	case (iFunct3)
+	case (wFunct3)
 		FUN3BEQ:
 			wBranchControl <= wALUZero;
 		FUN3BNE:

@@ -9,7 +9,7 @@ module Control_MULTI (
 	output wire oIorD, oMemRead, oMemWrite, oIRWrite, oALUSrcA,
 				oRegWrite, oPCWrite, oPCWriteCond, oPCSource,
 	output wire [1:0] oALUSrcB, oALUOp, oMemtoReg,
-	output wire [5:0] oState,
+	output wire [5:0] oState
 	//Adicionado em 1/2014
 	//output wire [2:0] oLoadCase,
 	//output wire [1:0] oWriteCase,
@@ -81,7 +81,7 @@ begin
 				OPCJALR:
 					wNextState <= JALR;
 
-				default: wNextState = FETCH;
+				default: wNextState <= FETCH;
 			endcase
 		end
 
@@ -90,12 +90,12 @@ begin
 			wOutput <= LWSW_OUTPUT;
 			case(iOpcode)
 				OPCLOAD:
-					wNextState = LOAD;
+					wNextState <= LOAD;
 				OPCSTORE:
-					wNextState = STORE;
+					wNextState <= STORE;
 				
 				default:
-					wNextState = FETCH;
+					wNextState <= FETCH;
 			endcase		
 		end
 
