@@ -1,7 +1,7 @@
 /* **************************************************** */
 /* * Escolha o tipo de processador a ser implementado * */
-`define UNICICLO
-//`define MULTICICLO 
+//`define UNICICLO
+`define MULTICICLO 
 //`define PIPELINE //FPU esta incompleta
 
 // Define se a extensão de multipicação/divisão será sintetizada ou não

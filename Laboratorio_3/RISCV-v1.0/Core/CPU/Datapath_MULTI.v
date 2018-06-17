@@ -40,17 +40,17 @@ output wire [3:0] DwByteEnable
 );
 
 
-//Adicionado no semestre 2014/1 para os load/stores
+//Adicionado no semestre 2014/1 para os load/stores - alterado 2018/1
 wire [2:0] 	wLoadCase;
 wire [1:0] 	wWriteCase;
-wire [3:0] 	wByteEnabler;
-wire [31:0] wTreatedToRegister;		
+wire [3:0] 	wByteEnabler;	
+wire [31:0] wTreatedToMDR;
 wire [31:0] wTreatedToMemory;
-wire [1:0]	wLigaULA_PASSADA;
-reg [1:0]	ULA_PASSADA; /*em um ciclo a gente puxa o dado da memoria e no segundo a gente escreve. Eu preciso saber
-o resultado passado no proximo ciclo, quando eu vou selecionar o que guardar.*/
+/*wire [1:0]	wLigaULA_PASSADA;
+reg [1:0]	ULA_PASSADA; // em um ciclo a gente puxa o dado da memoria e no segundo a gente escreve. Eu preciso saber
+//o resultado passado no proximo ciclo, quando eu vou selecionar o que guardar.
 assign wLigaULA_PASSADA = ULA_PASSADA;
-
+*/
 
 assign wBRReadA		= wReadData1;
 assign wBRReadB		= wReadData2;
@@ -202,7 +202,7 @@ begin
 		ALUOut	<= wALUResult;
 		A			<= wReadData1;
 		B			<= wReadData2;
-		MDR		<= wMemReadData;
+		MDR		<= wTreatedToMDR;
 		PCBACK <= PC;
 
 
@@ -213,10 +213,10 @@ begin
 		if (wCIRWrite)
 			IR	<= wMemReadData;
 
-		//2014, detecta que e um load ou write que nao precisa do resultado passado da ula passada
+		/*2014, detecta que e um load ou write que nao precisa do resultado passado da ula passada
 		if(wLoadCase==0)
 			ULA_PASSADA <= wMemAddress[1:0];
-
+		*/
 	end
 end
 
@@ -313,7 +313,7 @@ ALU ALU0 (
 	.iB(wALUMuxB),
 	.iControlSignal(wALUControlSignal),
 	.oZero(wALUZero),
-	.oALUresult(wALUResult),
+	.oALUResult(wALUResult)
 	);
 
 /* Arithmetic Logic Unit control module */
@@ -340,7 +340,7 @@ always @(*)
 		2'b00: wALUMuxB <= B;
 		2'b01: wALUMuxB <= 32'd4;
 		2'b10: wALUMuxB <= wImm;
-		2'b11: wALUMuxB <= wShiftImm;			//adicionado em 1/2016 para calculo dos branchs
+		2'b11: wALUMuxB <= wShiftImm;
 		default: wALUMuxB <= 32'd0;
 	endcase
 
@@ -349,8 +349,8 @@ always @(*)
 	case (wCMemtoReg)
 		2'b00: wDataReg <= ALUOut;
 		2'b01: wDataReg <= PC;
-		2'b10: wDataReg <= wTreatedToRegister;	//dado do MDR tratado pelo memload
-		2'b11: wDataReg <= wShiftImm;
+		2'b10: wDataReg <= MDR;			// load word
+		2'b11: wDataReg <= wShiftImm;	// lui
 		default: wDataReg <= ZERO;
 	endcase
 
@@ -386,7 +386,7 @@ MemStore MemStore0 (
 	.iData(wMemWriteData),
 	.oData(wTreatedToMemory),
 	.oByteEnable(wByteEnabler),
-	.oException()
+	//.oException()
 	);
 
 
@@ -401,12 +401,12 @@ assign DwByteEnable 	= wByteEnabler;
 
 
 MemLoad MemLoad0 (
-	.iAlignment(wLigaULA_PASSADA),
+	.iAlignment(wMemAddress[1:0]),
 	//.iLoadTypeF(wLoadCase),
 	.iFunct3(wFunct3),
-	.iData(MDR),
-	.oData(wTreatedToRegister),
-	.oException()
+	.iData(wMemReadData),
+	.oData(wTreatedToMDR),
+	//.oException()
 	);
 
 

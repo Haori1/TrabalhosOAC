@@ -50,7 +50,7 @@ assign DwWriteEnable    = wCMemWrite;
 assign wBRReadA		= wRead1;
 assign wBRReadB		= wRead2;
 assign wBRWrite		= wDataReg;
-assign wULA				= wALUresult;
+assign wULA				= wALUResult;
 
 /* Padrao de nomenclatura
  *
@@ -72,7 +72,7 @@ wire [4:0]  wAddrRs1, wAddrRs2, wAddrRd;     // enderecos dos reg rs,rt ,rd e sa
 wire [31:0] wOrigALU;
 wire        wZero;
 wire [4:0]  wALUControl;
-wire [31:0] wALUresult, wRead1, wRead2, wMemAccess;
+wire [31:0] wALUResult, wRead1, wRead2, wMemAccess;
 wire [31:0] wReadData;
 wire [31:0] wDataReg;
 wire [31:0] wImm;
@@ -219,18 +219,18 @@ ALU ALUunit(
     .iControlSignal(wALUControl),
     .iA(wRead1),
     .iB(wOrigALU),
-    .oALUResult(wALUresult),
+    .oALUResult(wALUResult),
     .oZero(wZero)
 	);
 
 MemStore MemStore0 (
-    .iAlignment(wALUresult[1:0]),
+    .iAlignment(wALUResult[1:0]),
     //.iWriteTypeF(STORE_TYPE_DUMMY),
     .iFunct3(wFunct3),
     .iData(wRead2),
     .oData(wMemStore),
     .oByteEnable(wMemEnableStore),
-    .oException()
+    //.oException()
 	);
 
 /* Barramento da memoria de dados */
@@ -239,15 +239,15 @@ assign DwWriteEnable    = wCMemWrite;
 assign DwByteEnable     = wMemEnable;
 assign DwWriteData      = wMemDataWrite;
 assign wReadData        = DwReadData;
-assign DwAddress        = wALUresult;
+assign DwAddress        = wALUResult;
 
 MemLoad MemLoad0 (
-    .iAlignment(wALUresult[1:0]),
+    .iAlignment(wALUResult[1:0]),
     //.iLoadTypeF(LOAD_TYPE_DUMMY),
     .iFunct3(wFunct3),
     .iData(wReadData),
     .oData(wMemAccess),
-    .oException()
+    //.oException()
 	);
 
 /* Unidade de Controle */
@@ -343,7 +343,7 @@ begin
                 FUN3BGE,
                 FUN3BLTU,
                 FUN3BGEU:
-						wNextPC <= (wALUresult[0]) ? 2'b01 : 2'b00;
+						wNextPC <= (wALUResult[0]) ? 2'b01 : 2'b00;
 					 
 					 default:
 						wNextPC <= wPC4;
@@ -366,7 +366,7 @@ begin
 	case(wNextPC)
 		2'b00:	wiPC <= wPC4;
 		2'b01:	wiPC <= wJumpAddr;
-		2'b10:	wiPC <= wALUresult;
+		2'b10:	wiPC <= wALUResult;
 		default:	wiPC <= wPC4;
 	endcase
 end
@@ -374,7 +374,7 @@ end
 /*Decide o que sera escrito no banco de registradores*/
 always @(*)
     case(wCMem2Reg)
-        3'b000:     wDataReg <= wALUresult;				// saída da ula
+        3'b000:     wDataReg <= wALUResult;				// saída da ula
         3'b001:     wDataReg <= wMemAccess; 				// ler da memória
         3'b010:	    wDataReg <= wJumpAddr;				// auipc
 	    3'b011:     wDataReg <= wPC4;						// pc+4 (resto das instruções)

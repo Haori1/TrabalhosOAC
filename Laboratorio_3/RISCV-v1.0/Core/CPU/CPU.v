@@ -150,7 +150,7 @@ Datapath_MULTI Processor (
     .DwAddress(DwAddress),
     .DwReadData(DwReadData),
 
-    .iPendingInterrupt(iPendingInterrupt) // feito no semestre 2013/1 para implementar a deteccao de excecoes (COP0)
+    //.iPendingInterrupt(iPendingInterrupt) // feito no semestre 2013/1 para implementar a deteccao de excecoes (COP0)
 );
 `endif
 

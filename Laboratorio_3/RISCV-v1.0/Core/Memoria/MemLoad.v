@@ -6,8 +6,8 @@ module MemLoad(
 	//input [2:0] iLoadTypeF,
 	input [2:0] iFunct3,
 	input [31:0] iData,
-	output [31:0] oData,
-	output oException
+	output [31:0] oData
+	//output oException
 );
 
 
@@ -27,11 +27,11 @@ begin
 end
 
 
-
+/*
 assign oException = (iLoadType == LOAD_TYPE_LW && iAlignment != 2'b00)
                   | (iLoadType == LOAD_TYPE_LH && iAlignment[0] != 1'b0)
                   | (iLoadType == LOAD_TYPE_LHU && iAlignment[0] != 1'b0);
-
+*/
 wire [15:0] Halfword;
 wire [ 7:0] Byte;
 

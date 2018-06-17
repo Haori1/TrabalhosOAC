@@ -7,8 +7,8 @@ module MemStore(
 	input [2:0] iFunct3,
 	input [31:0] iData,
 	output [31:0] oData,
-	output [3:0] oByteEnable,
-	output oException
+	output [3:0] oByteEnable
+	//output oException
 );
 
 
@@ -26,10 +26,10 @@ begin
 end
 
 
-// Alignment exception
+/* Alignment exception
 assign oException = (iWriteType == STORE_TYPE_SW && iAlignment != 2'b00)
                   | (iWriteType == STORE_TYPE_SH && iAlignment[0] != 1'b0);
-
+*/
 
 always @(*) begin
 	case (iWriteType)
