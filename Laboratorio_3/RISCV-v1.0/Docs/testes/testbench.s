@@ -6,8 +6,58 @@ NB:	.byte 2
 MSG:	.string "Endereco do erro - " #strings que sao printadas no bitmap
 MSG2:	.string "Nao ha erros"
 R32VIM:	.word 1	#1 para ter multiplicacao e 0 para nao ter multiplicacao
+WORDTESTE1: .word 0x12345678
 
 .text
+	
+	la t1, WORDTESTE1
+	li t2, 0x12345678
+	li t3, 0x00000012
+	li t4, 0x00000034
+	li t5, 0x00000056
+	li t6, 0x00001234
+	
+	lw t0, 0(t1)
+	beq t0, t2, PULAERRO0A
+	jal t0, ERRO
+		
+PULAERRO0A:
+	lb t0, 2(t1)
+	beq t0, t4, PULAERRO0B
+	jal t0, ERRO
+	
+PULAERRO0B:
+	lbu t0, 3(t1)
+	beq t0, t3, PULAERRO0C
+	jal t0, ERRO
+
+PULAERRO0C:
+	lh t0, 2(t1)
+	beq t0, t6, PULAERRO0D
+	jal t0, ERRO
+
+PULAERRO0D:
+	li t0, 0x87654321
+	sw t0, 0(t1)
+	lw t2, 0(t1)
+	beq t0, t2, PULAERRO0E
+	jal t0, ERRO
+
+PULAERRO0E:
+	sb t0, 2(t1)
+	lw t2, 0(t1)
+	li t3, 0x87214321
+	beq t2, t3, PULAERRO0F
+	jal t0, ERRO
+	
+PULAERRO0F:
+	sh t0, 2(t1)
+	lw t2, 0(t1)
+	li t3, 0x43214321
+	beq t2, t3, PULAERRO0G
+	jal t0, ERR0
+	
+PULAERRO0G:	
 	la t1, N	#t1 = 5
 	lw t0, 0(t1)
 	sw t0, 64(t1)
@@ -79,9 +129,9 @@ PULAERRO8:
 	beq t0, t2, PULAERRO9 #t0 = 8
 	
 PULAERRO9:
-	li t0, 4
+	li t0, -4
 	li t1, 1
-	li t2, 2
+	li t2, -2
 	
 	srl t0, t0, t1
 	beq t0, t2, PULAERRO10

@@ -346,7 +346,7 @@ begin
 						wNextPC <= (wALUResult[0]) ? 2'b01 : 2'b00;
 					 
 					 default:
-						wNextPC <= wPC4;
+						wNextPC <= 2'b00;
             endcase
         end
 

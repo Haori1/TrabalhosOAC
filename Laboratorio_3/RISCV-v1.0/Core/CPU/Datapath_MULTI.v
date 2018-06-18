@@ -410,37 +410,4 @@ MemLoad MemLoad0 (
 	);
 
 
-// feito no semestre 2013/1 para implementar a deteccao de excecoes (COP0)
-/* Banco de registradores do Coprocessador 0 
-COP0RegistersMULTI cop0reg (
-	.iCLK(iCLK),
-	.iCLR(iRST),
-
-	// register file interface
-	.iReadRegister(wRD),
-	.iWriteRegister(wRD),
-	.iWriteData(wCOP0DataReg),
-	.iRegWrite(COP0RegWrite),
-	.oReadData(wCOP0ReadData),
-
-	// eret interface
-	.iEret(COP0Eret),
-
-	// COP0 interface
-	.iExcOccurred(COP0ExcOccurred),
-	.iBranchDelay(COP0BranchDelay),
-	.iPendingInterrupt(iPendingInterrupt),
-	.iInterrupted(COP0Interrupted),
-	.iExcCode(COP0ExcCode),
-	.oInterruptMask(wCOP0InterruptMask),
-	.oUserMode(wCOP0UserMode),
-	.oExcLevel(wCOP0ExcLevel),
-//	.oInterruptEnable(oCOP0InterruptEnable),
-	// DE2-70 interface
-	.iRegDispSelect(iRegDispSelect),
-	.oRegDisp(oRegDispCOP0)
-	);
-
-*/
-
 endmodule
