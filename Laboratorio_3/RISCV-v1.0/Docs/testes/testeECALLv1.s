@@ -20,7 +20,7 @@ buffer: .string "                                "
 	jal PRINTSTR1
 	jal INPUTSTR
 	jal INPUTINT
-	#jal INPUTFP
+	jal INPUTFP
 	jal RAND
 	jal TIME
 	jal TOCAR

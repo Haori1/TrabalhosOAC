@@ -55,7 +55,7 @@ PULAERRO0F:
 	lw t2, 0(t1)
 	li t3, 0x43214321
 	beq t2, t3, PULAERRO0G
-	jal t0, ERR0
+	jal t0, ERRO
 	
 PULAERRO0G:	
 	la t1, N	#t1 = 5
