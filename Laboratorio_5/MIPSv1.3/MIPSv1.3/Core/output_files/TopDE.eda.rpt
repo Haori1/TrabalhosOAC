@@ -1,5 +1,5 @@
 EDA Netlist Writer report for TopDE
-Wed Jun 13 14:46:29 2018
+Thu Jun 21 15:53:48 2018
 Quartus Prime Version 17.1.0 Build 590 10/25/2017 SJ Lite Edition
 
 
@@ -36,7 +36,7 @@ refer to the applicable agreement for further details.
 +-------------------------------------------------------------------+
 ; EDA Netlist Writer Summary                                        ;
 +---------------------------+---------------------------------------+
-; EDA Netlist Writer Status ; Successful - Wed Jun 13 14:46:29 2018 ;
+; EDA Netlist Writer Status ; Successful - Thu Jun 21 15:53:48 2018 ;
 ; Revision Name             ; TopDE                                 ;
 ; Top-level Entity Name     ; TopDE                                 ;
 ; Family                    ; Cyclone V                             ;
@@ -50,7 +50,8 @@ refer to the applicable agreement for further details.
 ; Option                                                                                            ; Setting                   ;
 +---------------------------------------------------------------------------------------------------+---------------------------+
 ; Tool Name                                                                                         ; ModelSim-Altera (Verilog) ;
-; Generate functional simulation netlist                                                            ; On                        ;
+; Generate functional simulation netlist                                                            ; Off                       ;
+; Time scale                                                                                        ; 1 ps                      ;
 ; Truncate long hierarchy paths                                                                     ; Off                       ;
 ; Map illegal HDL characters                                                                        ; Off                       ;
 ; Flatten buses into individual nodes                                                               ; Off                       ;
@@ -65,13 +66,13 @@ refer to the applicable agreement for further details.
 +---------------------------------------------------------------------------------------------------+---------------------------+
 
 
-+--------------------------------------------------------------------------------------------+
-; Simulation Generated Files                                                                 ;
-+--------------------------------------------------------------------------------------------+
-; Generated Files                                                                            ;
-+--------------------------------------------------------------------------------------------+
-; C:/Users/henri/TrabalhosOAC/Laboratorio_5/MIPSv1.3/MIPSv1.3/Core/simulation/qsim//TopDE.vo ;
-+--------------------------------------------------------------------------------------------+
++-------------------------------------------------------------------------------------------+
+; Simulation Generated Files                                                                ;
++-------------------------------------------------------------------------------------------+
+; Generated Files                                                                           ;
++-------------------------------------------------------------------------------------------+
+; C:/Users/henri/TrabalhosOAC/Laboratorio_5/MIPSv1.3/MIPSv1.3/Core/simulation/qsim/TopDE.vo ;
++-------------------------------------------------------------------------------------------+
 
 
 +-----------------------------+
@@ -80,31 +81,15 @@ refer to the applicable agreement for further details.
 Info: *******************************************************************
 Info: Running Quartus Prime EDA Netlist Writer
     Info: Version 17.1.0 Build 590 10/25/2017 SJ Lite Edition
-    Info: Copyright (C) 2017  Intel Corporation. All rights reserved.
-    Info: Your use of Intel Corporation's design tools, logic functions 
-    Info: and other software and tools, and its AMPP partner logic 
-    Info: functions, and any output files from any of the foregoing 
-    Info: (including device programming or simulation files), and any 
-    Info: associated documentation or information are expressly subject 
-    Info: to the terms and conditions of the Intel Program License 
-    Info: Subscription Agreement, the Intel Quartus Prime License Agreement,
-    Info: the Intel FPGA IP License Agreement, or other applicable license
-    Info: agreement, including, without limitation, that your use is for
-    Info: the sole purpose of programming logic devices manufactured by
-    Info: Intel and sold by Intel or its authorized distributors.  Please
-    Info: refer to the applicable agreement for further details.
-    Info: Processing started: Wed Jun 13 14:46:22 2018
-Info: Command: quartus_eda --write_settings_files=off --simulation=on --functional=on --flatten_buses=off --tool=modelsim_oem --format=verilog --output_directory=simulation/qsim/ MIPS -c TopDE
-Info (119006): Selected device 5CSEMA5F31C6 for design "TopDE"
-Warning: RST port on the PLL is not properly connected on instance VGA_Interface:VGA0|VgaAdapter:VGA0|VgaPll:xx|VgaPll_0002:vgapll_inst|altera_pll:altera_pll_i|general[0].gpll. The reset port on the PLL should be connected. If the PLL loses lock for any reason, you might need to manually reset the PLL in order to re-establish lock to the reference clock. File: c:/intelfpga_lite/17.1/quartus/libraries/megafunctions/altera_pll.v Line: 748
-    Info: Must be connected
-Warning (21300): LOCKED port on the PLL is not properly connected on instance "VGA_Interface:VGA0|VgaAdapter:VGA0|VgaPll:xx|VgaPll_0002:vgapll_inst|altera_pll:altera_pll_i|general[0].gpll". The LOCKED port on the PLL should be connected when the FBOUTCLK port is connected. Although it is unnecessary to connect the LOCKED signal, any logic driven off of an output clock of the PLL will not know when the PLL is locked and ready.
+    Info: Processing started: Thu Jun 21 15:53:40 2018
+Info: Command: quartus_eda --read_settings_files=off --write_settings_files=off MIPS -c TopDE
 Warning (18236): Number of processors has not been specified which may cause overloading on shared machines.  Set the global assignment NUM_PARALLEL_PROCESSORS in your QSF to an appropriate value for best performance.
-Info (204019): Generated file TopDE.vo in folder "C:/Users/henri/TrabalhosOAC/Laboratorio_5/MIPSv1.3/MIPSv1.3/Core/simulation/qsim//" for EDA simulation tool
-Info: Quartus Prime EDA Netlist Writer was successful. 0 errors, 3 warnings
-    Info: Peak virtual memory: 4934 megabytes
-    Info: Processing ended: Wed Jun 13 14:46:29 2018
-    Info: Elapsed time: 00:00:07
-    Info: Total CPU time (on all processors): 00:00:06
+Warning (10905): Generated the EDA functional simulation netlist because it is the only supported netlist type for this device.
+Info (204019): Generated file TopDE.vo in folder "C:/Users/henri/TrabalhosOAC/Laboratorio_5/MIPSv1.3/MIPSv1.3/Core/simulation/qsim/" for EDA simulation tool
+Info: Quartus Prime EDA Netlist Writer was successful. 0 errors, 2 warnings
+    Info: Peak virtual memory: 5082 megabytes
+    Info: Processing ended: Thu Jun 21 15:53:49 2018
+    Info: Elapsed time: 00:00:09
+    Info: Total CPU time (on all processors): 00:00:08
 
 

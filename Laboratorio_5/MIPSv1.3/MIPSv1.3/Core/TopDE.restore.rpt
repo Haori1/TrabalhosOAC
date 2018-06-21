@@ -1,5 +1,5 @@
 Restore Archived Project report for TopDE
-Fri Jun 15 12:22:02 2018
+Thu Jun 21 15:43:11 2018
 Quartus Prime Version 17.1.0 Build 590 10/25/2017 SJ Lite Edition
 
 
@@ -36,7 +36,7 @@ refer to the applicable agreement for further details.
 +-------------------------------------------------------------------------+
 ; Restore Archived Project Summary                                        ;
 +---------------------------------+---------------------------------------+
-; Restore Archived Project Status ; Successful - Fri Jun 15 12:22:02 2018 ;
+; Restore Archived Project Status ; Successful - Thu Jun 21 15:43:11 2018 ;
 ; Revision Name                   ; TopDE                                 ;
 ; Top-level Entity Name           ; TopDE                                 ;
 ; Family                          ; Cyclone V                             ;
@@ -51,8 +51,8 @@ Info: Generated report 'TopDE.restore.rpt'
 Info (23030): Evaluation of Tcl script c:/intelfpga_lite/17.1/quartus/common/tcl/apps/qpm/qar.tcl was successful
 Info: Quartus Prime Shell was successful. 0 errors, 132 warnings
     Info: Peak virtual memory: 4868 megabytes
-    Info: Processing ended: Fri Jun 15 12:22:02 2018
-    Info: Elapsed time: 00:00:06
+    Info: Processing ended: Thu Jun 21 15:43:12 2018
+    Info: Elapsed time: 00:00:11
     Info: Total CPU time (on all processors): 00:00:01
 
 

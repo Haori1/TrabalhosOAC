@@ -8,7 +8,7 @@
 //`define FPU
 
 // Define se será utilizado simulação ou síntese
-`define SIMULACAO
+//`define SIMULACAO
 
 `ifndef PARAM
 	`include "Parametros.v"
