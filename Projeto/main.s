@@ -4,11 +4,14 @@
 
 .data
 
+#Atencao: Adicionar campo para indicar se a peca eh uma dama ou nao, mesmo se por ventura nao formos iplementar
+#nao adicionar este campo imposibilitaria-nos de implementar caso decidir-mos
+
 # DADOS DAS PEDRAS ##################################################
 # com as coordenadas iniciais no tabuleiro e cores que podem mudar antes do inicio das partidas
 # player sempre na parte de baixo da tela
-#			X	Y	cor	viva ou não
-pedra_pl_1: .byte	0,	5,	WHITE,	1
+#			X	Y	cor	viva ou nao
+pedra_pl_1: .byte	0,	5,	WHITE,	1 #por que o nome desta pedra esta em minusculo?
 PEDRA_PL_2: .byte	2,	5,	WHITE,	1
 PEDRA_PL_3: .byte	4,	5,	WHITE,	1
 PEDRA_PL_4: .byte	6,	5,	WHITE,	1
@@ -104,4 +107,62 @@ montaTabuleiro: li t0, BOARD_ADDRESS	# endereco do tabuleiro
 	addi t1, t1, 4
 	sw t1, 88(t0)
 	
+	ret
+
+
+#Este sera o loop principal em que o jogo ira ocorrer
+loopPrincipal: 
+	#argumentos de saida:
+	#a0 = nivel selecionado
+	jal abertura
+	
+	#Talvez faca-se necessario salvar a0 antes de pular para as proximas funcoes
+	
+	#Argumentos de entrada:
+	#a0 = coordenada X da ultima peca selecionada
+	#a1 = coordenada Y da ultima peca selecionada 
+	
+	#Argumentos de saida:
+	#Novo estado do tabuleiro salvo em memoria
+	jal jogadaPL
+	
+	#Argumentos de entrada:
+	#Estado atual do tabuleiro
+	
+	#Argumentos de saida:
+	#a0 = coordenada X da ultima peca selecionada
+	#a1 = coordenada Y da ultima peca selecionada 
+	jal desenhaTabuleiro 
+	
+	#Argumentos de entrada:
+	#a0 = nivel escolhido para jogar
+	jal jogadaPC #Existe a possibilidade de criar uma funcao para cada nivel, mas ao momento, acredito que a melhor opcao
+			#seja somente uma funcao.
+	
+	#Jah definido acima
+	jal desenhaTabuleiro
+	
+	j loopPrincipal
+	
+	ret 
+	
+
+#Aqui uma sugestao referente a aonde em codigo colocar a tela de abertura, esta funcao devera retornar o nivel da IA
+abertura:
+
+	ret
+
+#Permite ao player transitar entre as pecas, escolher uma jogada viavel, ou parar o jogo (sair).
+jogadaPL:
+
+	ret
+
+#refere-se totalmente a inteligencia artificial que determinara as jogadas do computador, com os dados niveis 
+jogadaPC:
+
+	ret
+
+#Sera responsavel por desenhar o estado do tabuleiro no momento em que foi chamada
+desenhaTabuleiro:
+
 	ret
