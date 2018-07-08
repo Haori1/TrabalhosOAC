@@ -57,6 +57,7 @@ pedras_apagadas: .word 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0		# 12 posicoes pois eh
 
 
 jal montaTabuleiro
+jal jogadaPC
 
 li a7, 10
 ecall
@@ -132,7 +133,7 @@ loopPrincipal: addi sp, sp, -4
 	
 	#argumentos de saida:
 	#a0 = nivel selecionado
-	jal abertura		# por que isso ta no loop gabriel?
+	#jal abertura		# por que isso ta no loop gabriel?
 	
 	#Talvez faca-se necessario salvar a0 antes de pular para as proximas funcoes
 	
@@ -167,7 +168,7 @@ loopPrincipal: addi sp, sp, -4
 	jal desenhaTabuleiro 
 	
 	#Argumentos de entrada:
-	#a0 = nivel escolhido para jogar
+	#a1 = nivel escolhido para jogar
 	jal jogadaPC #Existe a possibilidade de criar uma funcao para cada nivel, mas ao momento, acredito que a melhor opcao
 			#seja somente uma funcao.
 	
@@ -197,7 +198,105 @@ jogadaPL:
 
 #refere-se totalmente a inteligencia artificial que determinara as jogadas do computador, com os dados niveis 
 jogadaPC:
-
+	#a1 = 1 ---> Nivel 1
+	#a1 = 2 ---> Nivel 2
+		
+	li t0, BOARD_ADDRESS	# endereco do tabuleiro
+	addi t0, t0, 4 
+	li t6, 0   #Valor inicial do registrador com o peso da jogada
+	li t5, 0   #Contador para determinar quando somar ou nao valores relativos a posicao no tabuleiro
+	
+	#as jogadas subsequentes estao nas casas 28 ou 36 a frente na memoria
+	
+	li t1, 1 
+	bne a1, t1, nivel2 #checa se eh o nivel 1
+	
+	nivel1:
+		#No tabuleiro acresce-se de 8 em 8 normalmente
+		#em toda jogada multipla de 4, soma-se apenas 4
+		#em toda jogada multipla de 8, soma-se 12
+		
+		li t1, 8
+		rem t1, t5, t1
+		beq t1, zero, somaDoze #sequencia que checa se estamos no caso de somar 12
+					#Deve sempre ser anterior ao rem de 4, devido as propriedades da divisao
+		
+		li t1, 4
+		rem t1, t5, t1
+		beq t1, zero, somaQuatro #sequencia que checa se estamos no caso de somar 4
+		
+		lw t1, 0(t0) #loga a proxima posicao do tabuleiro
+		addi t0, t0, 8 #posiciona o ponteiro para a proxima posicao do tabuleiro
+		#lb t2, 0(t1) #carrega X
+		#lb t3, 1(t1) #carrega Y
+		
+		somaQuatro:
+			lw t1, 0(t0)
+			addi t0, t0, 4  #posiciona o ponteiro para a proxima posicao do tabuleiro
+			j saidaQuatro #jump necessario para nao passar por somaDoze
+		
+		somaDoze:
+			lw t1, 0(t0) #loga a proxima posicao do tabuleiro
+			addi t0, t0, 12  #posiciona o ponteiro para a proxima posicao do tabuleiro
+	
+		saidaQuatro:
+		
+		beq t1, zero, continue #Salta as comparacoes se nao tiver peca nesta posicao do tabuleiro
+		
+		lb t2, 3(t1) #loga a cor da peca
+		li t3, WHITE
+		
+		beq t2, t3, continue #Salta as comparacoes se a peca existente for do jogador
+		
+		#lb t2, 0(t1) #carrega X
+		#li t3, 0
+		
+		#beq t2, t3, jogadaEm0 #caso seja uma jogada em coordenada X 0, pula para seu tratamento especial
+		
+		addi t4, t0, 28 #carrega a posicao da diagonal esquerda
+		lw s11, 0(t4) 
+		
+		bne s11, zero, diagonalEsqCheia
+		
+		li a7, 41
+		li a0, 3
+		ecall #gera numero aleatorio
+	
+		# li t4, 1, pontuacao exemplo para o caso nao aleatorio
+		add t6, t6, a0 #FAZER A COMPARACAO JA AQUI, COM OS PESOS referente a se a jogada é mais pesada ou n, e guardar
+		                #no registrador marcador de jogada.
+	
+		diagonalEsqCheia: #Aqui deve-se descobrir se pode-se comer a peca 
+	
+		addi t4, t0, 36 #carrega a posicao da diagonal direita
+		lw s11, 0(t4) 
+	
+		bne s11, zero, diagonalDirCheia
+	
+		li a7, 41
+		li a0, 3
+		ecall #gera numero aleatorio
+		
+		add t6, t6, a0 
+		
+		diagonalDirCheia:
+		
+		continue:
+		
+		addi t5, t5, 1 #itera em um o contador
+		
+		li t2, 32 #loga o valor maximo possivel do contador (numero de espacos disponiveis no tabuleiro)
+		beq t5, t2, saidaJogadaPC #caso todo o tabuleiro tenha sido percorrido, sai da funcao
+		
+		j nivel1 
+	nivel2:
+	
+		li a7, 1
+		add a0, zero, t6
+		ecall
+		
+	saidaJogadaPC:
+	
 	ret
 
 #Sera responsavel por desenhar o estado do tabuleiro no momento em que foi chamada
