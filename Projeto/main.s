@@ -275,11 +275,17 @@ jogadaPC:
 	#a1 = 2 ---> Nivel 2
 		
 	li t0, BOARD_ADDRESS	# endereco do tabuleiro
-	addi t0, t0, 4 
-	li t6, 0   #Valor inicial do registrador com o peso da jogada
+	addi t0, t0, 4
+	li s10, 0  #Valor inicial do registrador com o endereco de origem da melhor jogada 
+	li s9, 0   #Valor inicial do registrador com o peso da jogada
+	li s8, 0   #Valor inicial do registrador com o endereço de destino da melhor joagada
+	li s7, 0   #Valor inicial do registrador que indica a diagonal para a qual a jogada será realizada
+	li s6, 0   #Valor booleano que indica se peca inimiga foi ou nao apagada
+	li s5, 0   #Valor inicial do registrador com o peso da ultima jogada em que uma peca foi comida
+	li s4, 0   #Valor inicial do registrador com o endereco da pedra que foi apagada ---> talvez seja melhor fazer no loop
 	li t5, 0   #Contador para determinar quando somar ou nao valores relativos a posicao no tabuleiro
 	
-	#as jogadas subsequentes estao nas casas 28 ou 36 a frente na memoria
+	#as jogadas subsequentes estao nas casas 28(diagonal esquerda) ou 36 (diagonal direita) a frente na memoria
 	
 	li t1, 1 
 	bne a1, t1, nivel2 #checa se eh o nivel 1
@@ -289,58 +295,83 @@ jogadaPC:
 		#em toda jogada multipla de 4, soma-se apenas 4
 		#em toda jogada multipla de 8, soma-se 12
 		
-		li t1, 8
-		rem t1, t5, t1
-		beq t1, zero, somaDoze #sequencia que checa se estamos no caso de somar 12
-					#Deve sempre ser anterior ao rem de 4, devido as propriedades da divisao
-		
-		li t1, 4
-		rem t1, t5, t1
-		beq t1, zero, somaQuatro #sequencia que checa se estamos no caso de somar 4
-		
-		lw t1, 0(t0) #loga a proxima posicao do tabuleiro
-		addi t0, t0, 8 #posiciona o ponteiro para a proxima posicao do tabuleiro
-		#lb t2, 0(t1) #carrega X
-		#lb t3, 1(t1) #carrega Y
-		
-		somaQuatro:
-			lw t1, 0(t0)
-			addi t0, t0, 4  #posiciona o ponteiro para a proxima posicao do tabuleiro
-			j saidaQuatro #jump necessario para nao passar por somaDoze
-		
-		somaDoze:
-			lw t1, 0(t0) #loga a proxima posicao do tabuleiro
-			addi t0, t0, 12  #posiciona o ponteiro para a proxima posicao do tabuleiro
-	
-		saidaQuatro:
+		lw t1, 0(t0) #loga a posicao atual do tabuleiro
 		
 		beq t1, zero, continue #Salta as comparacoes se nao tiver peca nesta posicao do tabuleiro
 		
-		lb t2, 3(t1) #loga a cor da peca
+		lbu t2, 2(t1) #loga a cor da peca
 		li t3, WHITE
 		
 		beq t2, t3, continue #Salta as comparacoes se a peca existente for do jogador
 		
-		#lb t2, 0(t1) #carrega X
-		#li t3, 0
+		lb t2, 0(t1) #carrega X
+		li t3, 0
 		
-		#beq t2, t3, jogadaEm0 #caso seja uma jogada em coordenada X 0, pula para seu tratamento especial
+		beq t2, t3, jogadaEm0 #caso seja uma jogada em coordenada X 0, pula para realizar somente a verificacao a direita
 		
 		addi t4, t0, 28 #carrega a posicao da diagonal esquerda
 		lw s11, 0(t4) 
 		
-		bne s11, zero, diagonalEsqCheia
+		bne s11, zero, diagonalEsqCheia #indica que ha peca na diagonal esquerda (pode ser possivel come-la)
 		
 		li a7, 41
 		li a0, 3
 		ecall #gera numero aleatorio
 	
-		# li t4, 1, pontuacao exemplo para o caso nao aleatorio
-		add t6, t6, a0 #FAZER A COMPARACAO JA AQUI, COM OS PESOS referente a se a jogada é mais pesada ou n, e guardar
-		                #no registrador marcador de jogada.
-	
-		diagonalEsqCheia: #Aqui deve-se descobrir se pode-se comer a peca 
-	
+		add t6, zero, a0 #Salva o numero aleatorio no registrador marcador da jogada
+		
+		bltu t6, s9, jogadaNaoMelhorEsq #Compara a pontuacao entre as jogadas
+		
+		mv s10, t0  #Salva a posicao de origem da melhor jogada atual
+		mv s9, t6   #Salva a pontuacao da melhor jogada atual
+		mv s8, t4   #Salva o endereco da diagonal destino
+		addi s7, zero, 28 #salva de qual diagonal se trata 
+		
+		j jogadaNaoMelhorEsq
+					
+		diagonalEsqCheia: #Aqui deve-se descobrir se pode-se comer a peca
+			
+			lbu t2, 2(s11) #carrega a cor da peca 
+			li t3, BLACK
+			 
+			beq t2, t3, diagonalComAliadoEsq #checa se a peca presente na diagonal eh aliada ou nao
+							  #pois caso for nao eh uma jogada valida
+			li a7, 41
+			li a0, 3
+			ecall #gera numero aleatorio
+			
+			bltu a0, s5, comeEsqDescartada 
+			
+			addi t4, t4, 28 #itera para a posicao destino da peca da cpu, caso ocorra o movimento
+			
+			lw t3, 0(t4) #carrega do tabuleiro as informacoes acerca de pecas na posicao destino
+			
+			bne t3, zero, naoVazioEsq #Caso nao esteja vazio, o movimento nao pode ser realizado
+			
+			li t6, COME_PECA #loga o valor maximo de 32 bits para determinar que uma peca deve ser comida
+			mv s10, t0  #Salva a origem da jogada atual
+			mv s9, t6   #Salva a pontuacao da jogada atual
+			mv s8, t4   #Salva o destino da jogada atual
+			addi s7, zero, 28 #Salva a diagonal da jogada atual 
+			addi s6, zero, 1 #Registra se alguma peca foi ou nao comida 
+			mv s5, a0 #Salva peso da jogada
+			mv s4, s11 #Salva endereco da peca apagada
+			
+			diagonalComAliadoEsq:
+			
+			comeEsqDescartada:
+			
+			naoVazioEsq: 				  
+		
+		jogadaNaoMelhorEsq:	 
+		
+		jogadaEm0:
+		
+		lb t2, 0(t1) #carrega X
+		li t3, 7
+		
+		beq t2, t3, jogadaEm7 #caso seja uma jogada em coordenada X 7, pula a comparacao a esquerda, pois nao existe
+		
 		addi t4, t0, 36 #carrega a posicao da diagonal direita
 		lw s11, 0(t4) 
 	
@@ -350,26 +381,222 @@ jogadaPC:
 		li a0, 3
 		ecall #gera numero aleatorio
 		
-		add t6, t6, a0 
+		add t6, zero, a0 #Salva o numero aleatorio no registrador marcador da jogada
+		
+		bltu t6, s9, jogadaNaoMelhorDir  #Compara a pontuacao entre as jogadas
+		
+		mv s10, t0  #Salva a posicao de origem da melhor jogada atual
+		mv s9, t6   #Salva a pontuacao da melhor jogada atual
+		mv s8, t4   #Salva o endereco da diagonal destino
+		addi s7, zero, 36 #salva de qual diagonal se trata 
+		
+		j jogadaNaoMelhorDir
 		
 		diagonalDirCheia:
 		
-		continue:
+			lbu t2, 2(s11) #carrega a cor da peca 
+			li t3, BLACK
+			 
+			beq t2, t3, diagonalComAliadoDir #checa se a peca presente na diagonal eh aliada ou nao
+			
+			li a7, 41
+			li a0, 3
+			ecall #gera numero aleatorio
+			
+			bltu a0, s5, comeDirDescartada 
+			
+			addi t4, t4, 36 #itera para a posicao destino da peca da cpu, caso ocorra o movimento
+			
+			lw t3, 0(t4) #carrega do tabuleiro as informacoes acerca de pecas na posicao destino
+			
+			bne t3, zero, naoVazioDir #Caso nao esteja vazio, o movimento nao pode ser realizado
+			
+			li t6, COME_PECA #loga o valor maximo em 32 bits para determinar que uma peca deve ser comida
+			mv s10, t0  #Salva a origem da jogada atual
+			mv s9, t6   #Salva a pontuacao da jogada atual
+			mv s8, t4   #Salva o destino da jogada atual
+			addi s7, zero, 36 #Salva a diagonal da jogada atual 
+			addi s6, zero, 1 #Registra que uma peca foi comida 
+			mv s5, a0   #Salva peso da jogada em que a peca foi comida
+			mv s4, s11 #Salva endereco da peca apagada
+			
+			diagonalComAliadoDir:
+			
+			comeDirDescartada:
+			
+			naoVazioDir: 
+			
+			
+		jogadaNaoMelhorDir:
 		
+		jogadaEm7:
+		
+		continue:
+				
 		addi t5, t5, 1 #itera em um o contador
 		
 		li t2, 32 #loga o valor maximo possivel do contador (numero de espacos disponiveis no tabuleiro)
-		beq t5, t2, saidaJogadaPC #caso todo o tabuleiro tenha sido percorrido, sai da funcao
+		beq t5, t2, saidaLoopNivel1 #caso todo o tabuleiro tenha sido percorrido, sai da funcao
+		
+		li t2, 1
+		beq t5, zero, primeiraIteracao 
+		
+		li t1, 8
+		rem t1, t5, t1
+		
+		beq t1, zero, somaDoze #sequencia que checa se estamos no caso de somar 12
+					#Deve sempre ser anterior ao rem de 4, devido as propriedades da divisao
+		
+		li t1, 4
+		rem t1, t5, t1
+		beq t1, zero, somaQuatro #sequencia que checa se estamos no caso de somar 4
+		
+		primeiraIteracao:
+		
+		addi t0, t0, 8 #posiciona o ponteiro para a proxima posicao do tabuleiro
+		j saidaIterador
+		#lb t2, 0(t1) #carrega X
+		#lb t3, 1(t1) #carrega Y
+		
+		somaQuatro:
+			addi t0, t0, 4  #posiciona o ponteiro para a proxima posicao do tabuleiro
+			j saidaIterador #jump necessario para nao passar por somaDoze
+		
+		somaDoze:
+			addi t0, t0, 12  #posiciona o ponteiro para a proxima posicao do tabuleiro
+	
+		saidaIterador:
 		
 		j nivel1 
+		
+		saidaLoopNivel1:
+		
+		#Retorna os parametros para a funcao
+		# a0: endereco da pedra, ja com X e Y atualizados
+    		# a1: antigo X da pedra
+    		# a2: antigo Y da pedra - X e Y como casas do tabuleiro
+    		# Pedras_apagadas: vetor com os endereco das pedras apagadas
+    		
+		li t2, 28
+		bne t2, s7, jogadaParaDireita #Checa se a jogada sera para a direita 
+		
+		li t2, 0
+		bne s6, t2, pecaComidaEsq #Checa se na jogada para a esquerda, uma peca foi comida
+		
+		lw t2, 0(s10) #Carrega o ponteiro para os dados em memoria
+		
+		lb t3, 0(t2) #carrega a coordenada X
+		
+		mv a1, t3 #salva valor do antigo X no registrador de retorno
+		
+		addi t3, t3, -1 #Atualiza a coordenada X um a esquerda
+		sb t3, 0(t2) #salva o novo valor na memória
+		
+		lb t3, 1(t2) #carrega a coordenada Y
+		
+		mv a2, t3 #salva valor do antigo Y no registrador de retorno
+		
+		addi t3, t3, 1 #atualiza a coordenada Y um abaixo
+		sb t3, 1(t2) #salva o novo valor na memoria
+		
+		mv a0, t2 #salva o endereco da peca na memoria
+		
+		pecaComidaEsq:
+			
+			lw t2, 0(s10) #Carrega o ponteiro para os dados em memoria
+		
+			lb t3, 0(t2) #carrega a coordenada X
+		
+			mv a1, t3 #salva valor do antigo X no registrador de retorno
+			
+			addi t3, t3, -2 #Atualiza a coordenada X dois a esquerda
+			sb t3, 0(t2) #salva o novo valor na memória
+		
+			lb t3, 1(t2) #carrega a coordenada Y
+		
+			mv a2, t3 #salva valor do antigo Y no registrador de retorno
+		
+			addi t3, t3, 2 #atualiza a coordenada Y dois abaixo
+			sb t3, 1(t2) #salva o novo valor na memória
+		
+			mv a0, t2 #salva o endereco da peca na memoria
+			
+			la t4, Pedras_apagadas #carrega o endereco do vetor de pedras apagadas
+			
+			posPedraApagadaNaoVaziaEsq:
+			
+			lw t3, 0(t4) #loga o valor na posicao do vetor de pedras apagas guardada em t4
+			addi t4, t4, 4 #itera para a proxima posicao
+			
+			bne t3, zero, posPedraApagadaNaoVaziaEsq #caso nao seja zero, salta buscando a proxima posicao vazia
+			
+			sw s4, 0(t4) #salva o valor da pedra apagada em posicao vazia do vetor
+			
+			j fimJogadaParaEsq
+			
+		
+		jogadaParaDireita:
+		
+		li t2, 0
+		bne s6, t2, pecaComidaDir #Checa se na jogada para a direita, uma peca foi comida
+		
+		lw t2, 0(s10) #Carrega o ponteiro para os dados em memoria
+		
+		lb t3, 0(t2) #carrega a coordenada X
+		
+		mv a1, t3 #salva valor do antigo X no registrador de retorno
+		
+		addi t3, t3, 1 #Atualiza a coordenada X um a direita
+		sb t3, 0(t2) #salva o novo valor na memória
+		
+		lb t3, 1(t2) #carrega a coordenada Y
+		
+		mv a2, t3 #salva valor do antigo Y no registrador de retorno
+		
+		addi t3, t3, 1 #atualiza a coordenada Y um abaixo
+		sb t3, 1(t2) #salva o novo valor na memória
+		
+		mv a0, t2
+		
+		pecaComidaDir:
+		
+			lw t2, 0(s10) #Carrega o ponteiro para os dados em memoria
+		
+			lb t3, 0(t2) #carrega a coordenada X
+		
+			mv a1, t3 #salva valor do antigo X no registrador de retorno
+			
+			addi t3, t3, 2 #Atualiza a coordenada X dois a direita
+			sb t3, 0(t2) #salva o novo valor na memória
+		
+			lb t3, 1(t2) #carrega a coordenada Y
+		
+			mv a2, t3 #salva valor do antigo Y no registrador de retorno
+		
+			addi t3, t3, 2 #atualiza a coordenada Y dois abaixo
+			sb t3, 1(t2) #salva o novo valor na memória
+		
+			mv a0, t2 #salva o endereco da peca na memoria
+			
+			la t4, Pedras_apagadas #carrega o endereco do vetor de pedras apagadas
+			
+			posPedraApagadaNaoVaziaDir:
+			
+			lw t3, 0(t4) #loga o valor na posicao do vetor de pedras apagas guardada em t4
+			addi t4, t4, 4 #itera para a proxima posicao
+			
+			bne t3, zero, posPedraApagadaNaoVaziaDir #caso nao seja zero, salta buscando a proxima posicao vazia
+			
+			sw s4, 0(t4) #salva o valor da pedra apagada em posicao vazia do vetor
+		
+		fimJogadaParaEsq:
+		
+			j saidaJogadaPC
+		
 	nivel2:
-	
-		li a7, 1
-		add a0, zero, t6
-		ecall
 		
 	saidaJogadaPC:
-	
+
 	ret
 
 #Sera responsavel por desenhar o estado do tabuleiro no momento em que foi chamada
