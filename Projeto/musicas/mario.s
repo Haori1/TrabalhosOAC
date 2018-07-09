@@ -56,7 +56,7 @@ RA:
 	
 VERIFY_KEY:
 
-	li t1, 0xFF100000
+	li t1, 0xFF200000
 	lw t2, 0(t1)
 	andi t2, t2, 0x0001 
 	beqz t2, JUMPR

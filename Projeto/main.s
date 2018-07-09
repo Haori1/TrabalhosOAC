@@ -7,42 +7,47 @@
 #Atencao: Adicionar campo para indicar se a peca eh uma dama ou nao, mesmo se por ventura nao formos iplementar
 #nao adicionar este campo imposibilitaria-nos de implementar caso decidir-mos
 
-# DADOS DAS PEDRAS ##################################################
+# DADOS DAS PEDRAS
 # com as coordenadas iniciais no tabuleiro e cores que podem mudar antes do inicio das partidas
 # player sempre na parte de baixo da tela
 #			X	Y	cor	viva ou nao
-pedra_pl_1: .byte	0,	5,	WHITE,	1
-pedra_pl_2: .byte	2,	5,	WHITE,	1
-pedra_pl_3: .byte	4,	5,	WHITE,	1
-pedra_pl_4: .byte	6,	5,	WHITE,	1
-pedra_pl_5: .byte	1,	6,	WHITE,	1
-pedra_pl_6: .byte	3,	6,	WHITE,	1
-pedra_pl_7: .byte	5,	6,	WHITE,	1
-pedra_pl_8: .byte	7,	6,	WHITE,	1
-pedra_pl_9: .byte	0,	7,	WHITE,	1
-pedra_pl_10: .byte	2,	7,	WHITE, 	1
-pedra_pl_11: .byte	4,	7,	WHITE, 	1
-pedra_pl_12: .byte	6,	7,	WHITE,	1
+Pedra_PL_1: .byte	0,	5,	WHITE,	1
+Pedra_PL_2: .byte	2,	5,	WHITE,	1
+Pedra_PL_3: .byte	4,	5,	WHITE,	1
+Pedra_PL_4: .byte	6,	5,	WHITE,	1
+Pedra_PL_5: .byte	1,	6,	WHITE,	1
+Pedra_PL_6: .byte	3,	6,	WHITE,	1
+Pedra_PL_7: .byte	5,	6,	WHITE,	1
+Pedra_PL_8: .byte	7,	6,	WHITE,	1
+Pedra_PL_9: .byte	0,	7,	WHITE,	1
+Pedra_PL_10: .byte	2,	7,	WHITE, 	1
+Pedra_PL_11: .byte	4,	7,	WHITE, 	1
+Pedra_PL_12: .byte	6,	7,	WHITE,	1
 
-pedra_cpu_1: .byte	1,	0,	BLACK,	1
-pedra_cpu_2: .byte	3,	0,	BLACK,	1
-pedra_cpu_3: .byte	5,	0,	BLACK,	1
-pedra_cpu_4: .byte	7,	0,	BLACK,	1
-pedra_cpu_5: .byte	0,	1,	BLACK,	1
-pedra_cpu_6: .byte	2,	1,	BLACK,	1
-pedra_cpu_7: .byte	4,	1,	BLACK,	1
-pedra_cpu_8: .byte	6,	1,	BLACK,	1
-pedra_cpu_9: .byte	1,	2,	BLACK,	1
-pedra_cpu_10: .byte	3,	2,	BLACK,	1
-pedra_cpu_11: .byte	5,	2,	BLACK,	1
-pedra_cpu_12: .byte	7,	2,	BLACK,	1
+Pedra_CPU_1: .byte	1,	0,	BLACK,	1
+Pedra_CPU_2: .byte	3,	0,	BLACK,	1
+Pedra_CPU_3: .byte	5,	0,	BLACK,	1
+Pedra_CPU_4: .byte	7,	0,	BLACK,	1
+Pedra_CPU_5: .byte	0,	1,	BLACK,	1
+Pedra_CPU_6: .byte	2,	1,	BLACK,	1
+Pedra_CPU_7: .byte	4,	1,	BLACK,	1
+Pedra_CPU_8: .byte	6,	1,	BLACK,	1
+Pedra_CPU_9: .byte	1,	2,	BLACK,	1
+Pedra_CPU_10: .byte	3,	2,	BLACK,	1
+Pedra_CPU_11: .byte	5,	2,	BLACK,	1
+Pedra_CPU_12: .byte	7,	2,	BLACK,	1
+
+# CORES ARMAZENADAS
+Cor_PL:		.byte 0
+Cor_CPU:	.byte 0
+Cor_cursor:	.byte 0x07
 #######################################################
 
 # VETOR DE PEDRAS APAGADAS
 # sempre atualizado apos a finalizaçao de uma jogada
 # cada word é o endereco da pedra apagada
 # serve para o desenhaTabuleiro saber quais pecas tem que apagar e para atribuir pontos
-pedras_apagadas: .word 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0		# 12 posicoes pois eh o maximo de pedras que podem ser apagadas de uma vez
+Pedras_apagadas: .word 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0		# 12 posicoes pois eh o maximo de pedras que podem ser apagadas de uma vez
 
 
 
@@ -55,9 +60,32 @@ pedras_apagadas: .word 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0		# 12 posicoes pois eh
 # s3: ultima coordenada x escolhida pra jogada do player
 # s4: ultima coordenada y escolhida pra jogada do player
 
+la a0, IMG_MENU
+li a1, 320
+li a2, 240
+li a3, 0
+li a4, 0
+#jal imprimeImagem			# imprime o menu
+#jal esperaEntrada			# pressione qualquer tecla
 
-jal montaTabuleiro
-jal jogadaPC
+li a0, WHITE_WORD
+jal clearScreen				# limpa a tela com branco
+
+# IMPRIME TELA SELECAO DE NIVEL
+#jal selecionaNivel
+mv s0, a0				# a0: nivel escolhido
+# IMPRIME TELA SELECAO DE CORES
+#jal selecionaCores
+
+#jal montaTabuleiro
+
+la a0, IMG_TABULEIRO
+li a1, 320
+li a2, 160
+li a3, 0
+li a4, 15
+jal imprimeImagem
+#jal desenhaBitmap.ini
 
 li a7, 10
 ecall
@@ -67,7 +95,7 @@ ecall
 # faz a distribuicao inicial das pecas no tabuleiro principal
 
 montaTabuleiro: li t0, BOARD_ADDRESS	# endereco do tabuleiro
-	la t1, pedra_cpu_1
+	la t1, Pedra_CPU_1
 	
 	# offsets em relacao ao endereco base (t0), ou seja, a coordenada (0, 0)
 	# t1 percorre de 4 em 4 pois as words estao proximas umas das outras na memoria
@@ -97,7 +125,7 @@ montaTabuleiro: li t0, BOARD_ADDRESS	# endereco do tabuleiro
 	sw t1, 92(t0)		# pedra_cpu_12 nas coordenadas (7, 2)
 	
 	addi t0, t0, 160
-	la t1, pedra_pl_1
+	la t1, Pedra_PL_1
 	
 	# offsets em relacao ao ponto (0, 5)
 	sw t1, 0(t0)		# pedra_pl_1 nas coordenadas (0, 5)
@@ -165,7 +193,7 @@ loopPrincipal: addi sp, sp, -4
 	#Argumentos de saida:
 	#a0 = coordenada X da ultima peca selecionada
 	#a1 = coordenada Y da ultima peca selecionada 
-	jal desenhaTabuleiro 
+	jal desenhaTela
 	
 	#Argumentos de entrada:
 	#a1 = nivel escolhido para jogar
@@ -173,7 +201,7 @@ loopPrincipal: addi sp, sp, -4
 			#seja somente uma funcao.
 	
 	#Jah definido acima
-	jal desenhaTabuleiro
+	jal desenhaTela
 	
 	j loopPrincipal
 	
@@ -303,3 +331,5 @@ jogadaPC:
 desenhaTabuleiro:
 
 	ret
+	
+.include "bitmap.s"
