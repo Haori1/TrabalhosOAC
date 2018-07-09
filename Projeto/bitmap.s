@@ -1,4 +1,45 @@
-.macro _limpaPedra(%X, %Y)
+# ARQUIVO QUE CONTEM ROTINAS RELACIONADAS AO TRATAMENTO DE IMAGENS E DO BITMAP
+# NAO COMPILA SOZINHO
+# INCLUSO NA MAIN
+###################################################################################
+
+.macro _imprimePedraBranca(%X, %Y)	# caso X e Y sejam imediatos
+la a0, IMG_PEDRA_BRANCA
+li a1, 25
+li a2, 11
+li a3, %X
+li a4, %Y
+jal imprimeImagem
+.end_macro
+
+.macro _imprimePedraBranca(%X, %Y)	# caso X e Y sejam registradores
+la a0, IMG_PEDRA_BRANCA
+li a1, 25
+li a2, 11
+mv a3, %X
+mv a4, %Y
+jal imprimeImagem
+.end_macro
+
+.macro _imprimePedraPreta(%X, %Y)	# caso X e Y sejam imediatos
+la a0, IMG_PEDRA_PRETA
+li a1, 25
+li a2, 11
+li a3, %X
+li a4, %Y
+jal imprimeImagem
+.end_macro
+
+.macro _imprimePedraPreta(%X, %Y)	# caso X e Y sejam registradores
+la a0, IMG_PEDRA_PRETA
+li a1, 25
+li a2, 11
+mv a3, %X
+mv a4, %Y
+jal imprimeImagem
+.end_macro
+
+.macro _limpaPedra(%X, %Y)		# caso X e Y sejam imediatos
 li a0, BOARD_BACKGROUND
 li a1, 25
 li a2, 11
@@ -7,7 +48,7 @@ li a4, %Y
 jal smallPaint
 .end_macro
 
-.macro _limpaPedra(%X, %Y)
+.macro _limpaPedra(%X, %Y)		# caso X e Y sejam registradores
 li a0, BOARD_BACKGROUND
 li a1, 25
 li a2, 11
@@ -25,6 +66,7 @@ li a3, %X
 li a4, %Y
 jal smallPaint
 .end_macro
+######################################################################################
 
 .text
 
@@ -218,18 +260,52 @@ desenhaTela: addi sp, sp, -20
 		lb a1, 1(s9)				# obtem X e Y a serem apagados 
 		jal desenha.map				# passa pra funcao que mapeia as coordenadas do bitmap
 		_limpaPedra(a0, a1)			# apaga a pedra com os argumentos obtidos
+		jal efeitoSonoro			# toca efeito sonoro dos pontos
 		addi s10, s10, 4				# analisa proximo indice do vetor
 		j desenhaTela.apaga.loop		# o loop continua ate achar o primeiro dado nulo
 	
-	desenhaTela.apaga.fora:
-	
-	lw ra, 0(sp)					# recupera dados da pilha e retorna
+	desenhaTela.apaga.fora: lw ra, 0(sp)					# recupera dados da pilha e retorna
 	lw s9, 8(sp)
 	lw s10, 12(sp)
 	lw s11, 16(sp)
 	addi sp, sp, 20
 	ret
 ############################################################################################################
+
+
+# desenhaTela.ini
+#	imprime todas as pedras nos seus lugares iniciais para o comeco da partida
+
+desenhaTela.ini: addi sp, sp, -12
+	sw ra, 0(sp)
+	sw s10, 4(sp)
+	sw s11, 8(sp)
+	
+	li s10, 24							# s10: contador do loop
+	la s11, Pedra_PL_1						# carrega primeira pedra
+	desenhaTela.ini.loop: beq s10, zero, desenhaTela.ini.fora
+		lb a0, 0(s11)
+		lb a1, 1(s11)
+		jal desenha.map
+		mv a3, a0						# coloca coordenadas obtidas em a3 e a4
+		mv a4, a1
+		lb t0, 2(s11)						# carrega cor da pedra
+		beq t0, zero, desenhaTela.ini.loop.preta		# se a cor for zero eh preta
+		la a0, IMG_PEDRA_BRANCA					# se for branca, prepara pra imprimir pedra branca	
+		j desenhaTela.ini.loop.pula					
+		desenhaTela.ini.loop.preta: la a0, IMG_PEDRA_PRETA	# se for preta, prepara pra imprimir pedra preta
+		desenhaTela.ini.loop.pula: li a1, 25
+		li a2, 11
+		
+		jal imprimeImagem		# argumentos: a0 (imagem), a1 e a2 (dimensoes), a3 e a4 (coordenadas desejadas)
+		addi s11, s11, 4		# carrega proxima pedra
+		addi s10, s10, -1		# decrementa contador
+		j desenhaTela.ini.loop
+	
+	desenhaTela.ini.fora: lw ra, 0(sp)
+	addi sp, sp, 4
+	ret
+
 
 # desenha.map
 #	mapeia as coordenadas do tabuleiro em coordenadas no bitmap
@@ -463,104 +539,4 @@ desenha.map: li t0, 1
 		map.7x7: li a0, 283
 	
 	desenha.map.pula: ret
-
-
-# esperaEntrada
-#	mantem o codigo em loop ate o usuario digitar uma tecla
-# Retornos:
-#	a0: letra lida (ASCII)
-
-esperaEntrada:  li t1,0xFF200000		# carrega o endereço de controle do KDMMIO
-esperaEntrada.loop: lw t0,0(t1)			# Le bit de Controle Teclado
-   	andi t0,t0,0x0001			# mascara o bit menos significativo
-   	beq t0,zero,esperaEntrada.loop		# não tem tecla pressionada então volta ao loop
-   	lw a0,4(t1)				# le o valor da tecla
-	ret					# retorna
-##########################################################################################################
-
-
-# selecionaNivel
-# Retornos:
-#	a0: nivel escolhido
-
-selecionaNivel: addi sp, sp, -4
-	sw ra, 0(sp)
-	
-selecionaNivel.loop: jal esperaEntrada		# a0 esta com a tecla digitada
-	li t1, '1'
-	li t2, '2'
-	li t3, '3'
-	beq a0, t1, selecionaNivel.fora
-	beq a0, t2, selecionaNivel.fora
-	beq a0, t3, selecionaNivel.fora
-	j selecionaNivel.loop			# se nao for nenhum dos tres, entrada invalida. Leia denovo
-	
-selecionaNivel.fora: lw ra, 0(sp)
-	addi sp, sp, 4
-	ret
-#############################################################################################################
-
-
-# selecionaCores
-# 	seleciona a cor das pedras do player, jogando a outra pra CPU
-#	tambem escolhe a cor do cursor e atualiza a cor das pedras na memoria
-
-selecionaCores: addi sp, sp, -4
-	sw ra, 0(sp)
-	
-	selecionaCores.loop: jal esperaEntrada
-		li t1, '1'
-		li t2, '2'
-		beq a0, t1, selecionaCores.1		# escolheu branco
-		beq a0, t2, selecionaCores.2		# escolheu preto
-		j selecionaCores.loop
-
-	selecionaCores.1: li t1, WHITE			# t1: cor das pedras do player
-		li t2, BLACK				# t2: cor das pedras da maquina
-		li t3, RED				# t3: cor do cursor das jogadas
-		
-		la t4, Pedra_PL_1			# armazendo as cores das pedras em cada uma delas
-		sb t1, 2(t4)				# as pedras estao distribuidas sequencialmente na memoria, logo basta incrementar o endereco
-		sb t1, 6(t4)				# colocando a cor sempre no terceiro indice de cada vetor
-		sb t1, 10(t4)
-		sb t1, 14(t4)
-		sb t1, 18(t4)
-		sb t1, 22(t4)
-		sb t1, 26(t4)
-		sb t1, 30(t4)
-		sb t1, 34(t4)
-		sb t1, 38(t4)
-		sb t1, 42(t4)
-		sb t1, 46(t4)
-		j selecionaCores.pula			# nao precisa colocar preto nas pedras da CPU, pois elas ja comecam em preto
-		
-	selecionaCores.2: li t1, BLACK			# escolheu preto
-		li t2, WHITE				# nesse caso nao precisa colocar preto nas pedras do player
-		li t3, YELLOW
-		
-		la t4, Pedra_CPU_1			# armazendo as cores das pedras em cada uma delas
-		sb t2, 2(t4)				# as pedras estao distribuidas sequencialmente na memoria, logo basta incrementar o endereco
-		sb t2, 6(t4)				# colocando a cor sempre no terceiro indice de cada vetor
-		sb t2, 10(t4)
-		sb t2, 14(t4)
-		sb t2, 18(t4)
-		sb t2, 22(t4)
-		sb t2, 26(t4)
-		sb t2, 30(t4)
-		sb t2, 34(t4)
-		sb t2, 38(t4)
-		sb t2, 42(t4)
-		sb t2, 46(t4)
-	
-	selecionaCores.pula: la t4, Cor_PL
-		la t5, Cor_CPU
-		la t6, Cor_cursor
-		sb t1, 0(t4)
-		sb t2, 0(t5)
-		sb t3, 0(t6)
-		
-	lw ra, 0(sp)
-	addi sp, sp, 4
-	ret
-###########################################################################################################
 	

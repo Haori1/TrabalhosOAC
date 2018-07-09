@@ -1,3 +1,6 @@
+# ARQUIVO DE DADOS CONTENDO TODAS AS IMAGENS (EM FORMA DE VETOR) USADAS NO PROJETO 
+################################################################################################################
+
 .data
 
 # IMAGENS ALINHADAS (COORDENADA X MULTIPLA DE 4) ###################################################################

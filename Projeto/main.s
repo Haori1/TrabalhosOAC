@@ -59,6 +59,11 @@ Pedras_apagadas: .word 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0		# 12 posicoes pois eh
 # s2: pontos da cpu
 # s3: ultima coordenada x escolhida pra jogada do player
 # s4: ultima coordenada y escolhida pra jogada do player
+li s0, 0
+li s1, 0
+li s2, 0
+li s3, 0
+li s4, 0				# zerando-se todos eles
 
 la a0, IMG_MENU
 li a1, 320
@@ -84,13 +89,62 @@ li a1, 320
 li a2, 160
 li a3, 0
 li a4, 15
-jal imprimeImagem
-#jal desenhaBitmap.ini
+jal imprimeImagem			# imprime tabuleiro
+jal desenhaTela.ini			# imprime todas as pedras
 
 li a7, 10
 ecall
+##################################################################################################################
 
-#######################################################
+
+#Este sera o loop principal em que o jogo ira ocorrer
+loopPrincipal: addi sp, sp, -4
+	sw ra, 0(sp)
+	
+	#argumentos de saida:
+	#a0 = nivel selecionado
+	#jal abertura		# por que isso ta no loop gabriel?
+	
+	#Talvez faca-se necessario salvar a0 antes de pular para as proximas funcoes
+	
+	mv a0, s3
+	mv a1, s4
+	# Argumentos:
+	# a0: coordenada X escolhida no ultimo loop
+	# a1: coordenada Y escolhida no ultimo loop
+	# Retornos:
+	# a0: endereco da pedra escolhida
+	jal escolhePedraPL
+
+
+	# Argumentos:
+	# a0: endereco da pedra escolhida
+	# Retornos: (sera usado pelo desenhaTabuleiro)
+	# a0: endereco da pedra, ja com X e Y atualizados
+	# a1: antigo X da pedra
+	# a2: antigo Y da pedra - X e Y como casas do tabuleiro
+	# a3: quantidade de pedras apagadas, pontos pro cpu ou pro player
+	# Pedras_apagadas: vetor com os endereco das pedras apagadas
+	jal jogadaPL
+	
+	# Argumentos: retornos do jogadaPL
+	jal desenhaTela
+	
+	#Argumentos de entrada:
+	#a1 = nivel escolhido para jogar
+	jal jogadaPC #Existe a possibilidade de criar uma funcao para cada nivel, mas ao momento, acredito que a melhor opcao
+			#seja somente uma funcao.
+	
+	jal desenhaTela		# argumentos: retornos do jogadaPC
+	
+	j loopPrincipal
+	
+	lw ra, 0(sp)
+	addi sp, sp, 4
+	ret
+######################################################################################################
+
+
 # montaTabuleiro ######################################
 # faz a distribuicao inicial das pecas no tabuleiro principal
 
@@ -153,70 +207,49 @@ montaTabuleiro: li t0, BOARD_ADDRESS	# endereco do tabuleiro
 	sw t1, 88(t0)
 	
 	ret
+#####################################################################################################
 
 
-#Este sera o loop principal em que o jogo ira ocorrer
-loopPrincipal: addi sp, sp, -4
+# escolhePedraPL
+# Argumentos:
+#	a0: ultimo X escolhido, guardado em s3
+#	a1; ultimo Y escolhido, guardado em s4
+# Retornos:
+#	a0: endereco da peca escolhida
+
+escolhePedraPL: addi sp, sp, -12
 	sw ra, 0(sp)
+	sw a0, 4(sp)
+	sw a1, 8(sp)
 	
-	#argumentos de saida:
-	#a0 = nivel selecionado
-	#jal abertura		# por que isso ta no loop gabriel?
+	escolhePedra.loop: jal esperaEntrada
+		li t0, 'w'
+		li t1, 'a'
+		li t2, 's'
+		li t3, 'd'
+		li t4, 10		# 10 = enter
+		beq a0, t0, moveCursorCima
+		beq a0, t1, moveCursorEsquerda
+		beq a0, t2, moveCursorBaixo
+		beq a0, t3, moveCursorDireita
+		beq a0, t4, escolhePedra.loop.out
+		j escolhePedra.loop
 	
-	#Talvez faca-se necessario salvar a0 antes de pular para as proximas funcoes
+	moveCursorEsquerda:
 	
-	mv a0, s1
-	mv a1, s2
-	# Argumentos:
-	# a0: coordenada X escolhida no ultimo loop
-	# a1: coordenada Y escolhida no ultimo loop
-	# Retornos:
-	# a0: endereco da pedra escolhida
-	jal escolhePedraPL
+	moveCursorDireita:
+	
+	moveCursorCima:
+	
+	moveCursorBaixo:
 
-	lb a1, 0(a0)
-	lb a2, 1(a0)
-	# Argumentos:
-	# a1: coordenada X da ultima peca selecionada
-	# a2: coordenada Y da ultima peca selecionada 
-	
-	# Retornos: (sera usado pelo desenhaTabuleiro)
-	# a0: posicao antiga da pedra
-	# a1: nova posicao da pedra
-	# pecas_apagadas (memoria): vetor de pecas apagadas
-	# a2: quantidade de pecas apagadas (pontos pro cpu ou pro player)  
-	jal jogadaPL
-	
-	#Argumentos de entrada:
-	#Estado atual do tabuleiro
-	
-	#Argumentos de saida:
-	#a0 = coordenada X da ultima peca selecionada
-	#a1 = coordenada Y da ultima peca selecionada 
-	jal desenhaTela
-	
-	#Argumentos de entrada:
-	#a1 = nivel escolhido para jogar
-	jal jogadaPC #Existe a possibilidade de criar uma funcao para cada nivel, mas ao momento, acredito que a melhor opcao
-			#seja somente uma funcao.
-	
-	#Jah definido acima
-	jal desenhaTela
-	
-	j loopPrincipal
+	escolhePedra.loop.out:
+		
+
 	
 	lw ra, 0(sp)
-	addi sp, sp, 4
-	ret 
-	
-
-#Aqui uma sugestao referente a aonde em codigo colocar a tela de abertura, esta funcao devera retornar o nivel da IA
-abertura:
-
-	ret
-
-escolhePedraPL:
-	
+	lw a0, 4(sp)
+	lw a1, 8(sp)
 	ret
 	
 #Permite ao player transitar entre as pecas, escolher uma jogada viavel, ou parar o jogo (sair).
@@ -333,3 +366,4 @@ desenhaTabuleiro:
 	ret
 	
 .include "bitmap.s"
+.include "outros.s"

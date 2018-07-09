@@ -1,3 +1,6 @@
+# ARQUIVO QUE CONTEM TODAS AS CONSTANTES USADAS NO PROJETO
+################################################################################################
+
 # ENDERECO BASE DO BITMAP
 .eqv BITMAP_ADDRESS 0xFF000000
 
