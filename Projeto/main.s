@@ -1,6 +1,4 @@
 .include "eqv.s"
-.include "imagens.s"
-.include "musicas.s"
 
 .data
 
@@ -49,7 +47,8 @@ Cor_cursor:	.byte 0x07
 # serve para o desenhaTabuleiro saber quais pecas tem que apagar e para atribuir pontos
 Pedras_apagadas: .word 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0		# 12 posicoes pois eh o maximo de pedras que podem ser apagadas de uma vez
 
-
+.include "imagens.s"
+.include "musicas.s"
 
 .text
 
@@ -70,19 +69,19 @@ li a1, 320
 li a2, 240
 li a3, 0
 li a4, 0
-#jal imprimeImagem			# imprime o menu
-#jal esperaEntrada			# pressione qualquer tecla
+jal imprimeImagem			# imprime o menu
+jal menuMusica			# pressione qualquer tecla
 
 li a0, WHITE_WORD
 jal clearScreen				# limpa a tela com branco
 
 # IMPRIME TELA SELECAO DE NIVEL
-#jal selecionaNivel
+jal selecionaNivel
 mv s0, a0				# a0: nivel escolhido
 # IMPRIME TELA SELECAO DE CORES
 #jal selecionaCores
 
-#jal montaTabuleiro
+jal montaTabuleiro
 
 la a0, IMG_TABULEIRO
 li a1, 320
@@ -107,16 +106,7 @@ loopPrincipal: addi sp, sp, -4
 	#a0 = nivel selecionado
 	#jal abertura		# por que isso ta no loop gabriel?
 	
-	#Talvez faca-se necessario salvar a0 antes de pular para as proximas funcoes
-	
-	mv a0, s3
-	mv a1, s4
-	# Argumentos:
-	# a0: coordenada X escolhida no ultimo loop
-	# a1: coordenada Y escolhida no ultimo loop
-	# Retornos:
-	# a0: endereco da pedra escolhida
-	#jal escolhePedraPL
+	#Talvez faca-se necessario salvar a0 antes de pular para as proximas funcoe
 
 
 	# Argumentos:
@@ -128,28 +118,41 @@ loopPrincipal: addi sp, sp, -4
 	# Pedras_apagadas: vetor com os endereco das pedras apagadas
 	jal jogadaPL
 	
-	li a7, 32
-	li a0, 2000
-	ecall
 	
 	# Argumentos: retornos do jogadaPL
-	la a0, Pedra_CPU_2
-	li a1, 0
-	li a2, 1
-	li t3, 1
-	li t4, 2
-	sb t3, 0(a0)
-	sb t4, 1(a0)
-	jal desenhaTela
+	#la a0, Pedra_CPU_2
+	#li a1, 0
+	#li a2, 1
+	#li t3, 1
+	#li t4, 2
+	#sb t3, 0(a0)
+	#sb t4, 1(a0)
+	#jal desenhaTela
 	
 	#Argumentos de entrada:
 	#a1 = nivel escolhido para jogar
-	#jal jogadaPC #Existe a possibilidade de criar uma funcao para cada nivel, mas ao momento, acredito que a melhor opcao
-			#seja somente uma funcao.
+	mv a1, s0
+	la t1, Pedra_PL_1
+	li t3, BOARD_ADDRESS
+	li t0, 4
+	sb t0, 0(t1)
+	li t0, 3
+	sb t0, 1(t1)
+	sw t1, 112(t3)
+	jal jogadaPC 
 	
-	#jal desenhaTela		# argumentos: retornos do jogadaPC
+	#ebreak
+	la a0, IMG_TABULEIRO
+	li a1, 320
+	li a2, 160
+	li a3, 0
+	li a4, 15
+	jal imprimeImagem			# imprime tabuleiro	
+	jal desenhaTela.ini 	# argumentos: retornos do jogadaPC
 	
-	#j loopPrincipal
+	ebreak
+	
+	j loopPrincipal
 	
 	lw ra, 0(sp)
 	addi sp, sp, 4
@@ -221,48 +224,6 @@ montaTabuleiro: li t0, BOARD_ADDRESS	# endereco do tabuleiro
 	ret
 #####################################################################################################
 
-
-# escolhePedraPL
-# Argumentos:
-#	a0: ultimo X escolhido, guardado em s3
-#	a1; ultimo Y escolhido, guardado em s4
-# Retornos:
-#	a0: endereco da peca escolhida
-
-escolhePedraPL: addi sp, sp, -12
-	sw ra, 0(sp)
-	sw a0, 4(sp)
-	sw a1, 8(sp)
-	
-	escolhePedra.loop: jal esperaEntrada
-		li t0, 'w'
-		li t1, 'a'
-		li t2, 's'
-		li t3, 'd'
-		li t4, 10		# 10 = enter
-		beq a0, t0, moveCursorCima
-		beq a0, t1, moveCursorEsquerda
-		beq a0, t2, moveCursorBaixo
-		beq a0, t3, moveCursorDireita
-		beq a0, t4, escolhePedra.loop.out
-		j escolhePedra.loop
-	
-	moveCursorEsquerda:
-	
-	moveCursorDireita:
-	
-	moveCursorCima:
-	
-	moveCursorBaixo:
-
-	escolhePedra.loop.out:
-		
-
-	
-	lw ra, 0(sp)
-	lw a0, 4(sp)
-	lw a1, 8(sp)
-	ret
 	
 #Permite ao player transitar entre as pecas, escolher uma jogada viavel, ou parar o jogo (sair).
 jogadaPL:
@@ -345,6 +306,11 @@ jogadaPC: addi sp, sp, -36
 			 
 			beq t2, t3, diagonalComAliadoEsq #checa se a peca presente na diagonal eh aliada ou nao
 							  #pois caso for nao eh uma jogada valida
+			
+			lb t2, 0(s11)
+			li t3, 0
+			beq t2, t3, diagonalLimiteEsq
+			
 			li a7, 41
 			li a0, 3
 			ecall #gera numero aleatorio
@@ -365,8 +331,13 @@ jogadaPC: addi sp, sp, -36
 			addi s6, zero, 1 #Registra se alguma peca foi ou nao comida 
 			mv s5, a0 #Salva peso da jogada
 			mv s4, s11 #Salva endereco da peca apagada
+			li t3, -1
+			sb t1, 0(s11)
+			sb t1, 1(s11)
 			
 			diagonalComAliadoEsq:
+			
+			diagonalLimiteEsq:
 			
 			comeEsqDescartada:
 			
@@ -408,6 +379,10 @@ jogadaPC: addi sp, sp, -36
 			 
 			beq t2, t3, diagonalComAliadoDir #checa se a peca presente na diagonal eh aliada ou nao
 			
+			lb t2, 0(s11)
+			li t3, 7
+			beq t2, t3, diagonalLimiteDir
+			
 			li a7, 41
 			li a0, 3
 			ecall #gera numero aleatorio
@@ -428,8 +403,13 @@ jogadaPC: addi sp, sp, -36
 			addi s6, zero, 1 #Registra que uma peca foi comida 
 			mv s5, a0   #Salva peso da jogada em que a peca foi comida
 			mv s4, s11 #Salva endereco da peca apagada
+			li t3, -1
+			sb t1, 0(s11)
+			sb t1, 1(s11)
 			
 			diagonalComAliadoDir:
+			
+			diagonalLimiteDir:
 			
 			comeDirDescartada:
 			
@@ -475,10 +455,11 @@ jogadaPC: addi sp, sp, -36
 			addi t0, t0, 12  #posiciona o ponteiro para a proxima posicao do tabuleiro
 	
 		saidaIterador:
-		
+
 		j nivel1 
 		
 		saidaLoopNivel1:
+		#ebreak
 		
 		#Retorna os parametros para a funcao
 		# a0: endereco da pedra, ja com X e Y atualizados
@@ -493,6 +474,10 @@ jogadaPC: addi sp, sp, -36
 		bne s6, t2, pecaComidaEsq #Checa se na jogada para a esquerda, uma peca foi comida
 		
 		lw t2, 0(s10) #Carrega o ponteiro para os dados em memoria
+		
+		li t3, 0
+		sw t3, 0(s10)
+		sw t2, 0(s8)
 		
 		lb t3, 0(t2) #carrega a coordenada X
 		
@@ -510,9 +495,15 @@ jogadaPC: addi sp, sp, -36
 		
 		mv a0, t2 #salva o endereco da peca na memoria
 		
+		j fimJogadaParaEsq
+		
 		pecaComidaEsq:
 			
 			lw t2, 0(s10) #Carrega o ponteiro para os dados em memoria
+			
+			li t3, 0
+			sw t3, 0(s10)
+			sw t2, 0(s8)
 		
 			lb t3, 0(t2) #carrega a coordenada X
 		
@@ -551,7 +542,13 @@ jogadaPC: addi sp, sp, -36
 		
 		lw t2, 0(s10) #Carrega o ponteiro para os dados em memoria
 		
+		li t3, 0
+		sw t3, 0(s10)
+		sw t2, 0(s8)
+		
 		lb t3, 0(t2) #carrega a coordenada X
+		
+		#ebreak
 		
 		mv a1, t3 #salva valor do antigo X no registrador de retorno
 		
@@ -567,9 +564,15 @@ jogadaPC: addi sp, sp, -36
 		
 		mv a0, t2
 		
+		j fimJogadaParaDir
+		
 		pecaComidaDir:
 		
-			lw t2, 0(s10) #Carrega o ponteiro para os dados em memoria
+			lw t2, 0(s10) #Carrega o ponteiro para os dados em memoria		
+		
+			li t3, 0
+			sw t3, 0(s10)
+			sw t2, 0(s8)
 		
 			lb t3, 0(t2) #carrega a coordenada X
 		
@@ -600,11 +603,15 @@ jogadaPC: addi sp, sp, -36
 		
 		fimJogadaParaEsq:
 		
+		fimJogadaParaDir:
+		
 			j saidaJogadaPC
 		
 	nivel2:
 		
 	saidaJogadaPC:
+	
+	#ebreak
 	
 	lw ra, 0(sp)
 	lw s4, 4(sp)
@@ -615,6 +622,7 @@ jogadaPC: addi sp, sp, -36
 	lw s9, 24(sp)
 	lw s10, 28(sp)
 	lw s11, 32(sp)
+	addi sp, sp, 36
 
 	ret
 

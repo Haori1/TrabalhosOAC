@@ -18,6 +18,8 @@ esperaEntrada.loop: lw t0,0(t1)			# Le bit de Controle Teclado
 	ret					# retorna
 ##########################################################################################################
 
+#######################################################################################################
+
 
 # selecionaNivel
 # Retornos:
@@ -122,4 +124,40 @@ ecall
 
 ret
 ###########################################################################################################
+
+menuMusica: addi sp, sp, -8
+	sw ra, 0(sp)
+	sw s0, 4(sp)
+
+INICIO:	la s0, NOTA_DURACAO_DELAY_WINX
+	li a2, 0 			#intrumento piano 0	
+	li a3, 64			#volume medio
+	li t0, 0
+	li t6, 48			#t6 = TAMANHO DO ARRAY DAS NOTAS
+MUSICA:	jal VERIFY_KEY
+RA:	lw a0, 0(s0)			#a0 = nota	
+	lw a1, 4(s0)			#a1 = duracao	
+	li a7, 31			#a2 = instrumento
+	ecall				#a3 = volume
+	
+	li a7, 32
+	lw a0, 8(s0)
+	ecall
+	
+	addi t0, t0, 1
+	addi s0, s0, 12
+	bne t0, t6, MUSICA		
+	j INICIO
+	
+VERIFY_KEY: li t1, 0xFF200000
+	lw t2, 0(t1)
+	andi t2, t2, 0x0001 
+	beqz t2, JUMPR
+	
+	lw ra, 0(sp)
+	lw s0, 4(sp)
+	addi sp, sp, 8
+	ret	
+	
+JUMPR:  j RA
 	

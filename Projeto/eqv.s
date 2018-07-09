@@ -14,7 +14,8 @@
 .eqv WHITE_WORD 0xFFFFFFFF
 .eqv YELLOW 0x3F
 .eqv RED 0x07
-.eqv BOARD_BACKGROUND 0x10	# verde escuro do tabuleiro
+.eqv DARK_BACKGROUND 0x10	# verde escuro do tabuleiro
+.eqv LIGHT BACKGROUND 0xB6	# verde claro do tabuleiro
 
 # AREA JOGAVEL NO TABULEIRO: TODOS OS QUADRADOS ESCUROS QUE NAO CONTEM PEDRAS
 .eqv FREE_ZONE 0xFFFFFFFF

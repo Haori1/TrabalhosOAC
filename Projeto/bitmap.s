@@ -11,7 +11,7 @@ li a3, %X
 li a4, %Y
 jal imprimeImagem
 .end_macro
-
+#############################################################################
 .macro _imprimePedraBranca(%X, %Y)	# caso X e Y sejam registradores
 la a0, IMG_PEDRA_BRANCA
 li a1, 25
@@ -20,7 +20,7 @@ mv a3, %X
 mv a4, %Y
 jal imprimeImagem
 .end_macro
-
+##############################################################################
 .macro _imprimePedraPreta(%X, %Y)	# caso X e Y sejam imediatos
 la a0, IMG_PEDRA_PRETA
 li a1, 25
@@ -29,7 +29,7 @@ li a3, %X
 li a4, %Y
 jal imprimeImagem
 .end_macro
-
+############################################################################
 .macro _imprimePedraPreta(%X, %Y)	# caso X e Y sejam registradores
 la a0, IMG_PEDRA_PRETA
 li a1, 25
@@ -38,57 +38,107 @@ mv a3, %X
 mv a4, %Y
 jal imprimeImagem
 .end_macro
-
+################################################################################
 .macro _limpaPedra(%X, %Y)		# caso X e Y sejam imediatos
-li a0, BOARD_BACKGROUND
+li a0, DARK_BACKGROUND
 li a1, 25
 li a2, 11
 li a3, %X
 li a4, %Y
 jal smallPaint
 .end_macro
-
+###############################################################################
 .macro _limpaPedra(%X, %Y)		# caso X e Y sejam registradores
-li a0, BOARD_BACKGROUND
+li a0, DARK_BACKGROUND
 li a1, 25
 li a2, 11
 mv a3, %X
 mv a4, %Y
 jal smallPaint
 .end_macro
-
-.macro _imprimeCursor(%X, %Y)
-la tp, Cor_cursor
-lb a0, 0(tp)
+##############################################################################################
+.macro _atualizaCursorEsq(%cor, %X, %Y)	# cor eh um registrador e outros sao imediatos
+mv a0, %cor
 li a1, 7
 li a2, 3
-li a3, %X
-li a4, %Y
-jal smallPaint
+mv a3, %X
+mv a4, %Y
+jal smallPaint			# apaga a posicao atual com branco ou verde
+
+addi a0, %X, -1			
+addi a1, %Y, 0
+jal desenha.map			# mapeia 1 coordenada a esquerda da atual para imprimir 
+mv a3, a0
+mv a4, a1
+li tp, Cor_cursor
+li a0, 0(tp)
+li a1, 7
+li a2, 3
+jal smallPaint			# imprime cursor
+.end_macro
+###############################################################################
+.macro _atualizaCursorDir(%cor, %X, %Y)	# cor eh um registrador e outros sao imediatos
+mv a0, %cor
+li a1, 7
+li a2, 3
+mv a3, %X
+mv a4, %Y
+jal smallPaint			# apaga a posicao atual com branco ou verde
+
+addi a0, %X, 1			
+addi a1, %Y, 0
+jal desenha.map			# mapeia 1 coordenada a direita da atual para imprimir 
+mv a3, a0
+mv a4, a1
+li tp, Cor_cursor
+li a0, 0(tp)
+li a1, 7
+li a2, 3
+jal smallPaint			# imprime cursor
+.end_macro
+##############################################################################################
+.macro _atualizaCursorCima(%cor, %X, %Y)	# cor eh um registrador e outros sao imediatos
+mv a0, %cor
+li a1, 7
+li a2, 3
+mv a3, %X
+mv a4, %Y
+jal smallPaint			# apaga a posicao atual com branco ou verde
+
+addi a0, %X, 0			
+addi a1, %Y, -1
+jal desenha.map			# mapeia 1 coordenada acima da atual para imprimir 
+mv a3, a0
+mv a4, a1
+li tp, Cor_cursor
+li a0, 0(tp)
+li a1, 7
+li a2, 3
+jal smallPaint			# imprime cursor
+.end_macro
+######################################################################################
+.macro _atualizaCursorBaixo(%cor, %X, %Y)	# cor eh um registrador e outros sao imediatos
+mv a0, %cor
+li a1, 7
+li a2, 3
+mv a3, %X
+mv a4, %Y
+jal smallPaint			# apaga a posicao atual com branco ou verde
+
+addi a0, %X, 0			
+addi a1, %Y, 1
+jal desenha.map			# mapeia 1 coordenada abaixo da atual para imprimir 
+mv a3, a0
+mv a4, a1
+li tp, Cor_cursor
+li a0, 0(tp)
+li a1, 7
+li a2, 3
+jal smallPaint			# imprime cursor
 .end_macro
 ######################################################################################
 
 .text
-
-la a0, IMG_PEDRA_PRETA
-li a1, 25
-li a2, 11
-li a3, 250
-li a4, 19
-#jal imprimeImagem
-
-#_limpaPedra(250, 19)
-la a0, IMG_PEDRA_BRANCA
-li a1, 25
-li a2, 11
-li a3, 77
-li a4, 19
-#jal imprimeImagem
-
-#_imprimeCursor(78, 19)
-
-#li a7, 10
-#ecall
 
 #########################################################################################################
 
@@ -286,6 +336,8 @@ desenhaTela.ini: addi sp, sp, -12
 	desenhaTela.ini.loop: beq s10, zero, desenhaTela.ini.fora
 		lb a0, 0(s11)
 		lb a1, 1(s11)
+		blt a0, zero, pecaMorta
+		blt a1, zero, pecaMorta
 		jal desenha.map
 		mv a3, a0						# coloca coordenadas obtidas em a3 e a4
 		mv a4, a1
@@ -298,12 +350,17 @@ desenhaTela.ini: addi sp, sp, -12
 		li a2, 11
 		
 		jal imprimeImagem		# argumentos: a0 (imagem), a1 e a2 (dimensoes), a3 e a4 (coordenadas desejadas)
+		
+		pecaMorta:
+		
 		addi s11, s11, 4		# carrega proxima pedra
 		addi s10, s10, -1		# decrementa contador
+		
+		
 		j desenhaTela.ini.loop
 	
 	desenhaTela.ini.fora: lw ra, 0(sp)
-	addi sp, sp, 4
+	addi sp, sp, 12
 	ret
 
 
