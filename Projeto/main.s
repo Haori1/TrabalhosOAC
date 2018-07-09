@@ -270,7 +270,16 @@ jogadaPL:
 	ret
 
 #refere-se totalmente a inteligencia artificial que determinara as jogadas do computador, com os dados niveis 
-jogadaPC:
+jogadaPC: addi sp, sp, -36
+	sw ra, 0(sp)
+	sw s4, 4(sp)
+	sw s5, 8(sp)
+	sw s6, 12(sp)
+	sw s7, 16(sp)
+	sw s8, 20(sp)
+	sw s9, 24(sp)
+	sw s10, 28(sp)
+	sw s11, 32(sp)
 	#a1 = 1 ---> Nivel 1
 	#a1 = 2 ---> Nivel 2
 		
@@ -596,6 +605,16 @@ jogadaPC:
 	nivel2:
 		
 	saidaJogadaPC:
+	
+	lw ra, 0(sp)
+	lw s4, 4(sp)
+	lw s5, 8(sp)
+	lw s6, 12(sp)
+	lw s7, 16(sp)
+	lw s8, 20(sp)
+	lw s9, 24(sp)
+	lw s10, 28(sp)
+	lw s11, 32(sp)
 
 	ret
 
