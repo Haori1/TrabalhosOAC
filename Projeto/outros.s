@@ -30,12 +30,19 @@ selecionaNivel.loop: jal esperaEntrada		# a0 esta com a tecla digitada
 	li t1, '1'
 	li t2, '2'
 	li t3, '3'
-	beq a0, t1, selecionaNivel.fora
-	beq a0, t2, selecionaNivel.fora
-	beq a0, t3, selecionaNivel.fora
+	beq a0, t1, selecionaNivel.1
+	beq a0, t2, selecionaNivel.2
+	beq a0, t3, selecionaNivel.3
 	j selecionaNivel.loop			# se nao for nenhum dos tres, entrada invalida. Leia denovo
 	
-selecionaNivel.fora: lw ra, 0(sp)
+selecionaNivel.1: li a0, 1
+	j selecionaNivel.pula
+
+selecionaNivel.2: li a0, 2
+ 	j selecionaNivel.pula
+ 
+selecionaNivel.3: li a0, 3 
+selecionaNivel.pula: lw ra, 0(sp)
 	addi sp, sp, 4
 	ret
 #############################################################################################################

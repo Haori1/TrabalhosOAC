@@ -92,6 +92,8 @@ li a4, 15
 jal imprimeImagem			# imprime tabuleiro
 jal desenhaTela.ini			# imprime todas as pedras
 
+jal loopPrincipal
+
 li a7, 10
 ecall
 ##################################################################################################################
@@ -114,7 +116,7 @@ loopPrincipal: addi sp, sp, -4
 	# a1: coordenada Y escolhida no ultimo loop
 	# Retornos:
 	# a0: endereco da pedra escolhida
-	jal escolhePedraPL
+	#jal escolhePedraPL
 
 
 	# Argumentos:
@@ -123,21 +125,31 @@ loopPrincipal: addi sp, sp, -4
 	# a0: endereco da pedra, ja com X e Y atualizados
 	# a1: antigo X da pedra
 	# a2: antigo Y da pedra - X e Y como casas do tabuleiro
-	# a3: quantidade de pedras apagadas, pontos pro cpu ou pro player
 	# Pedras_apagadas: vetor com os endereco das pedras apagadas
 	jal jogadaPL
 	
+	li a7, 32
+	li a0, 2000
+	ecall
+	
 	# Argumentos: retornos do jogadaPL
+	la a0, Pedra_CPU_2
+	li a1, 0
+	li a2, 1
+	li t3, 1
+	li t4, 2
+	sb t3, 0(a0)
+	sb t4, 1(a0)
 	jal desenhaTela
 	
 	#Argumentos de entrada:
 	#a1 = nivel escolhido para jogar
-	jal jogadaPC #Existe a possibilidade de criar uma funcao para cada nivel, mas ao momento, acredito que a melhor opcao
+	#jal jogadaPC #Existe a possibilidade de criar uma funcao para cada nivel, mas ao momento, acredito que a melhor opcao
 			#seja somente uma funcao.
 	
-	jal desenhaTela		# argumentos: retornos do jogadaPC
+	#jal desenhaTela		# argumentos: retornos do jogadaPC
 	
-	j loopPrincipal
+	#j loopPrincipal
 	
 	lw ra, 0(sp)
 	addi sp, sp, 4
