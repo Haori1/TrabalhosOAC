@@ -3,59 +3,6 @@
 # INCLUSO NA MAIN
 ###################################################################################
 
-.macro _imprimePedraBranca(%X, %Y)	# caso X e Y sejam imediatos
-la a0, IMG_PEDRA_BRANCA
-li a1, 25
-li a2, 11
-li a3, %X
-li a4, %Y
-jal imprimeImagem
-.end_macro
-#############################################################################
-.macro _imprimePedraBranca(%X, %Y)	# caso X e Y sejam registradores
-la a0, IMG_PEDRA_BRANCA
-li a1, 25
-li a2, 11
-mv a3, %X
-mv a4, %Y
-jal imprimeImagem
-.end_macro
-##############################################################################
-.macro _imprimePedraPreta(%X, %Y)	# caso X e Y sejam imediatos
-la a0, IMG_PEDRA_PRETA
-li a1, 25
-li a2, 11
-li a3, %X
-li a4, %Y
-jal imprimeImagem
-.end_macro
-############################################################################
-.macro _imprimePedraPreta(%X, %Y)	# caso X e Y sejam registradores
-la a0, IMG_PEDRA_PRETA
-li a1, 25
-li a2, 11
-mv a3, %X
-mv a4, %Y
-jal imprimeImagem
-.end_macro
-################################################################################
-.macro _limpaPedra(%X, %Y)		# caso X e Y sejam imediatos
-li a0, DARK_BACKGROUND
-li a1, 25
-li a2, 11
-li a3, %X
-li a4, %Y
-jal smallPaint
-.end_macro
-###############################################################################
-.macro _limpaPedra(%X, %Y)		# caso X e Y sejam registradores
-li a0, DARK_BACKGROUND
-li a1, 25
-li a2, 11
-mv a3, %X
-mv a4, %Y
-jal smallPaint
-.end_macro
 ##############################################################################################
 .macro _atualizaCursorEsq(%cor, %X, %Y)	# cor eh um registrador e outros sao imediatos
 mv a0, %cor
@@ -206,9 +153,9 @@ imprimeImagem: li t6, BITMAP_ADDRESS	# carrega 0xFF000000
 
 clearScreen: li t1, BITMAP_ADDRESS			# endereco inicial da Memoria VGA
 	li t2,0xFF012C00				# endereco final 
-	clearScreen.loop: beq t1,t2,clearScreen.fora	# Se for o último endereço então sai do loop
-		sw a0,0(t1)				# escreve a word na memória VGA
-		addi t1,t1,4				# soma 4 ao endereço
+	clearScreen.loop: beq t1,t2,clearScreen.fora	# Se for o ï¿½ltimo endereï¿½o entï¿½o sai do loop
+		sw a0,0(t1)				# escreve a word na memï¿½ria VGA
+		addi t1,t1,4				# soma 4 ao endereï¿½o
 		j clearScreen.loop			# volta a verificar
 	clearScreen.fora: ret
 ###########################################################################################################
@@ -249,82 +196,8 @@ smallPaint: li t6, BITMAP_ADDRESS	# carrega 0xFF000000
 ###########################################################################################################
 
 
-# desenhaTela
-#	atualiza o estado da tela de jogo conforme realizacao da jogada, tanto do player quanto do cpu
-#	também atualiza os pontos de cada um
-# Argumentos:
-#	a0: endereco da pedra, ja com X e Y atualizados
-# 	a1: antigo X da pedra
-#	a2: antigo Y da pedra - X e Y como casas do tabuleiro
-#	a3: quantidade de pedras apagadas, pontos pro cpu ou pro player
-#	Pedras_apagadas: vetor com os endereco das pedras apagadas
-
-desenhaTela: addi sp, sp, -20
-	sw ra, 0(sp)
-	sw a0, 4(sp)				# a0 sera alterado durante a rotina e precisaremos do dado original
-	sw s9, 8(sp)				# registradores salvos q tambem serao alterados
-	sw s10, 12(sp)
-	sw s11, 16(sp)				
-	
-	mv a0, a1
-	mv a1, a2
-	jal desenha.map			# funcao que pegam X e Y como casas do tabuleiro e retorna X e Y como coordenadas na tela
-	_limpaPedra(a0, a1)			# preenche de verde nas coordenadas retornadas anteriormente
-	
-	lw t0, 4(sp)				# recupera a0 do inicio (endereco da pedra a ser redesenhada) em t0
-	lb a0, 0(t0)				# obtem X
-	lb a1, 1(t0)				# obtem Y
-	jal desenha.map			# Agora precisa mover para a0 e a1 (antes eles ja estavam la). Estamos obtendo X e Y para imprimir uma nova pedra na tela
-	
-	lw t0, 4(sp)				# recupera a0 do inicio (endereco da pedra a ser redesenhada) em t0
-	lb t1, 2(t0)				# obtem cor da pedra (player ou cpu)
-	bne t1, zero, desenhaTela.branco	# se nao for zero (preto) eh branco
-	j desenhaTela.preto
-
-	desenhaTela.branco: mv a3, a0			# desenha uma pedra branca nas posicoes dadas pelo desenha.Map	
-		mv a4, a1				# recuperando X e Y (a0 e a1) obtidos do desenha.Map e pondo em a3 e a4 para a funcao imprimeImagem
-		la a0, IMG_PEDRA_BRANCA
-		li a1, 25
-		li a2, 11				# a1 e a2 sao as dimensoes da imagem das pedrinhas
-		j desenhaTela.pula
-	
-	desenhaTela.preto: mv a3, a0
-		mv a4, a1
-		la a0, IMG_PEDRA_PRETA
-		li a1, 25
-		li a2, 11
-	desenhaTela.pula: jal imprimeImagem
-
-	la s10, Pedras_apagadas
-	la s11, Cor_PL
-	lb s11, 0(s11)					# s11: cor das pedras do player
-	desenhaTela.apaga.loop: lw s9, 0(s10)		# carrega em s9 a primeira pedra a ser apagada
-		beqz s9, desenhaTela.apaga.fora		# Se for 0 nao tem nenhuma pedra no vetor, sai. Caso contrario apagaremos a pedra obtida.
-		lb t2, 2(s9)				# obtem cor da pedra
-		beq t2, s11, desenhaTela.apaga.PL	# se a cor da pedra apagada eh do player, ponto pra CPU
-		addi s1, s1, 1				# Caso contrario, player fez ponto. Incrementa contador global dos pontos do player	
-		j desenhaTela.apaga.pula
-		desenhaTela.apaga.PL: addi s2, s2, 1	# incrementa contador global da cpu
-		
-		desenhaTela.apaga.pula: lb a0, 0(s9)				
-		lb a1, 1(s9)				# obtem X e Y a serem apagados 
-		jal desenha.map				# passa pra funcao que mapeia as coordenadas do bitmap
-		_limpaPedra(a0, a1)			# apaga a pedra com os argumentos obtidos
-		jal efeitoSonoro			# toca efeito sonoro dos pontos
-		addi s10, s10, 4				# analisa proximo indice do vetor
-		j desenhaTela.apaga.loop		# o loop continua ate achar o primeiro dado nulo
-	
-	desenhaTela.apaga.fora: lw ra, 0(sp)					# recupera dados da pilha e retorna
-	lw s9, 8(sp)
-	lw s10, 12(sp)
-	lw s11, 16(sp)
-	addi sp, sp, 20
-	ret
-############################################################################################################
-
-
 # desenhaTela.ini
-#	imprime todas as pedras nos seus lugares iniciais para o comeco da partida
+#	atualiza a posicao de todas as pedras no bitmap apos cada jogada
 
 desenhaTela.ini: addi sp, sp, -12
 	sw ra, 0(sp)
@@ -398,21 +271,21 @@ desenha.map: li t0, 1
 		beq a0, t5, map.6x0
 		beq a0, t6, map.7x0
 		map.0x0: li a0, 49
-			j desenha.map.pula
+			j desenha.map.fim
 		map.1x0: li a0, 77
-			j desenha.map.pula
+			j desenha.map.fim
 		map.2x0: li a0, 106
-			j desenha.map.pula
+			j desenha.map.fim
 		map.3x0: li a0, 134
-			j desenha.map.pula
+			j desenha.map.fim
 		map.4x0: li a0, 163
-			j desenha.map.pula
+			j desenha.map.fim
 		map.5x0: li a0, 192
-			j desenha.map.pula
+			j desenha.map.fim
 		map.6x0: li a0, 221
-			j desenha.map.pula
+			j desenha.map.fim
 		map.7x0: li a0, 249
-			j desenha.map.pula
+			j desenha.map.fim
 	
 	map.y1:	li a1, 34
 		beq a0, zero, map.0x1
@@ -424,21 +297,21 @@ desenha.map: li t0, 1
 		beq a0, t5, map.6x1
 		beq a0, t6, map.7x1
 		map.0x1: li a0, 44
-			j desenha.map.pula
+			j desenha.map.fim
 		map.1x1: li a0, 74
-			j desenha.map.pula
+			j desenha.map.fim
 		map.2x1: li a0, 104
-			j desenha.map.pula
+			j desenha.map.fim
 		map.3x1: li a0, 134
-			j desenha.map.pula
+			j desenha.map.fim
 		map.4x1: li a0, 163
-			j desenha.map.pula
+			j desenha.map.fim
 		map.5x1: li a0, 194
-			j desenha.map.pula
+			j desenha.map.fim
 		map.6x1: li a0, 223
-			j desenha.map.pula
+			j desenha.map.fim
 		map.7x1: li a0, 253
-			j desenha.map.pula
+			j desenha.map.fim
 	
 	map.y2:	li a1, 49
 		beq a0, zero, map.0x2
@@ -450,21 +323,21 @@ desenha.map: li t0, 1
 		beq a0, t5, map.6x2
 		beq a0, t6, map.7x2
 		map.0x2: li a0, 40
-			j desenha.map.pula
+			j desenha.map.fim
 		map.1x2: li a0, 71
-			j desenha.map.pula
+			j desenha.map.fim
 		map.2x2: li a0, 102
-			j desenha.map.pula
+			j desenha.map.fim
 		map.3x2: li a0, 133
-			j desenha.map.pula
+			j desenha.map.fim
 		map.4x2: li a0, 164
-			j desenha.map.pula
+			j desenha.map.fim
 		map.5x2: li a0, 195
-			j desenha.map.pula
+			j desenha.map.fim
 		map.6x2: li a0, 226
-			j desenha.map.pula
+			j desenha.map.fim
 		map.7x2: li a0, 257
-			j desenha.map.pula
+			j desenha.map.fim
 
 	map.y3:	li a1, 66
 		beq a0, zero, map.0x3
@@ -476,21 +349,21 @@ desenha.map: li t0, 1
 		beq a0, t5, map.6x3
 		beq a0, t6, map.7x3
 		map.0x3: li a0, 36
-			j desenha.map.pula
+			j desenha.map.fim
 		map.1x3: li a0, 68
-			j desenha.map.pula
+			j desenha.map.fim
 		map.2x3: li a0, 100
-			j desenha.map.pula
+			j desenha.map.fim
 		map.3x3: li a0, 133
-			j desenha.map.pula
+			j desenha.map.fim
 		map.4x3: li a0, 164
-			j desenha.map.pula
+			j desenha.map.fim
 		map.5x3: li a0, 197
-			j desenha.map.pula
+			j desenha.map.fim
 		map.6x3: li a0, 229
-			j desenha.map.pula
+			j desenha.map.fim
 		map.7x3: li a0, 261
-			j desenha.map.pula
+			j desenha.map.fim
 
 	map.y4:	li a1, 84
 		beq a0, zero, map.0x4
@@ -502,21 +375,21 @@ desenha.map: li t0, 1
 		beq a0, t5, map.6x4
 		beq a0, t6, map.7x4
 		map.0x4: li a0, 31
-			j desenha.map.pula
+			j desenha.map.fim
 		map.1x4: li a0, 65
-			j desenha.map.pula
+			j desenha.map.fim
 		map.2x4: li a0, 98
-			j desenha.map.pula
+			j desenha.map.fim
 		map.3x4: li a0, 132
-			j desenha.map.pula
+			j desenha.map.fim
 		map.4x4: li a0, 165
-			j desenha.map.pula
+			j desenha.map.fim
 		map.5x4: li a0, 199
-			j desenha.map.pula
+			j desenha.map.fim
 		map.6x4: li a0, 232
-			j desenha.map.pula
+			j desenha.map.fim
 		map.7x4: li a0, 266
-			j desenha.map.pula
+			j desenha.map.fim
 
 	map.y5:	li a1, 103
 		beq a0, zero, map.0x5
@@ -528,21 +401,21 @@ desenha.map: li t0, 1
 		beq a0, t5, map.6x5
 		beq a0, t6, map.7x5
 		map.0x5: li a0, 26
-			j desenha.map.pula
+			j desenha.map.fim
 		map.1x5: li a0, 61
-			j desenha.map.pula
+			j desenha.map.fim
 		map.2x5: li a0, 96
-			j desenha.map.pula
+			j desenha.map.fim
 		map.3x5: li a0, 131
-			j desenha.map.pula
+			j desenha.map.fim
 		map.4x5: li a0, 166
-			j desenha.map.pula
+			j desenha.map.fim
 		map.5x5: li a0, 201
-			j desenha.map.pula
+			j desenha.map.fim
 		map.6x5: li a0, 236
-			j desenha.map.pula
+			j desenha.map.fim
 		map.7x5: li a0, 271
-			j desenha.map.pula
+			j desenha.map.fim
 	
 	map.y6: li a1, 125
 		beq a0, zero, map.0x6
@@ -554,21 +427,21 @@ desenha.map: li t0, 1
 		beq a0, t5, map.6x6
 		beq a0, t6, map.7x6
 		map.0x6: li a0, 20
-			j desenha.map.pula
+			j desenha.map.fim
 		map.1x6: li a0, 56
-			j desenha.map.pula
+			j desenha.map.fim
 		map.2x6: li a0, 93
-			j desenha.map.pula
+			j desenha.map.fim
 		map.3x6: li a0, 130
-			j desenha.map.pula
+			j desenha.map.fim
 		map.4x6: li a0, 167
-			j desenha.map.pula
+			j desenha.map.fim
 		map.5x6: li a0, 203
-			j desenha.map.pula
+			j desenha.map.fim
 		map.6x6: li a0, 240
-			j desenha.map.pula
+			j desenha.map.fim
 		map.7x6: li a0, 276
-			j desenha.map.pula
+			j desenha.map.fim
 
 	map.y7:	li a1, 149
 		beq a0, zero, map.0x7
@@ -580,20 +453,20 @@ desenha.map: li t0, 1
 		beq a0, t5, map.6x7
 		beq a0, t6, map.7x7
 		map.0x7: li a0, 12
-			j desenha.map.pula
+			j desenha.map.fim
 		map.1x7: li a0, 50
-			j desenha.map.pula
+			j desenha.map.fim
 		map.2x7: li a0, 90
-			j desenha.map.pula
+			j desenha.map.fim
 		map.3x7: li a0, 128
-			j desenha.map.pula
+			j desenha.map.fim
 		map.4x7: li a0, 168
-			j desenha.map.pula
+			j desenha.map.fim
 		map.5x7: li a0, 205
-			j desenha.map.pula
+			j desenha.map.fim
 		map.6x7: li a0, 245
-			j desenha.map.pula
+			j desenha.map.fim
 		map.7x7: li a0, 283
 	
-	desenha.map.pula: ret
+	desenha.map.fim: ret
 	
